@@ -48,6 +48,21 @@
       description: "B.S. in Computing (double major: Mathematical Sciences), KAIST"
   image: "/assets/images/members/jaejun.jpg"
 
+- name: "Heehyeon Kim (김희현)"
+  status: "Student"
+  role: "Ph.D. Student"
+  email: "heehyeon@kaist.ac.kr"
+  research: "Artificial Intelligence, Machine Learning"
+  scholar_url: "hhttps://scholar.google.co.kr/citations?user=-CBfXxYAAAAJ"
+  education_history:
+    - period: "Sep. 2024 ~"
+      description: "Ph.D. Program in School of Computing"
+    - period: "Aug. 2024"
+      description: "M.S. in Computing, KAIST"
+    - period: "Aug. 2022"
+      description: "B.S. in IoT Artificial Intelligence Convergence, Chonnam National University"
+  image: "/assets/images/members/heehyeon.jpg"
+
 - name: "Example Alumni 1"
   status: "Alumni"
   role: "Ph.D. Graduate"
