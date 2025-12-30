@@ -145,6 +145,11 @@
             
             // Scroll to top of main content
             window.scrollTo(0, 0);
+            
+            // Initialize publications filter if publications tab is active
+            if (tabId === 'publications') {
+                setTimeout(initPublicationsFilter, 100);
+            }
         }
 
         // Tab button click handlers
@@ -184,6 +189,66 @@
         // Handle browser back/forward buttons
         window.addEventListener('popstate', function() {
             handleInitialHash();
+        });
+
+        // Publications filtering functionality
+        function filterPublications() {
+            const yearFilter = document.getElementById('year-filter');
+            const titleFilter = document.getElementById('title-filter');
+            const publicationItems = document.querySelectorAll('.publication-item');
+
+            if (!yearFilter || !titleFilter) return;
+
+            const selectedYear = yearFilter.value;
+            const searchTitle = titleFilter.value.toLowerCase().trim();
+
+            publicationItems.forEach(item => {
+                const itemYear = item.getAttribute('data-year');
+                const itemTitle = item.getAttribute('data-title') || '';
+
+                let showItem = true;
+
+                // Filter by year
+                if (selectedYear !== 'all' && itemYear !== selectedYear) {
+                    showItem = false;
+                }
+
+                // Filter by title
+                if (showItem && searchTitle && !itemTitle.includes(searchTitle)) {
+                    showItem = false;
+                }
+
+                // Show or hide item
+                if (showItem) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initialize publications filter when publications tab is active
+        function initPublicationsFilter() {
+            const yearFilter = document.getElementById('year-filter');
+            const titleFilter = document.getElementById('title-filter');
+
+            if (yearFilter && !yearFilter.hasAttribute('data-initialized')) {
+                yearFilter.setAttribute('data-initialized', 'true');
+                yearFilter.addEventListener('change', filterPublications);
+            }
+
+            if (titleFilter && !titleFilter.hasAttribute('data-initialized')) {
+                titleFilter.setAttribute('data-initialized', 'true');
+                titleFilter.addEventListener('input', filterPublications);
+            }
+        }
+
+        // Also initialize on page load if publications tab is active
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
+                setTimeout(initPublicationsFilter, 100);
+            }
         });
     </script>
 </body>
