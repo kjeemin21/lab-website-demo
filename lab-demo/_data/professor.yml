@@ -1,7 +1,24 @@
-name: "Professor Name"
-title: "Professor / Associate Professor / Assistant Professor"
-email: "professor@university.edu"
+name: "Joyce Jiyoung Whang"
+title: "Associate Professor, School of Computing, KAIST"
+email: "jjwhang@kaist.ac.kr"
+office: "KAIST, N1 Building 905"
 # image: "/assets/images/professor/professor-photo.jpg" (optional)
+
+adjunct_positions:
+  - "Adjunct Professor, Kim Jaechul Graduate School of AI, KAIST"
+  - "Adjunct Professor, Graduate School of Data Science (GSDS), KAIST"
+
+education:
+  degree: "Ph.D. in Computer Science"
+  university: "The University of Texas at Austin, TX, USA"
+  year: "2015"
+  supervisor: "Inderjit S. Dhillon"
+  supervisor_link: "https://www.cs.utexas.edu/~inderjit/"
+
+research_interests: "Graph Machine Learning, Deep Learning, Data Mining, Big Data Analytics, and Data Science."
+
+cv_link: "/down/joyce_CV_public.pdf"
+
 bio: |
   Add professor's biography here. You can use markdown formatting.
   

@@ -366,23 +366,63 @@ main {
 .professor-info h3 {
     font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.professor-info .title {
-    font-size: 1.2rem;
-    color: var(--secondary-color);
     margin-bottom: 20px;
 }
 
-.professor-info .email {
-    margin-bottom: 20px;
-}
-
-.professor-info .bio {
+.professor-details {
     text-align: left;
     margin-top: 30px;
     line-height: 1.8;
+}
+
+.detail-item {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.detail-item.detail-indent {
+    padding-left: 50px;
+}
+
+.detail-label {
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.detail-content {
+    flex: 1;
+    color: var(--text-color);
+}
+
+.detail-content a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.detail-content a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.cv-link {
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.cv-link:hover {
+    background-color: var(--secondary-color);
+    color: white;
 }
 
 /* Members Section */
@@ -460,10 +500,49 @@ main {
     width: 100%;
 }
 
+.member-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
 .member-card h3 {
     font-size: 1.3rem;
     color: var(--primary-color);
-    margin-bottom: 10px;
+    margin: 0;
+    flex: 1;
+}
+
+.member-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.member-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.member-link:hover {
+    color: var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+}
+
+.member-link svg {
+    display: block;
+    width: 20px;
+    height: 20px;
 }
 
 .member-card .role {
@@ -475,6 +554,15 @@ main {
 .member-card .email {
     margin-bottom: 10px;
     font-size: 0.9rem;
+}
+
+.member-card .email a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.member-card .email a:hover {
+    text-decoration: underline;
 }
 
 .member-card .research {
@@ -489,6 +577,34 @@ main {
     color: #888;
     font-weight: 500;
     margin-top: 5px;
+}
+
+.education-history {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.education-item {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.education-item:last-child {
+    margin-bottom: 0;
+}
+
+.education-period {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-right: 8px;
+}
+
+.education-description {
+    color: #666;
 }
 
 /* Publications Section */

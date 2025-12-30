@@ -6,35 +6,42 @@
 #   role: "Ph.D. Student / Master's Student / Research Assistant"
 #   email: "member@university.edu"
 #   research: "Research area or interests"
+#   homepage_url: "https://example.com" (optional)
+#   scholar_url: "https://scholar.google.com/..." (optional)
+#   education_history: (optional)
+#     - period: "Mar. 2022 ~"
+#       description: "M.S./Ph.D. Integrated Program in School of Computing"
+#     - period: "Mar. 2021 ~ Feb. 2022"
+#       description: "M.S. Program in School of Computing"
 #   image: "/assets/images/members/member-photo.jpg" (optional)
 #   graduation_year: "2023" (optional, for Alumni)
 
-- name: "Example Member 1"
+- name: "Chanyoung Chung (정찬영)"
   status: "Student"
   role: "Ph.D. Student"
-  email: "member1@university.edu"
+  email: "chanyoung.chung@kaist.ac.kr"
   research: "Machine Learning, Deep Learning"
-  # image: "/assets/images/members/member1.jpg"
+  homepage_url: "https://chanyoungchung.github.io/"
+  scholar_url: "https://scholar.google.co.kr/citations?user=Qg9oTYoAAAAJ"
+  education_history:
+    - period: "Mar. 2022 ~"
+      description: "M.S./Ph.D. Integrated Program in School of Computing"
+    - period: "Mar. 2021 ~ Feb. 2022"
+      description: "M.S. Program in School of Computing"
+    - period: "Feb. 2021"
+      description: "B.S. in Computing (double major: Mathematical Sciences), KAIST"
+  # image: "/assets/images/members/chanyoung.jpg"
 
 - name: "Example Member 2"
   status: "Student"
   role: "Master's Student"
   email: "member2@university.edu"
   research: "Computer Vision, Image Processing"
-  # image: "/assets/images/members/member2.jpg"
-
-- name: "Example Member 1"
-  status: "Student"
-  role: "Ph.D. Student"
-  email: "member1@university.edu"
-  research: "Machine Learning, Deep Learning"
-  # image: "/assets/images/members/member1.jpg"
-
-- name: "Example Member 2"
-  status: "Student"
-  role: "Master's Student"
-  email: "member2@university.edu"
-  research: "Computer Vision, Image Processing"
+  # homepage_url: "https://example.com"
+  # scholar_url: "https://scholar.google.com/..."
+  # education_history:
+  #   - period: "Mar. 2020 ~"
+  #     description: "M.S. Program in School of Computing"
   # image: "/assets/images/members/member2.jpg"
 
 - name: "Example Alumni 1"
@@ -43,6 +50,8 @@
   email: "alumni1@university.edu"
   research: "Natural Language Processing"
   graduation_year: "2023"
+  # homepage_url: "https://example.com"
+  # scholar_url: "https://scholar.google.com/..."
   # image: "/assets/images/members/alumni1.jpg"
 
 - name: "Example Alumni 2"
@@ -51,4 +60,6 @@
   email: "alumni2@university.edu"
   research: "Computer Vision"
   graduation_year: "2022"
+  # homepage_url: "https://example.com"
+  # scholar_url: "https://scholar.google.com/..."
   # image: "/assets/images/members/alumni2.jpg"
