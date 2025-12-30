@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-<section id="about" class="section">
+<section id="about" class="section tab-panel active">
     <div class="container">
         <h2>About</h2>
         <div class="content">
@@ -13,7 +13,7 @@ title: Home
     </div>
 </section>
 
-<section id="professor" class="section">
+<section id="professor" class="section tab-panel">
     <div class="container">
         <h2>Professor</h2>
         <div class="content">
@@ -48,7 +48,7 @@ title: Home
     </div>
 </section>
 
-<section id="members" class="section">
+<section id="members" class="section tab-panel">
     <div class="container">
         <h2>Members</h2>
         <div class="content">
@@ -132,7 +132,7 @@ title: Home
     </div>
 </section>
 
-<section id="publications" class="section">
+<section id="publications" class="section tab-panel">
     <div class="container">
         <h2>Publications</h2>
         <div class="content">
@@ -210,7 +210,7 @@ title: Home
     </div>
 </section>
 
-<section id="projects" class="section">
+<section id="projects" class="section tab-panel">
     <div class="container">
         <h2>Projects</h2>
         <div class="content">
@@ -238,7 +238,7 @@ title: Home
     </div>
 </section>
 
-<section id="photos" class="section">
+<section id="photos" class="section tab-panel">
     <div class="container">
         <h2>Photos</h2>
         <div class="content">
@@ -262,7 +262,7 @@ title: Home
     </div>
 </section>
 
-<section id="contacts" class="section">
+<section id="contacts" class="section tab-panel">
     <div class="container">
         <h2>Contacts</h2>
         <div class="content">
