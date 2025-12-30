@@ -18,24 +18,20 @@
                     <span class="site-title-text">{{ site.title }}</span>
                 </a>
             </h1>
+            <nav class="main-nav">
+                <button class="tab-button active" data-tab="about">About</button>
+                <button class="tab-button" data-tab="professor">Professor</button>
+                <button class="tab-button" data-tab="members">Members</button>
+                <button class="tab-button" data-tab="publications">Publications</button>
+                <button class="tab-button" data-tab="projects">Projects</button>
+                <button class="tab-button" data-tab="photos">Photos</button>
+                <button class="tab-button" data-tab="contacts">Contacts</button>
+            </nav>
             <button class="menu-toggle" aria-label="Toggle menu">
                 <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
             </button>
         </div>
     </header>
-
-    <!-- Tabs Navigation -->
-    <nav class="tabs-navigation">
-        <div class="tabs-container">
-            <button class="tab-button active" data-tab="about">About</button>
-            <button class="tab-button" data-tab="professor">Professor</button>
-            <button class="tab-button" data-tab="members">Members</button>
-            <button class="tab-button" data-tab="publications">Publications</button>
-            <button class="tab-button" data-tab="projects">Projects</button>
-            <button class="tab-button" data-tab="photos">Photos</button>
-            <button class="tab-button" data-tab="contacts">Contacts</button>
-        </div>
-    </nav>
 
     <!-- Side Menu Overlay -->
     <div class="side-menu-overlay"></div>
