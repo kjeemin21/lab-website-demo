@@ -259,20 +259,32 @@ title: Home
         <h2>Publications</h2>
         <div class="content">
             {% if site.data.publications %}
+            <div class="publications-filters">
+                <div class="filter-group">
+                    <label for="year-filter">Filter by Year:</label>
+                    <select id="year-filter" class="filter-select">
+                        <option value="all">All Years</option>
+                        {% assign years = site.data.publications | map: "year" | uniq | sort | reverse %}
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="title-filter">Filter by Title:</label>
+                    <input type="text" id="title-filter" class="filter-input" placeholder="Search by paper name...">
+                </div>
+            </div>
             <div class="publications-list">
                 {% for pub in site.data.publications %}
-                <div class="publication-item">
+                <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}">
+                    {% if pub.year %}
+                    <span class="year-badge">{{ pub.year }}</span>
+                    {% endif %}
                     <h3>{{ pub.title }}</h3>
                     <p class="authors">{{ pub.authors }}</p>
-                    {% if pub.venue or pub.year %}
-                    <div class="venue-year">
-                        {% if pub.venue %}
-                        <span class="venue">{{ pub.venue }}</span>
-                        {% endif %}
-                        {% if pub.year %}
-                        <span class="year">{{ pub.year }}</span>
-                        {% endif %}
-                    </div>
+                    {% if pub.venue %}
+                    <p class="venue">{{ pub.venue }}</p>
                     {% endif %}
                     {% if pub.links %}
                     <div class="publication-links">
