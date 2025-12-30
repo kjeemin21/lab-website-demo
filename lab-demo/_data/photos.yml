@@ -1,0 +1,13 @@
+# Photos
+# Add photos by editing this file
+# Place images in assets/images/photos/ directory
+# Format:
+# - image: "/assets/images/photos/photo1.jpg"
+#   caption: "Photo caption"
+
+# - image: "/assets/images/photos/photo1.jpg"
+#   caption: "Lab meeting"
+# 
+# - image: "/assets/images/photos/photo2.jpg"
+#   caption: "Research presentation"
+

@@ -1,0 +1,10 @@
+name: "Professor Name"
+title: "Professor / Associate Professor / Assistant Professor"
+email: "professor@university.edu"
+bio: |
+  Add professor's biography here. You can use markdown formatting.
+  
+  - Research interests
+  - Education background
+  - Awards and honors
+

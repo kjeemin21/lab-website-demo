@@ -1,0 +1,18 @@
+# Projects
+# Add projects by editing this file
+# Format:
+# - title: "Project Title"
+#   description: "Project description"
+#   period: "2024-2025"
+#   status: "Ongoing / Completed / Planned"
+
+- title: "Example Project 1"
+  description: "Description of the project and its goals."
+  period: "2024-2025"
+  status: "Ongoing"
+
+- title: "Example Project 2"
+  description: "Another project description."
+  period: "2023-2024"
+  status: "Completed"
+

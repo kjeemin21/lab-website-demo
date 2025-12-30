@@ -1,0 +1,19 @@
+# Publications
+# Add publications by editing this file
+# Format:
+# - title: "Paper Title"
+#   authors: "Author1, Author2, Author3"
+#   venue: "Conference/Journal Name"
+#   year: "2024"
+#   links:
+#     pdf: "/path/to/paper.pdf"
+#     doi: "https://doi.org/..."
+
+- title: "Example Publication Title"
+  authors: "Author1, Author2, Author3"
+  venue: "Conference/Journal Name"
+  year: "2024"
+  links:
+    pdf: "/assets/papers/example.pdf"
+    doi: "https://doi.org/10.xxxx/xxxxx"
+

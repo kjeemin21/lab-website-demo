@@ -1,0 +1,18 @@
+# Lab Members
+# Add or remove members by editing this file
+# Format:
+# - name: "Member Name"
+#   role: "Ph.D. Student / Master's Student / Research Assistant"
+#   email: "member@university.edu"
+#   research: "Research area or interests"
+
+- name: "Example Member 1"
+  role: "Ph.D. Student"
+  email: "member1@university.edu"
+  research: "Machine Learning, Deep Learning"
+
+- name: "Example Member 2"
+  role: "Master's Student"
+  email: "member2@university.edu"
+  research: "Computer Vision, Image Processing"
+
