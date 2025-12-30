@@ -6,94 +6,37 @@
 #   venue: "Conference/Journal Name"
 #   year: "2024"
 #   links:
-#     pdf: "/path/to/paper.pdf"
-#     doi: "https://doi.org/..."
+#     link: "https://example.com" (optional - general link)
+#     paper: "/path/to/paper.pdf" (optional - PDF paper)
+#     arxiv: "https://arxiv.org/abs/xxxx.xxxxx" (optional - arXiv link)
+#     bibtex: "/path/to/bibtex.bib" (optional - BibTeX file)
+#     slides: "/path/to/slides.pdf" (optional - presentation slides)
+#     poster: "/path/to/poster.pdf" (optional - poster)
+#     code: "https://github.com/..." (optional - code repository)
+#     video: "https://youtube.com/..." (optional - video link)
 
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
+- title: "Beneath the Facade: Probing Safety Vulnerabilities in LLMs via Auto-Generated Jailbreak Prompts"
+  authors: "H. Kim, K. Lee, and J. J. Whang*"
+  venue: "Findings of the Association for Computational Linguistics: EMNLP (Findings of EMNLP)"
+  year: "2025"
   links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
+    paper: "/assets/papers/example.pdf"
+    arxiv: "https://arxiv.org/abs/xxxx.xxxxx"
+    bibtex: "/assets/bibtex/example.bib"
+    # slides: "/assets/slides/example.pdf"
+    # poster: "/assets/posters/example.pdf"
+    # code: "https://github.com/example/repo"
+    # video: "https://youtube.com/watch?v=xxxxx"
 
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
+- title: "ERepresentation Learning on Hyper-Relational and Numeric Knowledge Graphs with Transformers"
+  authors: "C. Chung‡, J. Lee‡, and J. J. Whang*"
+  venue: "ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD)"
+  year: "2023"
   links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
+    paper: "/assets/papers/example.pdf"
+    arxiv: "https://arxiv.org/abs/xxxx.xxxxx"
+    # bibtex: "/assets/bibtex/example.bib"
+    # slides: "/assets/slides/example.pdf"
+    # poster: "/assets/posters/example.pdf"
+    # code: "https://github.com/example/repo"
+    # video: "https://youtube.com/watch?v=xxxxx"

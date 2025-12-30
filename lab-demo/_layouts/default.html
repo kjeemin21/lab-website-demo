@@ -57,7 +57,7 @@
 
         function smoothScrollTo(targetElement, duration = 600) {
             isProgrammaticScroll = true;
-            const headerOffset = 80;
+            const headerOffset = 100;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerOffset;
             const startPosition = window.pageYOffset;
             const distance = targetPosition - startPosition;
