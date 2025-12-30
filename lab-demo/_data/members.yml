@@ -23,6 +23,20 @@
   research: "Computer Vision, Image Processing"
   # image: "/assets/images/members/member2.jpg"
 
+- name: "Example Member 1"
+  status: "Student"
+  role: "Ph.D. Student"
+  email: "member1@university.edu"
+  research: "Machine Learning, Deep Learning"
+  # image: "/assets/images/members/member1.jpg"
+
+- name: "Example Member 2"
+  status: "Student"
+  role: "Master's Student"
+  email: "member2@university.edu"
+  research: "Computer Vision, Image Processing"
+  # image: "/assets/images/members/member2.jpg"
+
 - name: "Example Alumni 1"
   status: "Alumni"
   role: "Ph.D. Graduate"
