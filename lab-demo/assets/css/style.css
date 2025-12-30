@@ -13,17 +13,18 @@
     --bg-color: #ffffff;
     --section-bg: #f8f9fa;
     --border-color: #e0e0e0;
-    --header-height: 90px;
+    --header-height: 100px;
+    --header-bg: #f5f7fa;
 }
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px;
+    scroll-padding-top: 110px;
 }
 
 /* Smooth transitions for sections */
 section {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 110px;
     transition: opacity 0.3s ease-in-out;
 }
 
@@ -40,10 +41,11 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--header-bg);
+    color: var(--primary-color);
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header-container {
@@ -63,7 +65,7 @@ body {
 }
 
 .site-title a {
-    color: white;
+    color: var(--primary-color);
     text-decoration: none;
     transition: opacity 0.3s;
     display: flex;
@@ -76,7 +78,7 @@ body {
 }
 
 .site-logo {
-    height: 55px;
+    height: 70px;
     width: auto;
     display: block;
 }
@@ -87,23 +89,23 @@ body {
 
 @media (max-width: 768px) {
     .site-logo {
-        height: 45px;
+        height: 55px;
     }
 }
 
 .main-nav ul {
     list-style: none;
     display: flex;
-    gap: 35px;
+    gap: 40px;
 }
 
 .main-nav a {
-    color: white;
+    color: var(--primary-color);
     text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
+    font-weight: 600;
+    font-size: 1.2rem;
     transition: color 0.2s ease, transform 0.2s ease;
-    padding: 8px 0;
+    padding: 10px 0;
     position: relative;
     display: inline-block;
 }
@@ -134,6 +136,141 @@ body {
     }
     to {
         transform: scaleX(1);
+    }
+}
+
+/* Menu Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 15px;
+    transition: opacity 0.3s;
+}
+
+.menu-toggle:hover {
+    opacity: 0.7;
+}
+
+.menu-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+/* Side Menu */
+.side-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.side-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--header-bg);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2001;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.menu-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+.menu-close:hover {
+    color: var(--secondary-color);
+}
+
+.menu-close span {
+    line-height: 1;
+}
+
+.side-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu-list li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.side-menu-list a {
+    display: block;
+    padding: 20px 25px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.side-menu-list a:hover {
+    background-color: #e8f4f8;
+    color: var(--secondary-color);
+    padding-left: 30px;
+}
+
+.side-menu-list a.active {
+    background-color: #e8f4f8;
+    color: var(--secondary-color);
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* Responsive: Show menu button and hide main nav at 1100px */
+@media (max-width: 1100px) {
+    .main-nav {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .side-menu-overlay {
+        display: block;
     }
 }
 
@@ -570,7 +707,7 @@ main {
 /* Responsive Design */
 @media (max-width: 768px) {
     :root {
-        --header-height: 110px;
+        --header-height: 120px;
     }
     
     .header-container {
@@ -582,14 +719,14 @@ main {
 
     .main-nav ul {
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 25px;
         justify-content: center;
         margin-top: 15px;
     }
     
     .main-nav a {
-        font-size: 1rem;
-        padding: 6px 0;
+        font-size: 1.1rem;
+        padding: 8px 0;
     }
 
     main {

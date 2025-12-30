@@ -29,8 +29,32 @@
                     <li><a href="#contacts">Contacts</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
+            </button>
         </div>
     </header>
+
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay"></div>
+    
+    <!-- Side Menu -->
+    <nav class="side-menu">
+        <div class="side-menu-header">
+            <button class="menu-close" aria-label="Close menu">
+                <span>&times;</span>
+            </button>
+        </div>
+        <ul class="side-menu-list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#professor">Professor</a></li>
+            <li><a href="#members">Members</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#photos">Photos</a></li>
+            <li><a href="#contacts">Contacts</a></li>
+        </ul>
+    </nav>
 
     <main>
         {{ content }}
@@ -48,6 +72,44 @@
     </footer>
 
     <script>
+        // Menu toggle functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menuClose = document.querySelector('.menu-close');
+        const sideMenu = document.querySelector('.side-menu');
+        const sideMenuOverlay = document.querySelector('.side-menu-overlay');
+
+        function openSideMenu() {
+            sideMenu.classList.add('active');
+            sideMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSideMenu() {
+            sideMenu.classList.remove('active');
+            sideMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', openSideMenu);
+        }
+
+        if (menuClose) {
+            menuClose.addEventListener('click', closeSideMenu);
+        }
+
+        if (sideMenuOverlay) {
+            sideMenuOverlay.addEventListener('click', closeSideMenu);
+        }
+
+        // Close menu when clicking on a link
+        const sideMenuLinks = document.querySelectorAll('.side-menu-list a');
+        sideMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                closeSideMenu();
+            });
+        });
+
         // Enhanced smooth scroll with custom easing function
         function easeInOutCubic(t) {
             return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -57,7 +119,7 @@
 
         function smoothScrollTo(targetElement, duration = 600) {
             isProgrammaticScroll = true;
-            const headerOffset = 100;
+            const headerOffset = 110;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerOffset;
             const startPosition = window.pageYOffset;
             const distance = targetPosition - startPosition;
@@ -94,7 +156,7 @@
                 
                 if (target) {
                     // Add active state to clicked link immediately
-                    document.querySelectorAll('.main-nav a').forEach(link => {
+                    document.querySelectorAll('.main-nav a, .side-menu-list a').forEach(link => {
                         link.classList.remove('active');
                     });
                     this.classList.add('active');
@@ -150,7 +212,9 @@
                 }
             });
 
-            navLinks.forEach(link => {
+            // Update both main nav and side menu links
+            const allNavLinks = document.querySelectorAll('.main-nav a[href^="#"], .side-menu-list a[href^="#"]');
+            allNavLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === '#' + current) {
                     link.classList.add('active');
