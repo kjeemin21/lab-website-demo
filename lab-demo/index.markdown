@@ -44,22 +44,74 @@ title: Home
         <h2>Members</h2>
         <div class="content">
             {% if site.data.members %}
-            <div class="members-grid">
-                {% for member in site.data.members %}
-                <div class="member-card">
-                    <h3>{{ member.name }}</h3>
-                    {% if member.role %}
-                    <p class="role">{{ member.role }}</p>
-                    {% endif %}
-                    {% if member.email %}
-                    <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
-                    {% endif %}
-                    {% if member.research %}
-                    <p class="research">{{ member.research }}</p>
-                    {% endif %}
+            <!-- Students Subsection -->
+            {% assign students = site.data.members | where: "status", "Student" %}
+            {% if students.size > 0 %}
+            <div class="members-subsection">
+                <h3 class="subsection-title">Students</h3>
+                <div class="members-grid">
+                    {% for member in students %}
+                    <div class="member-card">
+                        {% if member.image %}
+                        <div class="member-image">
+                            <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                        </div>
+                        {% endif %}
+                        <div class="member-info">
+                            <h3>{{ member.name }}</h3>
+                            {% if member.role %}
+                            <p class="role">{{ member.role }}</p>
+                            {% endif %}
+                            {% if member.email %}
+                            <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
+                            {% endif %}
+                            {% if member.research %}
+                            <p class="research">{{ member.research }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
+            {% endif %}
+            
+            <!-- Alumni Subsection -->
+            {% assign alumni = site.data.members | where: "status", "Alumni" %}
+            {% if alumni.size > 0 %}
+            <div class="members-subsection">
+                <h3 class="subsection-title">Alumni</h3>
+                <div class="members-grid">
+                    {% for member in alumni %}
+                    <div class="member-card">
+                        {% if member.image %}
+                        <div class="member-image">
+                            <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                        </div>
+                        {% endif %}
+                        <div class="member-info">
+                            <h3>{{ member.name }}</h3>
+                            {% if member.role %}
+                            <p class="role">{{ member.role }}</p>
+                            {% endif %}
+                            {% if member.email %}
+                            <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
+                            {% endif %}
+                            {% if member.research %}
+                            <p class="research">{{ member.research }}</p>
+                            {% endif %}
+                            {% if member.graduation_year %}
+                            <p class="graduation">Graduated: {{ member.graduation_year }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if students.size == 0 and alumni.size == 0 %}
+            <p>Member information will be added here.</p>
+            {% endif %}
             {% else %}
             <p>Member information will be added here.</p>
             {% endif %}

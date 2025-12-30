@@ -2,17 +2,39 @@
 # Add or remove members by editing this file
 # Format:
 # - name: "Member Name"
+#   status: "Student" or "Alumni"
 #   role: "Ph.D. Student / Master's Student / Research Assistant"
 #   email: "member@university.edu"
 #   research: "Research area or interests"
+#   image: "/assets/images/members/member-photo.jpg" (optional)
+#   graduation_year: "2023" (optional, for Alumni)
 
 - name: "Example Member 1"
+  status: "Student"
   role: "Ph.D. Student"
   email: "member1@university.edu"
   research: "Machine Learning, Deep Learning"
+  # image: "/assets/images/members/member1.jpg"
 
 - name: "Example Member 2"
+  status: "Student"
   role: "Master's Student"
   email: "member2@university.edu"
   research: "Computer Vision, Image Processing"
+  # image: "/assets/images/members/member2.jpg"
 
+- name: "Example Alumni 1"
+  status: "Alumni"
+  role: "Ph.D. Graduate"
+  email: "alumni1@university.edu"
+  research: "Natural Language Processing"
+  graduation_year: "2023"
+  # image: "/assets/images/members/alumni1.jpg"
+
+- name: "Example Alumni 2"
+  status: "Alumni"
+  role: "Master's Graduate"
+  email: "alumni2@university.edu"
+  research: "Computer Vision"
+  graduation_year: "2022"
+  # image: "/assets/images/members/alumni2.jpg"
