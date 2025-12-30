@@ -465,6 +465,7 @@ main {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
 }
 
 .member-card:hover {
@@ -500,26 +501,14 @@ main {
     width: 100%;
 }
 
-.member-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    gap: 10px;
-}
-
-.member-card h3 {
-    font-size: 1.3rem;
-    color: var(--primary-color);
-    margin: 0;
-    flex: 1;
-}
-
-.member-links {
+.member-links-top {
+    position: absolute;
+    top: 15px;
+    right: 15px;
     display: flex;
     gap: 8px;
     align-items: center;
-    flex-shrink: 0;
+    z-index: 10;
 }
 
 .member-link {
@@ -531,18 +520,49 @@ main {
     transition: all 0.3s;
     padding: 4px;
     border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .member-link:hover {
     color: var(--secondary-color);
     background-color: rgba(52, 152, 219, 0.1);
     transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-.member-link svg {
+.member-link .link-icon {
     display: block;
     width: 20px;
     height: 20px;
+}
+
+.member-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.member-name-en {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin: 0 0 4px 0;
+    font-weight: 600;
+}
+
+.member-name-ko {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+    font-weight: 400;
+}
+
+.member-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin: 0;
 }
 
 .member-card .role {
