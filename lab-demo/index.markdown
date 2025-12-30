@@ -19,6 +19,15 @@ title: Home
         <div class="content">
             {% if site.data.professor %}
             <div class="professor-info">
+                {% if site.data.professor.image %}
+                <div class="professor-image">
+                    <img src="{{ site.data.professor.image | relative_url }}" alt="{{ site.data.professor.name }}">
+                </div>
+                {% else %}
+                <div class="professor-image">
+                    <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ site.data.professor.name }}">
+                </div>
+                {% endif %}
                 <h3>{{ site.data.professor.name }}</h3>
                 {% if site.data.professor.title %}
                 <p class="title">{{ site.data.professor.title }}</p>
@@ -52,11 +61,13 @@ title: Home
                 <div class="members-grid">
                     {% for member in students %}
                     <div class="member-card">
-                        {% if member.image %}
                         <div class="member-image">
+                            {% if member.image %}
                             <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                            {% else %}
+                            <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
+                            {% endif %}
                         </div>
-                        {% endif %}
                         <div class="member-info">
                             <h3>{{ member.name }}</h3>
                             {% if member.role %}
@@ -83,11 +94,13 @@ title: Home
                 <div class="members-grid">
                     {% for member in alumni %}
                     <div class="member-card">
-                        {% if member.image %}
                         <div class="member-image">
+                            {% if member.image %}
                             <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                            {% else %}
+                            <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
+                            {% endif %}
                         </div>
-                        {% endif %}
                         <div class="member-info">
                             <h3>{{ member.name }}</h3>
                             {% if member.role %}

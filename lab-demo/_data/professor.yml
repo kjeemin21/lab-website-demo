@@ -1,6 +1,7 @@
 name: "Professor Name"
 title: "Professor / Associate Professor / Assistant Professor"
 email: "professor@university.edu"
+# image: "/assets/images/professor/professor-photo.jpg" (optional)
 bio: |
   Add professor's biography here. You can use markdown formatting.
   
