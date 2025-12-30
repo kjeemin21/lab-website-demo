@@ -6,94 +6,39 @@
 #   venue: "Conference/Journal Name"
 #   year: "2024"
 #   links:
-#     pdf: "/path/to/paper.pdf"
-#     doi: "https://doi.org/..."
+#     link: "https://example.com" (optional - general link)
+#     paper: "/path/to/paper.pdf" (optional - PDF paper)
+#     arxiv: "https://arxiv.org/abs/xxxx.xxxxx" (optional - arXiv link)
+#     bibtex: "/path/to/bibtex.bib" (optional - BibTeX file)
+#     slides: "/path/to/slides.pdf" (optional - presentation slides)
+#     poster: "/path/to/poster.pdf" (optional - poster)
+#     code: "https://github.com/..." (optional - code repository)
+#     video: "https://youtube.com/..." (optional - video link)
 
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
+- title: "Beneath the Facade: Probing Safety Vulnerabilities in LLMs via Auto-Generated Jailbreak Prompts"
+  authors: "H. Kim, K. Lee, and J. J. Whang*"
+  venue: "Findings of the Association for Computational Linguistics: EMNLP (Findings of EMNLP)"
+  year: "2025"
   links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
+    link: "https://aclanthology.org/2025.findings-emnlp.960/"
+    paper: "https://aclanthology.org/2025.findings-emnlp.960.pdf"
+    bibtex: "https://bdi-lab.kaist.ac.kr/down/emnlp2025_trogen_bibtex.txt"
+    slides: "https://bdi-lab.kaist.ac.kr/down/emnlp2025_trogen_ppt.pdf"
+    poster: "https://bdi-lab.kaist.ac.kr/down/emnlp2025_trogen_poster.pdf"
+    code: "https://github.com/bdi-lab/TroGEN"
 
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
+- title: "Representation Learning on Hyper-Relational and Numeric Knowledge Graphs with Transformers"
+  authors: "C. Chung‡, J. Lee‡, and J. J. Whang*"
+  venue: "ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD)"
+  year: "2023"
   links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
+    paper: "/assets/papers/example.pdf"
+    arxiv: "https://arxiv.org/abs/xxxx.xxxxx"
 
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
+- title: "Unveiling the Threat of Fraud Gangs to Graph Neural Networks: Multi-Target Graph Injection Attacks against GNN-Based Fraud Detectors"
+  authors: "J. Choi, H. Kim, and J. J. Whang*"
+  venue: "AAAI Conference on Artificial Intelligence (AAAI)"
+  year: "2025"
   links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
-- title: "Example Publication Title"
-  authors: "Author1, Author2, Author3"
-  venue: "Conference/Journal Name"
-  year: "2024"
-  links:
-    pdf: "/assets/papers/example.pdf"
-    doi: "https://doi.org/10.xxxx/xxxxx"
-
+    paper: "/assets/papers/example.pdf"
+    arxiv: "https://arxiv.org/abs/xxxx.xxxxx"

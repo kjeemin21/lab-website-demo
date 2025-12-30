@@ -19,6 +19,15 @@ title: Home
         <div class="content">
             {% if site.data.professor %}
             <div class="professor-info">
+                {% if site.data.professor.image %}
+                <div class="professor-image">
+                    <img src="{{ site.data.professor.image | relative_url }}" alt="{{ site.data.professor.name }}">
+                </div>
+                {% else %}
+                <div class="professor-image">
+                    <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ site.data.professor.name }}">
+                </div>
+                {% endif %}
                 <h3>{{ site.data.professor.name }}</h3>
                 {% if site.data.professor.title %}
                 <p class="title">{{ site.data.professor.title }}</p>
@@ -52,11 +61,13 @@ title: Home
                 <div class="members-grid">
                     {% for member in students %}
                     <div class="member-card">
-                        {% if member.image %}
                         <div class="member-image">
+                            {% if member.image %}
                             <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                            {% else %}
+                            <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
+                            {% endif %}
                         </div>
-                        {% endif %}
                         <div class="member-info">
                             <h3>{{ member.name }}</h3>
                             {% if member.role %}
@@ -83,11 +94,13 @@ title: Home
                 <div class="members-grid">
                     {% for member in alumni %}
                     <div class="member-card">
-                        {% if member.image %}
                         <div class="member-image">
+                            {% if member.image %}
                             <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                            {% else %}
+                            <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
+                            {% endif %}
                         </div>
-                        {% endif %}
                         <div class="member-info">
                             <h3>{{ member.name }}</h3>
                             {% if member.role %}
@@ -136,12 +149,54 @@ title: Home
                     <p class="year">{{ pub.year }}</p>
                     {% endif %}
                     {% if pub.links %}
-                    <div class="links">
-                        {% if pub.links.pdf %}
-                        <a href="{{ pub.links.pdf }}" target="_blank" rel="noopener">PDF</a>
+                    <div class="publication-links">
+                        {% if pub.links.link %}
+                        <a href="{{ pub.links.link }}" target="_blank" rel="noopener" class="pub-link" title="Link">
+                            <img src="{{ '/assets/images/icons/link_icon.svg' | relative_url }}" alt="Link" class="link-icon">
+                            <span>Link</span>
+                        </a>
                         {% endif %}
-                        {% if pub.links.doi %}
-                        <a href="{{ pub.links.doi }}" target="_blank" rel="noopener">DOI</a>
+                        {% if pub.links.paper %}
+                        <a href="{{ pub.links.paper }}" target="_blank" rel="noopener" class="pub-link" title="Paper">
+                            <img src="{{ '/assets/images/icons/paper_icon.svg' | relative_url }}" alt="Paper" class="link-icon">
+                            <span>Paper</span>
+                        </a>
+                        {% endif %}
+                        {% if pub.links.arxiv %}
+                        <a href="{{ pub.links.arxiv }}" target="_blank" rel="noopener" class="pub-link" title="arXiv">
+                            <img src="{{ '/assets/images/icons/arXiv_icon_temp.svg' | relative_url }}" alt="arXiv" class="link-icon">
+                            <span>arXiv</span>
+                        </a>
+                        {% endif %}
+                        {% if pub.links.bibtex %}
+                        <a href="{{ pub.links.bibtex }}" target="_blank" rel="noopener" class="pub-link" title="BibTeX">
+                            <img src="{{ '/assets/images/icons/bibtex_icon.svg' | relative_url }}" alt="BibTeX" class="link-icon">
+                            <span>BibTeX</span>
+                        </a>
+                        {% endif %}
+                        {% if pub.links.slides %}
+                        <a href="{{ pub.links.slides }}" target="_blank" rel="noopener" class="pub-link" title="Slides">
+                            <img src="{{ '/assets/images/icons/slides_icon.svg' | relative_url }}" alt="Slides" class="link-icon">
+                            <span>Slides</span>
+                        </a>
+                        {% endif %}
+                        {% if pub.links.poster %}
+                        <a href="{{ pub.links.poster }}" target="_blank" rel="noopener" class="pub-link" title="Poster">
+                            <img src="{{ '/assets/images/icons/poster_icon.svg' | relative_url }}" alt="Poster" class="link-icon">
+                            <span>Poster</span>
+                        </a>
+                        {% endif %}
+                        {% if pub.links.code %}
+                        <a href="{{ pub.links.code }}" target="_blank" rel="noopener" class="pub-link" title="Code">
+                            <img src="{{ '/assets/images/icons/code_icon.svg' | relative_url }}" alt="Code" class="link-icon">
+                            <span>Code</span>
+                        </a>
+                        {% endif %}
+                        {% if pub.links.video %}
+                        <a href="{{ pub.links.video }}" target="_blank" rel="noopener" class="pub-link" title="Video">
+                            <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="Video" class="link-icon">
+                            <span>Video</span>
+                        </a>
                         {% endif %}
                     </div>
                     {% endif %}
