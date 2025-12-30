@@ -12,7 +12,12 @@
 <body>
     <header class="site-header">
         <div class="header-container">
-            <h1 class="site-title"><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>
+            <h1 class="site-title">
+                <a href="{{ "/" | relative_url }}">
+                    <img src="{{ '/assets/images/icons/logo_bdi_v3.svg' | relative_url }}" alt="{{ site.title }}" class="site-logo">
+                    <span class="site-title-text">{{ site.title }}</span>
+                </a>
+            </h1>
             <nav class="main-nav">
                 <ul>
                     <li><a href="#about">About</a></li>

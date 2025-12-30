@@ -59,16 +59,40 @@ body {
 .site-title {
     font-size: 1.5rem;
     font-weight: 600;
+    margin: 0;
 }
 
 .site-title a {
     color: white;
     text-decoration: none;
     transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .site-title a:hover {
     opacity: 0.8;
+}
+
+.site-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.site-title-text {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .site-logo {
+        height: 32px;
+    }
+    
+    .site-title-text {
+        font-size: 1.2rem;
+    }
 }
 
 .main-nav ul {
