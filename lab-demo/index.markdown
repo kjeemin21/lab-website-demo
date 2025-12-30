@@ -264,11 +264,15 @@ title: Home
                 <div class="publication-item">
                     <h3>{{ pub.title }}</h3>
                     <p class="authors">{{ pub.authors }}</p>
-                    {% if pub.venue %}
-                    <p class="venue">{{ pub.venue }}</p>
-                    {% endif %}
-                    {% if pub.year %}
-                    <p class="year">{{ pub.year }}</p>
+                    {% if pub.venue or pub.year %}
+                    <div class="venue-year">
+                        {% if pub.venue %}
+                        <span class="venue">{{ pub.venue }}</span>
+                        {% endif %}
+                        {% if pub.year %}
+                        <span class="year">{{ pub.year }}</span>
+                        {% endif %}
+                    </div>
                     {% endif %}
                     {% if pub.links %}
                     <div class="publication-links">
