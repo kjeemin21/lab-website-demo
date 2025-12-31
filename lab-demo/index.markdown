@@ -243,7 +243,7 @@ title: Home
                             <h3 class="subsection-title">Alumni</h3>
                             <div class="members-grid">
                                 {% for member in alumni %}
-                                <div class="member-card">
+                                <div class="member-card alumni-card">
                                     <div class="member-links-top">
                                         {% if member.homepage_url %}
                                         <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
@@ -267,19 +267,13 @@ title: Home
                                         <div class="member-header">
                                             <h3 class="member-name">{{ member.name }}</h3>
                                         </div>
-                                        {% if member.email %}
-                                        <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
-                                        {% endif %}
-                                        {% if member.research %}
-                                        <p class="research">{{ member.research }}</p>
-                                        {% endif %}
-                                        {% if member.graduation_year %}
-                                        <p class="graduation">Graduated: {{ member.graduation_year }}</p>
+                                        {% if member.degree and member.graduation_date %}
+                                        <p class="alumni-degree">{{ member.degree }}{% if member.graduation_date %}, {{ member.graduation_date }}{% endif %}{% if member.institution %}, {{ member.institution }}{% endif %}</p>
                                         {% endif %}
                                         {% if member.thesis %}
                                         <div class="thesis-info">
                                             <p class="thesis-label">Thesis:</p>
-                                            {% if member.thesis.url %}
+                                            {% if member.thesis.url and member.thesis.url != "" %}
                                             <p class="thesis-title">
                                                 <a href="{{ member.thesis.url }}" target="_blank" rel="noopener">{{ member.thesis.title }}</a>
                                             </p>
@@ -583,15 +577,33 @@ title: Home
             {% if site.data.photos %}
             <div class="photos-grid">
                 {% for photo in site.data.photos %}
-                <div class="photo-item">
+                <div class="photo-item" data-image="{{ photo.image | relative_url }}">
                     {% if photo.image %}
                     <img src="{{ photo.image | relative_url }}" alt="{{ photo.caption | default: 'Lab photo' }}">
                     {% endif %}
-                    {% if photo.caption %}
-                    <p class="caption">{{ photo.caption }}</p>
-                    {% endif %}
                 </div>
                 {% endfor %}
+            </div>
+            
+            <!-- Photo Pagination -->
+            <div class="photo-pagination" id="photoPagination">
+                <button class="pagination-btn pagination-prev" id="photoPrevBtn" aria-label="Previous page">
+                    <span>&laquo;</span>
+                </button>
+                <div class="pagination-numbers" id="photoPaginationNumbers"></div>
+                <button class="pagination-btn pagination-next" id="photoNextBtn" aria-label="Next page">
+                    <span>&raquo;</span>
+                </button>
+            </div>
+            
+            <!-- Photo Lightbox -->
+            <div class="photo-lightbox" id="photoLightbox">
+                <button class="photo-lightbox-close" aria-label="Close lightbox">
+                    <span>&times;</span>
+                </button>
+                <div class="photo-lightbox-content">
+                    <img id="lightboxImage" src="" alt="Large photo">
+                </div>
             </div>
             {% else %}
             <p>Photos will be displayed here. Add images to the <code>assets/images/photos/</code> directory and update <code>_data/photos.yml</code>.</p>
