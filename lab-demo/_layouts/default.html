@@ -148,7 +148,7 @@
             
             // Initialize publications menu if publications tab is active
             if (tabId === 'publications') {
-                setTimeout(initPublicationsMenu, 100);
+                setTimeout(initPublicationsMenuWithClose, 100);
             }
         }
 
@@ -213,8 +213,50 @@
             });
         }
 
-        // Initialize publications menu when publications tab is active
-        function initPublicationsMenu() {
+        // Publications menu toggle functionality (for mobile)
+        const publicationsMenuToggle = document.querySelector('.publications-menu-toggle');
+        const publicationsMenuClose = document.querySelector('.publications-menu-close');
+        const publicationsSideMenu = document.querySelector('.publications-side-menu');
+        const publicationsMenuOverlay = document.querySelector('.publications-menu-overlay');
+
+        function openPublicationsMenu() {
+            if (publicationsSideMenu) {
+                publicationsSideMenu.classList.add('active');
+            }
+            if (publicationsMenuOverlay) {
+                publicationsMenuOverlay.classList.add('active');
+            }
+            if (document.body) {
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closePublicationsMenu() {
+            if (publicationsSideMenu) {
+                publicationsSideMenu.classList.remove('active');
+            }
+            if (publicationsMenuOverlay) {
+                publicationsMenuOverlay.classList.remove('active');
+            }
+            if (document.body) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (publicationsMenuToggle) {
+            publicationsMenuToggle.addEventListener('click', openPublicationsMenu);
+        }
+
+        if (publicationsMenuClose) {
+            publicationsMenuClose.addEventListener('click', closePublicationsMenu);
+        }
+
+        if (publicationsMenuOverlay) {
+            publicationsMenuOverlay.addEventListener('click', closePublicationsMenu);
+        }
+
+        // Close menu when clicking on a category button (mobile)
+        function initPublicationsMenuWithClose() {
             const menuButtons = document.querySelectorAll('.publication-menu-btn');
 
             menuButtons.forEach(button => {
@@ -223,6 +265,11 @@
                     button.addEventListener('click', function() {
                         const category = this.getAttribute('data-category');
                         switchPublicationCategory(category);
+                        
+                        // Close menu on mobile after selection
+                        if (window.innerWidth <= 620) {
+                            closePublicationsMenu();
+                        }
                     });
                 }
             });
@@ -232,7 +279,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.substring(1);
             if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
-                setTimeout(initPublicationsMenu, 100);
+                setTimeout(initPublicationsMenuWithClose, 100);
             }
         });
     </script>
