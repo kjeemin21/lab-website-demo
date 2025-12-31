@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-<section id="about" class="section">
+<section id="about" class="section tab-panel active">
     <div class="container">
         <h2>About</h2>
         <div class="content">
@@ -13,7 +13,7 @@ title: Home
     </div>
 </section>
 
-<section id="professor" class="section">
+<section id="professor" class="section tab-panel">
     <div class="container">
         <h2>Professor</h2>
         <div class="content">
@@ -29,17 +29,79 @@ title: Home
                 </div>
                 {% endif %}
                 <h3>{{ site.data.professor.name }}</h3>
-                {% if site.data.professor.title %}
-                <p class="title">{{ site.data.professor.title }}</p>
-                {% endif %}
-                {% if site.data.professor.email %}
-                <p class="email">Email: <a href="mailto:{{ site.data.professor.email }}">{{ site.data.professor.email }}</a></p>
-                {% endif %}
-                {% if site.data.professor.bio %}
-                <div class="bio">
-                    {{ site.data.professor.bio | markdownify }}
+                
+                <div class="professor-details">
+                    {% if site.data.professor.title %}
+                    <div class="detail-item">
+                        <span class="detail-label">•</span>
+                        <span class="detail-content">{{ site.data.professor.title }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if site.data.professor.adjunct_positions %}
+                    {% for position in site.data.professor.adjunct_positions %}
+                    <div class="detail-item detail-indent">
+                        <span class="detail-label"></span>
+                        <span class="detail-content">{{ position }}</span>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
+                    {% if site.data.professor.email %}
+                    <div class="detail-item">
+                        <span class="detail-label">•</span>
+                        <span class="detail-content">Email: <a href="mailto:{{ site.data.professor.email }}">{{ site.data.professor.email }}</a></span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if site.data.professor.office %}
+                    <div class="detail-item">
+                        <span class="detail-label">•</span>
+                        <span class="detail-content">Office: {{ site.data.professor.office }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if site.data.professor.education %}
+                    <div class="detail-item">
+                        <span class="detail-label">•</span>
+                        <span class="detail-content">Education</span>
+                    </div>
+                    <div class="detail-item detail-indent">
+                        <span class="detail-label"></span>
+                        <span class="detail-content">
+                            {{ site.data.professor.education.degree }}, {{ site.data.professor.education.university }}, {{ site.data.professor.education.year }}.
+                        </span>
+                    </div>
+                    {% if site.data.professor.education.supervisor %}
+                    <div class="detail-item detail-indent">
+                        <span class="detail-label"></span>
+                        <span class="detail-content">
+                            (Supervisor: {% if site.data.professor.education.supervisor_link %}<a href="{{ site.data.professor.education.supervisor_link }}" target="_blank" rel="noopener">{{ site.data.professor.education.supervisor }}</a>{% else %}{{ site.data.professor.education.supervisor }}{% endif %})
+                        </span>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    
+                    {% if site.data.professor.research_interests %}
+                    <div class="detail-item">
+                        <span class="detail-label">•</span>
+                        <span class="detail-content">Research Interests</span>
+                    </div>
+                    <div class="detail-item detail-indent">
+                        <span class="detail-label"></span>
+                        <span class="detail-content">{{ site.data.professor.research_interests }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if site.data.professor.cv_link %}
+                    <div class="detail-item">
+                        <span class="detail-label">•</span>
+                        <span class="detail-content">
+                            <a href="{{ site.data.professor.cv_link | relative_url }}" target="_blank" rel="noopener" class="cv-link">Curriculum Vitae</a>
+                        </span>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
             {% else %}
             <p>Professor information will be added here.</p>
@@ -48,7 +110,7 @@ title: Home
     </div>
 </section>
 
-<section id="members" class="section">
+<section id="members" class="section tab-panel">
     <div class="container">
         <h2>Members</h2>
         <div class="content">
@@ -61,6 +123,21 @@ title: Home
                 <div class="members-grid">
                     {% for member in students %}
                     <div class="member-card">
+                        {% assign name_parts = member.name | split: " (" %}
+                        {% assign name_en = name_parts[0] %}
+                        {% assign name_ko = name_parts[1] | remove: ")" %}
+                        <div class="member-links-top">
+                            {% if member.homepage_url %}
+                            <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
+                                <img src="{{ '/assets/images/icons/homepage_icon.svg' | relative_url }}" alt="Homepage" class="link-icon">
+                            </a>
+                            {% endif %}
+                            {% if member.scholar_url %}
+                            <a href="{{ member.scholar_url }}" target="_blank" rel="noopener" class="member-link" title="Google Scholar">
+                                <img src="{{ '/assets/images/icons/scholar_icon.svg' | relative_url }}" alt="Google Scholar" class="link-icon">
+                            </a>
+                            {% endif %}
+                        </div>
                         <div class="member-image">
                             {% if member.image %}
                             <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
@@ -69,7 +146,12 @@ title: Home
                             {% endif %}
                         </div>
                         <div class="member-info">
-                            <h3>{{ member.name }}</h3>
+                            <div class="member-header">
+                                <h3 class="member-name-en">{{ name_en }}</h3>
+                                {% if name_ko %}
+                                <h3 class="member-name-ko">{{ name_ko }}</h3>
+                                {% endif %}
+                            </div>
                             {% if member.role %}
                             <p class="role">{{ member.role }}</p>
                             {% endif %}
@@ -78,6 +160,16 @@ title: Home
                             {% endif %}
                             {% if member.research %}
                             <p class="research">{{ member.research }}</p>
+                            {% endif %}
+                            {% if member.education_history %}
+                            <div class="education-history">
+                                {% for edu in member.education_history %}
+                                <p class="education-item">
+                                    <span class="education-period">{{ edu.period }}:</span>
+                                    <span class="education-description">{{ edu.description }}</span>
+                                </p>
+                                {% endfor %}
+                            </div>
                             {% endif %}
                         </div>
                     </div>
@@ -94,6 +186,21 @@ title: Home
                 <div class="members-grid">
                     {% for member in alumni %}
                     <div class="member-card">
+                        {% assign name_parts = member.name | split: " (" %}
+                        {% assign name_en = name_parts[0] %}
+                        {% assign name_ko = name_parts[1] | remove: ")" %}
+                        <div class="member-links-top">
+                            {% if member.homepage_url %}
+                            <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
+                                <img src="{{ '/assets/images/icons/homepage_icon.svg' | relative_url }}" alt="Homepage" class="link-icon">
+                            </a>
+                            {% endif %}
+                            {% if member.scholar_url %}
+                            <a href="{{ member.scholar_url }}" target="_blank" rel="noopener" class="member-link" title="Google Scholar">
+                                <img src="{{ '/assets/images/icons/scholar_icon.svg' | relative_url }}" alt="Google Scholar" class="link-icon">
+                            </a>
+                            {% endif %}
+                        </div>
                         <div class="member-image">
                             {% if member.image %}
                             <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
@@ -102,7 +209,12 @@ title: Home
                             {% endif %}
                         </div>
                         <div class="member-info">
-                            <h3>{{ member.name }}</h3>
+                            <div class="member-header">
+                                <h3 class="member-name-en">{{ name_en }}</h3>
+                                {% if name_ko %}
+                                <h3 class="member-name-ko">{{ name_ko }}</h3>
+                                {% endif %}
+                            </div>
                             {% if member.role %}
                             <p class="role">{{ member.role }}</p>
                             {% endif %}
@@ -114,6 +226,16 @@ title: Home
                             {% endif %}
                             {% if member.graduation_year %}
                             <p class="graduation">Graduated: {{ member.graduation_year }}</p>
+                            {% endif %}
+                            {% if member.education_history %}
+                            <div class="education-history">
+                                {% for edu in member.education_history %}
+                                <p class="education-item">
+                                    <span class="education-period">{{ edu.period }}:</span>
+                                    <span class="education-description">{{ edu.description }}</span>
+                                </p>
+                                {% endfor %}
+                            </div>
                             {% endif %}
                         </div>
                     </div>
@@ -132,21 +254,37 @@ title: Home
     </div>
 </section>
 
-<section id="publications" class="section">
+<section id="publications" class="section tab-panel">
     <div class="container">
         <h2>Publications</h2>
         <div class="content">
             {% if site.data.publications %}
+            <div class="publications-filters">
+                <div class="filter-group">
+                    <label for="year-filter">Filter by Year:</label>
+                    <select id="year-filter" class="filter-select">
+                        <option value="all">All Years</option>
+                        {% assign years = site.data.publications | map: "year" | uniq | sort | reverse %}
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="title-filter">Filter by Title:</label>
+                    <input type="text" id="title-filter" class="filter-input" placeholder="Search by paper name...">
+                </div>
+            </div>
             <div class="publications-list">
                 {% for pub in site.data.publications %}
-                <div class="publication-item">
+                <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}">
+                    {% if pub.year %}
+                    <span class="year-badge">{{ pub.year }}</span>
+                    {% endif %}
                     <h3>{{ pub.title }}</h3>
                     <p class="authors">{{ pub.authors }}</p>
                     {% if pub.venue %}
                     <p class="venue">{{ pub.venue }}</p>
-                    {% endif %}
-                    {% if pub.year %}
-                    <p class="year">{{ pub.year }}</p>
                     {% endif %}
                     {% if pub.links %}
                     <div class="publication-links">
@@ -210,7 +348,7 @@ title: Home
     </div>
 </section>
 
-<section id="projects" class="section">
+<section id="projects" class="section tab-panel">
     <div class="container">
         <h2>Projects</h2>
         <div class="content">
@@ -238,7 +376,7 @@ title: Home
     </div>
 </section>
 
-<section id="photos" class="section">
+<section id="photos" class="section tab-panel">
     <div class="container">
         <h2>Photos</h2>
         <div class="content">
@@ -262,7 +400,7 @@ title: Home
     </div>
 </section>
 
-<section id="contacts" class="section">
+<section id="contacts" class="section tab-panel">
     <div class="container">
         <h2>Contacts</h2>
         <div class="content">
