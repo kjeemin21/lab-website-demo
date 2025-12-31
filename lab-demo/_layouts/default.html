@@ -155,6 +155,18 @@
             if (tabId === 'members') {
                 setTimeout(initMembersMenuWithClose, 100);
             }
+            
+            // Initialize photo items and pagination if photos tab is active
+            if (tabId === 'photos') {
+                setTimeout(function() {
+                    if (typeof initPhotoItems === 'function') {
+                        initPhotoItems();
+                    }
+                    if (typeof initPhotoPagination === 'function') {
+                        initPhotoPagination();
+                    }
+                }, 100);
+            }
         }
 
         // Tab button click handlers
@@ -374,6 +386,219 @@
                 setTimeout(initMembersMenuWithClose, 100);
             }
         });
+
+        // Photo Lightbox functionality
+        const photoLightbox = document.getElementById('photoLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.querySelector('.photo-lightbox-close');
+        let photoItems = document.querySelectorAll('.photo-item');
+
+        function openPhotoLightbox(imageSrc, clickedImg) {
+            if (!lightboxImage || !photoLightbox) return;
+            
+            // Set image source
+            lightboxImage.src = imageSrc;
+            
+            // Show lightbox with fade-in and scale effect
+            photoLightbox.style.visibility = 'visible';
+            photoLightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePhotoLightbox() {
+            if (!photoLightbox) return;
+
+            // Add closing class for fade-out effect
+            photoLightbox.classList.add('closing');
+            photoLightbox.classList.remove('active');
+            
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                photoLightbox.classList.remove('closing');
+                photoLightbox.style.visibility = 'hidden';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Add click handlers to photo items
+        function initPhotoItems() {
+            photoItems = document.querySelectorAll('.photo-item');
+            photoItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const img = this.querySelector('img');
+                    if (img) {
+                        const imageSrc = this.getAttribute('data-image') || img.src;
+                        if (imageSrc) {
+                            openPhotoLightbox(imageSrc, img);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Initialize photo items
+        initPhotoItems();
+
+        // Re-initialize when photos tab is opened
+        const originalSwitchTab = window.switchTab;
+        if (typeof switchTab === 'function') {
+            // This will be handled by the existing switchTab function
+        }
+
+        // Also initialize on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initPhotoItems();
+        });
+
+        // Close lightbox handlers
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', closePhotoLightbox);
+        }
+
+        if (photoLightbox) {
+            photoLightbox.addEventListener('click', function(e) {
+                if (e.target === photoLightbox) {
+                    closePhotoLightbox();
+                }
+            });
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && photoLightbox && photoLightbox.classList.contains('active')) {
+                closePhotoLightbox();
+            }
+        });
+
+        // Photo Pagination functionality
+        const photosPerPage = 9;
+        let currentPhotoPage = 1;
+        let totalPhotoItems = 0;
+        let totalPhotoPages = 1;
+
+        function initPhotoPagination() {
+            const allPhotoItems = document.querySelectorAll('.photo-item');
+            totalPhotoItems = allPhotoItems.length;
+            totalPhotoPages = Math.ceil(totalPhotoItems / photosPerPage);
+            
+            if (totalPhotoPages <= 1) {
+                // Hide pagination if only one page
+                const pagination = document.getElementById('photoPagination');
+                if (pagination) {
+                    pagination.style.display = 'none';
+                }
+                return;
+            } else {
+                const pagination = document.getElementById('photoPagination');
+                if (pagination) {
+                    pagination.style.display = 'flex';
+                }
+            }
+            
+            renderPhotoPagination();
+            showPhotoPage(1);
+        }
+
+        function showPhotoPage(pageNumber) {
+            currentPhotoPage = pageNumber;
+            const allPhotoItems = document.querySelectorAll('.photo-item');
+            const startIndex = (pageNumber - 1) * photosPerPage;
+            const endIndex = startIndex + photosPerPage;
+            
+            allPhotoItems.forEach((item, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+            
+            updatePhotoPaginationButtons();
+            
+            // Scroll to photos section
+            const photosSection = document.getElementById('photos');
+            if (photosSection) {
+                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+                const offsetTop = photosSection.offsetTop - headerHeight - 20;
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+            }
+        }
+
+        function renderPhotoPagination() {
+            const paginationNumbers = document.getElementById('photoPaginationNumbers');
+            if (!paginationNumbers) return;
+            
+            paginationNumbers.innerHTML = '';
+            
+            for (let i = 1; i <= totalPhotoPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'page-number';
+                pageBtn.textContent = i;
+                pageBtn.setAttribute('data-page', i);
+                
+                if (i === currentPhotoPage) {
+                    pageBtn.classList.add('active');
+                }
+                
+                pageBtn.addEventListener('click', function() {
+                    const page = parseInt(this.getAttribute('data-page'));
+                    showPhotoPage(page);
+                });
+                
+                paginationNumbers.appendChild(pageBtn);
+            }
+        }
+
+        function updatePhotoPaginationButtons() {
+            const prevBtn = document.getElementById('photoPrevBtn');
+            const nextBtn = document.getElementById('photoNextBtn');
+            const pageNumbers = document.querySelectorAll('.page-number');
+            
+            if (prevBtn) {
+                prevBtn.disabled = currentPhotoPage === 1;
+            }
+            
+            if (nextBtn) {
+                nextBtn.disabled = currentPhotoPage === totalPhotoPages;
+            }
+            
+            pageNumbers.forEach(btn => {
+                const page = parseInt(btn.getAttribute('data-page'));
+                if (page === currentPhotoPage) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Pagination button handlers
+        const photoPrevBtn = document.getElementById('photoPrevBtn');
+        const photoNextBtn = document.getElementById('photoNextBtn');
+        
+        if (photoPrevBtn) {
+            photoPrevBtn.addEventListener('click', function() {
+                if (currentPhotoPage > 1) {
+                    showPhotoPage(currentPhotoPage - 1);
+                }
+            });
+        }
+        
+        if (photoNextBtn) {
+            photoNextBtn.addEventListener('click', function() {
+                if (currentPhotoPage < totalPhotoPages) {
+                    showPhotoPage(currentPhotoPage + 1);
+                }
+            });
+        }
+
+        // Initialize pagination on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initPhotoPagination();
+        });
+
+        // Re-initialize when photos tab is activated
+        const originalSwitchTabForPagination = window.switchTab;
     </script>
 </body>
 </html>

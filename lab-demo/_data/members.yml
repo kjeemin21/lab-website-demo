@@ -1,8 +1,8 @@
 # Lab Members
 # Add or remove members by editing this file
-# Format:
+# Format for Students:
 # - name: "Member Name"
-#   status: "Student" or "Alumni"
+#   status: "Student"
 #   role: "Ph.D. Student / Master's Student / Research Assistant"
 #   email: "member@university.edu"
 #   research: "Research area or interests"
@@ -14,10 +14,22 @@
 #     - period: "Mar. 2021 ~ Feb. 2022"
 #       description: "M.S. Program in School of Computing"
 #   image: "/assets/images/members/member-photo.jpg" (optional)
-#   graduation_year: "2023" (optional, for Alumni)
-#   thesis: (optional, for Alumni)
+#
+# Format for Alumni:
+# - name: "Alumni Name"
+#   status: "Alumni"
+#   degree: "M.S. in Computing / Ph.D. in Computer Science"
+#   graduation_date: "Feb. 2023"
+#   institution: "KAIST"
+#   homepage_url: "https://example.com" (optional)
+#   scholar_url: "https://scholar.google.com/..." (optional)
+#   thesis: (optional)
 #     title: "Thesis Title"
 #     url: "https://example.com/thesis.pdf" (optional)
+#   education_history: (optional, for previous degrees)
+#     - period: "Aug. 2021"
+#       description: "B.S. in Computing (double major: Mathematical Sciences), KAIST"
+#   image: "/assets/images/members/member-photo.jpg" (optional)
 
 - name: "Chanyoung Chung (정찬영)"
   status: "Student"
@@ -90,25 +102,49 @@
       description: "B.S. in Philosophy (double major: Computer Science and Engineering), Sogang University"
   image: "/assets/images/members/kidong.jpg"
 
-- name: "Jaejun Lee (이재준)"
+- name: "Minho Kim (김민호)"
   status: "Alumni"
-  role: "Ph.D. Student"
-  email: "jjlee98@kaist.ac.kr"
-  research: "Machine Learning, Deep Learning, Mathematical Sciences"
-  homepage_url: "https://jaejunlee714.github.io/"
-  scholar_url: "https://scholar.google.co.kr/citations?user=G5UMYkUAAAAJ"
-  image: "/assets/images/members/jaejun.jpg"
-  graduation_year: "2023"
+  degree: "M.S. in Computing"
+  graduation_date: "Feb. 2023"
+  institution: "KAIST"
+  # homepage_url: ""
+  # scholar_url: ""
+  # image: "/assets/images/members/minho.jpg"
   thesis:
     title: "Image-based Augmented Knowledge Graph Embedding"
-    url: "https://example.com/thesis.pdf"
+    url: ""
+  education_history:
+    - period: "Aug. 2021"
+      description: "B.S. in Computing (double major: Mathematical Sciences), KAIST"
 
-- name: "Example Alumni 2"
+- name: "Soyeon Park (박소연)"
   status: "Alumni"
-  role: "Master's Graduate"
-  email: "alumni2@university.edu"
-  research: "Computer Vision"
-  graduation_year: "2022"
+  degree: "M.S. in Computer Science"
+  graduation_date: "Aug. 2022"
+  institution: "KAIST"
+  thesis:
+    title: "Deep Learning Approaches for Natural Language Understanding"
+    url: ""
+  education_history:
+    - period: "Feb. 2020"
+      description: "B.S. in Computer Science, Seoul National University"
   # homepage_url: "https://example.com"
   # scholar_url: "https://scholar.google.com/..."
-  # image: "/assets/images/members/alumni2.jpg"
+  # image: "/assets/images/members/soyeon.jpg"
+
+- name: "Jihoon Choi (최지훈)"
+  status: "Alumni"
+  degree: "Ph.D. in Artificial Intelligence"
+  graduation_date: "Feb. 2021"
+  institution: "KAIST"
+  thesis:
+    title: "Neural Network Optimization for Large-Scale Machine Learning"
+    url: ""
+  education_history:
+    - period: "Feb. 2016"
+      description: "M.S. in Computer Science, KAIST"
+    - period: "Feb. 2014"
+      description: "B.S. in Electrical Engineering, Yonsei University"
+  # homepage_url: "https://example.com"
+  # scholar_url: "https://scholar.google.com/..."
+  # image: "/assets/images/members/jihoon.jpg"
