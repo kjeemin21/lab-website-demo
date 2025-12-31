@@ -25,3 +25,13 @@
     - title: "Modeling Information Propagation by Exploiting the Clustering Structure of Massive Social Networks (거대 소셜 네트워크의 클러스터링 구조를 활용한 정보 전파 메커니즘 모델링)"
       period: "Nov. 2016 ~ Oct. 2019"
       role: "Principal Investigator"
+
+- organization: "Samsung Electronics"
+  logo: "/assets/images/projects/samsung_electronics_logo.png"
+  projects:
+    - title: "AI Agent-based Omni Knowledge Graph Construction and its Applications (AI Agent 기반 Omni Knowledge Graph 구축 및 활용 기술 개발)"
+      period: "Oct. 2025 ~ Sep. 2030"
+      role: "Principal Investigator"
+    - title: "Knowledge Graph Modeling for Semiconductor Data (반도체 공정 데이터의 다각적 분석을 위한 지식 그래프 모델링)"
+      period: "Sep. 2020 ~ Sep. 2023"
+      role: "Principal Investigator"
