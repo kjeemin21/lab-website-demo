@@ -5,6 +5,7 @@
 #   authors: "Author1, Author2, Author3"
 #   venue: "Conference/Journal Name"
 #   year: "2024"
+#   type: "international" or "domestic" (optional, defaults to "international")
 #   links:
 #     link: "https://example.com" (optional - general link)
 #     paper: "/path/to/paper.pdf" (optional - PDF paper)
