@@ -462,19 +462,35 @@ title: Home
         <h2>Projects</h2>
         <div class="content">
             {% if site.data.projects %}
-            <div class="projects-grid">
-                {% for project in site.data.projects %}
-                <div class="project-card">
-                    <h3>{{ project.title }}</h3>
-                    {% if project.description %}
-                    <p>{{ project.description }}</p>
+            <div class="projects-list">
+                {% for org in site.data.projects %}
+                <div class="organization-card">
+                    {% if org.logo %}
+                    <div class="organization-logo">
+                        <img src="{{ org.logo | relative_url }}" alt="{{ org.organization }}">
+                    </div>
                     {% endif %}
-                    {% if project.period %}
-                    <p class="period">{{ project.period }}</p>
-                    {% endif %}
-                    {% if project.status %}
-                    <span class="status status-{{ project.status | downcase }}">{{ project.status }}</span>
-                    {% endif %}
+                    <div class="organization-content">
+                        <h3 class="organization-name">{{ org.organization }}</h3>
+                        {% if org.projects %}
+                        <ul class="projects-list-items">
+                            {% for project in org.projects %}
+                            <li class="project-item">
+                                <span class="project-bullet">▶</span>
+                                <div class="project-content">
+                                    <div class="project-title">{{ project.title }}</div>
+                                    <div class="project-meta">
+                                        <span class="project-period">{{ project.period }}</span>
+                                        {% if project.role %}
+                                        <span class="project-role">{{ project.role }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
                 </div>
                 {% endfor %}
             </div>
