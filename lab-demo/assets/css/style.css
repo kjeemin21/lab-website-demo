@@ -333,11 +333,239 @@ main {
     position: relative;
 }
 
+/* About Section */
+.about-container {
+    max-width: 1200px;
+}
+
+.about-content {
+    width: 100%;
+}
+
+.about-hero {
+    margin-bottom: 60px;
+}
+
+.about-hero-image {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    height: 500px;
+}
+
+.about-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+    padding: 60px 50px 50px;
+    color: white;
+}
+
+.about-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.about-hero-subtitle {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    line-height: 1.4;
+}
+
+.about-description {
+    background: white;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 50px;
+}
+
+.about-description-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+.about-mission {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 2px solid var(--border-color);
+}
+
+.about-mission-title {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.about-mission-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+}
+
+.about-research-areas {
+    margin-top: 50px;
+}
+
+.about-section-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.research-areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.research-area-card {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.research-area-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    border-left-color: var(--accent-color);
+}
+
+.research-area-icon {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.research-area-name {
+    font-size: 1.05rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* About Section Responsive */
+@media (max-width: 1024px) {
+    .about-hero-image {
+        height: 400px;
+    }
+    
+    .about-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .about-hero-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero-image {
+        height: 350px;
+        border-radius: 12px;
+    }
+    
+    .about-hero-overlay {
+        padding: 40px 30px 30px;
+    }
+    
+    .about-hero-title {
+        font-size: 2rem;
+    }
+    
+    .about-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .about-description {
+        padding: 35px 25px;
+    }
+    
+    .about-text {
+        font-size: 1.05rem;
+    }
+    
+    .about-mission-title {
+        font-size: 1.4rem;
+    }
+    
+    .about-mission-text {
+        font-size: 1rem;
+    }
+    
+    .research-areas-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero-image {
+        height: 280px;
+    }
+    
+    .about-hero-overlay {
+        padding: 30px 20px 25px;
+    }
+    
+    .about-hero-title {
+        font-size: 1.6rem;
+    }
+    
+    .about-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .about-description {
+        padding: 25px 20px;
+    }
+    
+    .about-section-title {
+        font-size: 1.6rem;
+    }
+}
 
 /* Professor Section */
 .professor-info {
     text-align: left;
-    padding: 20px 280px 20px 30px;
+    padding: 20px 30px 20px 370px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -346,7 +574,7 @@ main {
     align-items: flex-start;
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
-    min-height: 400px;
+    min-height: 500px;
 }
 
 .professor-info:hover {
@@ -357,9 +585,9 @@ main {
 .professor-image {
     position: absolute;
     top: 20px;
-    right: 20px;
+    left: 20px;
     bottom: 20px;
-    width: 240px;
+    width: 330px;
     height: calc(100% - 40px);
     border-radius: 12px;
     overflow: hidden;
@@ -447,7 +675,7 @@ main {
     padding: 6px 14px;
     border: 2px solid var(--secondary-color);
     border-radius: 6px;
-    margin-top: 8px;
+    margin-top: 2px;
     font-size: 0.9rem;
 }
 
@@ -508,8 +736,8 @@ main {
 }
 
 .member-image {
-    width: 80px;
-    height: 110px;
+    width: 112px;
+    height: 154px;
     border-radius: 10px;
     overflow: hidden;
     border: 2px solid transparent;
@@ -662,7 +890,7 @@ main {
     font-size: 0.85rem;
     color: #666;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-right: 6px;
 }
 
 .thesis-title {
@@ -1595,8 +1823,8 @@ main {
     }
 
     .member-image {
-        width: 70px;
-        height: 95px;
+        width: 98px;
+        height: 133px;
     }
 
     .member-name-en {
@@ -1618,7 +1846,7 @@ main {
     .professor-image {
         position: relative;
         top: auto;
-        right: auto;
+        left: auto;
         width: 130px;
         height: 170px;
         margin: 0 auto 20px;

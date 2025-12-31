@@ -4,12 +4,61 @@ title: Home
 ---
 
 <section id="about" class="section tab-panel active">
-    <div class="container">
-        <h2>About</h2>
-        <div class="content">
-            <p>Welcome to {{ site.title }}. We are dedicated to advancing research in our field.</p>
-            <!-- Add your lab description here -->
+    <div class="container about-container">
+        {% if site.data.about %}
+        <div class="about-content">
+            <!-- Hero Image Section -->
+            <div class="about-hero">
+                {% if site.data.about.hero_image %}
+                <div class="about-hero-image">
+                    <img src="{{ site.data.about.hero_image | relative_url }}" alt="{{ site.data.about.title }}">
+                    <div class="about-hero-overlay">
+                        <h1 class="about-hero-title">{{ site.data.about.title }}</h1>
+                        {% if site.data.about.subtitle %}
+                        <p class="about-hero-subtitle">{{ site.data.about.subtitle }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Description Section -->
+            <div class="about-description">
+                <div class="about-description-content">
+                    {% if site.data.about.description %}
+                    <p class="about-text">{{ site.data.about.description }}</p>
+                    {% endif %}
+                    
+                    {% if site.data.about.mission %}
+                    <div class="about-mission">
+                        <h3 class="about-mission-title">Our Mission</h3>
+                        <p class="about-mission-text">{{ site.data.about.mission }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Research Areas Section -->
+            {% if site.data.about.research_areas %}
+            <div class="about-research-areas">
+                <h3 class="about-section-title">Research Areas</h3>
+                <div class="research-areas-grid">
+                    {% for area in site.data.about.research_areas %}
+                    <div class="research-area-card">
+                        <span class="research-area-icon">●</span>
+                        <span class="research-area-name">{{ area }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
+        {% else %}
+        <div class="content">
+            <h2>About</h2>
+            <p>Welcome to {{ site.title }}. We are dedicated to advancing research in our field.</p>
+        </div>
+        {% endif %}
     </div>
 </section>
 
@@ -95,7 +144,7 @@ title: Home
                     
                     {% if site.data.professor.cv_link %}
                     <div class="detail-item">
-                        <span class="detail-label">•</span>
+                        <span class="detail-label"></span>
                         <span class="detail-content">
                             <a href="{{ site.data.professor.cv_link | relative_url }}" target="_blank" rel="noopener" class="cv-link">Curriculum Vitae</a>
                         </span>
@@ -272,14 +321,14 @@ title: Home
                                         {% endif %}
                                         {% if member.thesis %}
                                         <div class="thesis-info">
-                                            <p class="thesis-label">Thesis:</p>
-                                            {% if member.thesis.url and member.thesis.url != "" %}
                                             <p class="thesis-title">
+                                                <span class="thesis-label">Thesis:</span>
+                                                {% if member.thesis.url and member.thesis.url != "" %}
                                                 <a href="{{ member.thesis.url }}" target="_blank" rel="noopener">{{ member.thesis.title }}</a>
+                                                {% else %}
+                                                {{ member.thesis.title }}
+                                                {% endif %}
                                             </p>
-                                            {% else %}
-                                            <p class="thesis-title">{{ member.thesis.title }}</p>
-                                            {% endif %}
                                         </div>
                                         {% endif %}
                                         {% if member.education_history %}
