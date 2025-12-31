@@ -256,7 +256,12 @@ title: Home
 
 <section id="publications" class="section tab-panel">
     <div class="container">
-        <h2>Publications</h2>
+        <div class="publications-header">
+            <h2>Publications</h2>
+            <button class="publications-menu-toggle" aria-label="Toggle publications menu">
+                <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
+            </button>
+        </div>
         <div class="content">
             {% if site.data.publications %}
             <div class="publications-container">
@@ -431,7 +436,15 @@ title: Home
                 </div>
             </div>
             
+            <!-- Publications Side Menu Overlay -->
+            <div class="publications-menu-overlay"></div>
+            
             <nav class="publications-side-menu">
+                <div class="publications-menu-header">
+                    <button class="publications-menu-close" aria-label="Close menu">
+                        <span>&times;</span>
+                    </button>
+                </div>
                 <ul class="publications-menu-list">
                     <li><button class="publication-menu-btn active" data-category="international">International</button></li>
                     <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
