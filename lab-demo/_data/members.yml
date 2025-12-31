@@ -15,6 +15,9 @@
 #       description: "M.S. Program in School of Computing"
 #   image: "/assets/images/members/member-photo.jpg" (optional)
 #   graduation_year: "2023" (optional, for Alumni)
+#   thesis: (optional, for Alumni)
+#     title: "Thesis Title"
+#     url: "https://example.com/thesis.pdf" (optional)
 
 - name: "Chanyoung Chung (정찬영)"
   status: "Student"
@@ -63,15 +66,42 @@
       description: "B.S. in IoT Artificial Intelligence Convergence, Chonnam National University"
   image: "/assets/images/members/heehyeon.jpg"
 
-- name: "Example Alumni 1"
+- name: "Donggyu Yoon (윤동규)"
+  status: "Student"
+  role: "Master's Student"
+  email: "justinyoonwk@kaist.ac.kr"
+  research: "Electrical Engineering, Machine Learning"
+  education_history:
+    - period: "Mar. 2025 ~"
+      description: "Program in School of Computing"
+    - period: "Feb. 2025"
+      description: "B.S. in Computing (minor: Electrical Engineering), KAIST"
+  image: "/assets/images/members/donggyu.jpg"
+
+- name: "Kidong Nam (남기동)"
+  status: "Student"
+  role: "Master's Student"
+  email: "rlehd201@kaist.ac.kr"
+  research: "Knowledge Graph Representation Learning, Machine Learning"
+  education_history:
+    - period: "Mar. 2025 ~"
+      description: "KT-AI M.S. Program in School of Computing"
+    - period: "Aug. 2024"
+      description: "B.S. in Philosophy (double major: Computer Science and Engineering), Sogang University"
+  image: "/assets/images/members/kidong.jpg"
+
+- name: "Jaejun Lee (이재준)"
   status: "Alumni"
-  role: "Ph.D. Graduate"
-  email: "alumni1@university.edu"
-  research: "Natural Language Processing"
+  role: "Ph.D. Student"
+  email: "jjlee98@kaist.ac.kr"
+  research: "Machine Learning, Deep Learning, Mathematical Sciences"
+  homepage_url: "https://jaejunlee714.github.io/"
+  scholar_url: "https://scholar.google.co.kr/citations?user=G5UMYkUAAAAJ"
+  image: "/assets/images/members/jaejun.jpg"
   graduation_year: "2023"
-  # homepage_url: "https://example.com"
-  # scholar_url: "https://scholar.google.com/..."
-  # image: "/assets/images/members/alumni1.jpg"
+  thesis:
+    title: "Image-based Augmented Knowledge Graph Embedding"
+    url: "https://example.com/thesis.pdf"
 
 - name: "Example Alumni 2"
   status: "Alumni"

@@ -276,6 +276,18 @@ title: Home
                                         {% if member.graduation_year %}
                                         <p class="graduation">Graduated: {{ member.graduation_year }}</p>
                                         {% endif %}
+                                        {% if member.thesis %}
+                                        <div class="thesis-info">
+                                            <p class="thesis-label">Thesis:</p>
+                                            {% if member.thesis.url %}
+                                            <p class="thesis-title">
+                                                <a href="{{ member.thesis.url }}" target="_blank" rel="noopener">{{ member.thesis.title }}</a>
+                                            </p>
+                                            {% else %}
+                                            <p class="thesis-title">{{ member.thesis.title }}</p>
+                                            {% endif %}
+                                        </div>
+                                        {% endif %}
                                         {% if member.education_history %}
                                         <div class="education-history">
                                             {% for edu in member.education_history %}
