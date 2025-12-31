@@ -112,141 +112,204 @@ title: Home
 
 <section id="members" class="section tab-panel">
     <div class="container">
-        <h2>Members</h2>
+        <div class="members-header">
+            <h2>Members</h2>
+            <button class="members-menu-toggle" aria-label="Toggle members menu">
+                <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
+            </button>
+        </div>
         <div class="content">
             {% if site.data.members %}
-            <!-- Students Subsection -->
-            {% assign students = site.data.members | where: "status", "Student" %}
-            {% if students.size > 0 %}
-            <div class="members-subsection">
-                <h3 class="subsection-title">Students</h3>
-                <div class="members-grid">
-                    {% for member in students %}
-                    <div class="member-card">
-                        {% assign name_parts = member.name | split: " (" %}
-                        {% assign name_en = name_parts[0] %}
-                        {% assign name_ko = name_parts[1] | remove: ")" %}
-                        <div class="member-links-top">
-                            {% if member.homepage_url %}
-                            <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
-                                <img src="{{ '/assets/images/icons/homepage_icon.svg' | relative_url }}" alt="Homepage" class="link-icon">
-                            </a>
-                            {% endif %}
-                            {% if member.scholar_url %}
-                            <a href="{{ member.scholar_url }}" target="_blank" rel="noopener" class="member-link" title="Google Scholar">
-                                <img src="{{ '/assets/images/icons/scholar_icon.svg' | relative_url }}" alt="Google Scholar" class="link-icon">
-                            </a>
-                            {% endif %}
-                        </div>
-                        <div class="member-image">
-                            {% if member.image %}
-                            <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
-                            {% else %}
-                            <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
-                            {% endif %}
-                        </div>
-                        <div class="member-info">
-                            <div class="member-header">
-                                <h3 class="member-name-en">{{ name_en }}</h3>
-                                {% if name_ko %}
-                                <h3 class="member-name-ko">{{ name_ko }}</h3>
-                                {% endif %}
-                            </div>
-                            {% if member.role %}
-                            <p class="role">{{ member.role }}</p>
-                            {% endif %}
-                            {% if member.email %}
-                            <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
-                            {% endif %}
-                            {% if member.research %}
-                            <p class="research">{{ member.research }}</p>
-                            {% endif %}
-                            {% if member.education_history %}
-                            <div class="education-history">
-                                {% for edu in member.education_history %}
-                                <p class="education-item">
-                                    <span class="education-period">{{ edu.period }}:</span>
-                                    <span class="education-description">{{ edu.description }}</span>
-                                </p>
+            <div class="members-container">
+                <div class="members-list">
+                    {% assign students = site.data.members | where: "status", "Student" %}
+                    {% assign phd_students = students | where: "role", "Ph.D. Student" %}
+                    {% assign ms_students = students | where: "role", "Master's Student" %}
+                    {% assign alumni = site.data.members | where: "status", "Alumni" %}
+                    
+                    <!-- Students Category -->
+                    <div class="member-category" data-category="students">
+                        <!-- Ph.D Students Subsection -->
+                        {% if phd_students.size > 0 %}
+                        <div class="members-subsection">
+                            <h3 class="subsection-title">Ph.D Students</h3>
+                            <div class="members-grid">
+                                {% for member in phd_students %}
+                                <div class="member-card">
+                                    <div class="member-links-top">
+                                        {% if member.homepage_url %}
+                                        <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
+                                            <img src="{{ '/assets/images/icons/homepage_icon.svg' | relative_url }}" alt="Homepage" class="link-icon">
+                                        </a>
+                                        {% endif %}
+                                        {% if member.scholar_url %}
+                                        <a href="{{ member.scholar_url }}" target="_blank" rel="noopener" class="member-link" title="Google Scholar">
+                                            <img src="{{ '/assets/images/icons/scholar_icon.svg' | relative_url }}" alt="Google Scholar" class="link-icon">
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="member-image">
+                                        {% if member.image %}
+                                        <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                                        {% else %}
+                                        <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
+                                        {% endif %}
+                                    </div>
+                                    <div class="member-info">
+                                        <div class="member-header">
+                                            <h3 class="member-name">{{ member.name }}</h3>
+                                        </div>
+                                        {% if member.email %}
+                                        <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
+                                        {% endif %}
+                                        {% if member.research %}
+                                        <p class="research">{{ member.research }}</p>
+                                        {% endif %}
+                                        {% if member.education_history %}
+                                        <div class="education-history">
+                                            {% for edu in member.education_history %}
+                                            <p class="education-item">
+                                                <span class="education-period">{{ edu.period }}:</span>
+                                                <span class="education-description">{{ edu.description }}</span>
+                                            </p>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
                                 {% endfor %}
                             </div>
-                            {% endif %}
                         </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
-            
-            <!-- Alumni Subsection -->
-            {% assign alumni = site.data.members | where: "status", "Alumni" %}
-            {% if alumni.size > 0 %}
-            <div class="members-subsection">
-                <h3 class="subsection-title">Alumni</h3>
-                <div class="members-grid">
-                    {% for member in alumni %}
-                    <div class="member-card">
-                        {% assign name_parts = member.name | split: " (" %}
-                        {% assign name_en = name_parts[0] %}
-                        {% assign name_ko = name_parts[1] | remove: ")" %}
-                        <div class="member-links-top">
-                            {% if member.homepage_url %}
-                            <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
-                                <img src="{{ '/assets/images/icons/homepage_icon.svg' | relative_url }}" alt="Homepage" class="link-icon">
-                            </a>
-                            {% endif %}
-                            {% if member.scholar_url %}
-                            <a href="{{ member.scholar_url }}" target="_blank" rel="noopener" class="member-link" title="Google Scholar">
-                                <img src="{{ '/assets/images/icons/scholar_icon.svg' | relative_url }}" alt="Google Scholar" class="link-icon">
-                            </a>
-                            {% endif %}
-                        </div>
-                        <div class="member-image">
-                            {% if member.image %}
-                            <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
-                            {% else %}
-                            <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
-                            {% endif %}
-                        </div>
-                        <div class="member-info">
-                            <div class="member-header">
-                                <h3 class="member-name-en">{{ name_en }}</h3>
-                                {% if name_ko %}
-                                <h3 class="member-name-ko">{{ name_ko }}</h3>
-                                {% endif %}
-                            </div>
-                            {% if member.role %}
-                            <p class="role">{{ member.role }}</p>
-                            {% endif %}
-                            {% if member.email %}
-                            <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
-                            {% endif %}
-                            {% if member.research %}
-                            <p class="research">{{ member.research }}</p>
-                            {% endif %}
-                            {% if member.graduation_year %}
-                            <p class="graduation">Graduated: {{ member.graduation_year }}</p>
-                            {% endif %}
-                            {% if member.education_history %}
-                            <div class="education-history">
-                                {% for edu in member.education_history %}
-                                <p class="education-item">
-                                    <span class="education-period">{{ edu.period }}:</span>
-                                    <span class="education-description">{{ edu.description }}</span>
-                                </p>
+                        {% endif %}
+                        
+                        <!-- M.S. Students Subsection -->
+                        {% if ms_students.size > 0 %}
+                        <div class="members-subsection">
+                            <h3 class="subsection-title">M.S. Students</h3>
+                            <div class="members-grid">
+                                {% for member in ms_students %}
+                                <div class="member-card">
+                                    <div class="member-links-top">
+                                        {% if member.homepage_url %}
+                                        <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
+                                            <img src="{{ '/assets/images/icons/homepage_icon.svg' | relative_url }}" alt="Homepage" class="link-icon">
+                                        </a>
+                                        {% endif %}
+                                        {% if member.scholar_url %}
+                                        <a href="{{ member.scholar_url }}" target="_blank" rel="noopener" class="member-link" title="Google Scholar">
+                                            <img src="{{ '/assets/images/icons/scholar_icon.svg' | relative_url }}" alt="Google Scholar" class="link-icon">
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="member-image">
+                                        {% if member.image %}
+                                        <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                                        {% else %}
+                                        <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
+                                        {% endif %}
+                                    </div>
+                                    <div class="member-info">
+                                        <div class="member-header">
+                                            <h3 class="member-name">{{ member.name }}</h3>
+                                        </div>
+                                        {% if member.email %}
+                                        <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
+                                        {% endif %}
+                                        {% if member.research %}
+                                        <p class="research">{{ member.research }}</p>
+                                        {% endif %}
+                                        {% if member.education_history %}
+                                        <div class="education-history">
+                                            {% for edu in member.education_history %}
+                                            <p class="education-item">
+                                                <span class="education-period">{{ edu.period }}:</span>
+                                                <span class="education-description">{{ edu.description }}</span>
+                                            </p>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
                                 {% endfor %}
                             </div>
-                            {% endif %}
                         </div>
+                        {% endif %}
                     </div>
-                    {% endfor %}
+                    
+                    <!-- Alumni Category -->
+                    <div class="member-category" data-category="alumni" style="display: none;">
+                        {% if alumni.size > 0 %}
+                        <div class="members-subsection">
+                            <h3 class="subsection-title">Alumni</h3>
+                            <div class="members-grid">
+                                {% for member in alumni %}
+                                <div class="member-card">
+                                    <div class="member-links-top">
+                                        {% if member.homepage_url %}
+                                        <a href="{{ member.homepage_url }}" target="_blank" rel="noopener" class="member-link" title="Homepage">
+                                            <img src="{{ '/assets/images/icons/homepage_icon.svg' | relative_url }}" alt="Homepage" class="link-icon">
+                                        </a>
+                                        {% endif %}
+                                        {% if member.scholar_url %}
+                                        <a href="{{ member.scholar_url }}" target="_blank" rel="noopener" class="member-link" title="Google Scholar">
+                                            <img src="{{ '/assets/images/icons/scholar_icon.svg' | relative_url }}" alt="Google Scholar" class="link-icon">
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="member-image">
+                                        {% if member.image %}
+                                        <img src="{{ member.image | relative_url }}" alt="{{ member.name }}">
+                                        {% else %}
+                                        <img src="{{ '/assets/images/icons/profile_icon.svg' | relative_url }}" alt="{{ member.name }}" class="default-icon">
+                                        {% endif %}
+                                    </div>
+                                    <div class="member-info">
+                                        <div class="member-header">
+                                            <h3 class="member-name">{{ member.name }}</h3>
+                                        </div>
+                                        {% if member.email %}
+                                        <p class="email"><a href="mailto:{{ member.email }}">{{ member.email }}</a></p>
+                                        {% endif %}
+                                        {% if member.research %}
+                                        <p class="research">{{ member.research }}</p>
+                                        {% endif %}
+                                        {% if member.graduation_year %}
+                                        <p class="graduation">Graduated: {{ member.graduation_year }}</p>
+                                        {% endif %}
+                                        {% if member.education_history %}
+                                        <div class="education-history">
+                                            {% for edu in member.education_history %}
+                                            <p class="education-item">
+                                                <span class="education-period">{{ edu.period }}:</span>
+                                                <span class="education-description">{{ edu.description }}</span>
+                                            </p>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-            {% endif %}
             
-            {% if students.size == 0 and alumni.size == 0 %}
-            <p>Member information will be added here.</p>
-            {% endif %}
+            <!-- Members Side Menu Overlay -->
+            <div class="members-menu-overlay"></div>
+            
+            <nav class="members-side-menu">
+                <div class="members-menu-header">
+                    <button class="members-menu-close" aria-label="Close menu">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <ul class="members-menu-list">
+                    <li><button class="member-menu-btn active" data-category="students">Students</button></li>
+                    <li><button class="member-menu-btn" data-category="alumni">Alumni</button></li>
+                </ul>
+            </nav>
             {% else %}
             <p>Member information will be added here.</p>
             {% endif %}
