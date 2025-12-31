@@ -1,18 +1,27 @@
 # Projects
-# Add projects by editing this file
+# Add projects by organization
 # Format:
-# - title: "Project Title"
-#   description: "Project description"
-#   period: "2024-2025"
-#   status: "Ongoing / Completed / Planned"
+# - organization: "Organization Name"
+#   logo: "/assets/images/projects/organization-logo.png" (optional)
+#   projects:
+#     - title: "Project Title"
+#       period: "Mar. 2025 ~ Feb. 2028"
+#       role: "Principal Investigator" (optional)
 
-- title: "Example Project 1"
-  description: "Description of the project and its goals."
-  period: "2024-2025"
-  status: "Ongoing"
-
-- title: "Example Project 2"
-  description: "Another project description."
-  period: "2023-2024"
-  status: "Completed"
-
+- organization: "National Research Foundation of Korea"
+  logo: "/assets/images/projects/nrf_logo.png"
+  projects:
+    - title: "Responsible Multimodal Graph AI (책임 있는 멀티모달 그래프 인공지능)"
+      period: "Mar. 2025 ~ Feb. 2028"
+      role: "Principal Investigator"
+    - title: "Extendable Graph Representation Learning (확장 가능한 그래프 표현학습)"
+      period: "Mar. 2022 ~ Feb. 2025"
+      role: "Principal Investigator"
+    - title: "MARS Artificial Intelligence Integrated Research Center (MARS 인공지능 통합연구센터)"
+      period: "Aug. 2018 ~ Feb. 2024"
+    - title: "Semi-Supervised Multi-View Learning with Graphs (다각적 데이터 융합을 통한 그래프기반 준지도 학습)"
+      period: "Mar. 2019 ~ Feb. 2022"
+      role: "Principal Investigator"
+    - title: "Modeling Information Propagation by Exploiting the Clustering Structure of Massive Social Networks (거대 소셜 네트워크의 클러스터링 구조를 활용한 정보 전파 메커니즘 모델링)"
+      period: "Nov. 2016 ~ Oct. 2019"
+      role: "Principal Investigator"
