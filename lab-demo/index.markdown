@@ -259,87 +259,183 @@ title: Home
         <h2>Publications</h2>
         <div class="content">
             {% if site.data.publications %}
-            <div class="publications-filters">
-                <div class="filter-group">
-                    <label for="year-filter">Filter by Year:</label>
-                    <select id="year-filter" class="filter-select">
-                        <option value="all">All Years</option>
-                        {% assign years = site.data.publications | map: "year" | uniq | sort | reverse %}
-                        {% for year in years %}
-                        <option value="{{ year }}">{{ year }}</option>
+            <div class="publications-wrapper">
+                <div class="publications-list">
+                    {% assign international_pubs = site.data.publications | where: "type", "international" %}
+                    {% assign domestic_pubs = site.data.publications | where: "type", "domestic" %}
+                    {% assign default_pubs = site.data.publications | where_exp: "pub", "pub.type == nil or pub.type == ''" %}
+                    
+                    <div class="publication-category" data-category="international">
+                        {% for pub in site.data.publications %}
+                        {% assign pub_type = pub.type | default: "international" %}
+                        {% if pub_type == "international" %}
+                        <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                            {% if pub.year %}
+                            <span class="year-badge">{{ pub.year }}</span>
+                            {% endif %}
+                            <h3>{{ pub.title }}</h3>
+                            <p class="authors">{{ pub.authors }}</p>
+                            {% if pub.venue %}
+                            <p class="venue">{{ pub.venue }}</p>
+                            {% endif %}
+                            {% if pub.links %}
+                            <div class="publication-links">
+                                {% if pub.links.link %}
+                                <a href="{{ pub.links.link }}" target="_blank" rel="noopener" class="pub-link" title="Link">
+                                    <img src="{{ '/assets/images/icons/link_icon.svg' | relative_url }}" alt="Link" class="link-icon">
+                                    <span>Link</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.paper %}
+                                <a href="{{ pub.links.paper }}" target="_blank" rel="noopener" class="pub-link" title="Paper">
+                                    <img src="{{ '/assets/images/icons/paper_icon.svg' | relative_url }}" alt="Paper" class="link-icon">
+                                    <span>Paper</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.arxiv %}
+                                <a href="{{ pub.links.arxiv }}" target="_blank" rel="noopener" class="pub-link" title="arXiv">
+                                    <img src="{{ '/assets/images/icons/arXiv_icon_temp.svg' | relative_url }}" alt="arXiv" class="link-icon">
+                                    <span>arXiv</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.bibtex %}
+                                <a href="{{ pub.links.bibtex }}" target="_blank" rel="noopener" class="pub-link" title="BibTeX">
+                                    <img src="{{ '/assets/images/icons/bibtex_icon.svg' | relative_url }}" alt="BibTeX" class="link-icon">
+                                    <span>BibTeX</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.slides %}
+                                <a href="{{ pub.links.slides }}" target="_blank" rel="noopener" class="pub-link" title="Slides">
+                                    <img src="{{ '/assets/images/icons/slides_icon.svg' | relative_url }}" alt="Slides" class="link-icon">
+                                    <span>Slides</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.poster %}
+                                <a href="{{ pub.links.poster }}" target="_blank" rel="noopener" class="pub-link" title="Poster">
+                                    <img src="{{ '/assets/images/icons/poster_icon.svg' | relative_url }}" alt="Poster" class="link-icon">
+                                    <span>Poster</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.code %}
+                                <a href="{{ pub.links.code }}" target="_blank" rel="noopener" class="pub-link" title="Code">
+                                    <img src="{{ '/assets/images/icons/code_icon.svg' | relative_url }}" alt="Code" class="link-icon">
+                                    <span>Code</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.video %}
+                                <a href="{{ pub.links.video }}" target="_blank" rel="noopener" class="pub-link" title="Video">
+                                    <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="Video" class="link-icon">
+                                    <span>Video</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.youtube %}
+                                <a href="{{ pub.links.youtube }}" target="_blank" rel="noopener" class="pub-link" title="YouTube">
+                                    <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="YouTube" class="link-icon">
+                                    <span>YouTube</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.promo %}
+                                <a href="{{ pub.links.promo }}" target="_blank" rel="noopener" class="pub-link" title="Promo">
+                                    <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="Promo" class="link-icon">
+                                    <span>Promo</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
                         {% endfor %}
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="title-filter">Filter by Title:</label>
-                    <input type="text" id="title-filter" class="filter-input" placeholder="Search by paper name...">
-                </div>
-            </div>
-            <div class="publications-list">
-                {% for pub in site.data.publications %}
-                <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}">
-                    {% if pub.year %}
-                    <span class="year-badge">{{ pub.year }}</span>
-                    {% endif %}
-                    <h3>{{ pub.title }}</h3>
-                    <p class="authors">{{ pub.authors }}</p>
-                    {% if pub.venue %}
-                    <p class="venue">{{ pub.venue }}</p>
-                    {% endif %}
-                    {% if pub.links %}
-                    <div class="publication-links">
-                        {% if pub.links.link %}
-                        <a href="{{ pub.links.link }}" target="_blank" rel="noopener" class="pub-link" title="Link">
-                            <img src="{{ '/assets/images/icons/link_icon.svg' | relative_url }}" alt="Link" class="link-icon">
-                            <span>Link</span>
-                        </a>
-                        {% endif %}
-                        {% if pub.links.paper %}
-                        <a href="{{ pub.links.paper }}" target="_blank" rel="noopener" class="pub-link" title="Paper">
-                            <img src="{{ '/assets/images/icons/paper_icon.svg' | relative_url }}" alt="Paper" class="link-icon">
-                            <span>Paper</span>
-                        </a>
-                        {% endif %}
-                        {% if pub.links.arxiv %}
-                        <a href="{{ pub.links.arxiv }}" target="_blank" rel="noopener" class="pub-link" title="arXiv">
-                            <img src="{{ '/assets/images/icons/arXiv_icon_temp.svg' | relative_url }}" alt="arXiv" class="link-icon">
-                            <span>arXiv</span>
-                        </a>
-                        {% endif %}
-                        {% if pub.links.bibtex %}
-                        <a href="{{ pub.links.bibtex }}" target="_blank" rel="noopener" class="pub-link" title="BibTeX">
-                            <img src="{{ '/assets/images/icons/bibtex_icon.svg' | relative_url }}" alt="BibTeX" class="link-icon">
-                            <span>BibTeX</span>
-                        </a>
-                        {% endif %}
-                        {% if pub.links.slides %}
-                        <a href="{{ pub.links.slides }}" target="_blank" rel="noopener" class="pub-link" title="Slides">
-                            <img src="{{ '/assets/images/icons/slides_icon.svg' | relative_url }}" alt="Slides" class="link-icon">
-                            <span>Slides</span>
-                        </a>
-                        {% endif %}
-                        {% if pub.links.poster %}
-                        <a href="{{ pub.links.poster }}" target="_blank" rel="noopener" class="pub-link" title="Poster">
-                            <img src="{{ '/assets/images/icons/poster_icon.svg' | relative_url }}" alt="Poster" class="link-icon">
-                            <span>Poster</span>
-                        </a>
-                        {% endif %}
-                        {% if pub.links.code %}
-                        <a href="{{ pub.links.code }}" target="_blank" rel="noopener" class="pub-link" title="Code">
-                            <img src="{{ '/assets/images/icons/code_icon.svg' | relative_url }}" alt="Code" class="link-icon">
-                            <span>Code</span>
-                        </a>
-                        {% endif %}
-                        {% if pub.links.video %}
-                        <a href="{{ pub.links.video }}" target="_blank" rel="noopener" class="pub-link" title="Video">
-                            <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="Video" class="link-icon">
-                            <span>Video</span>
-                        </a>
-                        {% endif %}
                     </div>
-                    {% endif %}
+                    
+                    <div class="publication-category" data-category="domestic" style="display: none;">
+                        {% for pub in site.data.publications %}
+                        {% assign pub_type = pub.type | default: "international" %}
+                        {% if pub_type == "domestic" %}
+                        <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                            {% if pub.year %}
+                            <span class="year-badge">{{ pub.year }}</span>
+                            {% endif %}
+                            <h3>{{ pub.title }}</h3>
+                            <p class="authors">{{ pub.authors }}</p>
+                            {% if pub.venue %}
+                            <p class="venue">{{ pub.venue }}</p>
+                            {% endif %}
+                            {% if pub.links %}
+                            <div class="publication-links">
+                                {% if pub.links.link %}
+                                <a href="{{ pub.links.link }}" target="_blank" rel="noopener" class="pub-link" title="Link">
+                                    <img src="{{ '/assets/images/icons/link_icon.svg' | relative_url }}" alt="Link" class="link-icon">
+                                    <span>Link</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.paper %}
+                                <a href="{{ pub.links.paper }}" target="_blank" rel="noopener" class="pub-link" title="Paper">
+                                    <img src="{{ '/assets/images/icons/paper_icon.svg' | relative_url }}" alt="Paper" class="link-icon">
+                                    <span>Paper</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.arxiv %}
+                                <a href="{{ pub.links.arxiv }}" target="_blank" rel="noopener" class="pub-link" title="arXiv">
+                                    <img src="{{ '/assets/images/icons/arXiv_icon_temp.svg' | relative_url }}" alt="arXiv" class="link-icon">
+                                    <span>arXiv</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.bibtex %}
+                                <a href="{{ pub.links.bibtex }}" target="_blank" rel="noopener" class="pub-link" title="BibTeX">
+                                    <img src="{{ '/assets/images/icons/bibtex_icon.svg' | relative_url }}" alt="BibTeX" class="link-icon">
+                                    <span>BibTeX</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.slides %}
+                                <a href="{{ pub.links.slides }}" target="_blank" rel="noopener" class="pub-link" title="Slides">
+                                    <img src="{{ '/assets/images/icons/slides_icon.svg' | relative_url }}" alt="Slides" class="link-icon">
+                                    <span>Slides</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.poster %}
+                                <a href="{{ pub.links.poster }}" target="_blank" rel="noopener" class="pub-link" title="Poster">
+                                    <img src="{{ '/assets/images/icons/poster_icon.svg' | relative_url }}" alt="Poster" class="link-icon">
+                                    <span>Poster</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.code %}
+                                <a href="{{ pub.links.code }}" target="_blank" rel="noopener" class="pub-link" title="Code">
+                                    <img src="{{ '/assets/images/icons/code_icon.svg' | relative_url }}" alt="Code" class="link-icon">
+                                    <span>Code</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.video %}
+                                <a href="{{ pub.links.video }}" target="_blank" rel="noopener" class="pub-link" title="Video">
+                                    <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="Video" class="link-icon">
+                                    <span>Video</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.youtube %}
+                                <a href="{{ pub.links.youtube }}" target="_blank" rel="noopener" class="pub-link" title="YouTube">
+                                    <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="YouTube" class="link-icon">
+                                    <span>YouTube</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.promo %}
+                                <a href="{{ pub.links.promo }}" target="_blank" rel="noopener" class="pub-link" title="Promo">
+                                    <img src="{{ '/assets/images/icons/video_icon.svg' | relative_url }}" alt="Promo" class="link-icon">
+                                    <span>Promo</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-                {% endfor %}
+                
+                <nav class="publications-side-menu">
+                    <ul class="publications-menu-list">
+                        <li><button class="publication-menu-btn active" data-category="international">International</button></li>
+                        <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
+                    </ul>
+                </nav>
             </div>
             {% else %}
             <p>Publications will be listed here.</p>
