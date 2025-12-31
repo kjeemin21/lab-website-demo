@@ -259,7 +259,7 @@ title: Home
         <h2>Publications</h2>
         <div class="content">
             {% if site.data.publications %}
-            <div class="publications-wrapper">
+            <div class="publications-container">
                 <div class="publications-list">
                     {% assign international_pubs = site.data.publications | where: "type", "international" %}
                     {% assign domestic_pubs = site.data.publications | where: "type", "domestic" %}
@@ -429,14 +429,14 @@ title: Home
                         {% endfor %}
                     </div>
                 </div>
-                
-                <nav class="publications-side-menu">
-                    <ul class="publications-menu-list">
-                        <li><button class="publication-menu-btn active" data-category="international">International</button></li>
-                        <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
-                    </ul>
-                </nav>
             </div>
+            
+            <nav class="publications-side-menu">
+                <ul class="publications-menu-list">
+                    <li><button class="publication-menu-btn active" data-category="international">International</button></li>
+                    <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
+                </ul>
+            </nav>
             {% else %}
             <p>Publications will be listed here.</p>
             {% endif %}

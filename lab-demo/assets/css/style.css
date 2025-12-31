@@ -329,6 +329,11 @@ main {
 .content {
     max-width: 1000px;
     margin: 0 auto;
+    position: relative;
+}
+
+#publications .content {
+    max-width: 1300px;
 }
 
 /* Professor Section */
@@ -628,14 +633,13 @@ main {
 }
 
 /* Publications Section */
-.publications-wrapper {
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
+.publications-container {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .publications-list {
-    flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -652,14 +656,27 @@ main {
 }
 
 .publications-side-menu {
-    position: sticky;
-    top: calc(var(--header-height) + 20px);
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 200px;
-    flex-shrink: 0;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     padding: 20px;
+}
+
+@media (max-width: 1300px) {
+    #publications .content {
+        max-width: 1000px;
+    }
+    
+    .publications-side-menu {
+        position: fixed;
+        top: calc(var(--header-height) + 20px);
+        right: 20px;
+        z-index: 100;
+    }
 }
 
 .publications-menu-list {
@@ -980,24 +997,30 @@ main {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 
-    .publications-wrapper {
-        flex-direction: column;
+    .publications-container {
+        padding-right: 0;
     }
 
     .publications-side-menu {
-        position: static;
-        width: 100%;
-        margin-bottom: 20px;
+        position: fixed;
+        top: calc(var(--header-height) + 20px);
+        right: 20px;
+        width: 180px;
+        float: none;
+        margin-left: 0;
+        z-index: 100;
     }
 
     .publications-menu-list {
-        flex-direction: row;
+        flex-direction: column;
         gap: 10px;
     }
 
     .publication-menu-btn {
-        flex: 1;
+        width: 100%;
         text-align: center;
+        font-size: 0.9rem;
+        padding: 10px 15px;
     }
 }
 
