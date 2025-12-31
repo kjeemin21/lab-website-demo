@@ -150,6 +150,11 @@
             if (tabId === 'publications') {
                 setTimeout(initPublicationsMenuWithClose, 100);
             }
+            
+            // Initialize members menu if members tab is active
+            if (tabId === 'members') {
+                setTimeout(initMembersMenuWithClose, 100);
+            }
         }
 
         // Tab button click handlers
@@ -275,11 +280,98 @@
             });
         }
 
-        // Also initialize on page load if publications tab is active
+        // Members category switching functionality
+        function switchMemberCategory(category) {
+            const categories = document.querySelectorAll('.member-category');
+            const buttons = document.querySelectorAll('.member-menu-btn');
+
+            categories.forEach(cat => {
+                if (cat.getAttribute('data-category') === category) {
+                    cat.style.display = 'flex';
+                } else {
+                    cat.style.display = 'none';
+                }
+            });
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Members menu toggle functionality (for mobile)
+        const membersMenuToggle = document.querySelector('.members-menu-toggle');
+        const membersMenuClose = document.querySelector('.members-menu-close');
+        const membersSideMenu = document.querySelector('.members-side-menu');
+        const membersMenuOverlay = document.querySelector('.members-menu-overlay');
+
+        function openMembersMenu() {
+            if (membersSideMenu) {
+                membersSideMenu.classList.add('active');
+            }
+            if (membersMenuOverlay) {
+                membersMenuOverlay.classList.add('active');
+            }
+            if (document.body) {
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeMembersMenu() {
+            if (membersSideMenu) {
+                membersSideMenu.classList.remove('active');
+            }
+            if (membersMenuOverlay) {
+                membersMenuOverlay.classList.remove('active');
+            }
+            if (document.body) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (membersMenuToggle) {
+            membersMenuToggle.addEventListener('click', openMembersMenu);
+        }
+
+        if (membersMenuClose) {
+            membersMenuClose.addEventListener('click', closeMembersMenu);
+        }
+
+        if (membersMenuOverlay) {
+            membersMenuOverlay.addEventListener('click', closeMembersMenu);
+        }
+
+        // Close menu when clicking on a category button (mobile)
+        function initMembersMenuWithClose() {
+            const menuButtons = document.querySelectorAll('.member-menu-btn');
+
+            menuButtons.forEach(button => {
+                if (!button.hasAttribute('data-initialized')) {
+                    button.setAttribute('data-initialized', 'true');
+                    button.addEventListener('click', function() {
+                        const category = this.getAttribute('data-category');
+                        switchMemberCategory(category);
+                        
+                        // Close menu on mobile after selection
+                        if (window.innerWidth <= 620) {
+                            closeMembersMenu();
+                        }
+                    });
+                }
+            });
+        }
+
+        // Also initialize on page load if publications or members tab is active
         document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.substring(1);
             if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
                 setTimeout(initPublicationsMenuWithClose, 100);
+            }
+            if (hash === 'members' || (!hash && document.querySelector('#members.tab-panel.active'))) {
+                setTimeout(initMembersMenuWithClose, 100);
             }
         });
     </script>
