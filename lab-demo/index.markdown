@@ -279,7 +279,7 @@ title: Home
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
                             <h3>{{ pub.title }}</h3>
-                            <p class="authors">{{ pub.authors }}</p>
+                            <p class="authors">{{ pub.authors | replace: "‡", "<sup>‡</sup>" }}</p>
                             {% if pub.venue %}
                             <p class="venue">{{ pub.venue }}</p>
                             {% endif %}
@@ -361,7 +361,7 @@ title: Home
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
                             <h3>{{ pub.title }}</h3>
-                            <p class="authors">{{ pub.authors }}</p>
+                            <p class="authors">{{ pub.authors | replace: "‡", "<sup>‡</sup>" }}</p>
                             {% if pub.venue %}
                             <p class="venue">{{ pub.venue }}</p>
                             {% endif %}
