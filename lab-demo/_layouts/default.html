@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,15 +20,13 @@
                 </a>
             </h1>
             <nav class="main-nav">
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#professor">Professor</a></li>
-                    <li><a href="#members">Members</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#photos">Photos</a></li>
-                    <li><a href="#contacts">Contacts</a></li>
-                </ul>
+                <button class="tab-button active" data-tab="about">About</button>
+                <button class="tab-button" data-tab="professor">Professor</button>
+                <button class="tab-button" data-tab="members">Members</button>
+                <button class="tab-button" data-tab="publications">Publications</button>
+                <button class="tab-button" data-tab="projects">Projects</button>
+                <button class="tab-button" data-tab="photos">Photos</button>
+                <button class="tab-button" data-tab="contacts">Contacts</button>
             </nav>
             <button class="menu-toggle" aria-label="Toggle menu">
                 <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
@@ -46,13 +45,13 @@
             </button>
         </div>
         <ul class="side-menu-list">
-            <li><a href="#about">About</a></li>
-            <li><a href="#professor">Professor</a></li>
-            <li><a href="#members">Members</a></li>
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#photos">Photos</a></li>
-            <li><a href="#contacts">Contacts</a></li>
+            <li><button class="side-menu-tab" data-tab="about">About</button></li>
+            <li><button class="side-menu-tab" data-tab="professor">Professor</button></li>
+            <li><button class="side-menu-tab" data-tab="members">Members</button></li>
+            <li><button class="side-menu-tab" data-tab="publications">Publications</button></li>
+            <li><button class="side-menu-tab" data-tab="projects">Projects</button></li>
+            <li><button class="side-menu-tab" data-tab="photos">Photos</button></li>
+            <li><button class="side-menu-tab" data-tab="contacts">Contacts</button></li>
         </ul>
     </nav>
 
@@ -102,151 +101,155 @@
             sideMenuOverlay.addEventListener('click', closeSideMenu);
         }
 
-        // Close menu when clicking on a link
-        const sideMenuLinks = document.querySelectorAll('.side-menu-list a');
-        sideMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
+        // Tab switching functionality
+        function switchTab(tabId) {
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Remove active class from all side menu tabs
+            document.querySelectorAll('.side-menu-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Hide all tab panels
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Show selected tab panel
+            const targetPanel = document.querySelector(`#${tabId}.tab-panel`);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+            
+            // Activate corresponding tab button
+            const targetTabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+            if (targetTabButton) {
+                targetTabButton.classList.add('active');
+            }
+            
+            // Activate corresponding side menu tab
+            const targetSideMenuTab = document.querySelector(`.side-menu-tab[data-tab="${tabId}"]`);
+            if (targetSideMenuTab) {
+                targetSideMenuTab.classList.add('active');
+            }
+            
+            // Update URL hash
+            if (history.pushState) {
+                history.pushState(null, null, `#${tabId}`);
+            } else {
+                window.location.hash = `#${tabId}`;
+            }
+            
+            // Scroll to top of main content
+            window.scrollTo(0, 0);
+            
+            // Initialize publications filter if publications tab is active
+            if (tabId === 'publications') {
+                setTimeout(initPublicationsFilter, 100);
+            }
+        }
+
+        // Tab button click handlers
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                switchTab(tabId);
+            });
+        });
+
+        // Side menu tab click handlers
+        document.querySelectorAll('.side-menu-tab').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                switchTab(tabId);
                 closeSideMenu();
             });
         });
 
-        // Enhanced smooth scroll with custom easing function
-        function easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-        }
-
-        let isProgrammaticScroll = false;
-
-        function smoothScrollTo(targetElement, duration = 600) {
-            isProgrammaticScroll = true;
-            const headerOffset = 110;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition;
-            let startTime = null;
-
-            function animation(currentTime) {
-                if (startTime === null) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                const ease = easeInOutCubic(progress);
-                
-                window.scrollTo(0, startPosition + distance * ease);
-                
-                if (timeElapsed < duration) {
-                    requestAnimationFrame(animation);
-                } else {
-                    // Scroll completed, allow nav updates after a short delay
-                    setTimeout(function() {
-                        isProgrammaticScroll = false;
-                        updateActiveNav();
-                    }, 100);
+        // Handle initial hash on page load
+        function handleInitialHash() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetPanel = document.querySelector(`#${hash}.tab-panel`);
+                if (targetPanel) {
+                    switchTab(hash);
+                    return;
                 }
             }
-
-            requestAnimationFrame(animation);
+            // Default to first tab if no valid hash
+            switchTab('about');
         }
 
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
-                
-                if (target) {
-                    // Add active state to clicked link immediately
-                    document.querySelectorAll('.main-nav a, .side-menu-list a').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    // Smooth scroll to target
-                    smoothScrollTo(target, 400);
-                }
-            });
+        // Initialize on page load
+        handleInitialHash();
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            handleInitialHash();
         });
 
-        // Highlight active navigation item on scroll - continuously update, but pause during nav button scroll
-        let scrollTimeout = null;
-        let scrollAnimationFrame = null;
+        // Publications filtering functionality
+        function filterPublications() {
+            const yearFilter = document.getElementById('year-filter');
+            const titleFilter = document.getElementById('title-filter');
+            const publicationItems = document.querySelectorAll('.publication-item');
 
-        function updateActiveNav() {
-            // Don't update during programmatic scroll (when nav button is pressed)
-            if (isProgrammaticScroll) return;
+            if (!yearFilter || !titleFilter) return;
 
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
-            
-            let current = '';
-            const scrollPosition = window.pageYOffset;
-            const viewportHeight = window.innerHeight;
-            
-            // Find the section that is most visible in the viewport
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                const sectionMiddle = sectionTop + section.offsetHeight / 2;
-                
-                // Check if section is significantly visible (at least 40% of viewport height)
-                const visibleTop = Math.max(scrollPosition + 100, sectionTop);
-                const visibleBottom = Math.min(scrollPosition + viewportHeight, sectionBottom);
-                const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-                const minVisibleHeight = viewportHeight * 0.4;
-                
-                if (visibleHeight >= minVisibleHeight) {
-                    // Prefer section that is more centered
-                    const distanceFromCenter = Math.abs((scrollPosition + viewportHeight / 2) - sectionMiddle);
-                    if (current === '') {
-                        current = section.getAttribute('id');
-                    } else {
-                        const currentSection = document.querySelector('#' + current);
-                        if (currentSection) {
-                            const currentMiddle = currentSection.offsetTop + currentSection.offsetHeight / 2;
-                            const currentDistance = Math.abs((scrollPosition + viewportHeight / 2) - currentMiddle);
-                            if (distanceFromCenter < currentDistance) {
-                                current = section.getAttribute('id');
-                            }
-                        }
-                    }
+            const selectedYear = yearFilter.value;
+            const searchTitle = titleFilter.value.toLowerCase().trim();
+
+            publicationItems.forEach(item => {
+                const itemYear = item.getAttribute('data-year');
+                const itemTitle = item.getAttribute('data-title') || '';
+
+                let showItem = true;
+
+                // Filter by year
+                if (selectedYear !== 'all' && itemYear !== selectedYear) {
+                    showItem = false;
                 }
-            });
 
-            // Update both main nav and side menu links
-            const allNavLinks = document.querySelectorAll('.main-nav a[href^="#"], .side-menu-list a[href^="#"]');
-            allNavLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
+                // Filter by title
+                if (showItem && searchTitle && !itemTitle.includes(searchTitle)) {
+                    showItem = false;
+                }
+
+                // Show or hide item
+                if (showItem) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
                 }
             });
         }
 
-        // Continuous update during user scroll (throttled with requestAnimationFrame)
-        function handleScroll() {
-            // Cancel any pending timeout
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = null;
+        // Initialize publications filter when publications tab is active
+        function initPublicationsFilter() {
+            const yearFilter = document.getElementById('year-filter');
+            const titleFilter = document.getElementById('title-filter');
+
+            if (yearFilter && !yearFilter.hasAttribute('data-initialized')) {
+                yearFilter.setAttribute('data-initialized', 'true');
+                yearFilter.addEventListener('change', filterPublications);
             }
 
-            // Cancel any pending animation frame
-            if (scrollAnimationFrame) {
-                cancelAnimationFrame(scrollAnimationFrame);
-            }
-
-            // Schedule update (only if not programmatically scrolling)
-            if (!isProgrammaticScroll) {
-                scrollAnimationFrame = requestAnimationFrame(function() {
-                    updateActiveNav();
-                });
+            if (titleFilter && !titleFilter.hasAttribute('data-initialized')) {
+                titleFilter.setAttribute('data-initialized', 'true');
+                titleFilter.addEventListener('input', filterPublications);
             }
         }
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-
-        // Update active nav on page load
-        updateActiveNav();
+        // Also initialize on page load if publications tab is active
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
+                setTimeout(initPublicationsFilter, 100);
+            }
+        });
     </script>
 </body>
 </html>
