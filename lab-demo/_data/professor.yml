@@ -1,8 +1,8 @@
-name: "Joyce Jiyoung Whang"
+name: "Joyce Jiyoung Whang (황지영)"
 title: "Associate Professor, School of Computing, KAIST"
 email: "jjwhang@kaist.ac.kr"
 office: "KAIST, N1 Building 905"
-# image: "/assets/images/professor/professor-photo.jpg" (optional)
+image: "/assets/images/professor/professor.jpg"
 
 adjunct_positions:
   - "Adjunct Professor, Kim Jaechul Graduate School of AI, KAIST"

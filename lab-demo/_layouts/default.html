@@ -146,9 +146,9 @@
             // Scroll to top of main content
             window.scrollTo(0, 0);
             
-            // Initialize publications filter if publications tab is active
+            // Initialize publications menu if publications tab is active
             if (tabId === 'publications') {
-                setTimeout(initPublicationsFilter, 100);
+                setTimeout(initPublicationsMenuWithClose, 100);
             }
         }
 
@@ -191,63 +191,95 @@
             handleInitialHash();
         });
 
-        // Publications filtering functionality
-        function filterPublications() {
-            const yearFilter = document.getElementById('year-filter');
-            const titleFilter = document.getElementById('title-filter');
-            const publicationItems = document.querySelectorAll('.publication-item');
+        // Publications category switching functionality
+        function switchPublicationCategory(category) {
+            const categories = document.querySelectorAll('.publication-category');
+            const buttons = document.querySelectorAll('.publication-menu-btn');
 
-            if (!yearFilter || !titleFilter) return;
-
-            const selectedYear = yearFilter.value;
-            const searchTitle = titleFilter.value.toLowerCase().trim();
-
-            publicationItems.forEach(item => {
-                const itemYear = item.getAttribute('data-year');
-                const itemTitle = item.getAttribute('data-title') || '';
-
-                let showItem = true;
-
-                // Filter by year
-                if (selectedYear !== 'all' && itemYear !== selectedYear) {
-                    showItem = false;
-                }
-
-                // Filter by title
-                if (showItem && searchTitle && !itemTitle.includes(searchTitle)) {
-                    showItem = false;
-                }
-
-                // Show or hide item
-                if (showItem) {
-                    item.classList.remove('hidden');
+            categories.forEach(cat => {
+                if (cat.getAttribute('data-category') === category) {
+                    cat.style.display = 'flex';
                 } else {
-                    item.classList.add('hidden');
+                    cat.style.display = 'none';
+                }
+            });
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
                 }
             });
         }
 
-        // Initialize publications filter when publications tab is active
-        function initPublicationsFilter() {
-            const yearFilter = document.getElementById('year-filter');
-            const titleFilter = document.getElementById('title-filter');
+        // Publications menu toggle functionality (for mobile)
+        const publicationsMenuToggle = document.querySelector('.publications-menu-toggle');
+        const publicationsMenuClose = document.querySelector('.publications-menu-close');
+        const publicationsSideMenu = document.querySelector('.publications-side-menu');
+        const publicationsMenuOverlay = document.querySelector('.publications-menu-overlay');
 
-            if (yearFilter && !yearFilter.hasAttribute('data-initialized')) {
-                yearFilter.setAttribute('data-initialized', 'true');
-                yearFilter.addEventListener('change', filterPublications);
+        function openPublicationsMenu() {
+            if (publicationsSideMenu) {
+                publicationsSideMenu.classList.add('active');
             }
+            if (publicationsMenuOverlay) {
+                publicationsMenuOverlay.classList.add('active');
+            }
+            if (document.body) {
+                document.body.style.overflow = 'hidden';
+            }
+        }
 
-            if (titleFilter && !titleFilter.hasAttribute('data-initialized')) {
-                titleFilter.setAttribute('data-initialized', 'true');
-                titleFilter.addEventListener('input', filterPublications);
+        function closePublicationsMenu() {
+            if (publicationsSideMenu) {
+                publicationsSideMenu.classList.remove('active');
             }
+            if (publicationsMenuOverlay) {
+                publicationsMenuOverlay.classList.remove('active');
+            }
+            if (document.body) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (publicationsMenuToggle) {
+            publicationsMenuToggle.addEventListener('click', openPublicationsMenu);
+        }
+
+        if (publicationsMenuClose) {
+            publicationsMenuClose.addEventListener('click', closePublicationsMenu);
+        }
+
+        if (publicationsMenuOverlay) {
+            publicationsMenuOverlay.addEventListener('click', closePublicationsMenu);
+        }
+
+        // Close menu when clicking on a category button (mobile)
+        function initPublicationsMenuWithClose() {
+            const menuButtons = document.querySelectorAll('.publication-menu-btn');
+
+            menuButtons.forEach(button => {
+                if (!button.hasAttribute('data-initialized')) {
+                    button.setAttribute('data-initialized', 'true');
+                    button.addEventListener('click', function() {
+                        const category = this.getAttribute('data-category');
+                        switchPublicationCategory(category);
+                        
+                        // Close menu on mobile after selection
+                        if (window.innerWidth <= 620) {
+                            closePublicationsMenu();
+                        }
+                    });
+                }
+            });
         }
 
         // Also initialize on page load if publications tab is active
         document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.substring(1);
             if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
-                setTimeout(initPublicationsFilter, 100);
+                setTimeout(initPublicationsMenuWithClose, 100);
             }
         });
     </script>
