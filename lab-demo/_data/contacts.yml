@@ -1,4 +1,14 @@
-address: "Department Name, University Name, City, Country"
-phone: "+82-XX-XXXX-XXXX"
-office: "Building Name, Room Number"
+location:
+  building: "KAIST, N1 Building"
+  professor_room: "N1, 905"
+  lab_room: "N1, 921"
+  admin_room: "N1, 904"
 
+email:
+  professor_name: "Professor Joyce Jiyoung Whang"
+  professor_email: "jjwhang@kaist.ac.kr"
+
+phone:
+  professor: "042-350-3584"
+  lab: "042-350-7784"
+  admin: "042-350-7884"
