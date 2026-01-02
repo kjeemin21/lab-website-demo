@@ -22,7 +22,7 @@ title: bdi-lab Demo
 email: kjeemin21@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   It's a demo site for bdi-lab.
-baseurl: "/lab-demo" # the subpath of your site, e.g. /blog
+baseurl: "/lab-website-demo" # the subpath of your site, e.g. /blog
 url: "https://kjeemin21.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: None
 github_username:  kjeemin21
