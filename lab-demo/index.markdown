@@ -99,14 +99,14 @@ title: Home
                     {% if site.data.professor.email %}
                     <div class="detail-item">
                         <span class="detail-label">•</span>
-                        <span class="detail-content">Email: <a href="mailto:{{ site.data.professor.email }}">{{ site.data.professor.email }}</a></span>
+                        <span class="detail-content"><strong>Email:</strong> <a href="mailto:{{ site.data.professor.email }}">{{ site.data.professor.email }}</a></span>
                     </div>
                     {% endif %}
                     
                     {% if site.data.professor.office %}
                     <div class="detail-item">
                         <span class="detail-label">•</span>
-                        <span class="detail-content">Office: {{ site.data.professor.office }}</span>
+                        <span class="detail-content"><strong>Office:</strong> {{ site.data.professor.office }}</span>
                     </div>
                     {% endif %}
                     

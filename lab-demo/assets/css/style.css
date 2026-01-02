@@ -635,22 +635,22 @@ main {
 }
 
 .professor-info h3 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--primary-color);
-    margin: 0 0 15px 0;
-    font-weight: 600;
+    margin: 0 0 20px 0;
+    font-weight: 700;
     line-height: 1.3;
     width: 100%;
 }
 
 .professor-details {
     width: 100%;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .detail-item {
     display: flex;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     align-items: flex-start;
 }
 
@@ -660,34 +660,70 @@ main {
 
 .detail-item.detail-indent {
     padding-left: 24px;
-    margin-top: 4px;
+    margin-top: 6px;
+    margin-bottom: 10px;
 }
 
 .detail-label {
     margin-right: 8px;
     flex-shrink: 0;
     color: var(--secondary-color);
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
 }
 
 .detail-content {
     flex: 1;
     color: var(--text-color);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* Style for labels within detail-content (e.g., "Email:", "Office:") */
+.detail-content strong {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.05rem;
+}
+
+/* Style for section headers in detail-content */
+.detail-item:not(.detail-indent) .detail-content {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
 }
 
 .detail-content a {
     color: var(--secondary-color);
     text-decoration: none;
     transition: color 0.3s;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .detail-content a:hover {
     color: var(--primary-color);
     text-decoration: underline;
+}
+
+/* Style for text before colon (e.g., "Email:", "Office:") */
+.detail-content {
+    position: relative;
+}
+
+/* Make section headers more prominent */
+.detail-item:not(.detail-indent) .detail-content:first-child {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.15rem;
+    letter-spacing: 0.3px;
+}
+
+/* Style for indented content (sub-items) */
+.detail-item.detail-indent .detail-content {
+    font-weight: 400;
+    color: var(--text-color);
+    font-size: 1rem;
 }
 
 .cv-link {
@@ -1861,8 +1897,7 @@ main {
 
     .professor-info {
         flex-direction: column;
-        padding: 20px;
-        padding-right: 20px;
+        padding: 30px 20px 20px 20px;
         align-items: center;
         text-align: center;
     }
@@ -1871,19 +1906,44 @@ main {
         position: relative;
         top: auto;
         left: auto;
-        width: 130px;
-        height: 170px;
-        margin: 0 auto 20px;
+        width: 180px;
+        height: 240px;
+        margin: 0 auto 25px;
     }
 
     .professor-info h3 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         text-align: center;
+        font-weight: 700;
+        margin-bottom: 25px;
     }
 
     .professor-details {
         text-align: left;
         width: 100%;
+        line-height: 1.8;
+    }
+    
+    .detail-item {
+        margin-bottom: 14px;
+    }
+    
+    .detail-label {
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+    
+    .detail-content {
+        font-size: 1rem;
+    }
+    
+    .detail-item:not(.detail-indent) .detail-content {
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+    
+    .detail-item.detail-indent .detail-content {
+        font-size: 0.95rem;
     }
 
     .detail-item.detail-indent {
