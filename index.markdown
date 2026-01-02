@@ -567,8 +567,6 @@ title: Home
                     <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
                 </ul>
             </nav>
-            {% else %}
-            <p>Publications will be listed here.</p>
         </div>
     </div>
 </section>
