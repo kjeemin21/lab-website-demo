@@ -386,7 +386,6 @@ title: Home
                 <div class="publications-list">
                     {% assign international_pubs = site.data.publications | where: "type", "international" %}
                     {% assign domestic_pubs = site.data.publications | where: "type", "domestic" %}
-                    {% assign default_pubs = site.data.publications | where_exp: "pub", "pub.type == nil or pub.type == ''" %}
                     
                     <div class="publication-category" data-category="international">
                         {% for pub in site.data.publications %}
