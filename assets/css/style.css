@@ -636,6 +636,8 @@ main {
 .professor-details {
     width: 100%;
     line-height: 1.7;
+    margin-bottom: 60px; /* Space for CV button */
+    padding-right: 10px;
 }
 
 .detail-item {
@@ -722,11 +724,15 @@ main {
     text-decoration: none;
     transition: all 0.3s;
     display: inline-block;
-    padding: 6px 14px;
+    padding: 8px 16px;
     border: 2px solid var(--secondary-color);
     border-radius: 6px;
-    margin-top: 2px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    white-space: nowrap;
+    z-index: 10; /* Ensure button stays on top */
 }
 
 .cv-link:hover {
@@ -856,6 +862,7 @@ main {
     align-items: flex-start;
     margin-bottom: 8px;
     width: 100%;
+    padding-right: 70px; /* Space for link buttons */
 }
 
 .member-name-en {
@@ -1943,6 +1950,21 @@ main {
         height: 133px;
     }
 
+    .member-links-top {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+    }
+
+    .member-link .link-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .member-header {
+        padding-right: 65px; /* Adjusted space for smaller link buttons */
+    }
+
     .member-name-en {
         font-size: 1.1rem;
     }
@@ -1978,6 +2000,8 @@ main {
         text-align: left;
         width: 100%;
         line-height: 1.8;
+        margin-bottom: 50px; /* Space for CV button on mobile */
+        padding-right: 5px;
     }
     
     .detail-item {
@@ -2004,6 +2028,13 @@ main {
 
     .detail-item.detail-indent {
         padding-left: 20px;
+    }
+    
+    .cv-link {
+        bottom: 15px;
+        right: 15px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
     }
     
     .contacts-grid {
@@ -2133,6 +2164,25 @@ main {
     .publication-links {
         padding-right: 70px;
         padding-bottom: 10px;
+    }
+
+    .member-links-top {
+        top: 8px;
+        right: 8px;
+        gap: 5px;
+    }
+
+    .member-link {
+        padding: 3px;
+    }
+
+    .member-link .link-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .member-header {
+        padding-right: 60px; /* Further adjusted for very small screens */
     }
 
     .members-menu-toggle {
