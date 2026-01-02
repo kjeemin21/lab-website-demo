@@ -7,47 +7,30 @@ title: Home
     <div class="container about-container">
         {% if site.data.about %}
         <div class="about-content">
-            <!-- Hero Image Section -->
-            <div class="about-hero">
-                {% if site.data.about.hero_image %}
-                <div class="about-hero-image">
+            <!-- Main Content: Image (Left) + Text (Right) -->
+            <div class="about-main-section">
+                <!-- Left: Hero Image -->
+                <div class="about-main-image">
+                    {% if site.data.about.hero_image %}
                     <img src="{{ site.data.about.hero_image | relative_url }}" alt="{{ site.data.about.title }}">
-                    <div class="about-hero-overlay">
-                        <h1 class="about-hero-title">{{ site.data.about.title }}</h1>
-                        {% if site.data.about.subtitle %}
-                        <p class="about-hero-subtitle">{{ site.data.about.subtitle }}</p>
-                        {% endif %}
-                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
-            </div>
-            
-            <!-- Description Section -->
-            <div class="about-description">
-                <div class="about-description-content">
+                
+                <!-- Right: Description -->
+                <div class="about-main-text">
                     {% if site.data.about.description %}
                     <p class="about-text">{{ site.data.about.description }}</p>
                     {% endif %}
-                    
-                    {% if site.data.about.mission %}
-                    <div class="about-mission">
-                        <h3 class="about-mission-title">Our Mission</h3>
-                        <p class="about-mission-text">{{ site.data.about.mission }}</p>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
             
-            <!-- Research Areas Section -->
+            <!-- Research Areas Section (Below) -->
             {% if site.data.about.research_areas %}
-            <div class="about-research-areas">
-                <h3 class="about-section-title">Research Areas</h3>
-                <div class="research-areas-grid">
+            <div class="about-research-section">
+                <h3 class="research-section-title">Research Areas</h3>
+                <div class="research-tags-list">
                     {% for area in site.data.about.research_areas %}
-                    <div class="research-area-card">
-                        <span class="research-area-icon">●</span>
-                        <span class="research-area-name">{{ area }}</span>
-                    </div>
+                    <span class="research-tag">{{ area }}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -171,12 +154,10 @@ title: Home
                     {% assign ms_students = students | where: "role", "Master's Student" %}
                     {% assign alumni = site.data.members | where: "status", "Alumni" %}
                     
-                    <!-- Students Category -->
-                    <div class="member-category" data-category="students">
-                        <!-- Ph.D Students Subsection -->
-                        {% if phd_students.size > 0 %}
-                        <div class="members-subsection">
-                            <h3 class="subsection-title">Ph.D Students</h3>
+                    <!-- Ph.D Students Subsection -->
+                    {% if phd_students.size > 0 %}
+                    <div class="members-subsection" id="members-phd">
+                        <h3 class="subsection-title">Ph.D Students</h3>
                             <div class="members-grid">
                                 {% for member in phd_students %}
                                 <div class="member-card">
@@ -223,13 +204,13 @@ title: Home
                                 </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        {% endif %}
-                        
-                        <!-- M.S. Students Subsection -->
-                        {% if ms_students.size > 0 %}
-                        <div class="members-subsection">
-                            <h3 class="subsection-title">M.S. Students</h3>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- M.S. Students Subsection -->
+                    {% if ms_students.size > 0 %}
+                    <div class="members-subsection" id="members-ms">
+                        <h3 class="subsection-title">M.S. Students</h3>
                             <div class="members-grid">
                                 {% for member in ms_students %}
                                 <div class="member-card">
@@ -276,15 +257,13 @@ title: Home
                                 </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        {% endif %}
                     </div>
+                    {% endif %}
                     
-                    <!-- Alumni Category -->
-                    <div class="member-category" data-category="alumni" style="display: none;">
-                        {% if alumni.size > 0 %}
-                        <div class="members-subsection">
-                            <h3 class="subsection-title">Alumni</h3>
+                    <!-- Alumni Subsection -->
+                    {% if alumni.size > 0 %}
+                    <div class="members-subsection" id="members-alumni">
+                        <h3 class="subsection-title">Alumni</h3>
                             <div class="members-grid">
                                 {% for member in alumni %}
                                 <div class="member-card alumni-card">
@@ -340,9 +319,8 @@ title: Home
                                 </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        {% endif %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -356,8 +334,9 @@ title: Home
                     </button>
                 </div>
                 <ul class="members-menu-list">
-                    <li><button class="member-menu-btn active" data-category="students">Students</button></li>
-                    <li><button class="member-menu-btn" data-category="alumni">Alumni</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-phd">Ph.D</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-ms">M.S</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-alumni">Alumni</button></li>
                 </ul>
             </nav>
             {% else %}
@@ -379,14 +358,26 @@ title: Home
             {% if site.data.publications %}
             <div class="publications-container">
                 <div class="publications-list">
-                    {% assign international_pubs = site.data.publications | where: "type", "international" %}
                     {% assign domestic_pubs = site.data.publications | where: "type", "domestic" %}
+                    {% assign all_pubs = site.data.publications %}
+                    {% assign has_international = false %}
+                    {% for pub in all_pubs %}
+                        {% assign pub_type = pub.type | default: "international" %}
+                        {% if pub_type != "domestic" %}
+                            {% assign has_international = true %}
+                        {% endif %}
+                    {% endfor %}
                     
-                    <div class="publication-category" data-category="international">
+                    <!-- International Publications Section -->
+                    {% if has_international %}
+                    <div class="publications-section" id="publications-international">
+                        <h3 class="subsection-title">International</h3>
+                        {% assign int_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
-                        {% if pub_type == "international" %}
-                        <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                        {% if pub_type != "domestic" %}
+                        {% assign int_count = int_count | plus: 1 %}
+                        <div class="publication-item {% if int_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
@@ -462,13 +453,31 @@ title: Home
                         </div>
                         {% endif %}
                         {% endfor %}
+                        {% if int_count > 10 %}
+                        <div class="publications-show-more-container">
+                            <button class="publications-show-more-btn" data-section="publications-international" data-limit="10">
+                                <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
+                                <span class="show-more-text">+10</span>
+                            </button>
+                            <button class="publications-show-less-btn" data-section="publications-international" data-limit="10" style="display: none;">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
+                                <span class="show-less-text">-10</span>
+                            </button>
+                        </div>
+                        {% endif %}
                     </div>
+                    {% endif %}
                     
-                    <div class="publication-category" data-category="domestic" style="display: none;">
+                    <!-- Domestic Publications Section -->
+                    {% if domestic_pubs.size > 0 %}
+                    <div class="publications-section" id="publications-domestic">
+                        <h3 class="subsection-title">Domestic</h3>
+                        {% assign dom_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
                         {% if pub_type == "domestic" %}
-                        <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                        {% assign dom_count = dom_count | plus: 1 %}
+                        <div class="publication-item {% if dom_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
@@ -544,7 +553,20 @@ title: Home
                         </div>
                         {% endif %}
                         {% endfor %}
+                        {% if dom_count > 10 %}
+                        <div class="publications-show-more-container">
+                            <button class="publications-show-more-btn" data-section="publications-domestic" data-limit="10">
+                                <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
+                                <span class="show-more-text">+10</span>
+                            </button>
+                            <button class="publications-show-less-btn" data-section="publications-domestic" data-limit="10" style="display: none;">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
+                                <span class="show-less-text">-10</span>
+                            </button>
+                        </div>
+                        {% endif %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -558,8 +580,8 @@ title: Home
                     </button>
                 </div>
                 <ul class="publications-menu-list">
-                    <li><button class="publication-menu-btn active" data-category="international">International</button></li>
-                    <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
+                    <li><button class="publication-menu-btn" data-scroll="publications-international">International</button></li>
+                    <li><button class="publication-menu-btn" data-scroll="publications-domestic">Domestic</button></li>
                 </ul>
             </nav>
             {% else %}
@@ -618,26 +640,22 @@ title: Home
         <h2>Photos</h2>
         <div class="content">
             {% if site.data.photos %}
-            <div class="photos-grid">
-                {% for photo in site.data.photos %}
-                <div class="photo-item" data-image="{{ photo.image | relative_url }}">
-                    {% if photo.image %}
-                    <img src="{{ photo.image | relative_url }}" alt="{{ photo.caption | default: 'Lab photo' }}">
-                    {% endif %}
-                </div>
-                {% endfor %}
+            <div class="photos-grid" id="photosGrid">
+                <!-- Photos will be dynamically loaded here -->
             </div>
             
-            <!-- Photo Pagination -->
-            <div class="photo-pagination" id="photoPagination">
-                <button class="pagination-btn pagination-prev" id="photoPrevBtn" aria-label="Previous page">
-                    <span>&laquo;</span>
-                </button>
-                <div class="pagination-numbers" id="photoPaginationNumbers"></div>
-                <button class="pagination-btn pagination-next" id="photoNextBtn" aria-label="Next page">
-                    <span>&raquo;</span>
-                </button>
-            </div>
+            <!-- Hidden data for JavaScript -->
+            <script id="photos-data" type="application/json">
+            [
+            {% for photo in site.data.photos %}
+            {
+                "image": "{{ photo.image | relative_url }}",
+                "caption": "{{ photo.caption | default: 'Lab photo' }}",
+                "date": "{{ photo.date }}"
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+            ]
+            </script>
             
             <!-- Photo Lightbox -->
             <div class="photo-lightbox" id="photoLightbox">
@@ -655,45 +673,74 @@ title: Home
     </div>
 </section>
 
-<section id="contacts" class="section tab-panel">
+<section id="recruit" class="section tab-panel">
     <div class="container">
-        <h2>Contacts</h2>
+        <h2>Recruit</h2>
         <div class="content">
-            {% if site.data.contacts %}
-            <div class="contacts-grid">
+            <!-- Recruitment Information -->
+            <div class="recruitment-section">
+                <div class="recruitment-links">
+                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link">Lab Video</a>
+                    <span class="link-separator">,</span>
+                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Material</a>
+                    <span class="link-separator">,</span>
+                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Video</a>
+                    <span class="link-separator">,</span>
+                    <a href="/down/BDI_Lab_internship.pdf" target="_blank" rel="noopener" class="recruitment-link">Internship Recruitment</a>
+                    <span class="link-separator">,</span>
+                    <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link">YouTube</a>
+                </div>
+                <div class="recruitment-applications">
+                    <p class="recruitment-title">[Recruiting Students]</p>
+                    <p class="recruitment-item">
+                        <strong>Master's New Students:</strong>
+                        <a href="https://forms.gle/8TUm8iPkgvRQSZv89" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                    </p>
+                    <p class="recruitment-item">
+                        <strong>Undergraduate Research Students:</strong>
+                        <a href="https://forms.gle/vPZs2LjWPCJFCa4Z8" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                    </p>
+                    <p class="recruitment-contact">
+                        Students interested in our lab, please contact <a href="mailto:jjwhang@kaist.ac.kr" class="recruitment-link">jjwhang@kaist.ac.kr</a>.
+                    </p>
+                </div>
+            </div>
+            
+            {% if site.data.recruit %}
+            <div class="recruit-grid">
                 <!-- Location Card -->
-                {% if site.data.contacts.location %}
-                <div class="contact-card">
-                    <h3 class="contact-card-title">Location</h3>
-                    <div class="contact-card-content">
-                        {% if site.data.contacts.location.building %}
-                        <p class="contact-item">{{ site.data.contacts.location.building }}</p>
+                {% if site.data.recruit.location %}
+                <div class="recruit-card">
+                    <h3 class="recruit-card-title">Location</h3>
+                    <div class="recruit-card-content">
+                        {% if site.data.recruit.location.building %}
+                        <p class="recruit-item">{{ site.data.recruit.location.building }}</p>
                         {% endif %}
-                        {% if site.data.contacts.location.professor_room %}
-                        <p class="contact-item"><strong>Prof.:</strong> {{ site.data.contacts.location.professor_room }}</p>
+                        {% if site.data.recruit.location.professor_room %}
+                        <p class="recruit-item"><strong>Prof.:</strong> {{ site.data.recruit.location.professor_room }}</p>
                         {% endif %}
-                        {% if site.data.contacts.location.lab_room %}
-                        <p class="contact-item"><strong>Lab.:</strong> {{ site.data.contacts.location.lab_room }}</p>
+                        {% if site.data.recruit.location.lab_room %}
+                        <p class="recruit-item"><strong>Lab.:</strong> {{ site.data.recruit.location.lab_room }}</p>
                         {% endif %}
-                        {% if site.data.contacts.location.admin_room %}
-                        <p class="contact-item"><strong>Admin.:</strong> {{ site.data.contacts.location.admin_room }}</p>
+                        {% if site.data.recruit.location.admin_room %}
+                        <p class="recruit-item"><strong>Admin.:</strong> {{ site.data.recruit.location.admin_room }}</p>
                         {% endif %}
                     </div>
                 </div>
                 {% endif %}
                 
                 <!-- Email Card -->
-                {% if site.data.contacts.email %}
-                <div class="contact-card">
-                    <h3 class="contact-card-title">Email</h3>
-                    <div class="contact-card-content">
-                        {% if site.data.contacts.email.professor_name %}
-                        <p class="contact-item">{{ site.data.contacts.email.professor_name }}</p>
+                {% if site.data.recruit.email %}
+                <div class="recruit-card">
+                    <h3 class="recruit-card-title">Email</h3>
+                    <div class="recruit-card-content">
+                        {% if site.data.recruit.email.professor_name %}
+                        <p class="recruit-item">{{ site.data.recruit.email.professor_name }}</p>
                         {% endif %}
-                        {% if site.data.contacts.email.professor_email %}
-                        <p class="contact-item">
-                            <a href="mailto:{{ site.data.contacts.email.professor_email }}" class="contact-link">
-                                {{ site.data.contacts.email.professor_email }}
+                        {% if site.data.recruit.email.professor_email %}
+                        <p class="recruit-item">
+                            <a href="mailto:{{ site.data.recruit.email.professor_email }}" class="recruit-link">
+                                {{ site.data.recruit.email.professor_email }}
                             </a>
                         </p>
                         {% endif %}
@@ -702,26 +749,26 @@ title: Home
                 {% endif %}
                 
                 <!-- Phone Card -->
-                {% if site.data.contacts.phone %}
-                <div class="contact-card">
-                    <h3 class="contact-card-title">Tel</h3>
-                    <div class="contact-card-content">
-                        {% if site.data.contacts.phone.professor %}
-                        <p class="contact-item"><strong>Prof.:</strong> {{ site.data.contacts.phone.professor }}</p>
+                {% if site.data.recruit.phone %}
+                <div class="recruit-card">
+                    <h3 class="recruit-card-title">Tel</h3>
+                    <div class="recruit-card-content">
+                        {% if site.data.recruit.phone.professor %}
+                        <p class="recruit-item"><strong>Prof.:</strong> {{ site.data.recruit.phone.professor }}</p>
                         {% endif %}
-                        {% if site.data.contacts.phone.lab %}
-                        <p class="contact-item"><strong>Lab.:</strong> {{ site.data.contacts.phone.lab }}</p>
+                        {% if site.data.recruit.phone.lab %}
+                        <p class="recruit-item"><strong>Lab.:</strong> {{ site.data.recruit.phone.lab }}</p>
                         {% endif %}
-                        {% if site.data.contacts.phone.admin %}
-                        <p class="contact-item"><strong>Admin.:</strong> {{ site.data.contacts.phone.admin }}</p>
+                        {% if site.data.recruit.phone.admin %}
+                        <p class="recruit-item"><strong>Admin.:</strong> {{ site.data.recruit.phone.admin }}</p>
                         {% endif %}
                     </div>
                 </div>
                 {% endif %}
             </div>
             {% else %}
-            <div class="contact-info">
-                <p>Contact information will be added here.</p>
+            <div class="recruit-info">
+                <p>Recruit information will be added here.</p>
             </div>
             {% endif %}
         </div>
