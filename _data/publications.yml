@@ -197,6 +197,7 @@
     poster: "https://bdi-lab.kaist.ac.kr/down/drag_icdmw2023_poster_portrait.pdf"
     code: "https://github.com/bdi-lab/DRAG"
 
+
 # Domestic Publications ------------------------------------------------------------
 - title: "Root Cause Analysis for Microservice Systems Using Anomaly Propagation by Resource Sharing (자원 공유에 따른 이상치 전파를 활용한 마이크로서비스 시스템 결함의 근본 원인 분석)"
   authors: "박준호, 황지영"
