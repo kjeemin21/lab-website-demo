@@ -377,10 +377,11 @@ title: Home
         <div class="publications-header">
             <h2>Publications</h2>
             <button class="publications-menu-toggle" aria-label="Toggle publications menu">
-                <img src="{{ '/assets/images/icons/menu_icon.svg' relative_url }}" alt="Menu" class="menu-icon">
+                <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
             </button>
         </div>
         <div class="content">
+            {% if site.data.publications %}
             <div class="publications-container">
                 <div class="publications-list">
                     {% assign international_pubs = site.data.publications | where: "type", "international" %}
@@ -567,6 +568,9 @@ title: Home
                     <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
                 </ul>
             </nav>
+            {% else %}
+            <p>Publications will be listed here.</p>
+            {% endif %}
         </div>
     </div>
 </section>
