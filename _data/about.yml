@@ -4,22 +4,19 @@
 title: ""
 subtitle: ""
 description: >
-  We are a research group dedicated to advancing the frontiers of 
-  artificial intelligence, machine learning, and data science. 
-  Our work focuses on developing innovative algorithms and systems 
-  that can extract meaningful insights from large-scale data.
+  The Big Data Intelligence lab at KAIST is led by Prof. Joyce Jiyoung Whang at the School of Computing. The group is engaged in fundamental research on diverse aspects of big data, with an emphasis on developing novel computational algorithms for massive and complex datasets that arise in various scientific and industrial applications. In particular, the group focuses on graph machine learning and mining techniques, where data is represented and interpreted in terms of the interactions between entities. The group explores various AI, graph machine learning, and data mining tasks to solve open challenges in these areas and develop scalable algorithms for real-world data.
 
 # Main hero image for the About section
 hero_image: "/assets/images/about/대표_이미지.png"
 
 # Research areas/keywords
 research_areas:
-  - "Machine Learning"
+  - "Graph Machine Learning"
   - "Deep Learning"
   - "Knowledge Graphs"
-  - "Natural Language Processing"
-  - "Computer Vision"
   - "Data Mining"
+  - "Big Data Analytics"
+  - "Data Science"
 
 # Mission statement
 mission: >
@@ -27,3 +24,17 @@ mission: >
   technologies and to train the next generation of researchers and practitioners 
   in the field of artificial intelligence.
 
+# Recent News (photos to display in the slider)
+recent_news:
+  - image: "/assets/images/photos/photo1.jpg"
+    caption: "Recent Lab Activity 1"
+  - image: "/assets/images/photos/photo2.jpg"
+    caption: "Recent Lab Activity 2"
+  - image: "/assets/images/photos/photo3.jpg"
+    caption: "Recent Lab Activity 3"
+  - image: "/assets/images/photos/photo4.jpg"
+    caption: "Recent Lab Activity 4"
+  - image: "/assets/images/photos/photo5.jpg"
+    caption: "Recent Lab Activity 5"
+  - image: "/assets/images/photos/photo6.jpg"
+    caption: "Recent Lab Activity 6"
