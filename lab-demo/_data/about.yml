@@ -1,0 +1,29 @@
+# About Section
+# Edit this file to customize the About page
+
+title: ""
+subtitle: ""
+description: >
+  We are a research group dedicated to advancing the frontiers of 
+  artificial intelligence, machine learning, and data science. 
+  Our work focuses on developing innovative algorithms and systems 
+  that can extract meaningful insights from large-scale data.
+
+# Main hero image for the About section
+hero_image: "/assets/images/about/대표_이미지.png"
+
+# Research areas/keywords
+research_areas:
+  - "Machine Learning"
+  - "Deep Learning"
+  - "Knowledge Graphs"
+  - "Natural Language Processing"
+  - "Computer Vision"
+  - "Data Mining"
+
+# Mission statement
+mission: >
+  Our mission is to push the boundaries of what's possible with data-driven 
+  technologies and to train the next generation of researchers and practitioners 
+  in the field of artificial intelligence.
+
