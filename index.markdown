@@ -7,48 +7,59 @@ title: Home
     <div class="container about-container">
         {% if site.data.about %}
         <div class="about-content">
-            <!-- Hero Image Section -->
-            <div class="about-hero">
-                {% if site.data.about.hero_image %}
-                <div class="about-hero-image">
+            <!-- Main Content: Image (Left) + Text (Right) -->
+            <div class="about-main-section">
+                <!-- Left: Hero Image -->
+                <div class="about-main-image">
+                    {% if site.data.about.hero_image %}
                     <img src="{{ site.data.about.hero_image | relative_url }}" alt="{{ site.data.about.title }}">
-                    <div class="about-hero-overlay">
-                        <h1 class="about-hero-title">{{ site.data.about.title }}</h1>
-                        {% if site.data.about.subtitle %}
-                        <p class="about-hero-subtitle">{{ site.data.about.subtitle }}</p>
-                        {% endif %}
-                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
-            </div>
-            
-            <!-- Description Section -->
-            <div class="about-description">
-                <div class="about-description-content">
+                
+                <!-- Right: Description -->
+                <div class="about-main-text">
                     {% if site.data.about.description %}
                     <p class="about-text">{{ site.data.about.description }}</p>
                     {% endif %}
                     
-                    {% if site.data.about.mission %}
-                    <div class="about-mission">
-                        <h3 class="about-mission-title">Our Mission</h3>
-                        <p class="about-mission-text">{{ site.data.about.mission }}</p>
+                    {% if site.data.about.research_areas %}
+                    <div class="about-research-tags">
+                        <h3 class="research-tags-title">Research Areas</h3>
+                        <div class="research-tags-list">
+                            {% for area in site.data.about.research_areas %}
+                            <span class="research-tag">{{ area }}</span>
+                            {% endfor %}
+                        </div>
                     </div>
                     {% endif %}
                 </div>
             </div>
             
-            <!-- Research Areas Section -->
-            {% if site.data.about.research_areas %}
-            <div class="about-research-areas">
-                <h3 class="about-section-title">Research Areas</h3>
-                <div class="research-areas-grid">
-                    {% for area in site.data.about.research_areas %}
-                    <div class="research-area-card">
-                        <span class="research-area-icon">●</span>
-                        <span class="research-area-name">{{ area }}</span>
+            <!-- Recent News Gallery Slider -->
+            {% if site.data.about.recent_news %}
+            <div class="about-recent-news">
+                <h3 class="recent-news-title">Recent News</h3>
+                <div class="recent-news-slider-container">
+                    <button class="slider-nav slider-nav-prev" aria-label="Previous">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="recent-news-slider">
+                        <div class="recent-news-track">
+                            {% for item in site.data.about.recent_news %}
+                            <div class="recent-news-item">
+                                <img src="{{ item.image | relative_url }}" alt="{{ item.caption }}">
+                                <p class="recent-news-caption">{{ item.caption }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    {% endfor %}
+                    <button class="slider-nav slider-nav-next" aria-label="Next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
             {% endif %}
