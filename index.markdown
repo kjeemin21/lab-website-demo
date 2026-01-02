@@ -171,12 +171,10 @@ title: Home
                     {% assign ms_students = students | where: "role", "Master's Student" %}
                     {% assign alumni = site.data.members | where: "status", "Alumni" %}
                     
-                    <!-- Students Category -->
-                    <div class="member-category" data-category="students">
-                        <!-- Ph.D Students Subsection -->
-                        {% if phd_students.size > 0 %}
-                        <div class="members-subsection">
-                            <h3 class="subsection-title">Ph.D Students</h3>
+                    <!-- Ph.D Students Subsection -->
+                    {% if phd_students.size > 0 %}
+                    <div class="members-subsection" id="members-phd">
+                        <h3 class="subsection-title">Ph.D Students</h3>
                             <div class="members-grid">
                                 {% for member in phd_students %}
                                 <div class="member-card">
@@ -223,13 +221,13 @@ title: Home
                                 </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        {% endif %}
-                        
-                        <!-- M.S. Students Subsection -->
-                        {% if ms_students.size > 0 %}
-                        <div class="members-subsection">
-                            <h3 class="subsection-title">M.S. Students</h3>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- M.S. Students Subsection -->
+                    {% if ms_students.size > 0 %}
+                    <div class="members-subsection" id="members-ms">
+                        <h3 class="subsection-title">M.S. Students</h3>
                             <div class="members-grid">
                                 {% for member in ms_students %}
                                 <div class="member-card">
@@ -276,15 +274,13 @@ title: Home
                                 </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        {% endif %}
                     </div>
+                    {% endif %}
                     
-                    <!-- Alumni Category -->
-                    <div class="member-category" data-category="alumni" style="display: none;">
-                        {% if alumni.size > 0 %}
-                        <div class="members-subsection">
-                            <h3 class="subsection-title">Alumni</h3>
+                    <!-- Alumni Subsection -->
+                    {% if alumni.size > 0 %}
+                    <div class="members-subsection" id="members-alumni">
+                        <h3 class="subsection-title">Alumni</h3>
                             <div class="members-grid">
                                 {% for member in alumni %}
                                 <div class="member-card alumni-card">
@@ -340,9 +336,8 @@ title: Home
                                 </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        {% endif %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -356,8 +351,9 @@ title: Home
                     </button>
                 </div>
                 <ul class="members-menu-list">
-                    <li><button class="member-menu-btn active" data-category="students">Students</button></li>
-                    <li><button class="member-menu-btn" data-category="alumni">Alumni</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-phd">Ph.D</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-ms">M.S</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-alumni">Alumni</button></li>
                 </ul>
             </nav>
             {% else %}
@@ -379,14 +375,26 @@ title: Home
             {% if site.data.publications %}
             <div class="publications-container">
                 <div class="publications-list">
-                    {% assign international_pubs = site.data.publications | where: "type", "international" %}
                     {% assign domestic_pubs = site.data.publications | where: "type", "domestic" %}
+                    {% assign all_pubs = site.data.publications %}
+                    {% assign has_international = false %}
+                    {% for pub in all_pubs %}
+                        {% assign pub_type = pub.type | default: "international" %}
+                        {% if pub_type != "domestic" %}
+                            {% assign has_international = true %}
+                        {% endif %}
+                    {% endfor %}
                     
-                    <div class="publication-category" data-category="international">
+                    <!-- International Publications Section -->
+                    {% if has_international %}
+                    <div class="publications-section" id="publications-international">
+                        <h3 class="subsection-title">International</h3>
+                        {% assign int_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
-                        {% if pub_type == "international" %}
-                        <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                        {% if pub_type != "domestic" %}
+                        {% assign int_count = int_count | plus: 1 %}
+                        <div class="publication-item {% if int_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
@@ -462,13 +470,27 @@ title: Home
                         </div>
                         {% endif %}
                         {% endfor %}
+                        {% if int_count > 10 %}
+                        <div class="publications-show-more-container">
+                            <button class="publications-show-more-btn" data-section="publications-international" data-limit="10">
+                                <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon" style="display: none;">
+                            </button>
+                        </div>
+                        {% endif %}
                     </div>
+                    {% endif %}
                     
-                    <div class="publication-category" data-category="domestic" style="display: none;">
+                    <!-- Domestic Publications Section -->
+                    {% if domestic_pubs.size > 0 %}
+                    <div class="publications-section" id="publications-domestic">
+                        <h3 class="subsection-title">Domestic</h3>
+                        {% assign dom_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
                         {% if pub_type == "domestic" %}
-                        <div class="publication-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                        {% assign dom_count = dom_count | plus: 1 %}
+                        <div class="publication-item {% if dom_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
@@ -544,7 +566,16 @@ title: Home
                         </div>
                         {% endif %}
                         {% endfor %}
+                        {% if dom_count > 10 %}
+                        <div class="publications-show-more-container">
+                            <button class="publications-show-more-btn" data-section="publications-domestic" data-limit="10">
+                                <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon" style="display: none;">
+                            </button>
+                        </div>
+                        {% endif %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -558,8 +589,8 @@ title: Home
                     </button>
                 </div>
                 <ul class="publications-menu-list">
-                    <li><button class="publication-menu-btn active" data-category="international">International</button></li>
-                    <li><button class="publication-menu-btn" data-category="domestic">Domestic</button></li>
+                    <li><button class="publication-menu-btn" data-scroll="publications-international">International</button></li>
+                    <li><button class="publication-menu-btn" data-scroll="publications-domestic">Domestic</button></li>
                 </ul>
             </nav>
             {% else %}

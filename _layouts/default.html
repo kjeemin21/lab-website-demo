@@ -163,7 +163,10 @@
             
             // Initialize publications menu if publications tab is active
             if (tabId === 'publications') {
-                setTimeout(initPublicationsMenuWithClose, 100);
+                setTimeout(function() {
+                    initPublicationsMenuWithClose();
+                    initPublicationsShowMore();
+                }, 100);
             }
             
             // Initialize members menu if members tab is active
@@ -262,26 +265,14 @@
             handleInitialHash();
         });
 
-        // Publications category switching functionality
-        function switchPublicationCategory(category) {
-            const categories = document.querySelectorAll('.publication-category');
-            const buttons = document.querySelectorAll('.publication-menu-btn');
-
-            categories.forEach(cat => {
-                if (cat.getAttribute('data-category') === category) {
-                    cat.style.display = 'flex';
-                } else {
-                    cat.style.display = 'none';
-                }
-            });
-
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-category') === category) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
+        // Publications scroll functionality
+        function scrollToPublicationSection(sectionId) {
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+                const offsetTop = targetSection.offsetTop - headerHeight - 20;
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+            }
         }
 
         // Publications menu toggle functionality (for mobile)
@@ -326,7 +317,7 @@
             publicationsMenuOverlay.addEventListener('click', closePublicationsMenu);
         }
 
-        // Close menu when clicking on a category button (mobile)
+        // Scroll to section when clicking on a menu button
         function initPublicationsMenuWithClose() {
             const menuButtons = document.querySelectorAll('.publication-menu-btn');
 
@@ -334,38 +325,110 @@
                 if (!button.hasAttribute('data-initialized')) {
                     button.setAttribute('data-initialized', 'true');
                     button.addEventListener('click', function() {
-                        const category = this.getAttribute('data-category');
-                        switchPublicationCategory(category);
+                        const sectionId = this.getAttribute('data-scroll');
+                        if (sectionId) {
+                            scrollToPublicationSection(sectionId);
+                            
+                            // Update active button
+                            menuButtons.forEach(btn => btn.classList.remove('active'));
+                            this.classList.add('active');
+                            
+                            // Close menu on mobile after selection
+                            if (window.innerWidth <= 620) {
+                                closePublicationsMenu();
+                            }
+                        }
+                    });
+                }
+            });
+            
+            // Update active button based on scroll position
+            function updateActivePublicationButton() {
+                const sections = ['publications-international', 'publications-domestic'];
+                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+                const scrollPosition = window.scrollY + headerHeight + 50;
+                
+                let activeSection = null;
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section && scrollPosition >= section.offsetTop) {
+                        activeSection = sectionId;
+                    }
+                });
+                
+                if (activeSection) {
+                    menuButtons.forEach(btn => {
+                        if (btn.getAttribute('data-scroll') === activeSection) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                }
+            }
+            
+            // Update on scroll
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateActivePublicationButton, 100);
+            });
+            
+            // Initial update
+            updateActivePublicationButton();
+        }
+
+        // Publications Show More functionality
+        function initPublicationsShowMore() {
+            const showMoreButtons = document.querySelectorAll('.publications-show-more-btn');
+            
+            showMoreButtons.forEach(button => {
+                if (!button.hasAttribute('data-initialized')) {
+                    button.setAttribute('data-initialized', 'true');
+                    button.addEventListener('click', function() {
+                        const sectionId = this.getAttribute('data-section');
+                        const limit = parseInt(this.getAttribute('data-limit')) || 10;
+                        const section = document.getElementById(sectionId);
                         
-                        // Close menu on mobile after selection
-                        if (window.innerWidth <= 620) {
-                            closePublicationsMenu();
+                        if (!section) return;
+                        
+                        const allItems = section.querySelectorAll('.publication-item');
+                        const showMoreIcon = this.querySelector('.show-more-icon');
+                        const showLessIcon = this.querySelector('.show-less-icon');
+                        const isExpanded = showMoreIcon.style.display === 'none';
+                        
+                        if (isExpanded) {
+                            // Collapse: hide items beyond limit
+                            allItems.forEach((item, index) => {
+                                if (index >= limit) {
+                                    item.classList.add('publication-item-hidden');
+                                }
+                            });
+                            showMoreIcon.style.display = 'block';
+                            showLessIcon.style.display = 'none';
+                        } else {
+                            // Expand: show all hidden items
+                            allItems.forEach((item, index) => {
+                                if (index >= limit) {
+                                    item.classList.remove('publication-item-hidden');
+                                }
+                            });
+                            showMoreIcon.style.display = 'none';
+                            showLessIcon.style.display = 'block';
                         }
                     });
                 }
             });
         }
 
-        // Members category switching functionality
-        function switchMemberCategory(category) {
-            const categories = document.querySelectorAll('.member-category');
-            const buttons = document.querySelectorAll('.member-menu-btn');
-
-            categories.forEach(cat => {
-                if (cat.getAttribute('data-category') === category) {
-                    cat.style.display = 'flex';
-                } else {
-                    cat.style.display = 'none';
-                }
-            });
-
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-category') === category) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
+        // Members scroll functionality
+        function scrollToMemberSection(sectionId) {
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+                const offsetTop = targetSection.offsetTop - headerHeight - 20;
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+            }
         }
 
         // Members menu toggle functionality (for mobile)
@@ -410,7 +473,7 @@
             membersMenuOverlay.addEventListener('click', closeMembersMenu);
         }
 
-        // Close menu when clicking on a category button (mobile)
+        // Scroll to section when clicking on a menu button
         function initMembersMenuWithClose() {
             const menuButtons = document.querySelectorAll('.member-menu-btn');
 
@@ -418,16 +481,57 @@
                 if (!button.hasAttribute('data-initialized')) {
                     button.setAttribute('data-initialized', 'true');
                     button.addEventListener('click', function() {
-                        const category = this.getAttribute('data-category');
-                        switchMemberCategory(category);
-                        
-                        // Close menu on mobile after selection
-                        if (window.innerWidth <= 620) {
-                            closeMembersMenu();
+                        const sectionId = this.getAttribute('data-scroll');
+                        if (sectionId) {
+                            scrollToMemberSection(sectionId);
+                            
+                            // Update active button
+                            menuButtons.forEach(btn => btn.classList.remove('active'));
+                            this.classList.add('active');
+                            
+                            // Close menu on mobile after selection
+                            if (window.innerWidth <= 620) {
+                                closeMembersMenu();
+                            }
                         }
                     });
                 }
             });
+            
+            // Update active button based on scroll position
+            function updateActiveMemberButton() {
+                const sections = ['members-phd', 'members-ms', 'members-alumni'];
+                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+                const scrollPosition = window.scrollY + headerHeight + 50;
+                
+                let activeSection = null;
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section && scrollPosition >= section.offsetTop) {
+                        activeSection = sectionId;
+                    }
+                });
+                
+                if (activeSection) {
+                    menuButtons.forEach(btn => {
+                        if (btn.getAttribute('data-scroll') === activeSection) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                }
+            }
+            
+            // Update on scroll
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateActiveMemberButton, 100);
+            });
+            
+            // Initial update
+            updateActiveMemberButton();
         }
 
         // About section scroll-based animations
@@ -530,7 +634,10 @@
             }
             
             if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
-                setTimeout(initPublicationsMenuWithClose, 100);
+                setTimeout(function() {
+                    initPublicationsMenuWithClose();
+                    initPublicationsShowMore();
+                }, 100);
             }
             if (hash === 'members' || (!hash && document.querySelector('#members.tab-panel.active'))) {
                 setTimeout(initMembersMenuWithClose, 100);
