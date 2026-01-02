@@ -71,6 +71,14 @@
     </footer>
 
     <script>
+        // Disable browser's automatic scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
+        // Force scroll to top immediately on script execution
+        window.scrollTo(0, 0);
+        
         // Menu toggle functionality
         const menuToggle = document.querySelector('.menu-toggle');
         const menuClose = document.querySelector('.menu-close');
@@ -146,6 +154,13 @@
             // Scroll to top of main content
             window.scrollTo(0, 0);
             
+            // For About tab, ensure scroll stays at top
+            if (tabId === 'about') {
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 50);
+            }
+            
             // Initialize publications menu if publications tab is active
             if (tabId === 'publications') {
                 setTimeout(initPublicationsMenuWithClose, 100);
@@ -203,10 +218,44 @@
             }
             // Default to first tab if no valid hash
             switchTab('about');
+            // Ensure scroll is at top for About tab
+            window.scrollTo(0, 0);
         }
 
         // Initialize on page load
         handleInitialHash();
+        
+        // Also ensure scroll is at top after page fully loads
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (!hash || hash === 'about') {
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // Handle window resize to maintain scroll position at top for About tab
+        let resizeTimeout;
+        let lastScrollY = window.scrollY;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                const hash = window.location.hash.substring(1);
+                const activeTab = document.querySelector('.tab-panel.active');
+                if ((!hash || hash === 'about') && activeTab && activeTab.id === 'about') {
+                    // If user was at or near the top before resize, keep them at top
+                    // This prevents layout shifts from moving scroll position
+                    if (lastScrollY < 50) {
+                        window.scrollTo(0, 0);
+                    }
+                }
+                lastScrollY = window.scrollY;
+            }, 150);
+        });
+        
+        // Track scroll position to detect if user intentionally scrolled
+        window.addEventListener('scroll', function() {
+            lastScrollY = window.scrollY;
+        });
 
         // Handle browser back/forward buttons
         window.addEventListener('popstate', function() {
@@ -383,6 +432,9 @@
 
         // About section scroll-based animations
         function initAboutAnimations() {
+            // Force scroll to top when initializing About animations
+            window.scrollTo(0, 0);
+            
             // Reset all animations first
             const aboutHero = document.querySelector('.about-hero');
             const aboutDescription = document.querySelector('.about-description');
@@ -471,6 +523,12 @@
         // Also initialize on page load if publications or members tab is active
         document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.substring(1);
+            
+            // Force scroll to top for About tab or no hash
+            if (!hash || hash === 'about') {
+                window.scrollTo(0, 0);
+            }
+            
             if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
                 setTimeout(initPublicationsMenuWithClose, 100);
             }
@@ -478,7 +536,13 @@
                 setTimeout(initMembersMenuWithClose, 100);
             }
             if (hash === 'about' || (!hash && document.querySelector('#about.tab-panel.active'))) {
-                setTimeout(initAboutAnimations, 100);
+                setTimeout(function() {
+                    initAboutAnimations();
+                    // Double-check scroll position after animations init
+                    setTimeout(function() {
+                        window.scrollTo(0, 0);
+                    }, 50);
+                }, 100);
             }
         });
 
