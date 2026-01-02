@@ -534,94 +534,105 @@
             updateActiveMemberButton();
         }
 
+        // Recent News Slider functionality
+        let currentSlideIndex = 0;
+        let slidesPerView = 3;
+        let recentNewsTrack = null;
+        let recentNewsItems = [];
+        let totalSlides = 0;
+        let maxSlideIndex = 0;
+
+        function initRecentNewsSlider() {
+            recentNewsTrack = document.querySelector('.recent-news-track');
+            recentNewsItems = document.querySelectorAll('.recent-news-item');
+            
+            if (!recentNewsTrack || recentNewsItems.length === 0) return;
+            
+            totalSlides = recentNewsItems.length;
+            updateSlidesPerView();
+            updateSliderPosition();
+            updateSliderButtons();
+            
+            // Add resize listener to update slides per view
+            window.addEventListener('resize', function() {
+                updateSlidesPerView();
+                updateSliderPosition();
+                updateSliderButtons();
+            });
+        }
+
+        function updateSlidesPerView() {
+            const width = window.innerWidth;
+            if (width <= 768) {
+                slidesPerView = 1;
+            } else if (width <= 1024) {
+                slidesPerView = 2;
+            } else {
+                slidesPerView = 3;
+            }
+            maxSlideIndex = Math.max(0, totalSlides - slidesPerView);
+        }
+
+        function updateSliderPosition() {
+            if (!recentNewsTrack) return;
+            
+            // Ensure currentSlideIndex is within valid range
+            currentSlideIndex = Math.max(0, Math.min(currentSlideIndex, maxSlideIndex));
+            
+            const slideWidth = recentNewsItems[0]?.offsetWidth || 0;
+            const gap = 20;
+            const offset = -(currentSlideIndex * (slideWidth + gap));
+            recentNewsTrack.style.transform = `translateX(${offset}px)`;
+        }
+
+        function updateSliderButtons() {
+            const prevBtn = document.querySelector('.slider-nav-prev');
+            const nextBtn = document.querySelector('.slider-nav-next');
+            
+            if (prevBtn) {
+                prevBtn.disabled = currentSlideIndex <= 0;
+            }
+            
+            if (nextBtn) {
+                nextBtn.disabled = currentSlideIndex >= maxSlideIndex;
+            }
+        }
+
+        function slideNext() {
+            if (currentSlideIndex < maxSlideIndex) {
+                currentSlideIndex++;
+                updateSliderPosition();
+                updateSliderButtons();
+            }
+        }
+
+        function slidePrev() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSliderPosition();
+                updateSliderButtons();
+            }
+        }
+
+        // Add event listeners for slider buttons
+        const sliderPrevBtn = document.querySelector('.slider-nav-prev');
+        const sliderNextBtn = document.querySelector('.slider-nav-next');
+        
+        if (sliderPrevBtn) {
+            sliderPrevBtn.addEventListener('click', slidePrev);
+        }
+        
+        if (sliderNextBtn) {
+            sliderNextBtn.addEventListener('click', slideNext);
+        }
+
         // About section scroll-based animations
         function initAboutAnimations() {
             // Force scroll to top when initializing About animations
             window.scrollTo(0, 0);
             
-            // Reset all animations first
-            const aboutHero = document.querySelector('.about-hero');
-            const aboutDescription = document.querySelector('.about-description');
-            const aboutResearchAreas = document.querySelector('.about-research-areas');
-            const researchCards = document.querySelectorAll('.research-area-card');
-            
-            if (aboutHero) {
-                aboutHero.classList.remove('animate-in');
-            }
-            if (aboutDescription) {
-                aboutDescription.classList.remove('animate-in');
-            }
-            if (aboutResearchAreas) {
-                aboutResearchAreas.classList.remove('animate-in');
-            }
-            researchCards.forEach(card => {
-                card.classList.remove('animate-in');
-            });
-            
-            // Create Intersection Observer for scroll-based animations
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15 // Trigger when 15% of element is visible
-            };
-            
-            // Track which elements have been animated
-            const animatedElements = new Set();
-            
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting && !animatedElements.has(entry.target)) {
-                        const element = entry.target;
-                        animatedElements.add(element);
-                        
-                        // Add animation class when element comes into view
-                        if (element.classList.contains('about-hero')) {
-                            setTimeout(function() {
-                                element.classList.add('animate-in');
-                            }, 50);
-                        } else if (element.classList.contains('about-description')) {
-                            setTimeout(function() {
-                                element.classList.add('animate-in');
-                            }, 50);
-                        } else if (element.classList.contains('about-research-areas')) {
-                            setTimeout(function() {
-                                element.classList.add('animate-in');
-                                
-                                // Animate research area cards sequentially after section appears
-                                const cards = document.querySelectorAll('.research-area-card');
-                                cards.forEach(function(card, index) {
-                                    if (!animatedElements.has(card)) {
-                                        animatedElements.add(card);
-                                        setTimeout(function() {
-                                            card.classList.add('animate-in');
-                                        }, 100 * index);
-                                    }
-                                });
-                            }, 50);
-                        } else if (element.classList.contains('research-area-card')) {
-                            setTimeout(function() {
-                                element.classList.add('animate-in');
-                            }, 50);
-                        }
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe main containers
-            if (aboutHero) {
-                observer.observe(aboutHero);
-            }
-            if (aboutDescription) {
-                observer.observe(aboutDescription);
-            }
-            if (aboutResearchAreas) {
-                observer.observe(aboutResearchAreas);
-            }
-            
-            // Also observe individual research cards for better control
-            researchCards.forEach(card => {
-                observer.observe(card);
-            });
+            // Initialize Recent News Slider
+            initRecentNewsSlider();
         }
 
         // Also initialize on page load if publications or members tab is active

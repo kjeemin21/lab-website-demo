@@ -336,243 +336,274 @@ main {
 /* About Section */
 .about-container {
     max-width: 1200px;
+    padding: 0 20px;
 }
 
 .about-content {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 20px;
 }
 
-/* About Section Animations */
-.about-hero,
-.about-description,
-.about-research-areas {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+/* Main Section: Image (Left) + Text (Right) */
+.about-main-section {
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    gap: 40px;
+    align-items: center;
+    min-height: 40vh;
 }
 
-.about-hero.animate-in,
-.about-description.animate-in,
-.about-research-areas.animate-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.about-hero {
-    margin-bottom: 60px;
-}
-
-.about-hero-image {
-    position: relative;
+.about-main-image {
     width: 100%;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    aspect-ratio: 4000 / 2250;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
-.about-hero-image img {
+.about-main-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.about-hero-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: transparent;
-    padding: 60px 50px 50px;
-    color: white;
-}
-
-.about-hero-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0 0 15px 0;
-    color: white;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    line-height: 1.2;
-}
-
-.about-hero-subtitle {
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-    line-height: 1.4;
-}
-
-.about-description {
-    margin-top: 100px;
-    margin-bottom: 50px;
-}
-
-.about-description-content {
-    max-width: 900px;
-    margin: 0 auto;
+.about-main-text {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .about-text {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.8;
     color: var(--text-color);
-    margin-bottom: 30px;
     text-align: justify;
 }
 
-.about-mission {
-    margin-top: 40px;
-    padding-top: 40px;
+.about-research-tags {
+    margin-top: 10px;
 }
 
-.about-mission-title {
-    font-size: 1.6rem;
+.research-tags-title {
+    font-size: 1.3rem;
     color: var(--primary-color);
     margin-bottom: 15px;
     font-weight: 600;
 }
 
-.about-mission-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-    text-align: justify;
+.research-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.about-research-areas {
-    margin-top: 50px;
+.research-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--secondary-color);
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.about-section-title {
-    font-size: 2rem;
+.research-tag:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Recent News Slider */
+.about-recent-news {
+    margin-top: 20px;
+}
+
+.recent-news-title {
+    font-size: 1.8rem;
     color: var(--primary-color);
-    margin-bottom: 30px;
-    text-align: center;
+    margin-bottom: 25px;
     font-weight: 600;
+    text-align: center;
 }
 
-.research-areas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
+.recent-news-slider-container {
+    position: relative;
+    max-width: 100%;
     margin: 0 auto;
 }
 
-.research-area-card {
-    background: white;
-    padding: 25px 30px;
+.recent-news-slider {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.recent-news-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+}
+
+.recent-news-item {
+    flex: 0 0 calc(33.333% - 14px);
+    min-width: 280px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+}
+
+.recent-news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.recent-news-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.recent-news-caption {
+    padding: 15px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Slider Navigation Buttons */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
-    border-left: 4px solid var(--secondary-color);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out, all 0.3s ease;
-}
-
-.research-area-card.animate-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.research-area-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    border-left-color: var(--accent-color);
-}
-
-.research-area-icon {
-    font-size: 1.2rem;
-    color: var(--secondary-color);
-    font-weight: 600;
-}
-
-.research-area-name {
-    font-size: 1.05rem;
+    z-index: 10;
     color: var(--primary-color);
-    font-weight: 600;
+}
+
+.slider-nav:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+.slider-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.slider-nav-prev {
+    left: -20px;
+}
+
+.slider-nav-next {
+    right: -20px;
 }
 
 /* About Section Responsive */
 @media (max-width: 1024px) {
-    .about-hero-image {
-        aspect-ratio: 4000 / 2250;
+    .about-main-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        min-height: auto;
     }
     
-    .about-hero-title {
-        font-size: 2.5rem;
+    .about-main-image {
+        max-width: 500px;
+        margin: 0 auto;
     }
     
-    .about-hero-subtitle {
-        font-size: 1.2rem;
+    .recent-news-item {
+        flex: 0 0 calc(50% - 10px);
     }
 }
 
 @media (max-width: 768px) {
-    .about-hero-image {
-        aspect-ratio: 4000 / 2250;
-        border-radius: 12px;
+    .about-container {
+        padding: 0 15px;
     }
     
-    .about-hero-overlay {
-        padding: 40px 30px 30px;
+    .about-content {
+        gap: 30px;
     }
-    
-    .about-hero-title {
-        font-size: 2rem;
-    }
-    
-    .about-hero-subtitle {
-        font-size: 1.1rem;
-    }
-    
     
     .about-text {
         font-size: 1.05rem;
     }
     
-    .about-mission-title {
-        font-size: 1.4rem;
+    .research-tags-title {
+        font-size: 1.2rem;
     }
     
-    .about-mission-text {
-        font-size: 1rem;
+    .research-tag {
+        font-size: 0.9rem;
+        padding: 6px 14px;
     }
     
-    .research-areas-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
+    .recent-news-title {
+        font-size: 1.5rem;
+    }
+    
+    .recent-news-item {
+        flex: 0 0 calc(100% - 0px);
+        min-width: 250px;
+    }
+    
+    .slider-nav {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .slider-nav-prev {
+        left: -15px;
+    }
+    
+    .slider-nav-next {
+        right: -15px;
     }
 }
 
 @media (max-width: 480px) {
-    .about-hero-image {
-        aspect-ratio: 4000 / 2250;
-    }
-    
-    .about-hero-overlay {
-        padding: 30px 20px 25px;
-    }
-    
-    .about-hero-title {
-        font-size: 1.6rem;
-    }
-    
-    .about-hero-subtitle {
+    .about-text {
         font-size: 1rem;
     }
     
+    .recent-news-title {
+        font-size: 1.3rem;
+    }
     
-    .about-section-title {
-        font-size: 1.6rem;
+    .recent-news-item img {
+        height: 180px;
+    }
+    
+    .slider-nav {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .slider-nav svg {
+        width: 20px;
+        height: 20px;
     }
 }
 

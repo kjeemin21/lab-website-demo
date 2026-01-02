@@ -27,3 +27,17 @@ mission: >
   technologies and to train the next generation of researchers and practitioners 
   in the field of artificial intelligence.
 
+# Recent News (photos to display in the slider)
+recent_news:
+  - image: "/assets/images/photos/photo1.jpg"
+    caption: "Recent Lab Activity 1"
+  - image: "/assets/images/photos/photo2.jpg"
+    caption: "Recent Lab Activity 2"
+  - image: "/assets/images/photos/photo3.jpg"
+    caption: "Recent Lab Activity 3"
+  - image: "/assets/images/photos/photo4.jpg"
+    caption: "Recent Lab Activity 4"
+  - image: "/assets/images/photos/photo5.jpg"
+    caption: "Recent Lab Activity 5"
+  - image: "/assets/images/photos/photo6.jpg"
+    caption: "Recent Lab Activity 6"
