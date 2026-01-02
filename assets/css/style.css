@@ -1219,6 +1219,14 @@ main {
     display: none;
 }
 
+.publications-section {
+    margin-bottom: 60px;
+}
+
+.publications-section:last-child {
+    margin-bottom: 0;
+}
+
 /* Publications Side Menu Overlay */
 .publications-menu-overlay {
     display: none;
@@ -1344,6 +1352,60 @@ main {
 
 .publication-item.hidden {
     display: none;
+}
+
+.publication-item-hidden {
+    display: none;
+}
+
+.publications-show-more-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.publications-show-more-btn {
+    background: none;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+
+.publications-show-more-btn:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: scale(1.1);
+}
+
+.publications-show-more-btn:active {
+    transform: scale(0.95);
+}
+
+.publications-show-more-btn .show-more-icon,
+.publications-show-more-btn .show-less-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.publications-show-more-btn .show-more-icon {
+    opacity: 0.6;
+}
+
+.publications-show-more-btn .show-less-icon {
+    opacity: 0.6;
+}
+
+.publications-show-more-btn:hover .show-more-icon,
+.publications-show-more-btn:hover .show-less-icon {
+    opacity: 1;
 }
 
 .year-badge {
