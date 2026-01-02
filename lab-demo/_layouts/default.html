@@ -167,6 +167,11 @@
                     }
                 }, 100);
             }
+            
+            // Initialize about animations if about tab is active
+            if (tabId === 'about') {
+                setTimeout(initAboutAnimations, 100);
+            }
         }
 
         // Tab button click handlers
@@ -376,6 +381,93 @@
             });
         }
 
+        // About section scroll-based animations
+        function initAboutAnimations() {
+            // Reset all animations first
+            const aboutHero = document.querySelector('.about-hero');
+            const aboutDescription = document.querySelector('.about-description');
+            const aboutResearchAreas = document.querySelector('.about-research-areas');
+            const researchCards = document.querySelectorAll('.research-area-card');
+            
+            if (aboutHero) {
+                aboutHero.classList.remove('animate-in');
+            }
+            if (aboutDescription) {
+                aboutDescription.classList.remove('animate-in');
+            }
+            if (aboutResearchAreas) {
+                aboutResearchAreas.classList.remove('animate-in');
+            }
+            researchCards.forEach(card => {
+                card.classList.remove('animate-in');
+            });
+            
+            // Create Intersection Observer for scroll-based animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Trigger when 15% of element is visible
+            };
+            
+            // Track which elements have been animated
+            const animatedElements = new Set();
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && !animatedElements.has(entry.target)) {
+                        const element = entry.target;
+                        animatedElements.add(element);
+                        
+                        // Add animation class when element comes into view
+                        if (element.classList.contains('about-hero')) {
+                            setTimeout(function() {
+                                element.classList.add('animate-in');
+                            }, 50);
+                        } else if (element.classList.contains('about-description')) {
+                            setTimeout(function() {
+                                element.classList.add('animate-in');
+                            }, 50);
+                        } else if (element.classList.contains('about-research-areas')) {
+                            setTimeout(function() {
+                                element.classList.add('animate-in');
+                                
+                                // Animate research area cards sequentially after section appears
+                                const cards = document.querySelectorAll('.research-area-card');
+                                cards.forEach(function(card, index) {
+                                    if (!animatedElements.has(card)) {
+                                        animatedElements.add(card);
+                                        setTimeout(function() {
+                                            card.classList.add('animate-in');
+                                        }, 100 * index);
+                                    }
+                                });
+                            }, 50);
+                        } else if (element.classList.contains('research-area-card')) {
+                            setTimeout(function() {
+                                element.classList.add('animate-in');
+                            }, 50);
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe main containers
+            if (aboutHero) {
+                observer.observe(aboutHero);
+            }
+            if (aboutDescription) {
+                observer.observe(aboutDescription);
+            }
+            if (aboutResearchAreas) {
+                observer.observe(aboutResearchAreas);
+            }
+            
+            // Also observe individual research cards for better control
+            researchCards.forEach(card => {
+                observer.observe(card);
+            });
+        }
+
         // Also initialize on page load if publications or members tab is active
         document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.substring(1);
@@ -384,6 +476,9 @@
             }
             if (hash === 'members' || (!hash && document.querySelector('#members.tab-panel.active'))) {
                 setTimeout(initMembersMenuWithClose, 100);
+            }
+            if (hash === 'about' || (!hash && document.querySelector('#about.tab-panel.active'))) {
+                setTimeout(initAboutAnimations, 100);
             }
         });
 
