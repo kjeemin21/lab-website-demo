@@ -265,13 +265,78 @@
             handleInitialHash();
         });
 
+        // Scroll blocking state
+        let isScrolling = false;
+        let scrollBlockTimeout = null;
+        
+        // Block user scroll during animation
+        function blockUserScroll(event) {
+            if (isScrolling) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+        }
+        
+        function enableScrollBlock() {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            document.body.style.pointerEvents = 'none';
+            
+            // Block wheel events
+            window.addEventListener('wheel', blockUserScroll, { passive: false, capture: true });
+            window.addEventListener('touchmove', blockUserScroll, { passive: false, capture: true });
+            
+            // Block keyboard scroll
+            window.addEventListener('keydown', blockUserScroll, { passive: false, capture: true });
+        }
+        
+        function disableScrollBlock() {
+            isScrolling = false;
+            document.body.style.pointerEvents = '';
+            
+            // Unblock events
+            window.removeEventListener('wheel', blockUserScroll, { capture: true });
+            window.removeEventListener('touchmove', blockUserScroll, { capture: true });
+            window.removeEventListener('keydown', blockUserScroll, { capture: true });
+        }
+        
         // Publications scroll functionality
         function scrollToPublicationSection(sectionId) {
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
+                enableScrollBlock();
+                
                 const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
                 const offsetTop = targetSection.offsetTop - headerHeight - 20;
-                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                const startPosition = window.scrollY;
+                const distance = offsetTop - startPosition;
+                const duration = 400; // 400ms for smooth and fast animation
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    // Easing function (ease-in-out)
+                    const ease = progress < 0.5 
+                        ? 2 * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    
+                    window.scrollTo(0, startPosition + distance * ease);
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    } else {
+                        // Animation complete
+                        clearTimeout(scrollBlockTimeout);
+                        scrollBlockTimeout = setTimeout(disableScrollBlock, 50);
+                    }
+                }
+                
+                requestAnimationFrame(animation);
             }
         }
 
@@ -380,44 +445,65 @@
 
         // Publications Show More functionality
         function initPublicationsShowMore() {
-            const showMoreButtons = document.querySelectorAll('.publications-show-more-btn');
+            const containers = document.querySelectorAll('.publications-show-more-container');
             
-            showMoreButtons.forEach(button => {
-                if (!button.hasAttribute('data-initialized')) {
-                    button.setAttribute('data-initialized', 'true');
-                    button.addEventListener('click', function() {
-                        const sectionId = this.getAttribute('data-section');
-                        const limit = parseInt(this.getAttribute('data-limit')) || 10;
-                        const section = document.getElementById(sectionId);
-                        
-                        if (!section) return;
-                        
-                        const allItems = section.querySelectorAll('.publication-item');
-                        const showMoreIcon = this.querySelector('.show-more-icon');
-                        const showLessIcon = this.querySelector('.show-less-icon');
-                        const isExpanded = showMoreIcon.style.display === 'none';
-                        
-                        if (isExpanded) {
-                            // Collapse: hide items beyond limit
-                            allItems.forEach((item, index) => {
-                                if (index >= limit) {
-                                    item.classList.add('publication-item-hidden');
-                                }
-                            });
-                            showMoreIcon.style.display = 'block';
-                            showLessIcon.style.display = 'none';
-                        } else {
-                            // Expand: show all hidden items
-                            allItems.forEach((item, index) => {
-                                if (index >= limit) {
-                                    item.classList.remove('publication-item-hidden');
-                                }
-                            });
-                            showMoreIcon.style.display = 'none';
-                            showLessIcon.style.display = 'block';
+            containers.forEach(container => {
+                const showMoreBtn = container.querySelector('.publications-show-more-btn');
+                const showLessBtn = container.querySelector('.publications-show-less-btn');
+                
+                if (!showMoreBtn || !showLessBtn) return;
+                if (showMoreBtn.hasAttribute('data-initialized')) return;
+                
+                showMoreBtn.setAttribute('data-initialized', 'true');
+                showLessBtn.setAttribute('data-initialized', 'true');
+                
+                const sectionId = showMoreBtn.getAttribute('data-section');
+                const initialLimit = parseInt(showMoreBtn.getAttribute('data-limit')) || 10;
+                const section = document.getElementById(sectionId);
+                
+                if (!section) return;
+                
+                const allItems = section.querySelectorAll('.publication-item');
+                const totalItems = allItems.length;
+                let currentVisible = initialLimit;
+                
+                // Show More button handler
+                showMoreBtn.addEventListener('click', function() {
+                    currentVisible = Math.min(currentVisible + 10, totalItems);
+                    
+                    allItems.forEach((item, index) => {
+                        if (index < currentVisible) {
+                            item.classList.remove('publication-item-hidden');
                         }
                     });
-                }
+                    
+                    // Update button visibility
+                    if (currentVisible >= totalItems) {
+                        showMoreBtn.style.display = 'none';
+                    }
+                    if (currentVisible > initialLimit) {
+                        showLessBtn.style.display = 'inline-flex';
+                    }
+                });
+                
+                // Show Less button handler
+                showLessBtn.addEventListener('click', function() {
+                    currentVisible = Math.max(currentVisible - 10, initialLimit);
+                    
+                    allItems.forEach((item, index) => {
+                        if (index >= currentVisible) {
+                            item.classList.add('publication-item-hidden');
+                        }
+                    });
+                    
+                    // Update button visibility
+                    if (currentVisible < totalItems) {
+                        showMoreBtn.style.display = 'inline-flex';
+                    }
+                    if (currentVisible <= initialLimit) {
+                        showLessBtn.style.display = 'none';
+                    }
+                });
             });
         }
 
@@ -425,9 +511,37 @@
         function scrollToMemberSection(sectionId) {
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
+                enableScrollBlock();
+                
                 const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
                 const offsetTop = targetSection.offsetTop - headerHeight - 20;
-                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                const startPosition = window.scrollY;
+                const distance = offsetTop - startPosition;
+                const duration = 400; // 400ms for smooth and fast animation
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    // Easing function (ease-in-out)
+                    const ease = progress < 0.5 
+                        ? 2 * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    
+                    window.scrollTo(0, startPosition + distance * ease);
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    } else {
+                        // Animation complete
+                        clearTimeout(scrollBlockTimeout);
+                        scrollBlockTimeout = setTimeout(disableScrollBlock, 50);
+                    }
+                }
+                
+                requestAnimationFrame(animation);
             }
         }
 
@@ -534,105 +648,10 @@
             updateActiveMemberButton();
         }
 
-        // Recent News Slider functionality
-        let currentSlideIndex = 0;
-        let slidesPerView = 3;
-        let recentNewsTrack = null;
-        let recentNewsItems = [];
-        let totalSlides = 0;
-        let maxSlideIndex = 0;
-
-        function initRecentNewsSlider() {
-            recentNewsTrack = document.querySelector('.recent-news-track');
-            recentNewsItems = document.querySelectorAll('.recent-news-item');
-            
-            if (!recentNewsTrack || recentNewsItems.length === 0) return;
-            
-            totalSlides = recentNewsItems.length;
-            updateSlidesPerView();
-            updateSliderPosition();
-            updateSliderButtons();
-            
-            // Add resize listener to update slides per view
-            window.addEventListener('resize', function() {
-                updateSlidesPerView();
-                updateSliderPosition();
-                updateSliderButtons();
-            });
-        }
-
-        function updateSlidesPerView() {
-            const width = window.innerWidth;
-            if (width <= 768) {
-                slidesPerView = 1;
-            } else if (width <= 1024) {
-                slidesPerView = 2;
-            } else {
-                slidesPerView = 3;
-            }
-            maxSlideIndex = Math.max(0, totalSlides - slidesPerView);
-        }
-
-        function updateSliderPosition() {
-            if (!recentNewsTrack) return;
-            
-            // Ensure currentSlideIndex is within valid range
-            currentSlideIndex = Math.max(0, Math.min(currentSlideIndex, maxSlideIndex));
-            
-            const slideWidth = recentNewsItems[0]?.offsetWidth || 0;
-            const gap = 20;
-            const offset = -(currentSlideIndex * (slideWidth + gap));
-            recentNewsTrack.style.transform = `translateX(${offset}px)`;
-        }
-
-        function updateSliderButtons() {
-            const prevBtn = document.querySelector('.slider-nav-prev');
-            const nextBtn = document.querySelector('.slider-nav-next');
-            
-            if (prevBtn) {
-                prevBtn.disabled = currentSlideIndex <= 0;
-            }
-            
-            if (nextBtn) {
-                nextBtn.disabled = currentSlideIndex >= maxSlideIndex;
-            }
-        }
-
-        function slideNext() {
-            if (currentSlideIndex < maxSlideIndex) {
-                currentSlideIndex++;
-                updateSliderPosition();
-                updateSliderButtons();
-            }
-        }
-
-        function slidePrev() {
-            if (currentSlideIndex > 0) {
-                currentSlideIndex--;
-                updateSliderPosition();
-                updateSliderButtons();
-            }
-        }
-
-        // Add event listeners for slider buttons
-        const sliderPrevBtn = document.querySelector('.slider-nav-prev');
-        const sliderNextBtn = document.querySelector('.slider-nav-next');
-        
-        if (sliderPrevBtn) {
-            sliderPrevBtn.addEventListener('click', slidePrev);
-        }
-        
-        if (sliderNextBtn) {
-            sliderNextBtn.addEventListener('click', slideNext);
-        }
-
         // About section scroll-based animations
         function initAboutAnimations() {
             // Force scroll to top when initializing About animations
             window.scrollTo(0, 0);
-            
-            // Initialize Recent News Slider
-            initRecentNewsSlider();
         }
 
         // Also initialize on page load if publications or members tab is active

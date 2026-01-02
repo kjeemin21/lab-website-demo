@@ -21,45 +21,17 @@ title: Home
                     {% if site.data.about.description %}
                     <p class="about-text">{{ site.data.about.description }}</p>
                     {% endif %}
-                    
-                    {% if site.data.about.research_areas %}
-                    <div class="about-research-tags">
-                        <h3 class="research-tags-title">Research Areas</h3>
-                        <div class="research-tags-list">
-                            {% for area in site.data.about.research_areas %}
-                            <span class="research-tag">{{ area }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
             
-            <!-- Recent News Gallery Slider -->
-            {% if site.data.about.recent_news %}
-            <div class="about-recent-news">
-                <h3 class="recent-news-title">Recent News</h3>
-                <div class="recent-news-slider-container">
-                    <button class="slider-nav slider-nav-prev" aria-label="Previous">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <div class="recent-news-slider">
-                        <div class="recent-news-track">
-                            {% for item in site.data.about.recent_news %}
-                            <div class="recent-news-item">
-                                <img src="{{ item.image | relative_url }}" alt="{{ item.caption }}">
-                                <p class="recent-news-caption">{{ item.caption }}</p>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <button class="slider-nav slider-nav-next" aria-label="Next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
+            <!-- Research Areas Section (Below) -->
+            {% if site.data.about.research_areas %}
+            <div class="about-research-section">
+                <h3 class="research-section-title">Research Areas</h3>
+                <div class="research-tags-list">
+                    {% for area in site.data.about.research_areas %}
+                    <span class="research-tag">{{ area }}</span>
+                    {% endfor %}
                 </div>
             </div>
             {% endif %}
@@ -485,7 +457,11 @@ title: Home
                         <div class="publications-show-more-container">
                             <button class="publications-show-more-btn" data-section="publications-international" data-limit="10">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
-                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon" style="display: none;">
+                                <span class="show-more-text">+10</span>
+                            </button>
+                            <button class="publications-show-less-btn" data-section="publications-international" data-limit="10" style="display: none;">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
+                                <span class="show-less-text">-10</span>
                             </button>
                         </div>
                         {% endif %}
@@ -581,7 +557,11 @@ title: Home
                         <div class="publications-show-more-container">
                             <button class="publications-show-more-btn" data-section="publications-domestic" data-limit="10">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
-                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon" style="display: none;">
+                                <span class="show-more-text">+10</span>
+                            </button>
+                            <button class="publications-show-less-btn" data-section="publications-domestic" data-limit="10" style="display: none;">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
+                                <span class="show-less-text">-10</span>
                             </button>
                         </div>
                         {% endif %}
