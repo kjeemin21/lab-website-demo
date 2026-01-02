@@ -1840,8 +1840,8 @@ main {
     line-height: 1;
 }
 
-/* Contacts Section */
-.contacts-grid {
+/* Recruit Section */
+.recruit-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
@@ -1851,7 +1851,7 @@ main {
     margin-right: auto;
 }
 
-.contact-card {
+.recruit-card {
     background: white;
     padding: 35px 30px;
     border-radius: 12px;
@@ -1860,13 +1860,13 @@ main {
     border-left: 4px solid var(--secondary-color);
 }
 
-.contact-card:hover {
+.recruit-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
     border-left-color: var(--accent-color);
 }
 
-.contact-card-title {
+.recruit-card-title {
     font-size: 1.5rem;
     color: var(--primary-color);
     margin: 0 0 25px 0;
@@ -1875,39 +1875,114 @@ main {
     border-bottom: 2px solid var(--border-color);
 }
 
-.contact-card-content {
+.recruit-card-content {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.contact-item {
+.recruit-item {
     margin: 0;
     font-size: 1.05rem;
     line-height: 1.7;
     color: var(--text-color);
 }
 
-.contact-item strong {
+.recruit-item strong {
     color: var(--primary-color);
     font-weight: 700;
     margin-right: 8px;
 }
 
-.contact-link {
+.recruit-link {
     color: var(--secondary-color);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s;
 }
 
-.contact-link:hover {
+.recruit-link:hover {
     color: var(--primary-color);
     text-decoration: underline;
 }
 
-/* Fallback for old contact-info style */
-.contact-info {
+/* Recruitment Section */
+.recruitment-section {
+    background: white;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+    border-left: 4px solid var(--secondary-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recruitment-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    border-left-color: var(--accent-color);
+}
+
+.recruitment-links {
+    margin-bottom: 25px;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.recruitment-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.recruitment-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.link-separator {
+    margin: 0 4px;
+    color: var(--text-color);
+}
+
+.recruitment-applications {
+    padding-top: 25px;
+    border-top: 2px solid var(--border-color);
+}
+
+.recruitment-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0 0 15px 0;
+}
+
+.recruitment-item {
+    margin: 12px 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-color);
+}
+
+.recruitment-item strong {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+.recruitment-contact {
+    margin: 20px 0 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-color);
+}
+
+/* Fallback for old recruit-info style */
+.recruit-info {
     background: white;
     padding: 40px;
     border-radius: 10px;
@@ -1916,18 +1991,18 @@ main {
     margin: 0 auto;
 }
 
-.contact-info p {
+.recruit-info p {
     margin-bottom: 20px;
     font-size: 1.1rem;
 }
 
-.contact-info a {
+.recruit-info a {
     color: var(--secondary-color);
     text-decoration: none;
     transition: color 0.3s;
 }
 
-.contact-info a:hover {
+.recruit-info a:hover {
     color: var(--primary-color);
 }
 
@@ -2099,22 +2174,47 @@ main {
         font-size: 0.75rem;
     }
     
-    .contacts-grid {
+    .recruit-grid {
         grid-template-columns: 1fr;
         gap: 20px;
         margin-top: 30px;
     }
     
-    .contact-card {
+    .recruitment-section {
+        padding: 25px 20px;
+        margin-bottom: 30px;
+    }
+    
+    .recruitment-links {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .recruitment-title {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
+    .recruitment-item {
+        font-size: 0.95rem;
+        margin: 10px 0;
+    }
+    
+    .recruitment-contact {
+        font-size: 0.95rem;
+        margin-top: 15px;
+    }
+    
+    .recruit-card {
         padding: 25px 20px;
     }
     
-    .contact-card-title {
+    .recruit-card-title {
         font-size: 1.3rem;
         margin-bottom: 20px;
     }
     
-    .contact-item {
+    .recruit-item {
         font-size: 1rem;
     }
 
