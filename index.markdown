@@ -686,45 +686,74 @@ title: Home
     </div>
 </section>
 
-<section id="contacts" class="section tab-panel">
+<section id="recruit" class="section tab-panel">
     <div class="container">
-        <h2>Contacts</h2>
+        <h2>Recruit</h2>
         <div class="content">
-            {% if site.data.contacts %}
-            <div class="contacts-grid">
+            <!-- Recruitment Information -->
+            <div class="recruitment-section">
+                <div class="recruitment-links">
+                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link">Lab Video</a>
+                    <span class="link-separator">,</span>
+                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Material</a>
+                    <span class="link-separator">,</span>
+                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Video</a>
+                    <span class="link-separator">,</span>
+                    <a href="/down/BDI_Lab_internship.pdf" target="_blank" rel="noopener" class="recruitment-link">Internship Recruitment</a>
+                    <span class="link-separator">,</span>
+                    <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link">YouTube</a>
+                </div>
+                <div class="recruitment-applications">
+                    <p class="recruitment-title">[Recruiting Students]</p>
+                    <p class="recruitment-item">
+                        <strong>Master's New Students:</strong>
+                        <a href="https://forms.gle/8TUm8iPkgvRQSZv89" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                    </p>
+                    <p class="recruitment-item">
+                        <strong>Undergraduate Research Students:</strong>
+                        <a href="https://forms.gle/vPZs2LjWPCJFCa4Z8" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                    </p>
+                    <p class="recruitment-contact">
+                        Students interested in our lab, please contact <a href="mailto:jjwhang@kaist.ac.kr" class="recruitment-link">jjwhang@kaist.ac.kr</a>.
+                    </p>
+                </div>
+            </div>
+            
+            {% if site.data.recruit %}
+            <div class="recruit-grid">
                 <!-- Location Card -->
-                {% if site.data.contacts.location %}
-                <div class="contact-card">
-                    <h3 class="contact-card-title">Location</h3>
-                    <div class="contact-card-content">
-                        {% if site.data.contacts.location.building %}
-                        <p class="contact-item">{{ site.data.contacts.location.building }}</p>
+                {% if site.data.recruit.location %}
+                <div class="recruit-card">
+                    <h3 class="recruit-card-title">Location</h3>
+                    <div class="recruit-card-content">
+                        {% if site.data.recruit.location.building %}
+                        <p class="recruit-item">{{ site.data.recruit.location.building }}</p>
                         {% endif %}
-                        {% if site.data.contacts.location.professor_room %}
-                        <p class="contact-item"><strong>Prof.:</strong> {{ site.data.contacts.location.professor_room }}</p>
+                        {% if site.data.recruit.location.professor_room %}
+                        <p class="recruit-item"><strong>Prof.:</strong> {{ site.data.recruit.location.professor_room }}</p>
                         {% endif %}
-                        {% if site.data.contacts.location.lab_room %}
-                        <p class="contact-item"><strong>Lab.:</strong> {{ site.data.contacts.location.lab_room }}</p>
+                        {% if site.data.recruit.location.lab_room %}
+                        <p class="recruit-item"><strong>Lab.:</strong> {{ site.data.recruit.location.lab_room }}</p>
                         {% endif %}
-                        {% if site.data.contacts.location.admin_room %}
-                        <p class="contact-item"><strong>Admin.:</strong> {{ site.data.contacts.location.admin_room }}</p>
+                        {% if site.data.recruit.location.admin_room %}
+                        <p class="recruit-item"><strong>Admin.:</strong> {{ site.data.recruit.location.admin_room }}</p>
                         {% endif %}
                     </div>
                 </div>
                 {% endif %}
                 
                 <!-- Email Card -->
-                {% if site.data.contacts.email %}
-                <div class="contact-card">
-                    <h3 class="contact-card-title">Email</h3>
-                    <div class="contact-card-content">
-                        {% if site.data.contacts.email.professor_name %}
-                        <p class="contact-item">{{ site.data.contacts.email.professor_name }}</p>
+                {% if site.data.recruit.email %}
+                <div class="recruit-card">
+                    <h3 class="recruit-card-title">Email</h3>
+                    <div class="recruit-card-content">
+                        {% if site.data.recruit.email.professor_name %}
+                        <p class="recruit-item">{{ site.data.recruit.email.professor_name }}</p>
                         {% endif %}
-                        {% if site.data.contacts.email.professor_email %}
-                        <p class="contact-item">
-                            <a href="mailto:{{ site.data.contacts.email.professor_email }}" class="contact-link">
-                                {{ site.data.contacts.email.professor_email }}
+                        {% if site.data.recruit.email.professor_email %}
+                        <p class="recruit-item">
+                            <a href="mailto:{{ site.data.recruit.email.professor_email }}" class="recruit-link">
+                                {{ site.data.recruit.email.professor_email }}
                             </a>
                         </p>
                         {% endif %}
@@ -733,26 +762,26 @@ title: Home
                 {% endif %}
                 
                 <!-- Phone Card -->
-                {% if site.data.contacts.phone %}
-                <div class="contact-card">
-                    <h3 class="contact-card-title">Tel</h3>
-                    <div class="contact-card-content">
-                        {% if site.data.contacts.phone.professor %}
-                        <p class="contact-item"><strong>Prof.:</strong> {{ site.data.contacts.phone.professor }}</p>
+                {% if site.data.recruit.phone %}
+                <div class="recruit-card">
+                    <h3 class="recruit-card-title">Tel</h3>
+                    <div class="recruit-card-content">
+                        {% if site.data.recruit.phone.professor %}
+                        <p class="recruit-item"><strong>Prof.:</strong> {{ site.data.recruit.phone.professor }}</p>
                         {% endif %}
-                        {% if site.data.contacts.phone.lab %}
-                        <p class="contact-item"><strong>Lab.:</strong> {{ site.data.contacts.phone.lab }}</p>
+                        {% if site.data.recruit.phone.lab %}
+                        <p class="recruit-item"><strong>Lab.:</strong> {{ site.data.recruit.phone.lab }}</p>
                         {% endif %}
-                        {% if site.data.contacts.phone.admin %}
-                        <p class="contact-item"><strong>Admin.:</strong> {{ site.data.contacts.phone.admin }}</p>
+                        {% if site.data.recruit.phone.admin %}
+                        <p class="recruit-item"><strong>Admin.:</strong> {{ site.data.recruit.phone.admin }}</p>
                         {% endif %}
                     </div>
                 </div>
                 {% endif %}
             </div>
             {% else %}
-            <div class="contact-info">
-                <p>Contact information will be added here.</p>
+            <div class="recruit-info">
+                <p>Recruit information will be added here.</p>
             </div>
             {% endif %}
         </div>
