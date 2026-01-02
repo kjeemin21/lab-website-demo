@@ -1279,52 +1279,56 @@ main {
     margin-top: 40px;
     margin-bottom: 30px;
     display: flex;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
     align-items: center;
 }
 
 .publications-show-more-btn,
 .publications-show-less-btn {
-    background: white;
-    border: 2px solid var(--border-color);
-    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    border-radius: 25px;
-    font-weight: 600;
-    color: var(--primary-color);
+    gap: 6px;
+    border-radius: 8px;
+    font-weight: 500;
+    color: #666;
 }
 
 .publications-show-more-btn:hover,
 .publications-show-less-btn:hover {
-    background-color: rgba(52, 152, 219, 0.1);
-    border-color: var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.08);
     color: var(--secondary-color);
-    transform: translateY(-2px);
 }
 
 .publications-show-more-btn:active,
 .publications-show-less-btn:active {
-    transform: translateY(0);
+    background-color: rgba(52, 152, 219, 0.15);
 }
 
 .publications-show-more-btn .show-more-icon,
 .publications-show-less-btn .show-less-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: block;
-    transition: opacity 0.3s ease;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+.publications-show-more-btn:hover .show-more-icon,
+.publications-show-less-btn:hover .show-less-icon {
+    opacity: 1;
 }
 
 .show-more-text,
 .show-less-text {
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .year-badge {
