@@ -31,3 +31,10 @@ gem "wdm", "~> 0.1", :platforms => [:mingw, :x64_mingw, :mswin]
 # Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
 # do not have a Java counterpart.
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
+
+# GitHub Pages에서 지원하는 버전으로 플러그인들을 자동 맞춤
+gem "github-pages", group: :jekyll_plugins
+
+# 윈도우/리눅스/맥 호환성 문제 방지
+gem "tzinfo-data"
+gem "webrick", group: :development
