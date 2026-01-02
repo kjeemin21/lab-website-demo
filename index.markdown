@@ -381,7 +381,7 @@ title: Home
             </button>
         </div>
         <div class="content">
-            {% if site.data.publications %}
+            {% if site.data.publications %} 
             <div class="publications-container">
                 <div class="publications-list">
                     {% assign international_pubs = site.data.publications | where: "type", "international" %}
