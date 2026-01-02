@@ -680,7 +680,7 @@
             }
         });
 
-        // Balanced Photo Grid functionality
+        // Balanced Photo Grid functionality with lazy loading
         function initBalancedPhotoGrid() {
             const photosDataElement = document.getElementById('photos-data');
             if (!photosDataElement) return;
@@ -695,69 +695,39 @@
                     return dateB - dateA;
                 });
                 
-                // 2. Load all images and calculate their sizes
-                const imagePromises = photosData.map(photo => {
-                    return new Promise((resolve) => {
-                        const img = new Image();
-                        img.onload = () => {
-                            resolve({
-                                image: photo.image,
-                                caption: photo.caption,
-                                date: photo.date,
-                                height: img.naturalHeight,
-                                width: img.naturalWidth
-                            });
-                        };
-                        img.onerror = () => {
-                            // If image fails to load, still include it with default dimensions
-                            resolve({
-                                image: photo.image,
-                                caption: photo.caption,
-                                date: photo.date,
-                                height: 400,
-                                width: 300
-                            });
-                        };
-                        img.src = photo.image;
-                    });
+                // 2. Determine number of columns based on screen width
+                const screenWidth = window.innerWidth;
+                let numColumns = 3;
+                if (screenWidth <= 480) {
+                    numColumns = 1;
+                } else if (screenWidth <= 768) {
+                    numColumns = 2;
+                }
+                
+                const columns = Array.from({ length: numColumns }, () => []);
+                const columnHeights = Array(numColumns).fill(0);
+                
+                // 3. Calculate column width (approximate)
+                const gridContainer = document.getElementById('photosGrid');
+                if (!gridContainer) return;
+                
+                const containerWidth = gridContainer.offsetWidth || 1200;
+                const gap = (screenWidth <= 768) ? 15 : 20;
+                const columnWidth = (containerWidth - (gap * (numColumns - 1))) / numColumns;
+                
+                // Use estimated aspect ratio for distribution (most photos are 3:4 or 4:3)
+                const estimatedAspectRatio = 1.0; // Square-ish average
+                const estimatedHeight = columnWidth * estimatedAspectRatio;
+                
+                // 4. Distribute photos to shortest column
+                photosData.forEach(photo => {
+                    const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+                    columns[shortestColumnIndex].push(photo);
+                    columnHeights[shortestColumnIndex] += estimatedHeight + gap;
                 });
                 
-                // 3. After all images load, distribute to columns
-                Promise.all(imagePromises).then(photos => {
-                    // Determine number of columns based on screen width
-                    const screenWidth = window.innerWidth;
-                    let numColumns = 3;
-                    if (screenWidth <= 480) {
-                        numColumns = 1;
-                    } else if (screenWidth <= 768) {
-                        numColumns = 2;
-                    }
-                    
-                    const columns = Array.from({ length: numColumns }, () => []);
-                    const columnHeights = Array(numColumns).fill(0);
-                    
-                    // Calculate column width (approximate)
-                    const gridContainer = document.getElementById('photosGrid');
-                    if (!gridContainer) return;
-                    
-                    const containerWidth = gridContainer.offsetWidth || 1200;
-                    const gap = (screenWidth <= 768) ? 15 : 20;
-                    const columnWidth = (containerWidth - (gap * (numColumns - 1))) / numColumns;
-                    
-                    // Distribute photos to shortest column
-                    photos.forEach(photo => {
-                        const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
-                        columns[shortestColumnIndex].push(photo);
-                        
-                        // Calculate rendered height based on aspect ratio
-                        const aspectRatio = photo.height / photo.width;
-                        const renderedHeight = columnWidth * aspectRatio;
-                        columnHeights[shortestColumnIndex] += renderedHeight + gap;
-                    });
-                    
-                    // 4. Render columns to DOM
-                    renderPhotoColumns(columns);
-                });
+                // 5. Render columns to DOM with lazy loading
+                renderPhotoColumns(columns);
                 
             } catch (error) {
                 console.error('Error loading photos:', error);
@@ -784,6 +754,7 @@
                     const img = document.createElement('img');
                     img.src = photo.image;
                     img.alt = photo.caption || 'Lab photo';
+                    img.loading = 'lazy'; // Native browser lazy loading
                     
                     photoItem.appendChild(img);
                     columnDiv.appendChild(photoItem);
