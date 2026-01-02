@@ -141,16 +141,11 @@ title: Home
                         <span class="detail-content">{{ site.data.professor.research_interests }}</span>
                     </div>
                     {% endif %}
-                    
-                    {% if site.data.professor.cv_link %}
-                    <div class="detail-item">
-                        <span class="detail-label"></span>
-                        <span class="detail-content">
-                            <a href="{{ site.data.professor.cv_link | relative_url }}" target="_blank" rel="noopener" class="cv-link">Curriculum Vitae</a>
-                        </span>
-                    </div>
-                    {% endif %}
                 </div>
+                
+                {% if site.data.professor.cv_link %}
+                <a href="{{ site.data.professor.cv_link | relative_url }}" target="_blank" rel="noopener" class="cv-link">Curriculum Vitae</a>
+                {% endif %}
             </div>
             {% else %}
             <p>Professor information will be added here.</p>
