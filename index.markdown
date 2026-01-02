@@ -377,7 +377,7 @@ title: Home
         <div class="publications-header">
             <h2>Publications</h2>
             <button class="publications-menu-toggle" aria-label="Toggle publications menu">
-                <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
+                <img src="{{ '/assets/images/icons/menu_icon.svg' relative_url }}" alt="Menu" class="menu-icon">
             </button>
         </div>
         <div class="content">
