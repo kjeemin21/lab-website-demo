@@ -640,26 +640,22 @@ title: Home
         <h2>Photos</h2>
         <div class="content">
             {% if site.data.photos %}
-            <div class="photos-grid">
-                {% for photo in site.data.photos %}
-                <div class="photo-item" data-image="{{ photo.image | relative_url }}">
-                    {% if photo.image %}
-                    <img src="{{ photo.image | relative_url }}" alt="{{ photo.caption | default: 'Lab photo' }}">
-                    {% endif %}
-                </div>
-                {% endfor %}
+            <div class="photos-grid" id="photosGrid">
+                <!-- Photos will be dynamically loaded here -->
             </div>
             
-            <!-- Photo Pagination -->
-            <div class="photo-pagination" id="photoPagination">
-                <button class="pagination-btn pagination-prev" id="photoPrevBtn" aria-label="Previous page">
-                    <span>&laquo;</span>
-                </button>
-                <div class="pagination-numbers" id="photoPaginationNumbers"></div>
-                <button class="pagination-btn pagination-next" id="photoNextBtn" aria-label="Next page">
-                    <span>&raquo;</span>
-                </button>
-            </div>
+            <!-- Hidden data for JavaScript -->
+            <script id="photos-data" type="application/json">
+            [
+            {% for photo in site.data.photos %}
+            {
+                "image": "{{ photo.image | relative_url }}",
+                "caption": "{{ photo.caption | default: 'Lab photo' }}",
+                "date": "{{ photo.date }}"
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+            ]
+            </script>
             
             <!-- Photo Lightbox -->
             <div class="photo-lightbox" id="photoLightbox">
