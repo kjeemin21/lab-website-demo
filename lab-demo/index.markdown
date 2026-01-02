@@ -529,22 +529,71 @@ title: Home
     <div class="container">
         <h2>Contacts</h2>
         <div class="content">
-            <div class="contact-info">
-                {% if site.email %}
-                <p><strong>Email:</strong> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+            {% if site.data.contacts %}
+            <div class="contacts-grid">
+                <!-- Location Card -->
+                {% if site.data.contacts.location %}
+                <div class="contact-card">
+                    <h3 class="contact-card-title">Location</h3>
+                    <div class="contact-card-content">
+                        {% if site.data.contacts.location.building %}
+                        <p class="contact-item">{{ site.data.contacts.location.building }}</p>
+                        {% endif %}
+                        {% if site.data.contacts.location.professor_room %}
+                        <p class="contact-item"><strong>Prof.:</strong> {{ site.data.contacts.location.professor_room }}</p>
+                        {% endif %}
+                        {% if site.data.contacts.location.lab_room %}
+                        <p class="contact-item"><strong>Lab.:</strong> {{ site.data.contacts.location.lab_room }}</p>
+                        {% endif %}
+                        {% if site.data.contacts.location.admin_room %}
+                        <p class="contact-item"><strong>Admin.:</strong> {{ site.data.contacts.location.admin_room }}</p>
+                        {% endif %}
+                    </div>
+                </div>
                 {% endif %}
-                {% if site.data.contacts %}
-                    {% if site.data.contacts.address %}
-                    <p><strong>Address:</strong> {{ site.data.contacts.address }}</p>
-                    {% endif %}
-                    {% if site.data.contacts.phone %}
-                    <p><strong>Phone:</strong> {{ site.data.contacts.phone }}</p>
-                    {% endif %}
-                    {% if site.data.contacts.office %}
-                    <p><strong>Office:</strong> {{ site.data.contacts.office }}</p>
-                    {% endif %}
+                
+                <!-- Email Card -->
+                {% if site.data.contacts.email %}
+                <div class="contact-card">
+                    <h3 class="contact-card-title">Email</h3>
+                    <div class="contact-card-content">
+                        {% if site.data.contacts.email.professor_name %}
+                        <p class="contact-item">{{ site.data.contacts.email.professor_name }}</p>
+                        {% endif %}
+                        {% if site.data.contacts.email.professor_email %}
+                        <p class="contact-item">
+                            <a href="mailto:{{ site.data.contacts.email.professor_email }}" class="contact-link">
+                                {{ site.data.contacts.email.professor_email }}
+                            </a>
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Phone Card -->
+                {% if site.data.contacts.phone %}
+                <div class="contact-card">
+                    <h3 class="contact-card-title">Tel</h3>
+                    <div class="contact-card-content">
+                        {% if site.data.contacts.phone.professor %}
+                        <p class="contact-item"><strong>Prof.:</strong> {{ site.data.contacts.phone.professor }}</p>
+                        {% endif %}
+                        {% if site.data.contacts.phone.lab %}
+                        <p class="contact-item"><strong>Lab.:</strong> {{ site.data.contacts.phone.lab }}</p>
+                        {% endif %}
+                        {% if site.data.contacts.phone.admin %}
+                        <p class="contact-item"><strong>Admin.:</strong> {{ site.data.contacts.phone.admin }}</p>
+                        {% endif %}
+                    </div>
+                </div>
                 {% endif %}
             </div>
+            {% else %}
+            <div class="contact-info">
+                <p>Contact information will be added here.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </section>
