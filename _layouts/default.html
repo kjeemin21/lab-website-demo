@@ -174,14 +174,11 @@
                 setTimeout(initMembersMenuWithClose, 100);
             }
             
-            // Initialize photo items and pagination if photos tab is active
+            // Initialize photo items if photos tab is active
             if (tabId === 'photos') {
                 setTimeout(function() {
-                    if (typeof initPhotoItems === 'function') {
-                        initPhotoItems();
-                    }
-                    if (typeof initPhotoPagination === 'function') {
-                        initPhotoPagination();
+                    if (typeof initBalancedPhotoGrid === 'function') {
+                        initBalancedPhotoGrid();
                     }
                 }, 100);
             }
@@ -683,6 +680,122 @@
             }
         });
 
+        // Balanced Photo Grid functionality
+        function initBalancedPhotoGrid() {
+            const photosDataElement = document.getElementById('photos-data');
+            if (!photosDataElement) return;
+            
+            try {
+                const photosData = JSON.parse(photosDataElement.textContent);
+                
+                // 1. Sort by date (most recent first)
+                photosData.sort((a, b) => {
+                    const dateA = new Date(a.date || '1970-01-01');
+                    const dateB = new Date(b.date || '1970-01-01');
+                    return dateB - dateA;
+                });
+                
+                // 2. Load all images and calculate their sizes
+                const imagePromises = photosData.map(photo => {
+                    return new Promise((resolve) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            resolve({
+                                image: photo.image,
+                                caption: photo.caption,
+                                date: photo.date,
+                                height: img.naturalHeight,
+                                width: img.naturalWidth
+                            });
+                        };
+                        img.onerror = () => {
+                            // If image fails to load, still include it with default dimensions
+                            resolve({
+                                image: photo.image,
+                                caption: photo.caption,
+                                date: photo.date,
+                                height: 400,
+                                width: 300
+                            });
+                        };
+                        img.src = photo.image;
+                    });
+                });
+                
+                // 3. After all images load, distribute to columns
+                Promise.all(imagePromises).then(photos => {
+                    // Determine number of columns based on screen width
+                    const screenWidth = window.innerWidth;
+                    let numColumns = 3;
+                    if (screenWidth <= 480) {
+                        numColumns = 1;
+                    } else if (screenWidth <= 768) {
+                        numColumns = 2;
+                    }
+                    
+                    const columns = Array.from({ length: numColumns }, () => []);
+                    const columnHeights = Array(numColumns).fill(0);
+                    
+                    // Calculate column width (approximate)
+                    const gridContainer = document.getElementById('photosGrid');
+                    if (!gridContainer) return;
+                    
+                    const containerWidth = gridContainer.offsetWidth || 1200;
+                    const gap = (screenWidth <= 768) ? 15 : 20;
+                    const columnWidth = (containerWidth - (gap * (numColumns - 1))) / numColumns;
+                    
+                    // Distribute photos to shortest column
+                    photos.forEach(photo => {
+                        const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+                        columns[shortestColumnIndex].push(photo);
+                        
+                        // Calculate rendered height based on aspect ratio
+                        const aspectRatio = photo.height / photo.width;
+                        const renderedHeight = columnWidth * aspectRatio;
+                        columnHeights[shortestColumnIndex] += renderedHeight + gap;
+                    });
+                    
+                    // 4. Render columns to DOM
+                    renderPhotoColumns(columns);
+                });
+                
+            } catch (error) {
+                console.error('Error loading photos:', error);
+            }
+        }
+        
+        function renderPhotoColumns(columns) {
+            const gridContainer = document.getElementById('photosGrid');
+            if (!gridContainer) return;
+            
+            // Clear existing content
+            gridContainer.innerHTML = '';
+            
+            // Create columns
+            columns.forEach((columnPhotos, columnIndex) => {
+                const columnDiv = document.createElement('div');
+                columnDiv.className = 'photo-column';
+                
+                columnPhotos.forEach(photo => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.setAttribute('data-image', photo.image);
+                    
+                    const img = document.createElement('img');
+                    img.src = photo.image;
+                    img.alt = photo.caption || 'Lab photo';
+                    
+                    photoItem.appendChild(img);
+                    columnDiv.appendChild(photoItem);
+                });
+                
+                gridContainer.appendChild(columnDiv);
+            });
+            
+            // Re-initialize photo items for lightbox
+            initPhotoItems();
+        }
+
         // Photo Lightbox functionality
         const photoLightbox = document.getElementById('photoLightbox');
         const lightboxImage = document.getElementById('lightboxImage');
@@ -743,7 +856,22 @@
 
         // Also initialize on DOMContentLoaded
         document.addEventListener('DOMContentLoaded', function() {
-            initPhotoItems();
+            const hash = window.location.hash.substring(1);
+            if (hash === 'photos') {
+                setTimeout(initBalancedPhotoGrid, 100);
+            }
+        });
+        
+        // Re-balance grid on window resize
+        let resizePhotoTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizePhotoTimeout);
+            resizePhotoTimeout = setTimeout(function() {
+                const photosTab = document.querySelector('#photos.tab-panel');
+                if (photosTab && photosTab.classList.contains('active')) {
+                    initBalancedPhotoGrid();
+                }
+            }, 300);
         });
 
         // Close lightbox handlers
@@ -766,135 +894,6 @@
             }
         });
 
-        // Photo Pagination functionality
-        const photosPerPage = 9;
-        let currentPhotoPage = 1;
-        let totalPhotoItems = 0;
-        let totalPhotoPages = 1;
-
-        function initPhotoPagination() {
-            const allPhotoItems = document.querySelectorAll('.photo-item');
-            totalPhotoItems = allPhotoItems.length;
-            totalPhotoPages = Math.ceil(totalPhotoItems / photosPerPage);
-            
-            if (totalPhotoPages <= 1) {
-                // Hide pagination if only one page
-                const pagination = document.getElementById('photoPagination');
-                if (pagination) {
-                    pagination.style.display = 'none';
-                }
-                return;
-            } else {
-                const pagination = document.getElementById('photoPagination');
-                if (pagination) {
-                    pagination.style.display = 'flex';
-                }
-            }
-            
-            renderPhotoPagination();
-            showPhotoPage(1);
-        }
-
-        function showPhotoPage(pageNumber) {
-            currentPhotoPage = pageNumber;
-            const allPhotoItems = document.querySelectorAll('.photo-item');
-            const startIndex = (pageNumber - 1) * photosPerPage;
-            const endIndex = startIndex + photosPerPage;
-            
-            allPhotoItems.forEach((item, index) => {
-                if (index >= startIndex && index < endIndex) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-            
-            updatePhotoPaginationButtons();
-            
-            // Scroll to photos section
-            const photosSection = document.getElementById('photos');
-            if (photosSection) {
-                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
-                const offsetTop = photosSection.offsetTop - headerHeight - 20;
-                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-            }
-        }
-
-        function renderPhotoPagination() {
-            const paginationNumbers = document.getElementById('photoPaginationNumbers');
-            if (!paginationNumbers) return;
-            
-            paginationNumbers.innerHTML = '';
-            
-            for (let i = 1; i <= totalPhotoPages; i++) {
-                const pageBtn = document.createElement('button');
-                pageBtn.className = 'page-number';
-                pageBtn.textContent = i;
-                pageBtn.setAttribute('data-page', i);
-                
-                if (i === currentPhotoPage) {
-                    pageBtn.classList.add('active');
-                }
-                
-                pageBtn.addEventListener('click', function() {
-                    const page = parseInt(this.getAttribute('data-page'));
-                    showPhotoPage(page);
-                });
-                
-                paginationNumbers.appendChild(pageBtn);
-            }
-        }
-
-        function updatePhotoPaginationButtons() {
-            const prevBtn = document.getElementById('photoPrevBtn');
-            const nextBtn = document.getElementById('photoNextBtn');
-            const pageNumbers = document.querySelectorAll('.page-number');
-            
-            if (prevBtn) {
-                prevBtn.disabled = currentPhotoPage === 1;
-            }
-            
-            if (nextBtn) {
-                nextBtn.disabled = currentPhotoPage === totalPhotoPages;
-            }
-            
-            pageNumbers.forEach(btn => {
-                const page = parseInt(btn.getAttribute('data-page'));
-                if (page === currentPhotoPage) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-
-        // Pagination button handlers
-        const photoPrevBtn = document.getElementById('photoPrevBtn');
-        const photoNextBtn = document.getElementById('photoNextBtn');
-        
-        if (photoPrevBtn) {
-            photoPrevBtn.addEventListener('click', function() {
-                if (currentPhotoPage > 1) {
-                    showPhotoPage(currentPhotoPage - 1);
-                }
-            });
-        }
-        
-        if (photoNextBtn) {
-            photoNextBtn.addEventListener('click', function() {
-                if (currentPhotoPage < totalPhotoPages) {
-                    showPhotoPage(currentPhotoPage + 1);
-                }
-            });
-        }
-
-        // Initialize pagination on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            initPhotoPagination();
-        });
-
-        // Re-initialize when photos tab is activated
-        const originalSwitchTabForPagination = window.switchTab;
     </script>
 </body>
 </html>
