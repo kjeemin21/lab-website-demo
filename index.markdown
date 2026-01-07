@@ -745,15 +745,11 @@ title: Home
             <!-- Recruitment Information -->
             <div class="recruitment-section">
                 <div class="recruitment-links">
-                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link">연구실 동영상</a>
-                    <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link">소개자료</a>
-                    <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link">설명자료</a>
-                    <span class="link-separator">,</span>
-                    <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="recruitment-link">Github</a>
-                    <span class="link-separator">,</span>
-                    <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link">YouTube</a>
+                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link-btn">연구실 동영상</a>
+                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link-btn">소개자료</a>
+                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link-btn">설명자료</a>
+                    <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="recruitment-link-btn">Github</a>
+                    <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link-btn">YouTube</a>
                 </div>
                 <div class="recruitment-applications">
                     <p class="recruitment-title">[학생 모집 중]</p>

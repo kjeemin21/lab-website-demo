@@ -1852,9 +1852,34 @@ main {
 }
 
 .recruitment-links {
-    margin-bottom: 15px;
-    line-height: 1.5;
-    font-size: 1.05rem;
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.recruitment-link-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: white;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.recruitment-link-btn:hover {
+    background-color: #f8f9fa;
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .recruitment-link {
@@ -2111,8 +2136,12 @@ main {
     }
     
     .recruitment-links {
+        gap: 10px;
+    }
+    
+    .recruitment-link-btn {
+        padding: 10px 20px;
         font-size: 0.95rem;
-        line-height: 1.4;
     }
     
     .recruitment-title {
