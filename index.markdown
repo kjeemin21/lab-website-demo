@@ -328,13 +328,14 @@ title: Home
             <div class="members-menu-overlay"></div>
             
             <nav class="members-side-menu">
-                <div class="members-menu-header">
+                <h3 class="members-menu-title">
+                    Members
                     <button class="members-menu-close" aria-label="Close menu">
                         <span>&times;</span>
                     </button>
-                </div>
+                </h3>
                 <ul class="members-menu-list">
-                    <li><button class="member-menu-btn" data-scroll="members-phd">Ph.D</button></li>
+                    <li><button class="member-menu-btn active" data-scroll="members-phd">Ph.D</button></li>
                     <li><button class="member-menu-btn" data-scroll="members-ms">M.S</button></li>
                     <li><button class="member-menu-btn" data-scroll="members-alumni">Alumni</button></li>
                 </ul>
