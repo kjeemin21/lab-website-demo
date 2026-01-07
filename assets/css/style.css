@@ -493,6 +493,10 @@ main {
 }
 
 /* Professor Section */
+#professor.section {
+    align-items: flex-start;
+}
+
 .professor-info {
     text-align: left;
     padding: 20px 30px 20px 370px;
@@ -551,7 +555,7 @@ main {
 
 .professor-details {
     width: 100%;
-    line-height: 1.7;
+    line-height: 1.2;
     margin-bottom: 60px; /* Space for CV button */
     padding-right: 10px;
 }
@@ -584,7 +588,7 @@ main {
     flex: 1;
     color: var(--text-color);
     font-size: 1.05rem;
-    line-height: 1.7;
+    line-height: 1.2;
     font-weight: 400;
 }
 
@@ -1950,7 +1954,7 @@ main {
     .professor-details {
         text-align: left;
         width: 100%;
-        line-height: 1.8;
+        line-height: 1.2;
         margin-bottom: 50px; /* Space for CV button on mobile */
         padding-right: 5px;
     }
