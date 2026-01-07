@@ -243,3 +243,12 @@
 #   type: "patent"
 #   links:
 #     link: "https://patents.google.com/patent/..."
+
+# Example patent entry (uncomment and edit to add patents):
+- title: "Patent Title"
+  authors: "Inventor1, Inventor2"
+  venue: "Patent Number: US-XXXX-XXXXXXX"
+  year: "2024"
+  type: "patent"
+  links:
+    link: "https://patents.google.com/patent/..."
