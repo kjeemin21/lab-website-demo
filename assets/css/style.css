@@ -1184,39 +1184,44 @@ main {
 .publications-menu-title {
     background-color: var(--primary-color);
     color: white;
-    padding: 15px 20px;
-    font-size: 1.2rem;
+    padding: 12px 20px;
+    font-size: 1.1rem;
     font-weight: 700;
     text-align: center;
     margin: 0;
-    border-bottom: 5px solid var(--primary-color);
+    border-bottom: 4px solid var(--primary-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .publications-menu-header {
     display: none;
-    justify-content: flex-end;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .publications-menu-close {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
-    font-size: 2rem;
-    color: var(--primary-color);
+    font-size: 1.8rem;
+    color: white;
     cursor: pointer;
     padding: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
+    width: 32px;
+    height: 32px;
     align-items: center;
     justify-content: center;
-    transition: color 0.3s;
+    transition: opacity 0.3s;
+    opacity: 0.9;
 }
 
 .publications-menu-close:hover {
-    color: var(--secondary-color);
+    opacity: 1;
 }
 
 .publications-menu-close span {
@@ -2094,8 +2099,8 @@ main {
     }
 
     .publications-menu-title {
-        font-size: 1.1rem;
-        padding: 12px 15px;
+        font-size: 1rem;
+        padding: 10px 40px 10px 15px;
     }
 
     .publications-menu-list {
@@ -2150,11 +2155,11 @@ main {
     }
 
     .publications-menu-title {
-        font-size: 1.2rem;
-        padding: 15px 20px;
+        font-size: 1.1rem;
+        padding: 12px 45px 12px 20px;
     }
 
-    .publications-menu-header {
+    .publications-menu-close {
         display: flex;
     }
 
