@@ -373,7 +373,7 @@ title: Home
                     <div class="publications-section" id="publications-international">
                         <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid var(--border-color);">
                             <h3 class="subsection-title" style="margin: 0; border: none; padding: 0;">International</h3>
-                            <p style="font-size: 0.85rem; color: #666; margin: 0; font-style: italic;">‡Equal Contribution, * Corresponding Author</p>
+                            <p style="font-size: 0.85rem; color: #666; margin: 0; font-style: italic;">‡: Equal Contribution, *: Corresponding Author</p>
                         </div>
                         {% assign int_count = 0 %}
                         {% for pub in site.data.publications %}
