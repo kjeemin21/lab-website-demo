@@ -5,7 +5,7 @@
 #   authors: "Author1, Author2, Author3"; ‡ = Equal Contribution, * = Corresponding Author
 #   venue: "Conference/Journal Name"
 #   year: "2024"
-#   type: "international" or "domestic" (optional, defaults to "international")
+#   type: "international" or "domestic" or "patent" (optional, defaults to "international")
 #   links:
 #     link: "https://example.com" (optional - general link)
 #     paper: "/path/to/paper.pdf" (optional - PDF paper)
@@ -232,3 +232,14 @@
   type: "domestic"
   links:
     link: "https://bdi-lab.kaist.ac.kr/down/domestic_kiise2020.pdf"
+
+
+# Patents ------------------------------------------------------------
+# Example patent entry (uncomment and edit to add patents):
+# - title: "Patent Title"
+#   authors: "Inventor1, Inventor2"
+#   venue: "Patent Number: US-XXXX-XXXXXXX"
+#   year: "2024"
+#   type: "patent"
+#   links:
+#     link: "https://patents.google.com/patent/..."

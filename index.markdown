@@ -371,7 +371,10 @@ title: Home
                     <!-- International Publications Section -->
                     {% if has_international %}
                     <div class="publications-section" id="publications-international">
-                        <h3 class="subsection-title">International</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid var(--border-color);">
+                            <h3 class="subsection-title" style="margin: 0; border: none; padding: 0;">International</h3>
+                            <p style="font-size: 0.85rem; color: #666; margin: 0; font-style: italic;">‡Equal Contribution, * Corresponding Author</p>
+                        </div>
                         {% assign int_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
@@ -567,6 +570,59 @@ title: Home
                         {% endif %}
                     </div>
                     {% endif %}
+                    
+                    <!-- Patents Section -->
+                    {% assign patent_pubs = site.data.publications | where: "type", "patent" %}
+                    {% if patent_pubs.size > 0 %}
+                    <div class="publications-section" id="publications-patents">
+                        <h3 class="subsection-title">Patents</h3>
+                        {% assign patent_count = 0 %}
+                        {% for pub in site.data.publications %}
+                        {% assign pub_type = pub.type | default: "international" %}
+                        {% if pub_type == "patent" %}
+                        {% assign patent_count = patent_count | plus: 1 %}
+                        <div class="publication-item {% if patent_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                            {% if pub.year %}
+                            <span class="year-badge">{{ pub.year }}</span>
+                            {% endif %}
+                            <h3>{{ pub.title }}</h3>
+                            <p class="authors">{{ pub.authors | replace: "‡", "<sup>‡</sup>" }}</p>
+                            {% if pub.venue %}
+                            <p class="venue">{{ pub.venue }}</p>
+                            {% endif %}
+                            {% if pub.links %}
+                            <div class="publication-links">
+                                {% if pub.links.link %}
+                                <a href="{{ pub.links.link }}" target="_blank" rel="noopener" class="pub-link" title="Link">
+                                    <img src="{{ '/assets/images/icons/link_icon.svg' | relative_url }}" alt="Link" class="link-icon">
+                                    <span>Link</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.paper %}
+                                <a href="{{ pub.links.paper }}" target="_blank" rel="noopener" class="pub-link" title="Paper">
+                                    <img src="{{ '/assets/images/icons/paper_icon.svg' | relative_url }}" alt="Paper" class="link-icon">
+                                    <span>Paper</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% if patent_count > 10 %}
+                        <div class="publications-show-more-container">
+                            <button class="publications-show-more-btn" data-section="publications-patents" data-limit="10">
+                                <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
+                                <span class="show-more-text">+10</span>
+                            </button>
+                            <button class="publications-show-less-btn" data-section="publications-patents" data-limit="10" style="display: none;">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
+                                <span class="show-less-text">-10</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -579,9 +635,11 @@ title: Home
                         <span>&times;</span>
                     </button>
                 </div>
+                <h3 class="publications-menu-title">Publications</h3>
                 <ul class="publications-menu-list">
-                    <li><button class="publication-menu-btn" data-scroll="publications-international">International</button></li>
+                    <li><button class="publication-menu-btn active" data-scroll="publications-international">International</button></li>
                     <li><button class="publication-menu-btn" data-scroll="publications-domestic">Domestic</button></li>
+                    <li><button class="publication-menu-btn" data-scroll="publications-patents">Patents</button></li>
                 </ul>
             </nav>
             {% else %}
