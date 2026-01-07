@@ -680,28 +680,28 @@ title: Home
             <!-- Recruitment Information -->
             <div class="recruitment-section">
                 <div class="recruitment-links">
-                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link">Lab Video</a>
+                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link">연구실 동영상</a>
                     <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Material</a>
+                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link">소개자료</a>
                     <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Video</a>
+                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link">설명자료</a>
                     <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_internship.pdf" target="_blank" rel="noopener" class="recruitment-link">Internship Recruitment</a>
+                    <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="recruitment-link">Github</a>
                     <span class="link-separator">,</span>
                     <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link">YouTube</a>
                 </div>
                 <div class="recruitment-applications">
-                    <p class="recruitment-title">[Recruiting Students]</p>
+                    <p class="recruitment-title">[학생 모집 중]</p>
                     <p class="recruitment-item">
-                        <strong>Master's New Students:</strong>
-                        <a href="https://forms.gle/8TUm8iPkgvRQSZv89" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                        <strong>석사 신입생:</strong>
+                        <a href="https://forms.gle/8TUm8iPkgvRQSZv89" target="_blank" rel="noopener" class="recruitment-link">지원서 링크</a>
                     </p>
                     <p class="recruitment-item">
-                        <strong>Undergraduate Research Students:</strong>
-                        <a href="https://forms.gle/vPZs2LjWPCJFCa4Z8" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                        <strong>학부 연구생:</strong>
+                        <a href="https://forms.gle/vPZs2LjWPCJFCa4Z8" target="_blank" rel="noopener" class="recruitment-link">지원 링크</a>
                     </p>
                     <p class="recruitment-contact">
-                        Students interested in our lab, please contact <a href="mailto:jjwhang@kaist.ac.kr" class="recruitment-link">jjwhang@kaist.ac.kr</a>.
+                        우리 연구실에 관심있는 학생들은 <a href="mailto:jjwhang@kaist.ac.kr" class="recruitment-link">jjwhang@kaist.ac.kr</a> 로 문의바랍니다.
                     </p>
                 </div>
             </div>
