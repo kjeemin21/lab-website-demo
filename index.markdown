@@ -25,14 +25,22 @@ title: Home
             </div>
             
             <!-- Research Areas Section (Below) -->
-            {% if site.data.about.research_areas %}
+            {% if site.data.about.research_graph %}
             <div class="about-research-section">
-                <h3 class="research-section-title">Research Areas</h3>
-                <div class="research-tags-list">
-                    {% for area in site.data.about.research_areas %}
-                    <span class="research-tag">{{ area }}</span>
-                    {% endfor %}
+                <div class="knowledge-graph-container">
+                    <div id="cy"></div>
+                    
+                    <div class="node-description-panel" id="nodeDescriptionPanel">
+                        <button class="node-description-close" id="closeDescription">&times;</button>
+                        <h4 id="nodeTitle"></h4>
+                        <p id="nodeDescription"></p>
+                    </div>
                 </div>
+                
+                <!-- Graph data from YAML -->
+                <script id="graph-data" type="application/json">
+                    {{ site.data.about.research_graph | jsonify }}
+                </script>
             </div>
             {% endif %}
         </div>

@@ -18,6 +18,55 @@ research_areas:
   - "Big Data Analytics"
   - "Data Science"
 
+# Knowledge Graph 구조
+research_graph:
+  nodes:
+    - id: "graph-ml"
+      label: "Graph Machine Learning"
+      description: "Developing novel algorithms for learning from graph-structured data, including graph neural networks and graph representation learning."
+      color: "#6bb6d0"
+      
+    - id: "deep-learning"
+      label: "Deep Learning"
+      description: "Advanced neural network architectures and deep learning techniques for complex pattern recognition and prediction tasks."
+      color: "#f77fb8"
+      
+    - id: "knowledge-graphs"
+      label: "Knowledge Graphs"
+      description: "Building and reasoning over structured knowledge representations to enable intelligent information systems."
+      color: "#9580c0"
+      
+    - id: "data-mining"
+      label: "Data Mining"
+      description: "Extracting meaningful patterns and insights from large-scale datasets using computational algorithms."
+      color: "#f49cae"
+      
+    - id: "big-data"
+      label: "Big Data Analytics"
+      description: "Scalable algorithms and systems for processing and analyzing massive datasets in distributed environments."
+      color: "#ffc87c"
+      
+    - id: "data-science"
+      label: "Data Science"
+      description: "Integrating statistical analysis, machine learning, and domain expertise to solve real-world problems."
+      color: "#a8b5e0"
+  
+  edges:
+    - source: "graph-ml"
+      target: "deep-learning"
+    - source: "graph-ml"
+      target: "knowledge-graphs"
+    - source: "graph-ml"
+      target: "data-mining"
+    - source: "deep-learning"
+      target: "data-science"
+    - source: "data-mining"
+      target: "big-data"
+    - source: "big-data"
+      target: "data-science"
+    - source: "knowledge-graphs"
+      target: "data-science"
+
 # Mission statement
 mission: >
   Our mission is to push the boundaries of what's possible with data-driven 

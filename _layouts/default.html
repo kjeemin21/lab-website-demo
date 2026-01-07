@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
     <title>{{ page.title }} | {{ site.title }}</title>
 </head>
 <body>
@@ -185,7 +186,10 @@
             
             // Initialize about animations if about tab is active
             if (tabId === 'about') {
-                setTimeout(initAboutAnimations, 100);
+                setTimeout(function() {
+                    initAboutAnimations();
+                    initKnowledgeGraph();
+                }, 100);
             }
         }
 
@@ -672,6 +676,7 @@
             if (hash === 'about' || (!hash && document.querySelector('#about.tab-panel.active'))) {
                 setTimeout(function() {
                     initAboutAnimations();
+                    initKnowledgeGraph();
                     // Double-check scroll position after animations init
                     setTimeout(function() {
                         window.scrollTo(0, 0);
@@ -864,6 +869,507 @@
                 closePhotoLightbox();
             }
         });
+
+        // Knowledge Graph Initialization
+        let cyInstance = null; // 전역 인스턴스 저장
+        
+        function initKnowledgeGraph() {
+            // 이미 초기화되었으면 리턴
+            if (cyInstance) {
+                console.log('Knowledge Graph already initialized');
+                return;
+            }
+            
+            const graphDataElement = document.getElementById('graph-data');
+            if (!graphDataElement) {
+                console.warn('Graph data element not found');
+                return;
+            }
+            
+            const cyContainer = document.getElementById('cy');
+            if (!cyContainer) {
+                console.warn('Cytoscape container not found');
+                return;
+            }
+            
+            if (!window.cytoscape) {
+                console.warn('Cytoscape library not loaded');
+                return;
+            }
+            
+            // 컨테이너가 렌더링될 때까지 대기
+            if (cyContainer.offsetWidth === 0 || cyContainer.offsetHeight === 0) {
+                console.warn('Container not visible, retrying in 100ms...');
+                setTimeout(initKnowledgeGraph, 100);
+                return;
+            }
+            
+            try {
+                const graphData = JSON.parse(graphDataElement.textContent);
+                
+                // 장식 노드 생성 함수
+                function generateDecoratorNodes(mainNodes) {
+                    const decoratorNodes = [];
+                    const decoratorEdges = [];
+                    const allDecorators = [];
+                    const connectionCount = {}; // 각 decorator의 연결 수 추적
+                    
+                    mainNodes.forEach((mainNode) => {
+                        const numDecorators = 5 + Math.floor(Math.random() * 4); // 5-8개
+                        const baseColor = mainNode.color;
+                        const zoneDecorators = [];
+                        
+                        for (let i = 0; i < numDecorators; i++) {
+                            const decoratorId = `decorator-${mainNode.id}-${i}`;
+                            const size = 25 + Math.floor(Math.random() * 20); // 25-44px 가변 크기
+                            
+                            // 장식 노드 추가
+                            decoratorNodes.push({
+                                data: {
+                                    id: decoratorId,
+                                    parentZone: mainNode.id,
+                                    color: baseColor,
+                                    isDecorator: true,
+                                    size: size
+                                }
+                            });
+                            
+                            zoneDecorators.push(decoratorId);
+                            allDecorators.push(decoratorId);
+                            connectionCount[decoratorId] = 0;
+                            
+                            // 메인 노드와 연결
+                            decoratorEdges.push({
+                                data: {
+                                    id: `edge-${mainNode.id}-${decoratorId}`,
+                                    source: mainNode.id,
+                                    target: decoratorId
+                                }
+                            });
+                            connectionCount[decoratorId]++;
+                            
+                            // 같은 구역 내 장식 노드끼리 연결 (50% 확률)
+                            if (i > 0 && Math.random() < 0.5) {
+                                const targetDecorator = zoneDecorators[Math.floor(Math.random() * i)];
+                                decoratorEdges.push({
+                                    data: {
+                                        id: `edge-${decoratorId}-${targetDecorator}`,
+                                        source: decoratorId,
+                                        target: targetDecorator
+                                    }
+                                });
+                                connectionCount[decoratorId]++;
+                                connectionCount[targetDecorator]++;
+                            }
+                            
+                            // 다른 메인 노드와도 연결 (30% 확률)
+                            if (Math.random() < 0.3) {
+                                const otherMainNodes = mainNodes.filter(node => node.id !== mainNode.id);
+                                if (otherMainNodes.length > 0) {
+                                    const randomMainNode = otherMainNodes[Math.floor(Math.random() * otherMainNodes.length)];
+                                    decoratorEdges.push({
+                                        data: {
+                                            id: `edge-main-${randomMainNode.id}-${decoratorId}`,
+                                            source: randomMainNode.id,
+                                            target: decoratorId
+                                        }
+                                    });
+                                    connectionCount[decoratorId]++;
+                                }
+                            }
+                        }
+                    });
+                    
+                    // 다른 구역 간 크로스 연결 추가 (20% 확률)
+                    const numCrossConnections = Math.floor(allDecorators.length * 0.2);
+                    for (let i = 0; i < numCrossConnections; i++) {
+                        const source = allDecorators[Math.floor(Math.random() * allDecorators.length)];
+                        const target = allDecorators[Math.floor(Math.random() * allDecorators.length)];
+                        
+                        if (source !== target) {
+                            decoratorEdges.push({
+                                data: {
+                                    id: `edge-cross-${i}-${source}-${target}`,
+                                    source: source,
+                                    target: target
+                                }
+                            });
+                            connectionCount[source]++;
+                            connectionCount[target]++;
+                        }
+                    }
+                    
+                    // 최소 2개 연결 보장: 연결이 2개 미만인 decorator 찾아서 추가 연결
+                    allDecorators.forEach(decoratorId => {
+                        while (connectionCount[decoratorId] < 2) {
+                            // 랜덤으로 다른 노드와 연결 (decorator 또는 main node)
+                            const useMainNode = Math.random() < 0.4; // 40% 확률로 메인 노드와 연결
+                            
+                            if (useMainNode && mainNodes.length > 0) {
+                                const randomMainNode = mainNodes[Math.floor(Math.random() * mainNodes.length)];
+                                decoratorEdges.push({
+                                    data: {
+                                        id: `edge-min-main-${randomMainNode.id}-${decoratorId}`,
+                                        source: randomMainNode.id,
+                                        target: decoratorId
+                                    }
+                                });
+                                connectionCount[decoratorId]++;
+                            } else {
+                                // 다른 decorator와 연결
+                                const availableTargets = allDecorators.filter(id => id !== decoratorId);
+                                if (availableTargets.length > 0) {
+                                    const target = availableTargets[Math.floor(Math.random() * availableTargets.length)];
+                                    decoratorEdges.push({
+                                        data: {
+                                            id: `edge-min-${decoratorId}-${target}`,
+                                            source: decoratorId,
+                                            target: target
+                                        }
+                                    });
+                                    connectionCount[decoratorId]++;
+                                    connectionCount[target]++;
+                                } else {
+                                    break; // 연결할 타겟이 없으면 종료
+                                }
+                            }
+                        }
+                    });
+                    
+                    return { decoratorNodes, decoratorEdges };
+                }
+                
+                // Cytoscape 요소 준비
+                const elements = [];
+                
+                // 메인 노드 추가
+                graphData.nodes.forEach(node => {
+                    elements.push({
+                        data: {
+                            id: node.id,
+                            label: node.label,
+                            description: node.description,
+                            color: node.color,
+                            isDecorator: false
+                        },
+                        classes: 'main-node' // 클래스 추가
+                    });
+                });
+                
+                // 장식 노드 생성 및 추가
+                const { decoratorNodes, decoratorEdges } = generateDecoratorNodes(graphData.nodes);
+                decoratorNodes.forEach(node => {
+                    node.classes = 'decorator-node'; // 클래스 추가
+                });
+                elements.push(...decoratorNodes);
+                
+                // 메인 엣지 추가
+                graphData.edges.forEach(edge => {
+                    elements.push({
+                        data: {
+                            id: `${edge.source}-${edge.target}`,
+                            source: edge.source,
+                            target: edge.target
+                        }
+                    });
+                });
+                
+                // 장식 엣지 추가
+                elements.push(...decoratorEdges);
+                
+                // Cytoscape 초기화
+                cyInstance = cytoscape({
+                    container: cyContainer,
+                    elements: elements,
+                    style: [
+                        {
+                            selector: '.main-node', // 중요 노드 (클래스 기반)
+                            style: {
+                                'shape': 'ellipse',
+                                'background-color': 'data(color)',
+                                'label': 'data(label)',
+                                'color': '#ffffff',
+                                'text-valign': 'center',
+                                'text-halign': 'center',
+                                'font-size': '18px',
+                                'font-weight': '700',
+                                'font-family': 'Pretendard Variable, Pretendard, sans-serif',
+                                'text-outline-width': '2px',
+                                'text-outline-color': '#000000',
+                                'text-outline-opacity': 0.3,
+                                'width': '200px',
+                                'height': '200px',
+                                'text-wrap': 'wrap',
+                                'text-max-width': '175px',
+                                'border-width': '3px',
+                                'border-color': '#ffffff',
+                                'box-shadow': '0 4px 12px rgba(0, 0, 0, 0.15)',
+                                'z-index': 10, // main nodes가 위에 오도록
+                                'transition-property': 'background-color, border-color, box-shadow, width, height',
+                                'transition-duration': '0.3s'
+                            }
+                        },
+                        {
+                            selector: '.decorator-node', // 작은 장식 노드 (클래스 기반)
+                            style: {
+                                'shape': 'ellipse',
+                                'background-color': 'data(color)',
+                                'width': 'data(size)',
+                                'height': 'data(size)',
+                                'border-width': '2px',
+                                'border-color': '#ffffff',
+                                'border-opacity': 0.7,
+                                'background-opacity': 0.5,
+                                'label': '',
+                                'z-index': 1, // decorator nodes는 뒤에
+                                'events': 'no'
+                            }
+                        },
+                        {
+                            selector: '.main-node:hover',
+                            style: {
+                                'width': '210px',
+                                'height': '210px',
+                                'box-shadow': '0 6px 20px rgba(0, 0, 0, 0.25)',
+                                'cursor': 'pointer',
+                                'border-width': '4px',
+                                'z-index': 20 // 호버 시 더 위로
+                            }
+                        },
+                        {
+                            selector: 'edge',
+                            style: {
+                                'width': function(ele) {
+                                    const sourceIsMain = ele.source().hasClass('main-node');
+                                    const targetIsMain = ele.target().hasClass('main-node');
+                                    return (sourceIsMain && targetIsMain) ? 3 : 1.5;
+                                },
+                                'line-color': function(ele) {
+                                    const sourceColor = ele.source().data('color');
+                                    const targetColor = ele.target().data('color');
+                                    if (sourceColor === targetColor) {
+                                        return sourceColor;
+                                    }
+                                    // 다른 색상 간 연결은 중간색 또는 회색
+                                    return '#b0b0b0';
+                                },
+                                'opacity': function(ele) {
+                                    const sourceIsMain = ele.source().hasClass('main-node');
+                                    const targetIsMain = ele.target().hasClass('main-node');
+                                    if (sourceIsMain && targetIsMain) return 0.6;
+                                    
+                                    // 크로스 구역 연결은 조금 더 투명하게
+                                    const sourceColor = ele.source().data('color');
+                                    const targetColor = ele.target().data('color');
+                                    if (sourceColor !== targetColor) return 0.25;
+                                    
+                                    return 0.4;
+                                },
+                                'curve-style': 'bezier',
+                                'z-index': 0 // edges는 모든 노드 아래
+                            }
+                        },
+                        {
+                            selector: '.highlighted',
+                            style: {
+                                'border-width': '5px',
+                                'border-color': '#2c3e50',
+                                'box-shadow': '0 8px 24px rgba(0, 0, 0, 0.3)',
+                                'z-index': 100 // 하이라이트된 요소가 가장 위에
+                            }
+                        }
+                    ],
+                    layout: {
+                        name: 'cose',
+                        animate: true,
+                        animationDuration: 1500,
+                        fit: true,
+                        padding: 10,
+                        boundingBox: { 
+                            x1: 0, 
+                            y1: 0, 
+                            w: cyContainer.offsetWidth * 1.6,
+                            h: cyContainer.offsetHeight * 1.6
+                        },
+                        nodeRepulsion: function(node) {
+                            // 노드 반발력을 대폭 증가하여 겹침 방지
+                            return node.hasClass('decorator-node') ? 200000 : 2000000;
+                        },
+                        idealEdgeLength: function(edge) {
+                            const sourceIsMain = edge.source().hasClass('main-node');
+                            const targetIsMain = edge.target().hasClass('main-node');
+                            // 메인 노드 간 거리를 늘려서 충분한 공간 확보
+                            if (sourceIsMain && targetIsMain) return 300;
+                            if (sourceIsMain || targetIsMain) return 120;
+                            return 70;
+                        },
+                        edgeElasticity: 100, // 엣지 유연성 감소로 더 안정적인 배치
+                        gravity: 0.02, // 중력 감소로 노드들이 덜 몰림
+                        numIter: 5000, // 반복 횟수 증가로 더 나은 레이아웃
+                        randomize: false,
+                        componentSpacing: 200, // 컴포넌트 간격 증가
+                        nestingFactor: 1,
+                        nodeOverlap: 20 // 노드 겹침 방지 추가
+                    },
+                    userZoomingEnabled: false,
+                    userPanningEnabled: false,
+                    boxSelectionEnabled: false,
+                    autoungrabify: true
+                });
+                
+                // 노드 클릭 이벤트 (메인 노드만)
+                const descriptionPanel = document.getElementById('nodeDescriptionPanel');
+                const nodeTitle = document.getElementById('nodeTitle');
+                const nodeDescription = document.getElementById('nodeDescription');
+                const closeBtn = document.getElementById('closeDescription');
+                
+                if (!descriptionPanel || !nodeTitle || !nodeDescription) {
+                    console.error('Description panel elements not found');
+                    cyInstance = null;
+                    return;
+                }
+                
+                // 메인 노드 클릭 이벤트 (클래스 기반 셀렉터)
+                cyInstance.on('tap', '.main-node', function(evt) {
+                    const node = evt.target;
+                    const data = node.data();
+                    
+                    // 모든 노드와 엣지의 하이라이트 제거
+                    cyInstance.elements().removeClass('highlighted');
+                    
+                    // 클릭한 노드와 연결된 엣지 하이라이트
+                    node.addClass('highlighted');
+                    node.connectedEdges().addClass('highlighted');
+                    
+                    // 설명 패널 표시
+                    nodeTitle.textContent = data.label || 'Unknown';
+                    nodeDescription.textContent = data.description || 'No description available';
+                    descriptionPanel.classList.add('active');
+                });
+                
+                // 배경 클릭 시 하이라이트 제거
+                cyInstance.on('tap', function(evt) {
+                    if (evt.target === cyInstance) {
+                        cyInstance.elements().removeClass('highlighted');
+                        descriptionPanel.classList.remove('active');
+                    }
+                });
+                
+                // 닫기 버튼
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function() {
+                        if (cyInstance) {
+                            cyInstance.elements().removeClass('highlighted');
+                        }
+                        descriptionPanel.classList.remove('active');
+                    });
+                }
+                
+                // 빈 공간 호버링 시 작은 노드 밀어내기 효과
+                let mousePosition = { x: 0, y: 0 };
+                let animationFrame = null;
+                const originalPositions = new Map(); // 원래 위치 저장
+                
+                // 마우스 움직임 추적
+                cyInstance.on('mousemove', function(evt) {
+                    mousePosition = evt.position; // 항상 업데이트
+                    
+                    // 애니메이션이 실행 중이 아니면 시작
+                    if (!animationFrame) {
+                        animationFrame = requestAnimationFrame(repelDecoratorNodes);
+                    }
+                });
+                
+                // Decorator 노드들을 마우스로부터 밀어내는 함수
+                function repelDecoratorNodes() {
+                    const decoratorNodes = cyInstance.nodes('.decorator-node');
+                    const repelRadius = 800; // 영향 범위
+                    const repelStrength = 30; // 밀어내는 강도
+                    let hasMovement = false; // 움직임이 있는지 추적
+                    
+                    decoratorNodes.forEach(node => {
+                        const nodePos = node.position();
+                        const nodeId = node.id();
+                        
+                        // 원래 위치 저장 (처음 한 번만)
+                        if (!originalPositions.has(nodeId)) {
+                            originalPositions.set(nodeId, { x: nodePos.x, y: nodePos.y });
+                        }
+                        
+                        const originalPos = originalPositions.get(nodeId);
+                        
+                        // 마우스와 노드 사이의 거리 계산
+                        const dx = nodePos.x - mousePosition.x;
+                        const dy = nodePos.y - mousePosition.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < repelRadius && distance > 0) {
+                            // 마우스로부터 밀어내기
+                            const force = (1 - distance / repelRadius) * repelStrength;
+                            const angle = Math.atan2(dy, dx);
+                            
+                            const newX = originalPos.x + Math.cos(angle) * force;
+                            const newY = originalPos.y + Math.sin(angle) * force;
+                            
+                            node.position({ x: newX, y: newY });
+                            hasMovement = true;
+                        } else {
+                            // 원래 위치로 부드럽게 복귀
+                            const currentX = nodePos.x;
+                            const currentY = nodePos.y;
+                            const returnSpeed = 0.15; // 복귀 속도 (0-1)
+                            const diffX = originalPos.x - currentX;
+                            const diffY = originalPos.y - currentY;
+                            
+                            // 충분히 원위치에 가까우면 정확히 맞춤
+                            if (Math.abs(diffX) < 0.5 && Math.abs(diffY) < 0.5) {
+                                node.position({ x: originalPos.x, y: originalPos.y });
+                            } else {
+                                const newX = currentX + diffX * returnSpeed;
+                                const newY = currentY + diffY * returnSpeed;
+                                node.position({ x: newX, y: newY });
+                                hasMovement = true;
+                            }
+                        }
+                    });
+                    
+                    // 움직임이 있을 때만 계속 애니메이션
+                    if (hasMovement) {
+                        animationFrame = requestAnimationFrame(repelDecoratorNodes);
+                    } else {
+                        animationFrame = null;
+                    }
+                }
+                
+                // 마우스가 그래프 영역을 벗어났을 때
+                cyContainer.addEventListener('mouseleave', function() {
+                    if (animationFrame) {
+                        cancelAnimationFrame(animationFrame);
+                        animationFrame = null;
+                    }
+                    
+                    // 모든 노드를 원래 위치로 복귀
+                    const decoratorNodes = cyInstance.nodes('.decorator-node');
+                    decoratorNodes.forEach(node => {
+                        const originalPos = originalPositions.get(node.id());
+                        if (originalPos) {
+                            node.animate({
+                                position: { x: originalPos.x, y: originalPos.y }
+                            }, {
+                                duration: 400,
+                                easing: 'ease-out'
+                            });
+                        }
+                    });
+                });
+                
+                console.log('Knowledge Graph initialized successfully with', graphData.nodes.length, 'main nodes');
+                
+            } catch (error) {
+                console.error('Error initializing knowledge graph:', error);
+                cyInstance = null;
+            }
+        }
 
     </script>
 </body>
