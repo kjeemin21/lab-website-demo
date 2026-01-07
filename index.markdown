@@ -630,12 +630,12 @@ title: Home
             <div class="publications-menu-overlay"></div>
             
             <nav class="publications-side-menu">
-                <div class="publications-menu-header">
+                <h3 class="publications-menu-title">
+                    Publications
                     <button class="publications-menu-close" aria-label="Close menu">
                         <span>&times;</span>
                     </button>
-                </div>
-                <h3 class="publications-menu-title">Publications</h3>
+                </h3>
                 <ul class="publications-menu-list">
                     <li><button class="publication-menu-btn active" data-scroll="publications-international">International</button></li>
                     <li><button class="publication-menu-btn" data-scroll="publications-domestic">Domestic</button></li>
