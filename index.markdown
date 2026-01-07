@@ -30,8 +30,14 @@ title: Home
                 <h3 class="research-section-title">Research Areas</h3>
                 <div class="research-tags-list">
                     {% for area in site.data.about.research_areas %}
-                    <span class="research-tag">{{ area }}</span>
+                    <span class="research-tag" data-description="{{ area.description }}">{{ area.name }}</span>
                     {% endfor %}
+                </div>
+                
+                <!-- Research Detail Panel -->
+                <div class="research-detail-panel">
+                    <h3 class="detail-title">연구 영역 상세</h3>
+                    <p class="detail-content">연구 영역을 선택하면 자세한 내용이 표시됩니다.</p>
                 </div>
             </div>
             {% endif %}
@@ -833,3 +839,4 @@ title: Home
         </div>
     </div>
 </section>
+

@@ -649,6 +649,55 @@
         function initAboutAnimations() {
             // Force scroll to top when initializing About animations
             window.scrollTo(0, 0);
+            
+            // Initialize research tag interactions
+            initAboutResearchTags();
+        }
+        
+        // Research tag click handler
+        function initAboutResearchTags() {
+            const tags = document.querySelectorAll('.research-tag');
+            const detailPanel = document.querySelector('.research-detail-panel');
+            
+            if (!tags.length || !detailPanel) return;
+            
+            const detailTitle = detailPanel.querySelector('.detail-title');
+            const detailContent = detailPanel.querySelector('.detail-content');
+            
+            tags.forEach(tag => {
+                // Remove any existing listeners by cloning
+                const newTag = tag.cloneNode(true);
+                tag.parentNode.replaceChild(newTag, tag);
+            });
+            
+            // Re-select tags after cloning
+            const freshTags = document.querySelectorAll('.research-tag');
+            
+            freshTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const isSelected = this.classList.contains('selected');
+                    
+                    // Remove selected class from all tags
+                    freshTags.forEach(t => t.classList.remove('selected'));
+                    
+                    if (isSelected) {
+                        // Same tag clicked again - close panel
+                        detailPanel.classList.remove('active');
+                    } else {
+                        // New tag selected - open panel with content
+                        this.classList.add('selected');
+                        const tagName = this.textContent;
+                        const description = this.getAttribute('data-description');
+                        
+                        if (detailTitle && detailContent) {
+                            detailTitle.textContent = tagName;
+                            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                        }
+                        
+                        detailPanel.classList.add('active');
+                    }
+                });
+            });
         }
 
         // Also initialize on page load if publications or members tab is active
