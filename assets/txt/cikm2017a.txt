@@ -1,0 +1,8 @@
+@inproceedings{whang-cikm2017a,
+	author={Joyce Jiyoung Whang and Inderjit S. Dhillon},
+	title={Non-Exhaustive, Overlapping Co-Clustering},
+	booktitle={Proceedings of the 26th ACM Conference on Information and Knowledge Management},
+	year={2017},
+	pages={2367--2370},
+	doi={10.1145/3132847.3133078}
+}

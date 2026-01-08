@@ -1,0 +1,6 @@
+@inproceedings{whang-mis2,
+	author={Joyce Jiyoung Whang and Yeon Seung Jeong and Inderjit S. Dhillon and Seonggoo Kang and Jungmin Lee},
+	title={Fast Asynchronous {Anti-TrustRank} for Web Spam Detection},
+	booktitle={The 11th ACM International Conference on Web Search and Data Mining, Workshop on MIS2: Misinformation and Misbehavior Mining on the Web},
+	year={2018}
+}

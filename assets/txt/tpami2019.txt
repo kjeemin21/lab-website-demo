@@ -1,0 +1,10 @@
+@article{whang-tpami2019,
+	author={Joyce Jiyoung Whang and Yangyang Hou and David F. Gleich and Inderjit S. Dhillon},
+	title={Non-exhaustive, Overlapping Clustering},
+	journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	year={2019},
+	volume={41},
+	number={11},
+	pages={2644--2659},
+	doi={10.1109/TPAMI.2018.2863278}
+}

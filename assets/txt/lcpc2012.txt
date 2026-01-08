@@ -1,0 +1,8 @@
+@inproceedings{sui-lcpc2012,
+	author={Xin Sui and Tsung-Hsien Lee and Joyce Jiyoung Whang and Berkant Sevas and Saral Jain and Keshav Pingali and Inderjit S. Dhillon},
+	title={Parallel Clustered Low-rank Approximation of Graphs and Its Application to Link Prediction},
+	booktitle={Proceedings of the 25th International Workshop on Languages and Compilers for Parallel Computing},
+	year={2012},
+	pages={76--95},
+	doi={10.1007/978-3-642-37658-0_6}
+}

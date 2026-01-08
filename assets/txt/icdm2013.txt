@@ -1,0 +1,8 @@
+@inproceedings{whang-icdm2013,
+	author={Joyce Jiyoung Whang and Piyush Rai and Inderjit S. Dhillon},
+	title={Stochastic Blockmodel with Cluster Overlap, Relevance Selection, and Similarity-Based Smoothing},
+	booktitle={Proceedings of the 2013 IEEE International Conference on Data Mining},
+	year={2013},
+	pages={817--826},
+	doi={10.1109/ICDM.2013.156}
+}

@@ -1,0 +1,7 @@
+@inproceedings{disans,
+	author={Giwon Hong and Jeonghwan Kim and Junmo Kang and Sung-Hyon Myaeng and Joyce Jiyoung Whang},
+	title={Why So Gullible? Enhancing the Robustness of Retrieval-Augmented Models against Counterfactual Noise},
+	booktitle={Findings of the Association for Computational Linguistics: NAACL 2024},
+	year={2024},
+	pages={2474--2495}
+}

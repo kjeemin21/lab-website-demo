@@ -1,0 +1,10 @@
+@article{kang2008parsing,
+  title={Parsing KEGG XML Files to Find Shared and Duplicate Compounds Contained in Metabolic Pathway Maps: A Graph-Theoretical Perspective},
+  author={Kang, Sung-Hui and Jang, Myung-Ha and Whang, Ji-Young and Park, Hyun-Seok},
+  journal={Genomics \& Informatics},
+  volume={6},
+  number={3},
+  pages={147--152},
+  year={2008},
+  publisher={Korea Genome Organization}
+}

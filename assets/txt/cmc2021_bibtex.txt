@@ -1,0 +1,10 @@
+@article{redes,
+	author={Junghyun Bum and Hyunseung Choo and Joyce Jiyoung Whang},
+	title={Image-based Lifelogging: User Emotion Perspective},
+	journal={Computers, Materials \& Continua},
+	year={2021},
+	volume={67},
+	number={2},
+	pages={1963--1977},
+	doi={10.32604/cmc.2021.014931}
+}

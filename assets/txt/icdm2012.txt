@@ -1,0 +1,8 @@
+@inproceedings{whang-icdm2012,
+	author={Joyce Jiyoung Whang and Xin Sui and Inderjit S. Dhillon},
+	title={Scalable and Memory-Efficient Clustering of Large-Scale Social Networks},
+	booktitle={Proceedings of the 2012 IEEE International Conference on Data Mining},
+	year={2012},
+	pages={705--714},
+	doi={10.1109/ICDM.2012.148}
+}

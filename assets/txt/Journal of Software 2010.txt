@@ -1,0 +1,9 @@
+@article{jang2010interpretation,
+  title={An Interpretation of Biological Metabolites and their Reactions Based on Relation Degree of Compound Pairs in KEGG XML Files.},
+  author={Jang, Myungha and Whang, Jiyoung and Lewis, Coleen S and Park, Hyun Seok},
+  journal={JSW},
+  volume={5},
+  number={2},
+  pages={187--194},
+  year={2010}
+}
