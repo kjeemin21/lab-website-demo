@@ -15,6 +15,7 @@
     --border-color: #e0e0e0;
     --header-height: 100px;
     --header-bg: #f5f7fa;
+    --card-bg: #ffffff;
 }
 
 html {
@@ -561,7 +562,7 @@ main {
 .professor-info {
     text-align: left;
     padding: 20px 30px 20px 370px;
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     display: flex;
@@ -754,7 +755,7 @@ main {
 }
 
 .member-card {
-    background: white;
+    background: var(--card-bg);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -1346,7 +1347,7 @@ main {
 }
 
 .publication-item {
-    background: white;
+    background: var(--card-bg);
     padding: 12px 14px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -1509,7 +1510,7 @@ main {
 }
 
 .organization-card {
-    background: white;
+    background: var(--card-bg);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -1629,7 +1630,7 @@ main {
 }
 
 .photo-item {
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -1776,7 +1777,7 @@ main {
 }
 
 .recruit-card {
-    background: white;
+    background: var(--card-bg);
     padding: 35px 30px;
     border-radius: 12px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
@@ -1919,7 +1920,7 @@ main {
 
 /* Fallback for old recruit-info style */
 .recruit-info {
-    background: white;
+    background: var(--card-bg);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
