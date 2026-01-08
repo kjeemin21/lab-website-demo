@@ -1,0 +1,8 @@
+@inproceedings{vista,
+	author={Jaejun Lee and Chanyoung Chung and Hochang Lee and Sungho Jo and Joyce Jiyoung Whang},
+	title={{VISTA}: Visual-Textual Knowledge Graph Representation Learning},
+	booktitle={Findings of the Association for Computational Linguistics: EMNLP 2023},
+	year={2023},
+	pages={7314--7328},
+	doi={10.18653/v1/2023.findings-emnlp.488}
+}

@@ -8,14 +8,16 @@
 #   type: "international" or "domestic" or "patent" (optional, defaults to "international")
 #   links:
 #     link: "https://example.com" (optional - general link)
-#     paper: "/path/to/paper.pdf" (optional - PDF paper)
+#     paper: "https://example.com/paper.pdf" (optional - PDF paper)
 #     arxiv: "https://arxiv.org/abs/xxxx.xxxxx" (optional - arXiv link)
-#     bibtex: "/path/to/bibtex.bib" (optional - BibTeX file)
-#     slides: "/path/to/slides.pdf" (optional - presentation slides)
-#     poster: "/path/to/poster.pdf" (optional - poster)
+#     bibtex: "assets/txt/bibtex.txt" (optional - BibTeX file)
+#     slides: "assets/pdf/slides.pdf" (optional - presentation slides)
+#     poster: "assets/pdf/poster.pdf" (optional - poster)
 #     code: "https://github.com/..." (optional - code repository)
 #     video: "https://youtube.com/..." (optional - video link)
 
+### note: please refer to other publications for the format of the links.
+# ==================================================================================
 - title: "Beneath the Facade: Probing Safety Vulnerabilities in LLMs via Auto-Generated Jailbreak Prompts"
   authors: "H. Kim, K. Lee, and J. J. Whang*"
   venue: "Findings of the Association for Computational Linguistics: EMNLP (Findings of EMNLP)"
@@ -23,9 +25,9 @@
   links:
     link: "https://aclanthology.org/2025.findings-emnlp.960/"
     paper: "https://aclanthology.org/2025.findings-emnlp.960.pdf"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/emnlp2025_trogen_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/emnlp2025_trogen_ppt.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/emnlp2025_trogen_poster.pdf"
+    bibtex: "assets/txt/emnlp2025_trogen_bibtex.txt"
+    slides: "assets/pdf/emnlp2025_trogen_ppt.pdf"
+    poster: "assets/pdf/emnlp2025_trogen_poster.pdf"
     code: "https://github.com/bdi-lab/TroGEN"
 
 - title: "Structure Is All You Need: Structural Representation Learning on Hyper-Relational Knowledge Graphs"
@@ -35,8 +37,8 @@
   links:
     link: "https://proceedings.mlr.press/v267/lee25ah.html"
     paper: "https://openreview.net/pdf?id=2tH2vexW1Z"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/ICML2025_MAYPL_bibtex.txt"
-    poster: "https://bdi-lab.kaist.ac.kr/down/ICML2025_MAYPL_poster.pdf"
+    bibtex: "assets/txt/ICML2025_MAYPL_bibtex.txt"
+    poster: "assets/pdf/ICML2025_MAYPL_poster.pdf"
     code: "https://github.com/bdi-lab/MAYPL"
 
 - title: "Stability and Generalization Capability of Subgraph Reasoning Models for Inductive Knowledge Graph Completion"
@@ -46,8 +48,8 @@
   links:
     link: "https://proceedings.mlr.press/v267/hwang25a.html"
     paper: "https://openreview.net/pdf?id=NE6Px91RkQ"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/ICML2025_IndTh_bibtex.txt"
-    poster: "https://bdi-lab.kaist.ac.kr/down/ICML2025_IndTh_poster.pdf"
+    bibtex: "assets/txt/ICML2025_IndTh_bibtex.txt"
+    poster: "assets/pdf/ICML2025_IndTh_poster.pdf"
 
 - title: "Unveiling the Threat of Fraud Gangs to Graph Neural Networks: Multi-Target Graph Injection Attacks against GNN-Based Fraud Detectors"
   authors: "J. Choi, H. Kim, and J. J. Whang*"
@@ -57,9 +59,9 @@
     link: "https://ojs.aaai.org/index.php/AAAI/article/view/33760"
     paper: "https://ojs.aaai.org/index.php/AAAI/article/view/33760/35915"
     arxiv: "https://arxiv.org/abs/2412.18370"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/monti_aaai2025_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/monti_aaai2025_ppt.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/monti_aaai2025_poster.pdf"
+    bibtex: "assets/txt/monti_aaai2025_bibtex.txt"
+    slides: "assets/pdf/monti_aaai2025_ppt.pdf"
+    poster: "assets/pdf/monti_aaai2025_poster.pdf"
     code: "https://github.com/bdi-lab/MonTi"
 
 - title: "Unifying Inductive, Cross-Domain, and Multimodal Learning for Robust and Generalizable Recommendation"
@@ -68,7 +70,7 @@
   year: "2025"
   links:
     arxiv: "http://arxiv.org/abs/2510.21812"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/micrec_bibtex.txt"
+    bibtex: "assets/txt/micrec_bibtex.txt"
     code: "https://github.com/bdi-lab/MICRec"
 
 - title: "SAIF: A Comprehensive Framework for Evaluating the Risks of Generative AI in the Public Sector"
@@ -77,7 +79,7 @@
   year: "2025"
   links:
     arxiv: "http://arxiv.org/abs/2501.08814"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/saif_bibtex.txt"
+    bibtex: "assets/txt/saif_bibtex.txt"
 
 - title: "PAC-Bayesian Generalization Bounds for Knowledge Graph Representation Learning"
   authors: "J. Lee, M. Hwang, and J. J. Whang*"
@@ -87,9 +89,9 @@
     link: "https://proceedings.mlr.press/v235/lee24i.html"
     paper: "https://raw.githubusercontent.com/mlresearch/v235/main/assets/lee24i/lee24i.pdf"
     arxiv: "https://arxiv.org/abs/2405.06418"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/icml2024_reed_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/icml2024_reed_slide.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/icml2024_reed_poster.pdf"
+    bibtex: "assets/txt/icml2024_reed_bibtex.txt"
+    slides: "assets/pdf/icml2024_reed_slide.pdf"
+    poster: "assets/pdf/icml2024_reed_poster.pdf"
     code: "https://github.com/bdi-lab/ReED"
     youtube: "https://youtu.be/TlZPBEeGKXA"
 
@@ -100,10 +102,10 @@
   links:
     link: "https://aclanthology.org/2024.findings-naacl.159/"
     paper: "https://aclanthology.org/2024.findings-naacl.159.pdf"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/naacl2024_discernanswer_bibtex.txt"
+    bibtex: "assets/txt/naacl2024_discernanswer_bibtex.txt"
     arxiv: "https://arxiv.org/abs/2305.01579"
-    slides: "https://bdi-lab.kaist.ac.kr/down/NAACL2024_Presentation_Slides.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/naacl2024_discernanswer_poster.pdf"
+    slides: "assets/pdf/NAACL2024_Presentation_Slides.pdf"
+    poster: "assets/pdf/naacl2024_discernanswer_poster.pdf"
     code: "https://github.com/wjdghks950/Discern-and-Answer"
 
 - title: "SpoT-Mamba: Learning Long-Range Dependency on Spatio-Temporal Graphs with Selective State Spaces"
@@ -114,8 +116,8 @@
     link: "https://ceur-ws.org/Vol-3827/"
     paper: "https://ceur-ws.org/Vol-3827/paper6.pdf"
     arxiv: "https://arxiv.org/abs/2406.11244"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/spotmamba_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/SpoTMamba_slide.pdf"
+    bibtex: "assets/txt/spotmamba_bibtex.txt"
+    slides: "assets/pdf/SpoTMamba_slide.pdf"
     code: "https://github.com/bdi-lab/SpoT-Mamba"
     youtube: "https://youtu.be/9c4aOperAzQ"
 
@@ -126,9 +128,9 @@
   links:
     link: "https://aclanthology.org/2023.findings-emnlp.488/"
     paper: "https://aclanthology.org/2023.findings-emnlp.488.pdf"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/vista_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/vista_emnlp2023_slides.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/vista_emnlp2023_poster.pdf"
+    bibtex: "assets/txt/vista_bibtex.txt"
+    slides: "assets/pdf/vista_emnlp2023_slides.pdf"
+    poster: "assets/pdf/vista_emnlp2023_poster.pdf"
     code: "https://github.com/bdi-lab/VISTA"
     youtube: "https://youtu.be/e47L3yZlmC8?si=0ZqZEdBQddlWmr7d"
 
@@ -139,8 +141,8 @@
   links:
     link: "https://aclanthology.org/2023.findings-emnlp.245/"
     paper: "https://aclanthology.org/2023.findings-emnlp.245.pdf"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/fineprompt_bibtex.txt"
-    poster: "https://bdi-lab.kaist.ac.kr/down/fineprompt_emnlp2023_poster.pdf"
+    bibtex: "assets/txt/fineprompt_bibtex.txt"
+    poster: "assets/pdf/fineprompt_emnlp2023_poster.pdf"
     code: "https://github.com/wjdghks950/FinePrompt"
 
 - title: "Representation Learning on Hyper-Relational and Numeric Knowledge Graphs with Transformers"
@@ -151,9 +153,9 @@
     link: "https://dl.acm.org/doi/10.1145/3580305.3599490"
     promo: "https://www.youtube.com/watch?v=_kxnOKZZsTI"
     arxiv: "https://arxiv.org/abs/2305.18256"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/hynt_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/hynt_kdd_video_full_static.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/hynt_kdd2023_poster.pdf"
+    bibtex: "assets/txt/hynt_bibtex.txt"
+    slides: "assets/pdf/hynt_kdd_video_full_static.pdf"
+    poster: "assets/pdf/hynt_kdd2023_poster.pdf"
     code: "https://github.com/bdi-lab/HyNT"
     youtube: "https://youtu.be/V23Y7kdmWUE"
 
@@ -165,11 +167,11 @@
     link: "https://proceedings.mlr.press/v202/lee23c.html"
     paper: "https://proceedings.mlr.press/v202/lee23c/lee23c.pdf"
     arxiv: "https://arxiv.org/abs/2305.19987"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/ingram_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/ingram_icml2023_slides.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/ingram_icml2023_poster.pdf"
+    bibtex: "assets/txt/ingram_bibtex.txt"
+    slides: "assets/pdf/ingram_icml2023_slides.pdf"
+    poster: "assets/pdf/ingram_icml2023_poster.pdf"
     code: "https://github.com/bdi-lab/InGram"
-    video: "https://www.youtube.com/watch?v=hDi1sdDlMZ8"
+    youtube: "https://www.youtube.com/watch?v=hDi1sdDlMZ8"
 
 - title: "Learning Representations of Bi-level Knowledge Graphs for Reasoning beyond Link Prediction"
   authors: "C. Chung and J. J. Whang*"
@@ -179,11 +181,11 @@
     link: "https://ojs.aaai.org/index.php/AAAI/article/view/25538"
     paper: "https://ojs.aaai.org/index.php/AAAI/article/view/25538/25310"
     arxiv: "https://arxiv.org/abs/2302.02601"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/bive_bibtex.txt"
-    slides: "https://bdi-lab.kaist.ac.kr/down/bive_aaai2023_slides.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/bive_aaai2023_poster.pdf"
+    bibtex: "assets/txt/bive_bibtex.txt"
+    slides: "assets/pdf/bive_aaai2023_slides.pdf"
+    poster: "assets/pdf/bive_aaai2023_poster.pdf"
     code: "https://github.com/bdi-lab/BiVE"
-    video: "https://www.youtube.com/watch?v=Zer9n7_eNCM"
+    youtube: "https://www.youtube.com/watch?v=Zer9n7_eNCM"
 
 - title: "Dynamic Relation-Attentive Graph Neural Networks for Fraud Detection"
   authors: "H. Kim, J. Choi, and J. J. Whang*"
@@ -193,52 +195,294 @@
     link: "https://ieeexplore.ieee.org/document/10411688"
     paper: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10411688"
     arxiv: "https://arxiv.org/abs/2310.04171"
-    bibtex: "https://bdi-lab.kaist.ac.kr/down/drag_bibtex.txt"
-    poster: "https://bdi-lab.kaist.ac.kr/down/drag_icdmw2023_poster_portrait.pdf"
+    bibtex: "assets/txt/drag_bibtex.txt"
+    poster: "assets/pdf/drag_icdmw2023_poster_portrait.pdf"
     code: "https://github.com/bdi-lab/DRAG"
 
+- title: "Semantic Grasping via a Knowledge Graph of Robotic Manipulation: A Graph Representation Learning Approach"
+  authors: "J. H. Kwak‡, J. Lee‡, J. J. Whang*, and S. Jo*"
+  venue: "IEEE Robotics and Automation Letters"
+  year: "2022"
+  links:
+    link: "https://ieeexplore.ieee.org/document/9830861"
+    paper: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9830861"
+    bibtex: "assets/txt/robokg_bibtex.txt"
+    slides: "assets/pdf/robokg_slides.pdf"
+    demo: "https://www.youtube.com/watch?v=BXOmLaGSHEc"
+    youtube: "https://www.youtube.com/watch?v=nifBo7_NzLc&t"
 
+- title: "HiddenCPG: Large-Scale Vulnerable Clone Detection Using Subgraph Isomorphism of Code Property Graphs"
+  authors: "S. Wi, S. Woo, J. J. Whang, and S. Son*"
+  venue: "The ACM Web Conference"
+  year: "2022"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/3485447.3512235"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/3485447.3512235"
+    bibtex: "assets/txt/WWW2022_bibtex.txt"
+    slides: "assets/pdf/WWW2022_slides.pdf"
+
+- title: "Knowledge Graph Embedding via Metagraph Learning"
+  authors: "C. Chung and J. J. Whang*"
+  venue: "International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR)"
+  year: "2021"
+  links:
+    link: "https://dl.acm.org/doi/abs/10.1145/3404835.3463072"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/3404835.3463072"
+    bibtex: "assets/txt/SIGIR2021_bibtex.txt"
+    slides: "assets/pdf/sigir2021_meta_kge_slides.pdf"
+    poster: "assets/pdf/sigir2021_meta_kge_poster.pdf"
+    code: "https://github.com/bdi-lab/meta_kge"
+    youtube: "https://www.youtube.com/watch?v=fa4KmPdk8xc"
+
+- title: "Image-based Lifelogging: User Emotion Perspective"
+  authors: "J. Bum, H. Choo, and J. J. Whang*"
+  venue: "Computers, Materials & Continua"
+  year: "2021"
+  links:
+    link: "https://www.techscience.com/cmc/v67n2/41353"
+    paper: "https://www.techscience.com/cmc/v67n2/41353/pdf"
+    bibtex: "assets/txt/cmc2021_bibtex.txt"
+
+- title: "Sentiment-based Sub-event Segmentation and Key Photo Selection"
+  authors: "J. Bum, J. J. Whang*, and H. Choo*"
+  venue: "Journal of Visual Communication and Image Representation"
+  year: "2021"
+  links:
+    link: "https://www.sciencedirect.com/science/article/pii/S1047320320301954"
+    paper: "https://www.sciencedirect.com/science/article/pii/S1047320320301954/pdfft?md5=f37a744871745fc07552e4598304262b&pid=1-s2.0-S1047320320301954-main.pdf"
+    bibtex: "assets/txt/jvci2021_bibtex.txt"
+
+- title: "MEGA: Multi-View Semi-Supervised Clustering of Hypergraphs"
+  authors: "J. J. Whang, R. Du, S. Jung, G. Lee, B. Drake, Q. Liu, S. Kang, and H. Park"
+  venue: "International Conference on Very Large Data Bases (VLDB)"
+  year: "2020"
+  links:
+    link: "https://dl.acm.org/doi/10.14778/3377369.3377378"
+    paper: "https://dl.acm.org/doi/pdf/10.14778/3377369.3377378"
+    bibtex: "assets/txt/pvldb2020.txt"
+    slides: "assets/pdf/vldb2020_slides.pdf"
+    code: "assets/down/pvldb2020_mega.html"
+    video: "https://www.youtube.com/watch?v=eTfTVDPYnyc"
+
+- title: "Sparse Probabilistic K-means"
+  authors: "Y. M. Jung, J. J. Whang, and S. Yun*"
+  venue: "Applied Mathematics and Computation"
+  year: "2020"
+  links:
+    link: "https://www.sciencedirect.com/science/article/pii/S0096300320302940"
+    paper: "https://www.sciencedirect.com/science/article/pii/S0096300320302940/pdfft?md5=d66236d6d81a86750ca5b0589e0d3348&pid=1-s2.0-S0096300320302940-main.pdf"
+    bibtex: "assets/txt/amc2020_bibtex.txt"
+
+- title: "Scalable Anti-TrustRank with Qualified Site-level Seeds for Link-based Web Spam Detection"
+  authors: "J. J. Whang*, Y. Jung, S. Kang, D. Yoo, and I. S. Dhillon"
+  venue: "Workshop on CyberSafety: Computational Methods in Online Misbehavior at the Web Conference"
+  year: "2020"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/3366424.3385773"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/3366424.3385773"
+    bibtex: "assets/txt/atr_bibtex.txt"
+    slides: "assets/pdf/atr_slides_cyber_safety_2020.pdf"
+    code: "assets/down/ATR_2020.zip"
+
+- title: "Hyperlink Classification via Structured Graph Embedding"
+  authors: "G. Lee, S. Kang, and J. J. Whang*"
+  venue: "International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR)"
+  year: "2019"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/3331184.3331325"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/3331184.3331325"
+    bibtex: "assets/txt/SIGIR2019_bibtex.txt"
+    slides: "assets/pdf/hyperlink_class_slides.pdf"
+    poster: "assets/pdf/SIGIR2019_poster.pdf"
+    code: "assets/down/SIGIR2019_page.html"
+
+- title: "Non-exhaustive, Overlapping Clustering"
+  authors: "J. J. Whang*‡, Y. Hou‡, D. F. Gleich, and I. S. Dhillon"
+  venue: "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)"
+  year: "2019"
+  links:
+    link: "https://ieeexplore.ieee.org/document/8425790/"
+    paper: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8425790"
+    bibtex: "assets/txt/tpami2019.txt"
+    slides: "assets/pdf/neo_kmeans_slides.pdf"
+    code: "assets/down/neo.htm"
+
+- title: "SmartGrip: Grip Sensing System for Commodity Mobile Devices through Sound Signals"
+  authors: "N. Kim, J. Lee, J. J. Whang, and J. Lee*"
+  venue: "Personal and Ubiquitous Computing"
+  year: "2019"
+  links:
+    link: "https://link.springer.com/article/10.1007/s00779-019-01337-7"
+    paper: "https://link.springer.com/content/pdf/10.1007/s00779-019-01337-7.pdf"
+    bibtex: "assets/txt/pauc2019_bibtex.txt"
+
+- title: "Fast Asynchronous Anti-TrustRank for Web Spam Detection"
+  authors: "J. J. Whang*, Y. S. Jeong, I. S. Dhillon, S. Kang, and J. Lee"
+  venue: "Workshop on MIS2: Misinformation and Misbehavior Mining on the Web at ACM International Conference on Web Search and Data Mining (WSDM)"
+  year: "2018"
+  links:
+    paper: "http://snap.stanford.edu/mis2/files/MIS2_paper_24.pdf"
+    bibtex: "assets/txt/mis2_2018_bibtex.txt"
+    poster: "assets/pdf/atr_wsdm18_poster.pdf"
+
+- title: "Non-Exhaustive, Overlapping Co-Clustering"
+  authors: "J. J. Whang* and I. S. Dhillon"
+  venue: "ACM Conference on Information and Knowledge Management (CIKM)"
+  year: "2017"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/3132847.3133078"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/3132847.3133078"
+    arxiv: "https://arxiv.org/abs/2004.11530"
+    poster: "assets/pdf/CIKM2017_neocc_poster.pdf"
+    bibtex: "assets/txt/cikm2017a.txt"
+    code: "assets/down/neocc.zip"
+
+- title: "An Empirical Study of Community Overlap: Ground-truth, Algorithmic Solutions, and Implications"
+  authors: "J. J. Whang*"
+  venue: "ACM Conference on Information and Knowledge Management (CIKM)"
+  year: "2017"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/3132847.3133133"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/3132847.3133133"
+    bibtex: "assets/txt/cikm2017b.txt"
+    poster: "assets/pdf/CIKM2017_ovlap_poster.pdf"
+
+- title: "Fast Multiplier Methods to Optimize Non-exhaustive, Overlapping Clustering"
+  authors: "Y. Hou, J. J. Whang, D. F. Gleich, and I. S. Dhillon"
+  venue: "SIAM International Conference on Data Mining (SDM)"
+  year: "2016"
+  links:
+    link: "https://epubs.siam.org/doi/abs/10.1137/1.9781611974348.34"
+    paper: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611974348.34"
+    bibtex: "assets/txt/sdm2016.txt"
+
+- title: "Overlapping Community Detection Using Neighborhood-Inflated Seed Expansion"
+  authors: "J. J. Whang*, D. F. Gleich, and I. S. Dhillon"
+  venue: "IEEE Transactions on Knowledge and Data Engineering (TKDE)"
+  year: "2016"
+  links:
+    link: "https://ieeexplore.ieee.org/document/7384503/"
+    paper: "https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7384503&casa_token=YBe_qKpuuOsAAAAA:g6LMrapUrQVufwgfbHDVl6_Fg4EGycKbojoXOjvBxLBY3nDoAXREAgAKs7mrRyV0HyRwMfKe&tag=1"
+    bibtex: "assets/txt/tkde2016.txt"
+    code: "assets/down/nise.htm"
+
+- title: "Non-exhaustive, Overlapping Clustering via Low-Rank Semidefinite Programming"
+  authors: "Y. Hou‡, J. J. Whang‡, D. F. Gleich, and I. S. Dhillon"
+  venue: "ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD)"
+  year: "2015"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/2783258.2783398"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/2783258.2783398"
+    bibtex: "assets/txt/kdd2015.txt"
+    slides: "assets/pdf/KDD2015_joyce_lrsdp.pdf"
+    poster: "assets/pdf/KDD2015_poster_lrsdp.pdf"
+
+- title: "Scalable Data-driven PageRank: Algorithms, System Issues, and Lessons Learned"
+  authors: "J. J. Whang, A. Lenharth, I. S. Dhillon, and K. Pingali"
+  venue: "International European Conference on Parallel and Distributed Computing (Euro-Par)"
+  year: "2015"
+  links:
+    link: "https://link.springer.com/chapter/10.1007/978-3-662-48096-0_34"
+    paper: "https://link.springer.com/content/pdf/10.1007/978-3-662-48096-0_34.pdf"
+    bibtex: "assets/txt/europar2015.txt"
+
+- title: "Non-exhaustive, Overlapping k-means"
+  authors: "J. J. Whang, I. S. Dhillon, and D. F. Gleich"
+  venue: "SIAM International Conference on Data Mining (SDM)"
+  year: "2015"
+  links:
+    link: "https://epubs.siam.org/doi/abs/10.1137/1.9781611974010.105"
+    paper: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611974010.105"
+    bibtex: "assets/txt/sdm2015.txt"
+    poster: "assets/pdf/SDM2015_joyce_neo_kmeans.pdf"
+    code: "assets/down/neo.htm"
+
+- title: "Stochastic Blockmodel with Cluster Overlap, Relevance Selection, and Similarity-Based Smoothing"
+  authors: "J. J. Whang, P. Rai, and I. S. Dhillon"
+  venue: "IEEE International Conference on Data Mining (ICDM)"
+  year: "2013"
+  links:
+    link: "https://ieeexplore.ieee.org/document/6729566"
+    paper: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6729566"
+    bibtex: "assets/txt/icdm2013.txt"
+    slides: "assets/pdf/ICDM2013_joyce_stochastic.pdf"
+
+- title: "Overlapping Community Detection Using Seed Set Expansion"
+  authors: "J. J. Whang, D. F. Gleich, and I. S. Dhillon"
+  venue: "ACM Conference on Information and Knowledge Management (CIKM)"
+  year: "2013"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/2505515.2505535"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/2505515.2505535"
+    bibtex: "assets/txt/cikm2013.txt"
+    slides: "assets/pdf/CIKM2013_joyce_overlapping.pdf"
+    code: "assets/down/nise.htm"
+
+- title: "Scalable and Memory-Efficient Clustering of Large-Scale Social Networks"
+  authors: "J. J. Whang, X. Sui, and I. S. Dhillon"
+  venue: "IEEE International Conference on Data Mining (ICDM)"
+  year: "2012"
+  links:
+    link: "https://ieeexplore.ieee.org/document/6413858"
+    paper: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6413858"
+    bibtex: "assets/txt/icdm2012.txt"
+    slides: "assets/pdf/ICDM2012_joyce_gem.pdf"
+
+- title: "Scalable Clustering of Signed Networks using Balance Normalized Cut"
+  authors: "K. Chiang, J. J. Whang, and I. S. Dhillon"
+  venue: "ACM Conference on Information and Knowledge Management (CIKM)"
+  year: "2012"
+  links:
+    link: "https://dl.acm.org/doi/10.1145/2396761.2396841"
+    paper: "https://dl.acm.org/doi/pdf/10.1145/2396761.2396841"
+    bibtex: "assets/txt/cikm2012.txt"
+    slides: "assets/pdf/CIKM2012_joyce_sign.pdf"
+
+- title: "Parallel Clustered Low-rank Approximation of Graphs and Its Application to Link Prediction"
+  authors: "X. Sui, T. Lee, J. J. Whang, B. Savas, S. Jain, K. Pingali, and I. S. Dhillon"
+  venue: "International Workshop on Languages and Compilers for Parallel Computing (LCPC)"
+  year: "2012"
+  links:
+    link: "https://link.springer.com/chapter/10.1007/978-3-642-37658-0_6"
+    paper: "https://link.springer.com/content/pdf/10.1007/978-3-642-37658-0_6.pdf"
+    bibtex: "assets/txt/lcpc2012.txt"
+    slides: "assets/down/LCPC2012_ppt.pptx"
+
+# ==================================================================================
 # Domestic Publications ------------------------------------------------------------
-- title: "Root Cause Analysis for Microservice Systems Using Anomaly Propagation by Resource Sharing (자원 공유에 따른 이상치 전파를 활용한 마이크로서비스 시스템 결함의 근본 원인 분석)"
+# ==================================================================================
+- title: "Root Cause Analysis for Microservice Systems Using Anomaly Propagation by Resource Sharing자원 공유에 따른 이상치 전파를 활용한 마이크로서비스 시스템 결함의 근본 원인 분석[paper]"
   authors: "박준호, 황지영"
-  venue: "정보과학회논문지 (Journal of KIISE)"
+  venue: "정보과학회논문지 (Journal of KIISE), 2025년 4월"
   year: "2025"
   type: "domestic"
   links:
-    link: "https://bdi-lab.kaist.ac.kr/down/domestic_kiise2025.pdf"
+    paper: "assets/pdf/domestic_kiise2025.pdf"
 
-- title: "Knowledge Graph Embedding with Entity Type Constraints (개체 유형 정보를 활용한 지식 그래프 임베딩)"
+- title: "Knowledge Graph Embedding with Entity Type Constraints개체 유형 정보를 활용한 지식 그래프 임베딩[paper][code]"
   authors: "공승환, 정찬영, 주수헌, 황지영"
-  venue: "정보과학회논문지 (Journal of KIISE)"
+  venue: "정보과학회논문지 (Journal of KIISE), 2022년 9월"
   year: "2022"
   type: "domestic"
   links:
-    link: "https://bdi-lab.kaist.ac.kr/down/domestic_kiise2022.pdf"
+    paper: "assets/pdf/domestic_kiise2022.pdf"
     code: "https://github.com/bdi-lab/TransE_type"
 
-- title: "Knowledge Graph Embedding with Dynamic Attention (동적 어텐션을 이용한 지식그래프 임베딩)"
+- title: "Knowledge Graph Embedding with Dynamic Attention동적 어텐션을 이용한 지식그래프 임베딩[paper][poster]"
   authors: "황민성, 황지영"
-  venue: "한국컴퓨터종합학술대회 논문집"
+  venue: "한국컴퓨터종합학술대회 논문집, 2022년 6월"
   year: "2022"
   type: "domestic"
   links:
-    link: "https://bdi-lab.kaist.ac.kr/down/domestic_kcc2022.pdf"
-    poster: "https://bdi-lab.kaist.ac.kr/down/domestic_kcc2022_poster.pdf"
+    paper: "assets/pdf/domestic_kcc2022.pdf"
+    poster: "assets/pdf/domestic_kcc2022_poster.pdf"
 
-# Patents ------------------------------------------------------------
-# Example patent entry (uncomment and edit to add patents):
-# - title: "Patent Title"
-#   authors: "Inventor1, Inventor2"
-#   venue: "Patent Number: US-XXXX-XXXXXXX"
-#   year: "2024"
-#   type: "patent"
-#   links:
-#     link: "https://patents.google.com/patent/..."
-
-# Example patent entry (uncomment and edit to add patents):
+# ==================================================================================
+# Patents --------------------------------------------------------------------------
+# ==================================================================================
 - title: "복층 지식 그래프 임베딩 방법 및 그 시스템"
   authors: "황지영, 정찬영"
-  venue: "등록번호: 1028343440000"
+  venue: "등록번호: 10-2834344-0000"
   year: "2025"
   type: "patent"
   links:

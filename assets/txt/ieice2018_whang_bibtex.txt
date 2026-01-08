@@ -1,0 +1,9 @@
+@ARTICLE{whang-ieice2018, 
+ author={J. J. Whang and Y. Shin}, 
+ journal={IEICE Transactions on Information and Systems},
+ title={Localized Ranking in Social and Information Networks}, 
+ year={2018}, 
+ volume={E101-D},
+ number={2},
+ pages={547--551}
+}

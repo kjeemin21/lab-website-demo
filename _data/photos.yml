@@ -4,13 +4,14 @@
 # Format:
 # - image: "/assets/images/photos/photo1.jpg"
 #   caption: "Photo caption"
-
+#   date: "YYYY-MM-DD"
 # - image: "/assets/images/photos/photo1.jpg"
 #   caption: "Lab meeting"
-# 
+#   date: "YYYY-MM-DD"
 # - image: "/assets/images/photos/photo2.jpg"
 #   caption: "Research presentation"
-
+#   date: "YYYY-MM-DD"
+# ==================================================================================
 - image: "/assets/images/photos/photo1.jpg"
   caption: "Photo caption"
   date: "2025-01-15"

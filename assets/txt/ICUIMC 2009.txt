@@ -1,0 +1,8 @@
+@inproceedings{jang2009statistical,
+  title={A statistical analysis of relation degree of compound pair on online biological pathway databases},
+  author={Jang, Myungha and Rhie, Arang and Whang, Jiyoung and Yang, Sanduk and Park, Hyun S},
+  booktitle={Proceedings of the 3rd International Conference on Ubiquitous Information Management and Communication},
+  pages={644--649},
+  year={2009},
+  organization={ACM}
+}

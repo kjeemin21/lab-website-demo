@@ -1,0 +1,7 @@
+@inproceedings{indth,
+  author={Hwang, Minsung and Lee, Jaejun and Whang, Joyce Jiyoung},
+  title={Stability and Generalization Capability of Subgraph Reasoning Models for Inductive Knowledge Graph Completion},
+  booktitle={Proceedings of the 42nd International Conference on Machine Learning},
+  year={2025},
+  pages={26376--26411},
+}

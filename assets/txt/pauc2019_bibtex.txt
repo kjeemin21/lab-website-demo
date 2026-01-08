@@ -1,0 +1,7 @@
+@article{kim-pauc2019,
+	author={Namhyun Kim and Junseong Lee and Joyce Jiyoung Whang and Jinkyu Lee},
+	title={{SmartGrip}: Grip Sensing System for Commodity Mobile Devices through Sound Signals},
+	journal={Personal and Ubiquitous Computing},
+	year={2019},
+	doi={10.1007/s00779-019-01337-7}
+}

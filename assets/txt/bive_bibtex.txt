@@ -1,0 +1,8 @@
+@inproceedings{bive,
+	author={Chanyoung Chung and Joyce Jiyoung Whang},
+	title={Learning Representations of Bi-level Knowledge Graphs for Reasoning beyond Link Prediction},
+	booktitle={Proceedings of the 37th AAAI Conference on Artificial Intelligence},
+	year={2023},
+	pages={4208--4216},
+	doi={10.1609/aaai.v37i4.25538}
+}

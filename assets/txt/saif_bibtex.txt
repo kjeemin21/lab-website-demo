@@ -1,0 +1,7 @@
+@article{saif,
+  author={Lee, Kyeongryul and Kim, Heehyeon and Whang, Joyce Jiyoung},
+  title={{SAIF}: A Comprehensive Framework for Evaluating the Risks of Generative {AI} in the Public Sector},
+  year={2025},
+  journal={arXiv preprint arXiv.2501.08814},
+  doi = {10.48550/arXiv.2501.08814}
+}

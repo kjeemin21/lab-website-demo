@@ -370,7 +370,7 @@ title: Home
                     {% assign has_international = false %}
                     {% for pub in all_pubs %}
                         {% assign pub_type = pub.type | default: "international" %}
-                        {% if pub_type != "domestic" %}
+                        {% if pub_type != "domestic" and pub_type != "patent" %}
                             {% assign has_international = true %}
                         {% endif %}
                     {% endfor %}
@@ -385,7 +385,7 @@ title: Home
                         {% assign int_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
-                        {% if pub_type != "domestic" %}
+                        {% if pub_type != "domestic" and pub_type != "patent" %}
                         {% assign int_count = int_count | plus: 1 %}
                         <div class="publication-item {% if int_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
