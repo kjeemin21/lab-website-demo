@@ -1,0 +1,109 @@
+<!-- 색상 팔레트 플로팅 버튼 -->
+<button class="color-palette-toggle" aria-label="색상 설정">
+    🎨
+</button>
+
+<!-- 색상 팔레트 오버레이 -->
+<div class="color-palette-overlay"></div>
+
+<!-- 색상 설정 패널 -->
+<div class="color-palette-panel">
+    <div class="color-palette-header">
+        <h3>색상 설정</h3>
+        <button class="color-palette-close" aria-label="닫기">×</button>
+    </div>
+    <div class="color-palette-body">
+        <!-- Primary Color -->
+        <div class="color-control">
+            <label>Primary Color (기본색)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--primary-color" value="#2c3e50">
+                <input type="text" class="color-hex-input" data-var="--primary-color" value="#2c3e50" maxlength="7">
+            </div>
+            <div class="color-control-description">헤더, 제목 등 주요 요소</div>
+        </div>
+
+        <!-- Secondary Color -->
+        <div class="color-control">
+            <label>Secondary Color (보조색)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--secondary-color" value="#3498db">
+                <input type="text" class="color-hex-input" data-var="--secondary-color" value="#3498db" maxlength="7">
+            </div>
+            <div class="color-control-description">링크, 버튼 등 상호작용 요소</div>
+        </div>
+
+        <!-- Accent Color -->
+        <div class="color-control">
+            <label>Accent Color (강조색)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--accent-color" value="#e74c3c">
+                <input type="text" class="color-hex-input" data-var="--accent-color" value="#e74c3c" maxlength="7">
+            </div>
+            <div class="color-control-description">강조 버튼, 중요 알림</div>
+        </div>
+
+        <!-- Text Color -->
+        <div class="color-control">
+            <label>Text Color (텍스트 색상)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--text-color" value="#333333">
+                <input type="text" class="color-hex-input" data-var="--text-color" value="#333333" maxlength="7">
+            </div>
+            <div class="color-control-description">본문 텍스트</div>
+        </div>
+
+        <!-- Background Color -->
+        <div class="color-control">
+            <label>Background Color (배경색)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--bg-color" value="#ffffff">
+                <input type="text" class="color-hex-input" data-var="--bg-color" value="#ffffff" maxlength="7">
+            </div>
+            <div class="color-control-description">페이지 전체 배경</div>
+        </div>
+
+        <!-- Section Background -->
+        <div class="color-control">
+            <label>Section Background (섹션 배경)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--section-bg" value="#f8f9fa">
+                <input type="text" class="color-hex-input" data-var="--section-bg" value="#f8f9fa" maxlength="7">
+            </div>
+            <div class="color-control-description">카드, 섹션 배경</div>
+        </div>
+
+        <!-- Border Color -->
+        <div class="color-control">
+            <label>Border Color (테두리 색상)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--border-color" value="#e0e0e0">
+                <input type="text" class="color-hex-input" data-var="--border-color" value="#e0e0e0" maxlength="7">
+            </div>
+            <div class="color-control-description">테두리, 구분선</div>
+        </div>
+
+        <!-- Header Background -->
+        <div class="color-control">
+            <label>Header Background (헤더 배경)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--header-bg" value="#f5f7fa">
+                <input type="text" class="color-hex-input" data-var="--header-bg" value="#f5f7fa" maxlength="7">
+            </div>
+            <div class="color-control-description">상단 헤더 배경</div>
+        </div>
+
+        <!-- Card Background -->
+        <div class="color-control">
+            <label>Card Background (카드 배경)</label>
+            <div class="color-control-input-wrapper">
+                <input type="color" data-var="--card-bg" value="#ffffff">
+                <input type="text" class="color-hex-input" data-var="--card-bg" value="#ffffff" maxlength="7">
+            </div>
+            <div class="color-control-description">카드, 컨테이너 배경</div>
+        </div>
+    </div>
+    <div class="color-palette-footer">
+        <button class="color-reset-btn">초기화 🔄</button>
+    </div>
+</div>
