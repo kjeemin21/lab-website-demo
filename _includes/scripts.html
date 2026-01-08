@@ -1,0 +1,1032 @@
+<script>
+    // Disable browser's automatic scroll restoration
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    
+    // Force scroll to top immediately on script execution
+    window.scrollTo(0, 0);
+    
+    // Menu toggle functionality
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuClose = document.querySelector('.menu-close');
+    const sideMenu = document.querySelector('.side-menu');
+    const sideMenuOverlay = document.querySelector('.side-menu-overlay');
+
+    function openSideMenu() {
+        sideMenu.classList.add('active');
+        sideMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSideMenu() {
+        sideMenu.classList.remove('active');
+        sideMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', openSideMenu);
+    }
+
+    if (menuClose) {
+        menuClose.addEventListener('click', closeSideMenu);
+    }
+
+    if (sideMenuOverlay) {
+        sideMenuOverlay.addEventListener('click', closeSideMenu);
+    }
+
+    // Tab switching functionality
+    function switchTab(tabId) {
+        // Remove active class from all tab buttons
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Remove active class from all side menu tabs
+        document.querySelectorAll('.side-menu-tab').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Hide all tab panels
+        document.querySelectorAll('.tab-panel').forEach(panel => {
+            panel.classList.remove('active');
+        });
+        
+        // Show selected tab panel
+        const targetPanel = document.querySelector(`#${tabId}.tab-panel`);
+        if (targetPanel) {
+            targetPanel.classList.add('active');
+        }
+        
+        // Activate corresponding tab button
+        const targetTabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+        if (targetTabButton) {
+            targetTabButton.classList.add('active');
+        }
+        
+        // Activate corresponding side menu tab
+        const targetSideMenuTab = document.querySelector(`.side-menu-tab[data-tab="${tabId}"]`);
+        if (targetSideMenuTab) {
+            targetSideMenuTab.classList.add('active');
+        }
+        
+        // Update URL hash
+        if (history.pushState) {
+            history.pushState(null, null, `#${tabId}`);
+        } else {
+            window.location.hash = `#${tabId}`;
+        }
+        
+        // Scroll to top of main content
+        window.scrollTo(0, 0);
+        
+        // For About tab, ensure scroll stays at top
+        if (tabId === 'about') {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 50);
+        }
+        
+        // Initialize publications menu if publications tab is active
+        if (tabId === 'publications') {
+            setTimeout(function() {
+                initPublicationsMenuWithClose();
+                initPublicationsShowMore();
+            }, 100);
+        }
+        
+        // Initialize members menu if members tab is active
+        if (tabId === 'members') {
+            setTimeout(initMembersMenuWithClose, 100);
+        }
+        
+        // Initialize photo items if photos tab is active
+        if (tabId === 'photos') {
+            setTimeout(function() {
+                if (typeof initBalancedPhotoGrid === 'function') {
+                    initBalancedPhotoGrid();
+                }
+            }, 100);
+        }
+        
+        // Initialize about animations if about tab is active
+        if (tabId === 'about') {
+            setTimeout(initAboutAnimations, 100);
+        }
+    }
+
+    // Tab button click handlers
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId);
+        });
+    });
+
+    // Side menu tab click handlers
+    document.querySelectorAll('.side-menu-tab').forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId);
+            closeSideMenu();
+        });
+    });
+
+    // Handle initial hash on page load
+    function handleInitialHash() {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            const targetPanel = document.querySelector(`#${hash}.tab-panel`);
+            if (targetPanel) {
+                switchTab(hash);
+                return;
+            }
+        }
+        // Default to first tab if no valid hash
+        switchTab('about');
+        // Ensure scroll is at top for About tab
+        window.scrollTo(0, 0);
+    }
+
+    // Initialize on page load
+    handleInitialHash();
+    
+    // Also ensure scroll is at top after page fully loads
+    window.addEventListener('load', function() {
+        const hash = window.location.hash.substring(1);
+        if (!hash || hash === 'about') {
+            window.scrollTo(0, 0);
+        }
+    });
+
+    // Handle window resize to maintain scroll position at top for About tab
+    let resizeTimeout;
+    let lastScrollY = window.scrollY;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            const hash = window.location.hash.substring(1);
+            const activeTab = document.querySelector('.tab-panel.active');
+            if ((!hash || hash === 'about') && activeTab && activeTab.id === 'about') {
+                // If user was at or near the top before resize, keep them at top
+                // This prevents layout shifts from moving scroll position
+                if (lastScrollY < 50) {
+                    window.scrollTo(0, 0);
+                }
+            }
+            lastScrollY = window.scrollY;
+        }, 150);
+    });
+    
+    // Track scroll position to detect if user intentionally scrolled
+    window.addEventListener('scroll', function() {
+        lastScrollY = window.scrollY;
+    });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function() {
+        handleInitialHash();
+    });
+
+    // Scroll blocking state
+    let isScrolling = false;
+    let scrollBlockTimeout = null;
+    
+    // Block user scroll during animation
+    function blockUserScroll(event) {
+        if (isScrolling) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    }
+    
+    function enableScrollBlock() {
+        if (isScrolling) return;
+        
+        isScrolling = true;
+        document.body.style.pointerEvents = 'none';
+        
+        // Block wheel events
+        window.addEventListener('wheel', blockUserScroll, { passive: false, capture: true });
+        window.addEventListener('touchmove', blockUserScroll, { passive: false, capture: true });
+        
+        // Block keyboard scroll
+        window.addEventListener('keydown', blockUserScroll, { passive: false, capture: true });
+    }
+    
+    function disableScrollBlock() {
+        isScrolling = false;
+        document.body.style.pointerEvents = '';
+        
+        // Unblock events
+        window.removeEventListener('wheel', blockUserScroll, { capture: true });
+        window.removeEventListener('touchmove', blockUserScroll, { capture: true });
+        window.removeEventListener('keydown', blockUserScroll, { capture: true });
+    }
+    
+    // Publications scroll functionality
+    function scrollToPublicationSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            enableScrollBlock();
+            
+            const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+            const offsetTop = targetSection.offsetTop - headerHeight - 20;
+            const startPosition = window.scrollY;
+            const distance = offsetTop - startPosition;
+            const duration = 400; // 400ms for smooth and fast animation
+            let startTime = null;
+            
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                // Easing function (ease-in-out)
+                const ease = progress < 0.5 
+                    ? 2 * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                
+                window.scrollTo(0, startPosition + distance * ease);
+                
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                } else {
+                    // Animation complete
+                    clearTimeout(scrollBlockTimeout);
+                    scrollBlockTimeout = setTimeout(disableScrollBlock, 50);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        }
+    }
+
+    // Publications menu toggle functionality (for mobile)
+    const publicationsMenuToggle = document.querySelector('.publications-menu-toggle');
+    const publicationsMenuClose = document.querySelector('.publications-menu-close');
+    const publicationsSideMenu = document.querySelector('.publications-side-menu');
+    const publicationsMenuOverlay = document.querySelector('.publications-menu-overlay');
+
+    function openPublicationsMenu() {
+        if (publicationsSideMenu) {
+            publicationsSideMenu.classList.add('active');
+        }
+        if (publicationsMenuOverlay) {
+            publicationsMenuOverlay.classList.add('active');
+        }
+        if (document.body) {
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closePublicationsMenu() {
+        if (publicationsSideMenu) {
+            publicationsSideMenu.classList.remove('active');
+        }
+        if (publicationsMenuOverlay) {
+            publicationsMenuOverlay.classList.remove('active');
+        }
+        if (document.body) {
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (publicationsMenuToggle) {
+        publicationsMenuToggle.addEventListener('click', openPublicationsMenu);
+    }
+
+    if (publicationsMenuClose) {
+        publicationsMenuClose.addEventListener('click', closePublicationsMenu);
+    }
+
+    if (publicationsMenuOverlay) {
+        publicationsMenuOverlay.addEventListener('click', closePublicationsMenu);
+    }
+
+    // Scroll to section when clicking on a menu button
+    function initPublicationsMenuWithClose() {
+        const menuButtons = document.querySelectorAll('.publication-menu-btn');
+
+        menuButtons.forEach(button => {
+            if (!button.hasAttribute('data-initialized')) {
+                button.setAttribute('data-initialized', 'true');
+                button.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-scroll');
+                    if (sectionId) {
+                        scrollToPublicationSection(sectionId);
+                        
+                        // Update active button
+                        menuButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close menu on mobile after selection
+                        if (window.innerWidth <= 620) {
+                            closePublicationsMenu();
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Update active button based on scroll position
+        function updateActivePublicationButton() {
+            const sections = ['publications-international', 'publications-domestic', 'publications-patents'];
+            const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+            const scrollPosition = window.scrollY + headerHeight + 50;
+            
+            let activeSection = null;
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section && scrollPosition >= section.offsetTop) {
+                    activeSection = sectionId;
+                }
+            });
+            
+            if (activeSection) {
+                menuButtons.forEach(btn => {
+                    if (btn.getAttribute('data-scroll') === activeSection) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        // Update on scroll
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(updateActivePublicationButton, 100);
+        });
+        
+        // Initial update
+        updateActivePublicationButton();
+    }
+
+    // Publications Show More functionality
+    function initPublicationsShowMore() {
+        const containers = document.querySelectorAll('.publications-show-more-container');
+        
+        containers.forEach(container => {
+            const showMoreBtn = container.querySelector('.publications-show-more-btn');
+            const showLessBtn = container.querySelector('.publications-show-less-btn');
+            
+            if (!showMoreBtn || !showLessBtn) return;
+            if (showMoreBtn.hasAttribute('data-initialized')) return;
+            
+            showMoreBtn.setAttribute('data-initialized', 'true');
+            showLessBtn.setAttribute('data-initialized', 'true');
+            
+            const sectionId = showMoreBtn.getAttribute('data-section');
+            const initialLimit = parseInt(showMoreBtn.getAttribute('data-limit')) || 10;
+            const section = document.getElementById(sectionId);
+            
+            if (!section) return;
+            
+            const allItems = section.querySelectorAll('.publication-item');
+            const totalItems = allItems.length;
+            let currentVisible = initialLimit;
+            
+            // Show More button handler
+            showMoreBtn.addEventListener('click', function() {
+                currentVisible = Math.min(currentVisible + 10, totalItems);
+                
+                allItems.forEach((item, index) => {
+                    if (index < currentVisible) {
+                        item.classList.remove('publication-item-hidden');
+                    }
+                });
+                
+                // Update button visibility
+                if (currentVisible >= totalItems) {
+                    showMoreBtn.style.display = 'none';
+                }
+                if (currentVisible > initialLimit) {
+                    showLessBtn.style.display = 'inline-flex';
+                }
+            });
+            
+            // Show Less button handler
+            showLessBtn.addEventListener('click', function() {
+                currentVisible = Math.max(currentVisible - 10, initialLimit);
+                
+                allItems.forEach((item, index) => {
+                    if (index >= currentVisible) {
+                        item.classList.add('publication-item-hidden');
+                    }
+                });
+                
+                // Update button visibility
+                if (currentVisible < totalItems) {
+                    showMoreBtn.style.display = 'inline-flex';
+                }
+                if (currentVisible <= initialLimit) {
+                    showLessBtn.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Members scroll functionality
+    function scrollToMemberSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            enableScrollBlock();
+            
+            const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+            const offsetTop = targetSection.offsetTop - headerHeight - 20;
+            const startPosition = window.scrollY;
+            const distance = offsetTop - startPosition;
+            const duration = 400; // 400ms for smooth and fast animation
+            let startTime = null;
+            
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                // Easing function (ease-in-out)
+                const ease = progress < 0.5 
+                    ? 2 * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                
+                window.scrollTo(0, startPosition + distance * ease);
+                
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                } else {
+                    // Animation complete
+                    clearTimeout(scrollBlockTimeout);
+                    scrollBlockTimeout = setTimeout(disableScrollBlock, 50);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        }
+    }
+
+    // Members menu toggle functionality (for mobile)
+    const membersMenuToggle = document.querySelector('.members-menu-toggle');
+    const membersMenuClose = document.querySelector('.members-menu-close');
+    const membersSideMenu = document.querySelector('.members-side-menu');
+    const membersMenuOverlay = document.querySelector('.members-menu-overlay');
+
+    function openMembersMenu() {
+        if (membersSideMenu) {
+            membersSideMenu.classList.add('active');
+        }
+        if (membersMenuOverlay) {
+            membersMenuOverlay.classList.add('active');
+        }
+        if (document.body) {
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeMembersMenu() {
+        if (membersSideMenu) {
+            membersSideMenu.classList.remove('active');
+        }
+        if (membersMenuOverlay) {
+            membersMenuOverlay.classList.remove('active');
+        }
+        if (document.body) {
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (membersMenuToggle) {
+        membersMenuToggle.addEventListener('click', openMembersMenu);
+    }
+
+    if (membersMenuClose) {
+        membersMenuClose.addEventListener('click', closeMembersMenu);
+    }
+
+    if (membersMenuOverlay) {
+        membersMenuOverlay.addEventListener('click', closeMembersMenu);
+    }
+
+    // Scroll to section when clicking on a menu button
+    function initMembersMenuWithClose() {
+        const menuButtons = document.querySelectorAll('.member-menu-btn');
+
+        menuButtons.forEach(button => {
+            if (!button.hasAttribute('data-initialized')) {
+                button.setAttribute('data-initialized', 'true');
+                button.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-scroll');
+                    if (sectionId) {
+                        scrollToMemberSection(sectionId);
+                        
+                        // Update active button
+                        menuButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close menu on mobile after selection
+                        if (window.innerWidth <= 620) {
+                            closeMembersMenu();
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Update active button based on scroll position
+        function updateActiveMemberButton() {
+            const sections = ['members-phd', 'members-ms', 'members-alumni'];
+            const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
+            const scrollPosition = window.scrollY + headerHeight + 50;
+            
+            let activeSection = null;
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section && scrollPosition >= section.offsetTop) {
+                    activeSection = sectionId;
+                }
+            });
+            
+            if (activeSection) {
+                menuButtons.forEach(btn => {
+                    if (btn.getAttribute('data-scroll') === activeSection) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        // Update on scroll
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(updateActiveMemberButton, 100);
+        });
+        
+        // Initial update
+        updateActiveMemberButton();
+    }
+
+    // About section scroll-based animations
+    function initAboutAnimations() {
+        // Force scroll to top when initializing About animations
+        window.scrollTo(0, 0);
+        
+        // Initialize research tag interactions
+        initAboutResearchTags();
+    }
+    
+    // Research tag click handler
+    function initAboutResearchTags() {
+        const tags = document.querySelectorAll('.research-tag');
+        const detailPanel = document.querySelector('.research-detail-panel');
+        
+        if (!tags.length || !detailPanel) return;
+        
+        const detailTitle = detailPanel.querySelector('.detail-title');
+        const detailContent = detailPanel.querySelector('.detail-content');
+        
+        tags.forEach(tag => {
+            // Remove any existing listeners by cloning
+            const newTag = tag.cloneNode(true);
+            tag.parentNode.replaceChild(newTag, tag);
+        });
+        
+        // Re-select tags after cloning
+        const freshTags = document.querySelectorAll('.research-tag');
+        
+        freshTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                const isSelected = this.classList.contains('selected');
+                const isActive = detailPanel.classList.contains('active');
+                
+                if (isSelected) {
+                    // Same tag clicked again - fade out and close panel
+                    freshTags.forEach(t => t.classList.remove('selected'));
+                    detailPanel.classList.remove('active');
+                } else {
+                    // Different tag selected
+                    const tagName = this.textContent;
+                    const description = this.getAttribute('data-description');
+                    
+                    if (isActive) {
+                        // Panel is already open - fade out, change content, fade in
+                        detailPanel.classList.remove('active');
+                        
+                        setTimeout(() => {
+                            freshTags.forEach(t => t.classList.remove('selected'));
+                            this.classList.add('selected');
+                            
+                            if (detailTitle && detailContent) {
+                                detailTitle.textContent = tagName;
+                                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                            }
+                            
+                            detailPanel.classList.add('active');
+                        }, 300); // Match CSS transition duration
+                    } else {
+                        // Panel is closed - just fade in
+                        freshTags.forEach(t => t.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        if (detailTitle && detailContent) {
+                            detailTitle.textContent = tagName;
+                            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                        }
+                        
+                        detailPanel.classList.add('active');
+                    }
+                }
+            });
+        });
+    }
+
+    // Also initialize on page load if publications or members tab is active
+    document.addEventListener('DOMContentLoaded', function() {
+        const hash = window.location.hash.substring(1);
+        
+        // Force scroll to top for About tab or no hash
+        if (!hash || hash === 'about') {
+            window.scrollTo(0, 0);
+        }
+        
+        if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
+            setTimeout(function() {
+                initPublicationsMenuWithClose();
+                initPublicationsShowMore();
+            }, 100);
+        }
+        if (hash === 'members' || (!hash && document.querySelector('#members.tab-panel.active'))) {
+            setTimeout(initMembersMenuWithClose, 100);
+        }
+        if (hash === 'about' || (!hash && document.querySelector('#about.tab-panel.active'))) {
+            setTimeout(function() {
+                initAboutAnimations();
+                // Double-check scroll position after animations init
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 50);
+            }, 100);
+        }
+    });
+
+    // Balanced Photo Grid functionality with lazy loading
+    function initBalancedPhotoGrid() {
+        const photosDataElement = document.getElementById('photos-data');
+        if (!photosDataElement) return;
+        
+        try {
+            const photosData = JSON.parse(photosDataElement.textContent);
+            
+            // 1. Sort by date (most recent first)
+            photosData.sort((a, b) => {
+                const dateA = new Date(a.date || '1970-01-01');
+                const dateB = new Date(b.date || '1970-01-01');
+                return dateB - dateA;
+            });
+            
+            // 2. Determine number of columns based on screen width
+            const screenWidth = window.innerWidth;
+            let numColumns = 3;
+            if (screenWidth <= 480) {
+                numColumns = 1;
+            } else if (screenWidth <= 768) {
+                numColumns = 2;
+            }
+            
+            const columns = Array.from({ length: numColumns }, () => []);
+            const columnHeights = Array(numColumns).fill(0);
+            
+            // 3. Calculate column width (approximate)
+            const gridContainer = document.getElementById('photosGrid');
+            if (!gridContainer) return;
+            
+            const containerWidth = gridContainer.offsetWidth || 1200;
+            const gap = (screenWidth <= 768) ? 15 : 20;
+            const columnWidth = (containerWidth - (gap * (numColumns - 1))) / numColumns;
+            
+            // Use estimated aspect ratio for distribution (most photos are 3:4 or 4:3)
+            const estimatedAspectRatio = 1.0; // Square-ish average
+            const estimatedHeight = columnWidth * estimatedAspectRatio;
+            
+            // 4. Distribute photos to shortest column
+            photosData.forEach(photo => {
+                const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+                columns[shortestColumnIndex].push(photo);
+                columnHeights[shortestColumnIndex] += estimatedHeight + gap;
+            });
+            
+            // 5. Render columns to DOM with lazy loading
+            renderPhotoColumns(columns);
+            
+        } catch (error) {
+            console.error('Error loading photos:', error);
+        }
+    }
+    
+    function renderPhotoColumns(columns) {
+        const gridContainer = document.getElementById('photosGrid');
+        if (!gridContainer) return;
+        
+        // Clear existing content
+        gridContainer.innerHTML = '';
+        
+        // Create columns
+        columns.forEach((columnPhotos, columnIndex) => {
+            const columnDiv = document.createElement('div');
+            columnDiv.className = 'photo-column';
+            
+            columnPhotos.forEach(photo => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.setAttribute('data-image', photo.image);
+                // Set background image directly for blurred effect
+                photoItem.style.backgroundImage = `url(${photo.image})`;
+                
+                const img = document.createElement('img');
+                img.src = photo.image;
+                img.alt = photo.caption || 'Lab photo';
+                img.loading = 'lazy'; // Native browser lazy loading
+                
+                photoItem.appendChild(img);
+                columnDiv.appendChild(photoItem);
+            });
+            
+            gridContainer.appendChild(columnDiv);
+        });
+        
+        // Re-initialize photo items for lightbox
+        initPhotoItems();
+    }
+
+    // Photo Lightbox functionality
+    const photoLightbox = document.getElementById('photoLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxClose = document.querySelector('.photo-lightbox-close');
+    let photoItems = document.querySelectorAll('.photo-item');
+
+    function openPhotoLightbox(imageSrc, clickedImg) {
+        if (!lightboxImage || !photoLightbox) return;
+        
+        // Set image source
+        lightboxImage.src = imageSrc;
+        
+        // Show lightbox with fade-in and scale effect
+        photoLightbox.style.visibility = 'visible';
+        photoLightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePhotoLightbox() {
+        if (!photoLightbox) return;
+
+        // Add closing class for fade-out effect
+        photoLightbox.classList.add('closing');
+        photoLightbox.classList.remove('active');
+        
+        // Wait for animation to complete before hiding
+        setTimeout(() => {
+            photoLightbox.classList.remove('closing');
+            photoLightbox.style.visibility = 'hidden';
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    // Add click handlers to photo items
+    function initPhotoItems() {
+        photoItems = document.querySelectorAll('.photo-item');
+        photoItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                const img = this.querySelector('img');
+                if (img) {
+                    const imageSrc = this.getAttribute('data-image') || img.src;
+                    if (imageSrc) {
+                        openPhotoLightbox(imageSrc, img);
+                    }
+                }
+            });
+        });
+    }
+
+    // Initialize photo items
+    initPhotoItems();
+
+    // Re-initialize when photos tab is opened
+    const originalSwitchTab = window.switchTab;
+    if (typeof switchTab === 'function') {
+        // This will be handled by the existing switchTab function
+    }
+
+    // Also initialize on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const hash = window.location.hash.substring(1);
+        if (hash === 'photos') {
+            setTimeout(initBalancedPhotoGrid, 100);
+        }
+    });
+    
+    // Re-balance grid on window resize
+    let resizePhotoTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizePhotoTimeout);
+        resizePhotoTimeout = setTimeout(function() {
+            const photosTab = document.querySelector('#photos.tab-panel');
+            if (photosTab && photosTab.classList.contains('active')) {
+                initBalancedPhotoGrid();
+            }
+        }, 300);
+    });
+
+    // Close lightbox handlers
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closePhotoLightbox);
+    }
+
+    if (photoLightbox) {
+        photoLightbox.addEventListener('click', function(e) {
+            if (e.target === photoLightbox) {
+                closePhotoLightbox();
+            }
+        });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && photoLightbox && photoLightbox.classList.contains('active')) {
+            closePhotoLightbox();
+        }
+    });
+
+    // ============================================
+    // 색상 팔레트 기능
+    // ============================================
+
+    // 기본 색상 값 저장 (초기화용)
+    const defaultColors = {
+        '--primary-color': '#2c3e50',
+        '--secondary-color': '#3498db',
+        '--accent-color': '#e74c3c',
+        '--text-color': '#333333',
+        '--bg-color': '#ffffff',
+        '--section-bg': '#f8f9fa',
+        '--border-color': '#e0e0e0',
+        '--header-bg': '#f5f7fa',
+        '--card-bg': '#ffffff'
+    };
+
+    // DOM 요소 선택
+    const colorPaletteToggle = document.querySelector('.color-palette-toggle');
+    const colorPalettePanel = document.querySelector('.color-palette-panel');
+    const colorPaletteOverlay = document.querySelector('.color-palette-overlay');
+    const colorPaletteClose = document.querySelector('.color-palette-close');
+    const colorResetBtn = document.querySelector('.color-reset-btn');
+    const colorInputs = document.querySelectorAll('.color-control input[type="color"]');
+    const hexInputs = document.querySelectorAll('.color-control input[type="text"]');
+
+    // 패널 열기
+    function openColorPalette() {
+        if (colorPalettePanel) {
+            colorPalettePanel.classList.add('active');
+        }
+        if (colorPaletteOverlay) {
+            colorPaletteOverlay.classList.add('active');
+        }
+    }
+
+    // 패널 닫기
+    function closeColorPalette() {
+        if (colorPalettePanel) {
+            colorPalettePanel.classList.remove('active');
+        }
+        if (colorPaletteOverlay) {
+            colorPaletteOverlay.classList.remove('active');
+        }
+    }
+
+    // CSS 변수 업데이트
+    function updateCSSVariable(varName, value) {
+        document.documentElement.style.setProperty(varName, value);
+    }
+
+    // 16진수 색상 유효성 검사
+    function isValidHexColor(hex) {
+        return /^#[0-9A-F]{6}$/i.test(hex);
+    }
+
+    // 색상 초기화
+    function resetColors() {
+        Object.keys(defaultColors).forEach(varName => {
+            const value = defaultColors[varName];
+            updateCSSVariable(varName, value);
+            
+            // 입력 필드 업데이트
+            const colorInput = document.querySelector(`input[type="color"][data-var="${varName}"]`);
+            const hexInput = document.querySelector(`input[type="text"][data-var="${varName}"]`);
+            
+            if (colorInput) {
+                colorInput.value = value;
+            }
+            if (hexInput) {
+                hexInput.value = value;
+            }
+        });
+    }
+
+    // 토글 버튼 이벤트
+    if (colorPaletteToggle) {
+        colorPaletteToggle.addEventListener('click', function() {
+            if (colorPalettePanel && colorPalettePanel.classList.contains('active')) {
+                closeColorPalette();
+            } else {
+                openColorPalette();
+            }
+        });
+    }
+
+    // 닫기 버튼 이벤트
+    if (colorPaletteClose) {
+        colorPaletteClose.addEventListener('click', closeColorPalette);
+    }
+
+    // 오버레이 클릭 이벤트
+    if (colorPaletteOverlay) {
+        colorPaletteOverlay.addEventListener('click', closeColorPalette);
+    }
+
+    // 색상 피커 변경 이벤트
+    colorInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const varName = this.getAttribute('data-var');
+            const value = this.value;
+            
+            updateCSSVariable(varName, value);
+            
+            // 대응하는 텍스트 입력 필드 업데이트
+            const hexInput = document.querySelector(`input[type="text"][data-var="${varName}"]`);
+            if (hexInput) {
+                hexInput.value = value;
+            }
+        });
+    });
+
+    // 16진수 입력 필드 변경 이벤트
+    hexInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const varName = this.getAttribute('data-var');
+            let value = this.value.trim();
+            
+            // # 없으면 추가
+            if (value.length > 0 && value[0] !== '#') {
+                value = '#' + value;
+                this.value = value;
+            }
+            
+            // 유효한 색상이면 적용
+            if (isValidHexColor(value)) {
+                updateCSSVariable(varName, value);
+                
+                // 대응하는 컬러 피커 업데이트
+                const colorInput = document.querySelector(`input[type="color"][data-var="${varName}"]`);
+                if (colorInput) {
+                    colorInput.value = value;
+                }
+            }
+        });
+        
+        // blur 이벤트로 유효하지 않은 값 복원
+        input.addEventListener('blur', function() {
+            const varName = this.getAttribute('data-var');
+            let value = this.value.trim();
+            
+            if (!isValidHexColor(value)) {
+                // 현재 CSS 변수 값으로 복원
+                const currentValue = getComputedStyle(document.documentElement)
+                    .getPropertyValue(varName).trim();
+                this.value = currentValue || defaultColors[varName];
+            }
+        });
+    });
+
+    // 초기화 버튼 이벤트
+    if (colorResetBtn) {
+        colorResetBtn.addEventListener('click', function() {
+            if (confirm('모든 색상을 기본값으로 초기화하시겠습니까?')) {
+                resetColors();
+            }
+        });
+    }
+
+    // Escape 키로 패널 닫기
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && colorPalettePanel && colorPalettePanel.classList.contains('active')) {
+            closeColorPalette();
+        }
+    });
+
+</script>
