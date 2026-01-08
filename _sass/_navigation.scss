@@ -1,0 +1,143 @@
+﻿/* Menu Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 15px;
+    transition: opacity 0.3s;
+}
+
+.menu-toggle:hover {
+    opacity: 0.7;
+}
+
+.menu-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+/* Side Menu */
+.side-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.side-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--header-bg);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2001;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.menu-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+.menu-close:hover {
+    color: var(--secondary-color);
+}
+
+.menu-close span {
+    line-height: 1;
+}
+
+.side-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu-list li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.side-menu-list button {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 20px 25px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.side-menu-tab {
+    display: block;
+}
+
+.side-menu-tab:hover {
+    background-color: #e8f4f8;
+    color: var(--secondary-color);
+    padding-left: 30px;
+}
+
+.side-menu-tab.active {
+    background-color: #e8f4f8;
+    color: var(--secondary-color);
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* Responsive: Show menu button and hide main nav at 1100px */
+@media (max-width: 1100px) {
+    .main-nav {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .side-menu-overlay {
+        display: block;
+    }
+}
+

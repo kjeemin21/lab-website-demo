@@ -1,0 +1,170 @@
+﻿/* Professor Section */
+#professor.section {
+    align-items: flex-start;
+}
+
+.professor-info {
+    text-align: left;
+    padding: 20px 30px 20px 370px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-height: 500px;
+}
+
+.professor-info:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.professor-image {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    width: 330px;
+    height: calc(100% - 40px);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.professor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.professor-image img.default-icon {
+    object-fit: contain;
+    padding: 25px;
+    background-color: #f5f5f5;
+}
+
+.professor-info h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    line-height: 1.3;
+    width: 100%;
+}
+
+.professor-details {
+    width: 100%;
+    line-height: 1.2;
+    margin-bottom: 60px; /* Space for CV button */
+    padding-right: 10px;
+}
+
+.detail-item {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+}
+
+.detail-item.detail-indent {
+    padding-left: 24px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+
+.detail-label {
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.detail-content {
+    flex: 1;
+    color: var(--text-color);
+    font-size: 1.05rem;
+    line-height: 1.2;
+    font-weight: 400;
+}
+
+/* Style for labels within detail-content (e.g., "Email:", "Office:") */
+.detail-content strong {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.05rem;
+}
+
+/* Style for section headers in detail-content */
+.detail-item:not(.detail-indent) .detail-content {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.detail-content a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 600;
+}
+
+.detail-content a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Style for text before colon (e.g., "Email:", "Office:") */
+.detail-content {
+    position: relative;
+}
+
+/* Make section headers more prominent */
+.detail-item:not(.detail-indent) .detail-content:first-child {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.15rem;
+    letter-spacing: 0.3px;
+}
+
+/* Style for indented content (sub-items) */
+.detail-item.detail-indent .detail-content {
+    font-weight: 400;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.cv-link {
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    white-space: nowrap;
+    z-index: 10; /* Ensure button stays on top */
+}
+
+.cv-link:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(52, 152, 219, 0.3);
+}
+

@@ -78,3 +78,6 @@
 - image: "/assets/images/photos/photo22.jpg"
   caption: "Photo caption"
   date: "2024-09-15"
+- image: "/assets/images/photos/photo23.png"
+  caption: "Photo caption"
+  date: "2025-12-29"
