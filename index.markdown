@@ -163,7 +163,7 @@ title: Home
                     <!-- Ph.D Students Subsection -->
                     {% if phd_students.size > 0 %}
                     <div class="members-subsection" id="members-phd">
-                        <h3 class="subsection-title">Ph.D Students</h3>
+                        <h3 class="subsection-title">Ph.D. Students</h3>
                             <div class="members-grid">
                                 {% for member in phd_students %}
                                 <div class="member-card">
@@ -341,8 +341,8 @@ title: Home
                     </button>
                 </h3>
                 <ul class="members-menu-list">
-                    <li><button class="member-menu-btn active" data-scroll="members-phd">Ph.D</button></li>
-                    <li><button class="member-menu-btn" data-scroll="members-ms">M.S</button></li>
+                    <li><button class="member-menu-btn active" data-scroll="members-phd">Ph.D. Students</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-ms">M.S. Students</button></li>
                     <li><button class="member-menu-btn" data-scroll="members-alumni">Alumni</button></li>
                 </ul>
             </nav>
@@ -467,11 +467,9 @@ title: Home
                         <div class="publications-show-more-container">
                             <button class="publications-show-more-btn" data-section="publications-international" data-limit="10">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
-                                <span class="show-more-text">+10</span>
                             </button>
                             <button class="publications-show-less-btn" data-section="publications-international" data-limit="10" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
-                                <span class="show-less-text">-10</span>
                             </button>
                         </div>
                         {% endif %}
@@ -567,11 +565,9 @@ title: Home
                         <div class="publications-show-more-container">
                             <button class="publications-show-more-btn" data-section="publications-domestic" data-limit="10">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
-                                <span class="show-more-text">+10</span>
                             </button>
                             <button class="publications-show-less-btn" data-section="publications-domestic" data-limit="10" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
-                                <span class="show-less-text">-10</span>
                             </button>
                         </div>
                         {% endif %}
@@ -620,11 +616,9 @@ title: Home
                         <div class="publications-show-more-container">
                             <button class="publications-show-more-btn" data-section="publications-patents" data-limit="10">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
-                                <span class="show-more-text">+10</span>
                             </button>
                             <button class="publications-show-less-btn" data-section="publications-patents" data-limit="10" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
-                                <span class="show-less-text">-10</span>
                             </button>
                         </div>
                         {% endif %}
