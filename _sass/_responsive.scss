@@ -1,0 +1,363 @@
+﻿/* Responsive Design */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 120px;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        min-height: var(--header-height);
+    }
+
+    .main-nav ul {
+        flex-wrap: wrap;
+        gap: 25px;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    
+    .main-nav a {
+        font-size: 1.1rem;
+        padding: 8px 0;
+    }
+
+    main {
+        margin-top: var(--header-height);
+    }
+
+    .section {
+        padding: 60px 0;
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .member-card {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .member-image {
+        width: 98px;
+        height: 133px;
+    }
+
+    .member-links-top {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+    }
+
+    .member-link .link-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .member-header {
+        padding-right: 65px; /* Adjusted space for smaller link buttons */
+    }
+
+    .member-name-en {
+        font-size: 1.1rem;
+    }
+
+    .member-name-ko {
+        font-size: 0.9rem;
+    }
+
+    .professor-info {
+        flex-direction: column;
+        padding: 30px 20px 20px 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .professor-image {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 180px;
+        height: 240px;
+        margin: 0 auto 25px;
+    }
+
+    .professor-info h3 {
+        font-size: 1.8rem;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .professor-details {
+        text-align: left;
+        width: 100%;
+        line-height: 1.2;
+        margin-bottom: 50px; /* Space for CV button on mobile */
+        padding-right: 5px;
+    }
+    
+    .detail-item {
+        margin-bottom: 14px;
+    }
+    
+    .detail-label {
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+    
+    .detail-content {
+        font-size: 1rem;
+    }
+    
+    .detail-item:not(.detail-indent) .detail-content {
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+    
+    .detail-item.detail-indent .detail-content {
+        font-size: 0.95rem;
+    }
+
+    .detail-item.detail-indent {
+        padding-left: 20px;
+    }
+    
+    .cv-link {
+        bottom: 15px;
+        right: 15px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+    
+    .recruit-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 30px;
+    }
+    
+    .recruitment-section {
+        padding: 0 0 15px 0;
+        margin-bottom: 25px;
+    }
+    
+    .recruitment-links {
+        gap: 10px;
+    }
+    
+    .recruitment-link-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .recruitment-title {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    
+    .recruitment-item {
+        font-size: 0.95rem;
+        margin: 6px 0;
+    }
+    
+    .recruitment-contact {
+        font-size: 0.95rem;
+        margin-top: 10px;
+    }
+    
+    .recruit-card {
+        padding: 25px 20px;
+    }
+    
+    .recruit-card-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .recruit-item {
+        font-size: 1rem;
+    }
+
+    .organization-card {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .organization-logo {
+        width: 100%;
+        max-width: 250px;
+        padding: 15px;
+    }
+
+    .organization-logo img {
+        max-height: 150px;
+    }
+
+    .organization-name {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .project-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .project-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .publications-container {
+        padding-right: 0;
+    }
+
+    .publications-side-menu {
+        position: fixed;
+        top: calc(var(--header-height) + 20px);
+        right: 20px;
+        width: 180px;
+        z-index: 1999;
+    }
+
+    .publications-menu-title {
+        font-size: 1rem;
+        padding: 10px 40px 10px 15px;
+    }
+
+    .publications-menu-list {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .publication-menu-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 12px 15px;
+    }
+
+    .members-side-menu {
+        position: fixed;
+        top: calc(var(--header-height) + 20px);
+        right: 20px;
+        width: 180px;
+        z-index: 1999;
+    }
+
+    .members-menu-title {
+        font-size: 1rem;
+        padding: 10px 40px 10px 15px;
+    }
+
+    .members-menu-list {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .member-menu-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 620px) {
+    .publications-menu-toggle {
+        display: block;
+    }
+
+    .publications-side-menu {
+        right: -300px;
+        width: 280px;
+        height: auto;
+        max-height: calc(100vh - var(--header-height) - 40px);
+        overflow-y: auto;
+        transition: right 0.3s ease;
+    }
+
+    .publications-side-menu.active {
+        right: 20px;
+    }
+
+    .publications-menu-title {
+        font-size: 1.1rem;
+        padding: 12px 45px 12px 20px;
+    }
+
+    .publications-menu-close {
+        display: flex;
+    }
+
+    .publications-menu-overlay {
+        display: block;
+    }
+
+    .publication-links {
+        padding-right: 46.67px;
+        padding-bottom: 10px;
+    }
+
+    .member-links-top {
+        top: 8px;
+        right: 8px;
+        gap: 5px;
+    }
+
+    .member-link {
+        padding: 3px;
+    }
+
+    .member-link .link-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .member-header {
+        padding-right: 60px; /* Further adjusted for very small screens */
+    }
+
+    .members-menu-toggle {
+        display: block;
+    }
+
+    .members-side-menu {
+        right: -300px;
+        width: 280px;
+        height: auto;
+        max-height: calc(100vh - var(--header-height) - 40px);
+        overflow-y: auto;
+        transition: right 0.3s ease;
+    }
+
+    .members-side-menu.active {
+        right: 20px;
+    }
+
+    .members-menu-title {
+        font-size: 1.1rem;
+        padding: 12px 45px 12px 20px;
+    }
+
+    .members-menu-close {
+        display: flex;
+    }
+
+    .members-menu-overlay {
+        display: block;
+    }
+}
+
