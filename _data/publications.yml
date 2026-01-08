@@ -225,15 +225,6 @@
     link: "https://bdi-lab.kaist.ac.kr/down/domestic_kcc2022.pdf"
     poster: "https://bdi-lab.kaist.ac.kr/down/domestic_kcc2022_poster.pdf"
 
-- title: "네트워크의 중첩 클러스터링 구조를 고려한 정보 확산 모델"
-  authors: "이우중, 황지영"
-  venue: "정보과학회논문지 (Journal of KIISE)"
-  year: "2020"
-  type: "domestic"
-  links:
-    link: "https://bdi-lab.kaist.ac.kr/down/domestic_kiise2020.pdf"
-
-
 # Patents ------------------------------------------------------------
 # Example patent entry (uncomment and edit to add patents):
 # - title: "Patent Title"
@@ -245,10 +236,10 @@
 #     link: "https://patents.google.com/patent/..."
 
 # Example patent entry (uncomment and edit to add patents):
-- title: "Patent Title"
-  authors: "Inventor1, Inventor2"
-  venue: "Patent Number: US-XXXX-XXXXXXX"
-  year: "2024"
+- title: "복층 지식 그래프 임베딩 방법 및 그 시스템"
+  authors: "황지영, 정찬영"
+  venue: "등록번호: 1028343440000"
+  year: "2025"
   type: "patent"
   links:
-    link: "https://patents.google.com/patent/..."
+    link: "https://doi.org/10.8080/1020230038397"
