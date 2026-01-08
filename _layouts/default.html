@@ -105,6 +105,16 @@
                 </div>
                 <div class="color-control-description">상단 헤더 배경</div>
             </div>
+
+            <!-- Card Background -->
+            <div class="color-control">
+                <label>Card Background (카드 배경)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--card-bg" value="#ffffff">
+                    <input type="text" class="color-hex-input" data-var="--card-bg" value="#ffffff" maxlength="7">
+                </div>
+                <div class="color-control-description">카드, 컨테이너 배경</div>
+            </div>
         </div>
         <div class="color-palette-footer">
             <button class="color-reset-btn">초기화 🔄</button>
@@ -1046,7 +1056,8 @@
             '--bg-color': '#ffffff',
             '--section-bg': '#f8f9fa',
             '--border-color': '#e0e0e0',
-            '--header-bg': '#f5f7fa'
+            '--header-bg': '#f5f7fa',
+            '--card-bg': '#ffffff'
         };
 
         // DOM 요소 선택
