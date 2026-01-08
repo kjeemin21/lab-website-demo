@@ -1,0 +1,10 @@
+@article{whang-tkde2016,
+	author={Joyce Jiyoung Whang and David F. Gleich and Inderjit S. Dhillon},
+	title={Overlapping Community Detection Using Neighborhood-Inflated Seed Expansion},
+	journal={IEEE Transactions on Knowledge and Data Engineering},
+	year={2016},
+	volume={28},
+	number={5},
+	pages={1272--1284},
+	doi={10.1109/TKDE.2016.2518687}
+}

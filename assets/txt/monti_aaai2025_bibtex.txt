@@ -1,0 +1,8 @@
+@inproceedings{monti,
+  author={Jinhyeok Choi and Heehyeon Kim and Joyce Jiyoung Whang},
+  title={Unveiling the Threat of Fraud Gangs to Graph Neural Networks: Multi-Target Graph Injection Attacks against GNN-Based Fraud Detectors},
+  booktitle={Proceedings of the 39th AAAI Conference on Artificial Intelligence},
+  year={2025},
+  pages={16028--16036},
+  doi={10.1609/aaai.v39i15.33760}
+}

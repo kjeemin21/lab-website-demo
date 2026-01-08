@@ -30,8 +30,14 @@ title: Home
                 <h3 class="research-section-title">Research Areas</h3>
                 <div class="research-tags-list">
                     {% for area in site.data.about.research_areas %}
-                    <span class="research-tag">{{ area }}</span>
+                    <span class="research-tag" data-description="{{ area.description }}">{{ area.name }}</span>
                     {% endfor %}
+                </div>
+                
+                <!-- Research Detail Panel -->
+                <div class="research-detail-panel">
+                    <h3 class="detail-title">연구 영역 상세</h3>
+                    <p class="detail-content">연구 영역을 선택하면 자세한 내용이 표시됩니다.</p>
                 </div>
             </div>
             {% endif %}
@@ -157,7 +163,7 @@ title: Home
                     <!-- Ph.D Students Subsection -->
                     {% if phd_students.size > 0 %}
                     <div class="members-subsection" id="members-phd">
-                        <h3 class="subsection-title">Ph.D Students</h3>
+                        <h3 class="subsection-title">Ph.D. Students</h3>
                             <div class="members-grid">
                                 {% for member in phd_students %}
                                 <div class="member-card">
@@ -328,14 +334,15 @@ title: Home
             <div class="members-menu-overlay"></div>
             
             <nav class="members-side-menu">
-                <div class="members-menu-header">
+                <h3 class="members-menu-title">
+                    Members
                     <button class="members-menu-close" aria-label="Close menu">
                         <span>&times;</span>
                     </button>
-                </div>
+                </h3>
                 <ul class="members-menu-list">
-                    <li><button class="member-menu-btn" data-scroll="members-phd">Ph.D</button></li>
-                    <li><button class="member-menu-btn" data-scroll="members-ms">M.S</button></li>
+                    <li><button class="member-menu-btn active" data-scroll="members-phd">Ph.D. Students</button></li>
+                    <li><button class="member-menu-btn" data-scroll="members-ms">M.S. Students</button></li>
                     <li><button class="member-menu-btn" data-scroll="members-alumni">Alumni</button></li>
                 </ul>
             </nav>
@@ -363,7 +370,7 @@ title: Home
                     {% assign has_international = false %}
                     {% for pub in all_pubs %}
                         {% assign pub_type = pub.type | default: "international" %}
-                        {% if pub_type != "domestic" %}
+                        {% if pub_type != "domestic" and pub_type != "patent" %}
                             {% assign has_international = true %}
                         {% endif %}
                     {% endfor %}
@@ -371,11 +378,14 @@ title: Home
                     <!-- International Publications Section -->
                     {% if has_international %}
                     <div class="publications-section" id="publications-international">
-                        <h3 class="subsection-title">International</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid var(--border-color);">
+                            <h3 class="subsection-title" style="margin: 0; border: none; padding: 0;">International</h3>
+                            <p style="font-size: 0.85rem; color: #666; margin: 0; font-style: italic;">‡: Equal Contribution, *: Corresponding Author</p>
+                        </div>
                         {% assign int_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
-                        {% if pub_type != "domestic" %}
+                        {% if pub_type != "domestic" and pub_type != "patent" %}
                         {% assign int_count = int_count | plus: 1 %}
                         <div class="publication-item {% if int_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
@@ -457,11 +467,9 @@ title: Home
                         <div class="publications-show-more-container">
                             <button class="publications-show-more-btn" data-section="publications-international" data-limit="10">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
-                                <span class="show-more-text">+10</span>
                             </button>
                             <button class="publications-show-less-btn" data-section="publications-international" data-limit="10" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
-                                <span class="show-less-text">-10</span>
                             </button>
                         </div>
                         {% endif %}
@@ -557,11 +565,60 @@ title: Home
                         <div class="publications-show-more-container">
                             <button class="publications-show-more-btn" data-section="publications-domestic" data-limit="10">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
-                                <span class="show-more-text">+10</span>
                             </button>
                             <button class="publications-show-less-btn" data-section="publications-domestic" data-limit="10" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
-                                <span class="show-less-text">-10</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Patents Section -->
+                    {% assign patent_pubs = site.data.publications | where: "type", "patent" %}
+                    {% if patent_pubs.size > 0 %}
+                    <div class="publications-section" id="publications-patents">
+                        <h3 class="subsection-title">Patents</h3>
+                        {% assign patent_count = 0 %}
+                        {% for pub in site.data.publications %}
+                        {% assign pub_type = pub.type | default: "international" %}
+                        {% if pub_type == "patent" %}
+                        {% assign patent_count = patent_count | plus: 1 %}
+                        <div class="publication-item {% if patent_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                            {% if pub.year %}
+                            <span class="year-badge">{{ pub.year }}</span>
+                            {% endif %}
+                            <h3>{{ pub.title }}</h3>
+                            <p class="authors">{{ pub.authors | replace: "‡", "<sup>‡</sup>" }}</p>
+                            {% if pub.venue %}
+                            <p class="venue">{{ pub.venue }}</p>
+                            {% endif %}
+                            {% if pub.links %}
+                            <div class="publication-links">
+                                {% if pub.links.link %}
+                                <a href="{{ pub.links.link }}" target="_blank" rel="noopener" class="pub-link" title="Link">
+                                    <img src="{{ '/assets/images/icons/link_icon.svg' | relative_url }}" alt="Link" class="link-icon">
+                                    <span>Link</span>
+                                </a>
+                                {% endif %}
+                                {% if pub.links.paper %}
+                                <a href="{{ pub.links.paper }}" target="_blank" rel="noopener" class="pub-link" title="Paper">
+                                    <img src="{{ '/assets/images/icons/paper_icon.svg' | relative_url }}" alt="Paper" class="link-icon">
+                                    <span>Paper</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% if patent_count > 10 %}
+                        <div class="publications-show-more-container">
+                            <button class="publications-show-more-btn" data-section="publications-patents" data-limit="10">
+                                <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
+                            </button>
+                            <button class="publications-show-less-btn" data-section="publications-patents" data-limit="10" style="display: none;">
+                                <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
                             </button>
                         </div>
                         {% endif %}
@@ -574,14 +631,16 @@ title: Home
             <div class="publications-menu-overlay"></div>
             
             <nav class="publications-side-menu">
-                <div class="publications-menu-header">
+                <h3 class="publications-menu-title">
+                    Publications
                     <button class="publications-menu-close" aria-label="Close menu">
                         <span>&times;</span>
                     </button>
-                </div>
+                </h3>
                 <ul class="publications-menu-list">
-                    <li><button class="publication-menu-btn" data-scroll="publications-international">International</button></li>
+                    <li><button class="publication-menu-btn active" data-scroll="publications-international">International</button></li>
                     <li><button class="publication-menu-btn" data-scroll="publications-domestic">Domestic</button></li>
+                    <li><button class="publication-menu-btn" data-scroll="publications-patents">Patents</button></li>
                 </ul>
             </nav>
             {% else %}
@@ -680,28 +739,24 @@ title: Home
             <!-- Recruitment Information -->
             <div class="recruitment-section">
                 <div class="recruitment-links">
-                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link">Lab Video</a>
-                    <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Material</a>
-                    <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link">Lab Introduction Video</a>
-                    <span class="link-separator">,</span>
-                    <a href="/down/BDI_Lab_internship.pdf" target="_blank" rel="noopener" class="recruitment-link">Internship Recruitment</a>
-                    <span class="link-separator">,</span>
-                    <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link">YouTube</a>
+                    <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link-btn">연구실 동영상</a>
+                    <a href="/down/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link-btn">소개자료</a>
+                    <a href="/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link-btn">설명자료</a>
+                    <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="recruitment-link-btn">Github</a>
+                    <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link-btn">YouTube</a>
                 </div>
                 <div class="recruitment-applications">
-                    <p class="recruitment-title">[Recruiting Students]</p>
+                    <p class="recruitment-title">[학생 모집 중]</p>
                     <p class="recruitment-item">
-                        <strong>Master's New Students:</strong>
-                        <a href="https://forms.gle/8TUm8iPkgvRQSZv89" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                        <strong>석사 신입생:</strong>
+                        <a href="https://forms.gle/8TUm8iPkgvRQSZv89" target="_blank" rel="noopener" class="recruitment-link">지원서 링크</a>
                     </p>
                     <p class="recruitment-item">
-                        <strong>Undergraduate Research Students:</strong>
-                        <a href="https://forms.gle/vPZs2LjWPCJFCa4Z8" target="_blank" rel="noopener" class="recruitment-link">Application Link</a>
+                        <strong>학부 연구생:</strong>
+                        <a href="https://forms.gle/vPZs2LjWPCJFCa4Z8" target="_blank" rel="noopener" class="recruitment-link">지원 링크</a>
                     </p>
                     <p class="recruitment-contact">
-                        Students interested in our lab, please contact <a href="mailto:jjwhang@kaist.ac.kr" class="recruitment-link">jjwhang@kaist.ac.kr</a>.
+                        우리 연구실에 관심있는 학생들은 <a href="mailto:jjwhang@kaist.ac.kr" class="recruitment-link">jjwhang@kaist.ac.kr</a> 로 문의바랍니다.
                     </p>
                 </div>
             </div>
@@ -774,3 +829,4 @@ title: Home
         </div>
     </div>
 </section>
+

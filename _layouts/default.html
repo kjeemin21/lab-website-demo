@@ -11,6 +11,106 @@
     <title>{{ page.title }} | {{ site.title }}</title>
 </head>
 <body>
+    <!-- 색상 팔레트 플로팅 버튼 -->
+    <button class="color-palette-toggle" aria-label="색상 설정">
+        🎨
+    </button>
+
+    <!-- 색상 팔레트 오버레이 -->
+    <div class="color-palette-overlay"></div>
+
+    <!-- 색상 설정 패널 -->
+    <div class="color-palette-panel">
+        <div class="color-palette-header">
+            <h3>색상 설정</h3>
+            <button class="color-palette-close" aria-label="닫기">×</button>
+        </div>
+        <div class="color-palette-body">
+            <!-- Primary Color -->
+            <div class="color-control">
+                <label>Primary Color (기본색)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--primary-color" value="#2c3e50">
+                    <input type="text" class="color-hex-input" data-var="--primary-color" value="#2c3e50" maxlength="7">
+                </div>
+                <div class="color-control-description">헤더, 제목 등 주요 요소</div>
+            </div>
+
+            <!-- Secondary Color -->
+            <div class="color-control">
+                <label>Secondary Color (보조색)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--secondary-color" value="#3498db">
+                    <input type="text" class="color-hex-input" data-var="--secondary-color" value="#3498db" maxlength="7">
+                </div>
+                <div class="color-control-description">링크, 버튼 등 상호작용 요소</div>
+            </div>
+
+            <!-- Accent Color -->
+            <div class="color-control">
+                <label>Accent Color (강조색)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--accent-color" value="#e74c3c">
+                    <input type="text" class="color-hex-input" data-var="--accent-color" value="#e74c3c" maxlength="7">
+                </div>
+                <div class="color-control-description">강조 버튼, 중요 알림</div>
+            </div>
+
+            <!-- Text Color -->
+            <div class="color-control">
+                <label>Text Color (텍스트 색상)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--text-color" value="#333333">
+                    <input type="text" class="color-hex-input" data-var="--text-color" value="#333333" maxlength="7">
+                </div>
+                <div class="color-control-description">본문 텍스트</div>
+            </div>
+
+            <!-- Background Color -->
+            <div class="color-control">
+                <label>Background Color (배경색)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--bg-color" value="#ffffff">
+                    <input type="text" class="color-hex-input" data-var="--bg-color" value="#ffffff" maxlength="7">
+                </div>
+                <div class="color-control-description">페이지 전체 배경</div>
+            </div>
+
+            <!-- Section Background -->
+            <div class="color-control">
+                <label>Section Background (섹션 배경)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--section-bg" value="#f8f9fa">
+                    <input type="text" class="color-hex-input" data-var="--section-bg" value="#f8f9fa" maxlength="7">
+                </div>
+                <div class="color-control-description">카드, 섹션 배경</div>
+            </div>
+
+            <!-- Border Color -->
+            <div class="color-control">
+                <label>Border Color (테두리 색상)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--border-color" value="#e0e0e0">
+                    <input type="text" class="color-hex-input" data-var="--border-color" value="#e0e0e0" maxlength="7">
+                </div>
+                <div class="color-control-description">테두리, 구분선</div>
+            </div>
+
+            <!-- Header Background -->
+            <div class="color-control">
+                <label>Header Background (헤더 배경)</label>
+                <div class="color-control-input-wrapper">
+                    <input type="color" data-var="--header-bg" value="#f5f7fa">
+                    <input type="text" class="color-hex-input" data-var="--header-bg" value="#f5f7fa" maxlength="7">
+                </div>
+                <div class="color-control-description">상단 헤더 배경</div>
+            </div>
+        </div>
+        <div class="color-palette-footer">
+            <button class="color-reset-btn">초기화 🔄</button>
+        </div>
+    </div>
+
     <header class="site-header">
         <div class="header-container">
             <h1 class="site-title">
@@ -406,7 +506,7 @@
             
             // Update active button based on scroll position
             function updateActivePublicationButton() {
-                const sections = ['publications-international', 'publications-domestic'];
+                const sections = ['publications-international', 'publications-domestic', 'publications-patents'];
                 const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
                 const scrollPosition = window.scrollY + headerHeight + 50;
                 
@@ -649,6 +749,74 @@
         function initAboutAnimations() {
             // Force scroll to top when initializing About animations
             window.scrollTo(0, 0);
+            
+            // Initialize research tag interactions
+            initAboutResearchTags();
+        }
+        
+        // Research tag click handler
+        function initAboutResearchTags() {
+            const tags = document.querySelectorAll('.research-tag');
+            const detailPanel = document.querySelector('.research-detail-panel');
+            
+            if (!tags.length || !detailPanel) return;
+            
+            const detailTitle = detailPanel.querySelector('.detail-title');
+            const detailContent = detailPanel.querySelector('.detail-content');
+            
+            tags.forEach(tag => {
+                // Remove any existing listeners by cloning
+                const newTag = tag.cloneNode(true);
+                tag.parentNode.replaceChild(newTag, tag);
+            });
+            
+            // Re-select tags after cloning
+            const freshTags = document.querySelectorAll('.research-tag');
+            
+            freshTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const isSelected = this.classList.contains('selected');
+                    const isActive = detailPanel.classList.contains('active');
+                    
+                    if (isSelected) {
+                        // Same tag clicked again - fade out and close panel
+                        freshTags.forEach(t => t.classList.remove('selected'));
+                        detailPanel.classList.remove('active');
+                    } else {
+                        // Different tag selected
+                        const tagName = this.textContent;
+                        const description = this.getAttribute('data-description');
+                        
+                        if (isActive) {
+                            // Panel is already open - fade out, change content, fade in
+                            detailPanel.classList.remove('active');
+                            
+                            setTimeout(() => {
+                                freshTags.forEach(t => t.classList.remove('selected'));
+                                this.classList.add('selected');
+                                
+                                if (detailTitle && detailContent) {
+                                    detailTitle.textContent = tagName;
+                                    detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                                }
+                                
+                                detailPanel.classList.add('active');
+                            }, 300); // Match CSS transition duration
+                        } else {
+                            // Panel is closed - just fade in
+                            freshTags.forEach(t => t.classList.remove('selected'));
+                            this.classList.add('selected');
+                            
+                            if (detailTitle && detailContent) {
+                                detailTitle.textContent = tagName;
+                                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                            }
+                            
+                            detailPanel.classList.add('active');
+                        }
+                    }
+                });
+            });
         }
 
         // Also initialize on page load if publications or members tab is active
@@ -862,6 +1030,171 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && photoLightbox && photoLightbox.classList.contains('active')) {
                 closePhotoLightbox();
+            }
+        });
+
+        // ============================================
+        // 색상 팔레트 기능
+        // ============================================
+
+        // 기본 색상 값 저장 (초기화용)
+        const defaultColors = {
+            '--primary-color': '#2c3e50',
+            '--secondary-color': '#3498db',
+            '--accent-color': '#e74c3c',
+            '--text-color': '#333333',
+            '--bg-color': '#ffffff',
+            '--section-bg': '#f8f9fa',
+            '--border-color': '#e0e0e0',
+            '--header-bg': '#f5f7fa'
+        };
+
+        // DOM 요소 선택
+        const colorPaletteToggle = document.querySelector('.color-palette-toggle');
+        const colorPalettePanel = document.querySelector('.color-palette-panel');
+        const colorPaletteOverlay = document.querySelector('.color-palette-overlay');
+        const colorPaletteClose = document.querySelector('.color-palette-close');
+        const colorResetBtn = document.querySelector('.color-reset-btn');
+        const colorInputs = document.querySelectorAll('.color-control input[type="color"]');
+        const hexInputs = document.querySelectorAll('.color-control input[type="text"]');
+
+        // 패널 열기
+        function openColorPalette() {
+            if (colorPalettePanel) {
+                colorPalettePanel.classList.add('active');
+            }
+            if (colorPaletteOverlay) {
+                colorPaletteOverlay.classList.add('active');
+            }
+        }
+
+        // 패널 닫기
+        function closeColorPalette() {
+            if (colorPalettePanel) {
+                colorPalettePanel.classList.remove('active');
+            }
+            if (colorPaletteOverlay) {
+                colorPaletteOverlay.classList.remove('active');
+            }
+        }
+
+        // CSS 변수 업데이트
+        function updateCSSVariable(varName, value) {
+            document.documentElement.style.setProperty(varName, value);
+        }
+
+        // 16진수 색상 유효성 검사
+        function isValidHexColor(hex) {
+            return /^#[0-9A-F]{6}$/i.test(hex);
+        }
+
+        // 색상 초기화
+        function resetColors() {
+            Object.keys(defaultColors).forEach(varName => {
+                const value = defaultColors[varName];
+                updateCSSVariable(varName, value);
+                
+                // 입력 필드 업데이트
+                const colorInput = document.querySelector(`input[type="color"][data-var="${varName}"]`);
+                const hexInput = document.querySelector(`input[type="text"][data-var="${varName}"]`);
+                
+                if (colorInput) {
+                    colorInput.value = value;
+                }
+                if (hexInput) {
+                    hexInput.value = value;
+                }
+            });
+        }
+
+        // 토글 버튼 이벤트
+        if (colorPaletteToggle) {
+            colorPaletteToggle.addEventListener('click', function() {
+                if (colorPalettePanel && colorPalettePanel.classList.contains('active')) {
+                    closeColorPalette();
+                } else {
+                    openColorPalette();
+                }
+            });
+        }
+
+        // 닫기 버튼 이벤트
+        if (colorPaletteClose) {
+            colorPaletteClose.addEventListener('click', closeColorPalette);
+        }
+
+        // 오버레이 클릭 이벤트
+        if (colorPaletteOverlay) {
+            colorPaletteOverlay.addEventListener('click', closeColorPalette);
+        }
+
+        // 색상 피커 변경 이벤트
+        colorInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const varName = this.getAttribute('data-var');
+                const value = this.value;
+                
+                updateCSSVariable(varName, value);
+                
+                // 대응하는 텍스트 입력 필드 업데이트
+                const hexInput = document.querySelector(`input[type="text"][data-var="${varName}"]`);
+                if (hexInput) {
+                    hexInput.value = value;
+                }
+            });
+        });
+
+        // 16진수 입력 필드 변경 이벤트
+        hexInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const varName = this.getAttribute('data-var');
+                let value = this.value.trim();
+                
+                // # 없으면 추가
+                if (value.length > 0 && value[0] !== '#') {
+                    value = '#' + value;
+                    this.value = value;
+                }
+                
+                // 유효한 색상이면 적용
+                if (isValidHexColor(value)) {
+                    updateCSSVariable(varName, value);
+                    
+                    // 대응하는 컬러 피커 업데이트
+                    const colorInput = document.querySelector(`input[type="color"][data-var="${varName}"]`);
+                    if (colorInput) {
+                        colorInput.value = value;
+                    }
+                }
+            });
+            
+            // blur 이벤트로 유효하지 않은 값 복원
+            input.addEventListener('blur', function() {
+                const varName = this.getAttribute('data-var');
+                let value = this.value.trim();
+                
+                if (!isValidHexColor(value)) {
+                    // 현재 CSS 변수 값으로 복원
+                    const currentValue = getComputedStyle(document.documentElement)
+                        .getPropertyValue(varName).trim();
+                    this.value = currentValue || defaultColors[varName];
+                }
+            });
+        });
+
+        // 초기화 버튼 이벤트
+        if (colorResetBtn) {
+            colorResetBtn.addEventListener('click', function() {
+                if (confirm('모든 색상을 기본값으로 초기화하시겠습니까?')) {
+                    resetColors();
+                }
+            });
+        }
+
+        // Escape 키로 패널 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && colorPalettePanel && colorPalettePanel.classList.contains('active')) {
+                closeColorPalette();
             }
         });
 

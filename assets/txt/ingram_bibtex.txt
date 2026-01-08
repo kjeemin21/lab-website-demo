@@ -1,0 +1,7 @@
+@inproceedings{ingram,
+	author={Jaejun Lee and Chanyoung Chung and Joyce Jiyoung Whang},
+	title={{InGram}: Inductive Knowledge Graph Embedding via Relation Graphs},
+	booktitle={Proceedings of the 40th International Conference on Machine Learning},
+	year={2023},
+	pages={18796--18809}
+}

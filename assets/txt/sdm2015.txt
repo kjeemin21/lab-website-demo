@@ -1,0 +1,8 @@
+@inproceedings{whang-sdm2015,
+	author={Joyce Jiyoung Whang and David F. Gleich and Inderjit S. Dhillon},
+	title={Non-exhaustive, Overlapping $k$-means},
+	booktitle={Proceedings of the 2015 SIAM International Conference on Data Mining},
+	year={2015},
+	pages={936--944},
+	doi={10.1137/1.9781611974010.105}
+}

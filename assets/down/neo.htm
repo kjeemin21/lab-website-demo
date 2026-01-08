@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Non-exhaustive, Overlapping k-means</title>
+  </head>
+
+  <body style="">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody><tr>
+	<td style="background-color:rgb(153, 0, 0)">
+	  <br>
+	</td>
+      </tr>
+    </tbody></table>
+    <h1 style="text-align:center">
+     Non-exhaustive, Overlapping k-means
+    </h1>
+	<h3>
+	<!-- This code is not officially released yet. -->
+	</h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight:bold;text-decoration:none;">
+      The Program
+    </h2>
+    <h3>
+	  We propose a simple and intuitive objective function that captures the issues of overlap and non-exhaustiveness in a unified manner. Our objective function can be viewed as a reformulation of the traditional k-means
+objective, with easy-to-understand parameters that capture the degrees of overlap and non-exhaustiveness. To optimize the objective, we propose a simple iterative algorithm which we call NEO-K-Means (Non-Exhaustive Overlapping K-Means). Our NEO-K-Means algorithm can be used for both data clustering and graph clustering.<br>
+
+    </h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight: bold">
+      <a name="download"></a>
+      Download
+    </h2>
+    <h3 style="text-align:justify">
+      The code is released under the GNU Public License (GPL). The NEO-K-Means algorithm for data clustering is written in MATLAB and the algorithm for graph clustering is written in a mixture of C++ and MATLAB.
+      <br><br>
+
+      To download data clustering code, please click <a href="neo_k_means_vector.zip">here</a>. <br>
+      To download graph clustering code, please click <a href="neo_k_means_graph.zip">here</a>.
+    </h3>
+
+	<hr>
+    <h2 style="font-weight: bold">
+      <a name="Usage">Usage</a>
+    </h2>
+    <pre style="font-family:courier new"> -Data Clustering
+	A sample dataset (synth2.mat) and a script file (run_synth2.m) are included.
+	Please run the script to test the code and visualize the clustering result.
+    </pre>
+    <pre style="font-family:courier new"> -Graph Clustering
+	In the command line, please type:
+        make clean
+        make
+
+	And then, you can run the code using the following command:
+	./neo -a alpha_value -b beta_value -s sigma_value input
+	(Please set the sigma_value to be zero.)
+
+	For example, you can just type
+	sh run_neo.sh
+	to see how it works on the karate club network.
+
+	In the output file, each line corresponds to the membership of the node.
+	For example, if the first line contains 0 and 1, it means that the first node belongs to cluster 0 and cluster 1.
+
+	You can also find the MATLAB interface within 'matlab' folder. Please run 'test.m' to test the code on the karate club network.
+	You might want to execute MATLAB using the following command:
+	LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libstdc++.so.6" matlab
+    </pre>
+
+<hr>
+    <h2 style="font-weight: bold">
+      <a name="citeation">Citation</a>
+    </h2>
+    <h3 style="text-align:justify">
+      Please acknowledge the use of the code with a citation.  </h3>
+
+	<b>
+	Non-exhaustive, Overlapping Clustering</b>, J. J. Whang, Y. Hou, I. S. Dhillon, and D. F. Gleich, IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), November 2019. [<a href="/down/TPAMI2019_whang.pdf" target="_blank">pdf</a>] <br>
+
+<pre style="font-family:courier new">@ARTICLE{whang-tpami2019, 
+ author={J. J. Whang and Y. Hou and D. F. Gleich and I. S. Dhillon}, 
+ journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+ title={Non-exhaustive, Overlapping Clustering}, 
+ year={2019}, 
+ volume={41},
+ number={11},
+ pages={2644--2659}
+}</pre>
+
+<b>
+	Non-exhaustive, Overlapping k-means</b>, J. J. Whang, I. S. Dhillon, and D. F. Gleich, Proceedings of the 15th SIAM International Conference on Data Mining (SDM), April 2015. [<a href="/down/neo_kmeans_sdm15.pdf" target="_blank">pdf</a>] <br>
+
+    <pre style="font-family:courier new">@inproceedings{whang-sdm2015,
+ author = {Joyce Jiyoung Whang and David F. Gleich and Inderjit S. Dhillon},
+ title = {Non-exhaustive, Overlapping $k$-means},
+ booktitle = {Proceedings of the 15th SIAM International Conference on Data Mining (SDM)},
+ year = {2015},
+ pages = {936--944}
+}</pre>
+
+      <a href="mailto:joycewhang88@gmail.com">Bug reports and comments</a> are
+      always appreciated.
+
+</body></html>

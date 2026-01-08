@@ -1,0 +1,8 @@
+@inproceedings{fineprompt,
+	author={Jeonghwan Kim and Giwon Hong and Sung-Hyon Myaeng and Joyce Jiyoung Whang},
+	title={{FinePrompt}: Unveiling the Role of Finetuned Inductive Bias on Compositional Reasoning in {GPT}-4},
+	booktitle={Findings of the Association for Computational Linguistics: EMNLP 2023},
+	year={2023},
+	pages={3763--3775},
+	doi={10.18653/v1/2023.findings-emnlp.245}
+}

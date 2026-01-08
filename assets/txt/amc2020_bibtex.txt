@@ -1,0 +1,8 @@
+@article{spkmeans,
+	author={Yoon Mo Jung and Joyce Jiyoung Whang and Sangwoon Yun},
+	title={Sparse Probabilistic K-means},
+	journal={Applied Mathematics and Computation},
+	year={2020},
+	volume={382},
+	doi={10.1016/j.amc.2020.125328}
+}

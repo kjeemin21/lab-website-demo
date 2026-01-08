@@ -1,0 +1,7 @@
+@article{micrec,
+  author={Chanyoung Chung and Kyeongryul Lee and Sunbin Park and Joyce Jiyoung Whang},
+  title={Unifying Inductive, Cross-Domain, and Multimodal Learning for Robust and Generalizable Recommendation},
+  year={2025},
+  journal={arXiv preprint arXiv.2510.21812},
+  doi = {10.48550/arXiv.2510.21812}
+}

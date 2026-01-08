@@ -1,0 +1,8 @@
+@inproceedings{trogen,
+  author={Kim, Heehyeon and Lee, Kyeongryul  and Whang, Joyce Jiyoung},
+  title={Beneath the Facade: Probing Safety Vulnerabilities in {LLMs} via Auto-Generated Jailbreak Prompts},
+  booktitle={Findings of the Association for Computational Linguistics: EMNLP 2025},
+  year={2025},
+  pages={17668–17700},
+  doi={10.18653/v1/2025.findings-emnlp.960}
+}

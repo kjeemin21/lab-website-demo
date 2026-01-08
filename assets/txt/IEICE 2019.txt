@@ -1,0 +1,10 @@
+@article{song2019design,
+  title={Design and Feasibility Study: Customized Virtual Buttons for Electronic Mobile Devices},
+  author={Song, Seungtaek and Kim, Namhyun and Lee, Sungkil and Whang, Joyce Jiyoung and Lee, Jinkyu},
+  journal={IEICE TRANSACTIONS on Fundamentals of Electronics, Communications and Computer Sciences},
+  volume={102},
+  number={4},
+  pages={668--671},
+  year={2019},
+  publisher={The Institute of Electronics, Information and Communication Engineers}
+}

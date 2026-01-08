@@ -1,0 +1,8 @@
+@inproceedings{whang-pvldb2020,
+	author={Joyce Jiyoung Whang and Rundong Du and Sangwon Jung and Geon Lee and Barry Drake and Qingqing Liu and Seonggoo Kang and Haesun Park},
+	title={{MEGA}: Multi-View Semi-Supervised Clustering of Hypergraphs},
+	booktitle={Proceedings of the 46th International Conference on Very Large Data Bases},
+	year={2020},
+	pages={698--711},
+	doi={10.14778/3377369.3377378}
+}

@@ -1,0 +1,10 @@
+@article{whang2018localized,
+  title={Localized Ranking in Social and Information Networks},
+  author={Whang, Joyce Jiyoung and Shin, Yunseob},
+  journal={IEICE TRANSACTIONS on Information and Systems},
+  volume={101},
+  number={2},
+  pages={547--551},
+  year={2018},
+  publisher={The Institute of Electronics, Information and Communication Engineers}
+}
