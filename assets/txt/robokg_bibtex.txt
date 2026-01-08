@@ -1,0 +1,10 @@
+@article{robokg,
+	author={Ji Ho Kwak and Jaejun Lee and Joyce Jiyoung Whang and Sungho Jo},
+	title={Semantic Grasping via a Knowledge Graph of Robotic Manipulation: A Graph Representation Learning Approach},
+	journal={IEEE Robotics and Automation Letters},
+	year={2022},
+	volume={7},
+	number={4},
+	pages={9397--9404},
+	doi={10.1109/LRA.2022.3191194}
+}

@@ -1,0 +1,8 @@
+@inproceedings{whang-cyber,
+	author={Joyce Jiyoung Whang and Yeonsung Jung and Seonggoo Kang and Dongho Yoo and Inderjit S. Dhillon},
+	title={Scalable {Anti-TrustRank} with Qualified Site-level Seeds for Link-based Web Spam Detection},
+	booktitle={Companion Proceedings of the Web Conference 2020, Workshop on CyberSafety: Computational Methods in Online Misbehavior},
+	year={2020},
+	pages={593--602},
+	doi={10.1145/3366424.3385773}
+}

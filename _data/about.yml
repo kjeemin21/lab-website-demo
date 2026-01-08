@@ -12,18 +12,21 @@ hero_image: "/assets/images/about/대표_이미지.png"
 # Research areas/keywords
 research_areas:
   - name: "Graph Machine Learning"
-    description: "그래프 구조 데이터에 대한 머신러닝 기법을 연구합니다. 소셜 네트워크, 지식 그래프, 생물학적 네트워크 등 복잡한 관계형 데이터를 효과적으로 학습하고 분석하는 알고리즘을 개발합니다."
+    description: "We investigate machine learning techniques for graph-structured data. Our research focuses on developing algorithms to effectively learn from and analyze complex relational data, such as social networks, knowledge graphs, and biological networks."
   - name: "Deep Learning"
-    description: "심층 신경망 모델의 개발과 최적화를 수행합니다. 다양한 도메인에서 효율적이고 확장 가능한 딥러닝 아키텍처를 설계하고, 실제 응용 문제에 적용합니다."
+    description: "We work on the development and optimization of deep neural network models. We design efficient and scalable deep learning architectures across diverse domains and apply them to solve real-world problems."
   - name: "Knowledge Graphs"
-    description: "지식 그래프 구축, 임베딩, 추론 기술을 연구합니다. 대규모 지식 베이스에서 의미 있는 정보를 추출하고 활용하는 방법론을 개발합니다."
+    description: "We research techniques for knowledge graph construction, embedding, and reasoning. We develop methodologies to extract and utilize meaningful semantic information from large-scale knowledge bases."
   - name: "Data Mining"
-    description: "대규모 데이터에서 유용한 패턴과 지식을 발견하는 기술을 연구합니다. 클러스터링, 분류, 이상 탐지 등 다양한 데이터 마이닝 알고리즘을 개발합니다."
+    description: "We study techniques to discover useful patterns and knowledge from large-scale datasets. Our work involves developing diverse data mining algorithms for clustering, classification, and anomaly detection."
   - name: "Big Data Analytics"
-    description: "방대한 데이터를 효율적으로 처리하고 분석하는 확장 가능한 알고리즘을 연구합니다. 분산 컴퓨팅 환경에서 작동하는 고성능 데이터 분석 시스템을 개발합니다."
+    description: "We research scalable algorithms to efficiently process and analyze massive datasets. We develop high-performance data analytics systems designed to operate in distributed computing environments."
   - name: "Data Science"
-    description: "데이터 과학의 다양한 측면을 탐구하며, 실제 산업 및 과학 응용 문제를 해결합니다. 데이터 수집, 전처리, 시각화, 모델링을 포함한 전체 데이터 파이프라인을 연구합니다."
+    description: "We explore various facets of data science to address industrial and scientific challenges. Our research encompasses the entire data pipeline, including data collection, preprocessing, visualization, and modeling."
 
+# ==================================================================================
+# Non-Used Sections ----------------------------------------------------------------
+# ==================================================================================
 # Mission statement
 mission: >
   Our mission is to push the boundaries of what's possible with data-driven 

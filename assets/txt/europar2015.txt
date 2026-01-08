@@ -1,0 +1,8 @@
+@inproceedings{whang-europar2015,
+	author={Joyce Jiyoung Whang and Andrew Lenharth and Inderjit S. Dhillon and Keshav Pingali},
+	title={Scalable Data-driven {PageRank}: Algorithms, System Issues, and Lessons Learned},
+	booktitle={Proceedings of the 21st International European Conference on Parallel and Distributed Computing},
+	year={2015},
+	pages={438--450},
+	doi={10.1007/978-3-662-48096-0_34}
+}

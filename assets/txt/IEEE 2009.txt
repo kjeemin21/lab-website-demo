@@ -1,0 +1,10 @@
+@article{lee2009popular,
+  title={Popular channel concentration schemes for efficient channel navigation in internet protocol televisions},
+  author={Lee, Eunji and Whang, Jiyoung and Oh, Uran and Koh, Kern and Bahn, Hyokyung},
+  journal={IEEE Transactions on Consumer Electronics},
+  volume={55},
+  number={4},
+  pages={1945--1949},
+  year={2009},
+  publisher={IEEE}
+}

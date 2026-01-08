@@ -1,0 +1,8 @@
+@inproceedings{chung-sigir2021,
+	author={Chanyoung Chung and Joyce Jiyoung Whang},
+	title={Knowledge Graph Embedding via Metagraph Learning},
+	booktitle={Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+	year={2021},
+	pages={2212--2216},
+	doi={10.1145/3404835.3463072}
+}

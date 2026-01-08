@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Overlapping Community Detection Using Seed Set Expansion</title>
+  </head>
+
+  <body style="">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody><tr>
+	<td style="background-color:rgb(153, 0, 0)">
+	  <br>
+	</td>
+      </tr>
+    </tbody></table>
+    <h1 style="text-align:center">
+     Overlapping Community Detection Using Seed Set Expansion
+    </h1>
+	<h3>
+	<!-- This code is not officially released yet. -->
+	</h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight:bold;text-decoration:none;">
+      The Program
+    </h2>
+    <h3>
+	  We propose an efficient overlapping community detection algorithm using a seed expansion approach. In particular, we develop effective seeding strategies for a personalized PageRank scheme that optimizes the conductance community score. The key idea of our algorithm is to find good seeds, and then greedily expand these seeds based on a community metric. We name our algorithm 'NISE' by abbreviating our main idea, Neighborhood-Inflated Seed Expansion.<br>
+
+    </h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight: bold">
+      <a name="download"></a>
+      Download
+    </h2>
+    <h3 style="text-align:justify">
+      The code is released under the GNU Public License (GPL). Our algorithm is written in a mixture of C++ and MATLAB. The high level interface is written in MATLAB.
+      <br><br>
+
+      <a href="./nise_codes.zip">Download</a> and extract the files. Once you prompt MATLAB, please type 'compile' inside the main directory.
+    </h3>
+
+	<hr>
+    <h2 style="font-weight: bold">
+      <a name="Usage">Usage</a>
+    </h2>
+    <pre style="font-family:courier new">C = nise(A, k);
+Input:
+	A: adjacency matrix
+	k: the number of communities
+C = nise(A, k, seeding, ego, expansion, nworkers, fid);
+Optional Input:
+	seeding: seeding strategy ('hrc_graclus' or 'sphub')
+	ego: neighborhood inflation (true or false) -- set this to be true for large networks (e.g., more than 400 nodes).
+	expansion: expansion method ('ppr' or 'vppr')
+	nworkers: the number of threads (parallel expansion of the seeds)
+	fid: output file ID
+Output:
+	C: assignment matrix (no. of nodes x no. of clusters)
+	</pre>
+
+<hr>
+    <h2 style="font-weight: bold">
+      <a name="citeation">Citation</a>
+    </h2>
+    <h3 style="text-align:justify">
+      Please acknowledge the use of the code with a citation.  </h3>
+
+      <b>
+	Overlapping Community Detection Using Neighborhood-Inflated Seed Expansion</b>, J. J. Whang, D. F. Gleich, and I. S. Dhillon, IEEE Transactions on Knowledge and Data Engineering (TKDE), May 2016. [<a href="/down/nise_tkde16.pdf" target="_blank">pdf</a>] <br>
+    <pre style="font-family:courier new">@article{whang-tkde2016,
+  author  = {Joyce Jiyoung Whang and David F. Gleich and Inderjit S. Dhillon},
+  title   = {Overlapping Community Detection Using Neighborhood-Inflated Seed Expansion},
+  journal = {IEEE Transactions on Knowledge and Data Engineering (TKDE)},
+  year    = 2016,
+  number  = 5,
+  pages   = {1272--1284},
+  month   = May,
+  volume  = 28
+}</pre>
+
+      <b>Overlapping Community Detection Using Seed Set Expansion</b>, J. J. Whang, D. F. Gleich, and I. S. Dhillon, ACM International Conference on Information and Knowledge Management (CIKM), October 2013. [<a href="/down/overlapping_commumity_cikm13.pdf" target="_blank">pdf</a>] <br>
+
+    <pre style="font-family:courier new">@inproceedings{whang_cikm13,
+  title ={Overlapping Community Detection Using Seed Set Expansion},
+  author={Joyce Jiyoung Whang and David F. Gleich and Inderjit S. Dhillon},
+  booktitle = {ACM International Conference on Information and Knowledge Management},
+  pages = {2099--2108},
+  year = {2013}
+}</pre>
+
+      <a href="mailto:joycewhang88@gmail.com">Bug reports and comments</a> are
+      always appreciated.
+
+</body></html>

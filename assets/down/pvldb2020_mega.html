@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>MEGA</title>
+  </head>
+
+  <body style="">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody><tr>
+	<td style="background-color:rgb(153, 0, 0)">
+	  <br>
+	</td>
+      </tr>
+    </tbody></table>
+    <h1 style="text-align:center">
+     MEGA: Multi-View Semi-Supervised Clustering of Hypergraphs
+    </h1>
+	<h3>
+	<!-- This code is not officially released yet. -->
+	</h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight:bold;text-decoration:none;">
+      The Program
+    </h2>
+    <h3>
+     We develop a semi-supervised multi-view clustering algorithm that can effectively handle hypergraphs. We simultaneously consider multi-view clustering and semi-supervised learning to not only reflect multiple views of data (i.e., multiple attributes or content of the objects as well as auxiliary relationships among the objects besides the connection structure of a hypergraph) but also improve the clustering accuracy by utilizing partially available labels of objects. In our method, the hypergraph structure is considered as one of the views of given objects. Our method can be considered to be a general framework for semi-supervised multiview clustering in that the input data is not necessarily restricted to a hypergraph. Also, our method is flexible in the sense that it can be used as either an unsupervised learning method or a semi-supervised method. That is, when there is no prior knowledge about the labels, our method works as an unsupervised multi-view clustering method. We name our method MEGA by abbreviating Multi-view sEmi-supervised hyperGrAph clustering.
+    </h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight: bold">
+      <a name="download"></a>
+      Download
+    </h2>
+    <h3 style="text-align:justify">
+      The code is released under the GNU Public License (GPL). Please acknowledge the use of the code/data with a citation.
+      <br>
+      The code is written in MATLAB R2018b.
+      <br><br>
+      To download the code and the datasets, please click <a href="pvldb2020-mega-release.zip">here</a>. <br>
+    </h3>
+
+	<hr>
+    <h2 style="font-weight: bold">
+      <a name="Usage">Usage</a>
+    </h2>
+    <pre style="font-family:courier new"> -data
+      Five datasets are used in our paper: <i>query</i>, <i>gene</i>, <i>cora</i>, <i>dblp5</i>, and <i>dblp10</i>.
+    </pre>
+    <pre style="font-family:courier new"> -mega
+      To run MEGA, please read/run the MATLAB scripts. For example, to run MEGA on the <i>query</i> dataset, type run_query in MATLAB.
+    </pre>
+    <pre style="font-family:courier new"> -result
+      The results are saved in the 'result' folder. For example, when 'run_query.m' is executed, the result is saved in result/MEGA_query_H.mat file.
+    </pre>
+<hr>
+    <h2 style="font-weight: bold">
+      <a name="citeation">Citation</a>
+    </h2>
+    <h3 style="text-align:justify">
+      Please acknowledge the use of the code/data with a citation.  </h3>
+
+      <b>
+        MEGA: Multi-View Semi-Supervised Clustering of Hypergraphs</b>, J. J. Whang, R. Du, S. Jung, G. Lee, B. Drake, Q. Liu, S. Kang, and H. Park, Proceedings of the VLDB Endowments (PVLDB), 2020. <a href="/down/PVLDB2020_MEGA.pdf"  target="_blank">[pdf]</a>
+</br>
+<pre style="font-family:courier new">
+@ARTICLE{whang-pvldb2020, 
+ author={J. J. Whang and R. Du and S. Jung and G. Lee and B. Drake and Q. Liu and S. Kang and H. Park}, 
+ journal={Proceedings of the VLDB Endowment},
+ title={{MEGA}: Multi-View Semi-Supervised Clustering of Hypergraphs}, 
+ year={2020}, 
+ volume={13},
+ number={5},
+ pages={698--711}
+}
+</pre>
+      <a href="mailto:joycewhang88@gmail.com">Bug reports and comments</a> are
+      always appreciated.
+
+</body></html>

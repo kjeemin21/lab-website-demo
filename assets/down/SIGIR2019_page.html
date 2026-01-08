@@ -1,0 +1,93 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Hyperlink Classification via Structured Graph Embedding</title>
+  </head>
+
+  <body style="">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tbody><tr>
+	<td style="background-color:rgb(153, 0, 0)">
+	  <br>
+	</td>
+      </tr>
+    </tbody></table>
+    <h1 style="text-align:center">
+     Hyperlink Classification via Structured Graph Embedding
+    </h1>
+	<h3>
+	<!-- This code is not officially released yet. -->
+	</h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight:bold;text-decoration:none;">
+      The Program
+    </h2>
+    <h3>
+      We formally define a hyperlink classification problem in web search by classifying hyperlinks into three classes based on their roles: navigation, suggestion, and action. Real-world web graph datasets are generated for this task.We approach the hyperlink classification problem from a structured graph embedding perspective, and show that we can solve the problem by modifying the recently proposed knowledge graph embedding techniques. The key idea of our modification is to introduce a relation perturbation while the original knowledge graph embedding models only corrupt entities when generating negative triplets in training. To the best of our knowledge, this is the first study to apply the knowledge graph embedding idea to the hyperlink classification problem. We show that our model significantly outperforms the original knowledge graph embedding models in classifying hyperlinks on web graphs.
+    </h3>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="font-weight: bold">
+      <a name="download"></a>
+      Download
+    </h2>
+    <h3 style="text-align:justify">
+      The code is released under the GNU Public License (GPL).
+      The original code source is from <a href="https://github.com/thunlp/KB2E">https://github.com/thunlp/KB2E</a>.
+      <br>
+      The train code is written in C++ and the test code is written in Python.
+      <br><br>
+
+      To download the code, please click <a href="hyperlink_code.zip">here</a>. <br>
+      To download the data, please click <a href="hyperlink_data.zip">here</a>.
+    </h3>
+
+	<hr>
+    <h2 style="font-weight: bold">
+      <a name="Usage">Usage</a>
+    </h2>
+    <pre style="font-family:courier new">
+      Sample train set (train_example.txt) and test set (test_example.txt) are included in each model.
+      Please run the script to train/test the model.
+    </pre>
+
+    <pre style="font-family:courier new"> -Train
+      In the command line, please type:
+            make
+
+      You can train the model (TransE for example) using the following command:
+            ./Train_TransE train_example.txt 404 437
+            (404 is no. of nodes, 437 is no. of edges)
+
+      You will get <i>entity2id</i> and <i>relation2id</i>, which are embedding results of entities and relations respectively.
+    </pre>
+    <pre style="font-family:courier new"> -Test
+      You can evaluate the model (TransE for example) using the following command:
+            python3 test_TransE.py test_example.txt
+
+      You will get <i>result.txt</i>, which contains a confusion matrix, F1, Precision, Recall, and Accuracy of the model.
+    </pre>
+
+<hr>
+    <h2 style="font-weight: bold">
+      <a name="citeation">Citation</a>
+    </h2>
+    <h3 style="text-align:justify">
+      Please acknowledge the use of the code/data with a citation.  </h3>
+
+      <b>
+        Hyperlink Classification via Structured Graph Embedding</b>, G. Lee, S. Kang, and J. J. Whang, ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR), July 2019. <a href="/down/SIGIR2019_paper.pdf"  target="_blank">[pdf]</a>
+</br>
+<pre style="font-family:courier new">
+@inproceedings{lee-sigir2019,
+  author = {Lee, Geon and Kang, Seonggoo and Whang, Joyce Jiyoung},
+  title = {Hyperlink Classification via Structured Graph Embedding},
+  booktitle = {Proceedings of the 42nd International ACM SIGIR Conference on Research and Development in Information Retrieval},
+  year = {2019},
+  pages = {1017--1020}
+}
+</pre>
+      <a href="mailto:geonlee@skku.edu">Bug reports and comments</a> are
+      always appreciated.
+
+</body></html>

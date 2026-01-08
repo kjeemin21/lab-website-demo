@@ -1,0 +1,7 @@
+@inproceedings{maypl,
+  author={Lee, Jaejun and Whang, Joyce Jiyoung},
+  title={Structure Is All You Need: Structural Representation Learning on Hyper-Relational Knowledge Graphs},
+  booktitle={Proceedings of the 42nd International Conference on Machine Learning},
+  year={2025},
+  pages={33765--33783},
+}
