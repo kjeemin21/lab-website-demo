@@ -676,25 +676,44 @@
             freshTags.forEach(tag => {
                 tag.addEventListener('click', function() {
                     const isSelected = this.classList.contains('selected');
-                    
-                    // Remove selected class from all tags
-                    freshTags.forEach(t => t.classList.remove('selected'));
+                    const isActive = detailPanel.classList.contains('active');
                     
                     if (isSelected) {
-                        // Same tag clicked again - close panel
+                        // Same tag clicked again - fade out and close panel
+                        freshTags.forEach(t => t.classList.remove('selected'));
                         detailPanel.classList.remove('active');
                     } else {
-                        // New tag selected - open panel with content
-                        this.classList.add('selected');
+                        // Different tag selected
                         const tagName = this.textContent;
                         const description = this.getAttribute('data-description');
                         
-                        if (detailTitle && detailContent) {
-                            detailTitle.textContent = tagName;
-                            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                        if (isActive) {
+                            // Panel is already open - fade out, change content, fade in
+                            detailPanel.classList.remove('active');
+                            
+                            setTimeout(() => {
+                                freshTags.forEach(t => t.classList.remove('selected'));
+                                this.classList.add('selected');
+                                
+                                if (detailTitle && detailContent) {
+                                    detailTitle.textContent = tagName;
+                                    detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                                }
+                                
+                                detailPanel.classList.add('active');
+                            }, 300); // Match CSS transition duration
+                        } else {
+                            // Panel is closed - just fade in
+                            freshTags.forEach(t => t.classList.remove('selected'));
+                            this.classList.add('selected');
+                            
+                            if (detailTitle && detailContent) {
+                                detailTitle.textContent = tagName;
+                                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                            }
+                            
+                            detailPanel.classList.add('active');
                         }
-                        
-                        detailPanel.classList.add('active');
                     }
                 });
             });
