@@ -404,7 +404,7 @@
 .member-menu-btn {
     width: 100%;
     padding: 14px 20px;
-    background-color: #e8e8e8;
+    background-color: var(--bg-color);
     border: none;
     border-bottom: 1px solid #d0d0d0;
     color: var(--primary-color);
@@ -417,18 +417,18 @@
 }
 
 .member-menu-btn:hover {
-    background-color: #d8d8d8;
+    background-color: #f2f2f2;
     color: var(--primary-color);
 }
 
 .member-menu-btn.active {
-    background-color: white;
+    background-color: #f2f2f2;
     color: var(--primary-color);
     font-weight: 700;
 }
 
 .member-menu-btn.active:hover {
-    background-color: white;
+    background-color: #f2f2f2;
     color: var(--primary-color);
 }
 
