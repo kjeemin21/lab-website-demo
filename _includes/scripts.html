@@ -706,8 +706,26 @@
         // Clear existing content
         gridContainer.innerHTML = '';
         
-        // Create photo items
-        photosData.forEach(photo => {
+        // Determine number of columns based on screen width
+        const columnCount = getColumnCount();
+        
+        // Create columns
+        const columns = [];
+        const columnHeights = [];
+        
+        for (let i = 0; i < columnCount; i++) {
+            const column = document.createElement('div');
+            column.className = 'photo-column';
+            gridContainer.appendChild(column);
+            columns.push(column);
+            columnHeights.push(0);
+        }
+        
+        // Counter for loaded images
+        let loadedCount = 0;
+        
+        // Process each photo
+        photosData.forEach((photo, index) => {
             const photoItem = document.createElement('div');
             photoItem.className = 'photo-item';
             photoItem.setAttribute('data-image', photo.image);
@@ -716,78 +734,57 @@
             img.src = photo.image;
             img.alt = photo.caption || 'Lab photo';
             img.className = 'photo-main';
-            img.loading = 'lazy'; // Native browser lazy loading
             
-            // Add load event to detect image orientation and add reflection for landscape
+            // Add load event to calculate height and place in shortest column
             img.addEventListener('load', function() {
                 const aspectRatio = this.naturalWidth / this.naturalHeight;
                 
-                if (aspectRatio > 1.1) {
-                    // Landscape (가로로 긴 이미지) - add reflection padding
-                    photoItem.classList.add('landscape');
-                    addReflectionPadding(photoItem, photo.image, this);
-                } else if (aspectRatio < 0.9) {
-                    // Portrait (세로로 긴 이미지)
-                    photoItem.classList.add('portrait');
+                // Find the shortest column
+                const minHeight = Math.min(...columnHeights);
+                const minIndex = columnHeights.indexOf(minHeight);
+                
+                // Get column width to calculate proper height
+                const columnWidth = columns[minIndex].offsetWidth;
+                const calculatedHeight = columnWidth / aspectRatio;
+                
+                // Add photo to the shortest column
+                columns[minIndex].appendChild(photoItem);
+                
+                // Update column height (add image height + gap)
+                columnHeights[minIndex] += calculatedHeight + 20; // 20px is the gap
+                
+                loadedCount++;
+                
+                // Re-initialize photo items for lightbox after all images loaded
+                if (loadedCount === photosData.length) {
+                    initPhotoItems();
                 }
-                // Square images (0.9 ~ 1.1) don't need any special treatment
+            });
+            
+            // Handle load error
+            img.addEventListener('error', function() {
+                console.error('Failed to load image:', photo.image);
+                loadedCount++;
+                
+                if (loadedCount === photosData.length) {
+                    initPhotoItems();
+                }
             });
             
             photoItem.appendChild(img);
-            gridContainer.appendChild(photoItem);
         });
-        
-        // Re-initialize photo items for lightbox
-        initPhotoItems();
     }
     
-    // Add reflection padding for landscape images
-    function addReflectionPadding(photoItem, imageSrc, mainImg) {
-        const containerWidth = photoItem.offsetWidth;
-        const containerHeight = photoItem.offsetHeight;
-        const imgWidth = mainImg.naturalWidth;
-        const imgHeight = mainImg.naturalHeight;
-        
-        // Calculate rendered size with contain
-        const scale = Math.min(containerWidth / imgWidth, containerHeight / imgHeight);
-        const renderedHeight = imgHeight * scale;
-        
-        // Calculate vertical gap (empty space above and below)
-        const verticalGap = (containerHeight - renderedHeight) / 2;
-        
-        if (verticalGap <= 0) return; // No gap to fill
-        
-        // Create top reflection wrapper and image
-        const wrapperTop = document.createElement('div');
-        wrapperTop.className = 'reflection-wrapper-top';
-        wrapperTop.style.height = verticalGap + 'px';
-        
-        const reflectionTop = document.createElement('img');
-        reflectionTop.src = imageSrc;
-        reflectionTop.className = 'reflection-top';
-        reflectionTop.alt = '';
-        // 이미지 높이를 verticalGap으로 설정하면 원본의 위쪽 부분만 보임
-        reflectionTop.style.height = verticalGap + 'px';
-        
-        wrapperTop.appendChild(reflectionTop);
-        
-        // Create bottom reflection wrapper and image
-        const wrapperBottom = document.createElement('div');
-        wrapperBottom.className = 'reflection-wrapper-bottom';
-        wrapperBottom.style.height = verticalGap + 'px';
-        
-        const reflectionBottom = document.createElement('img');
-        reflectionBottom.src = imageSrc;
-        reflectionBottom.className = 'reflection-bottom';
-        reflectionBottom.alt = '';
-        // 이미지 높이를 verticalGap으로 설정하면 원본의 아래쪽 부분만 보임
-        reflectionBottom.style.height = verticalGap + 'px';
-        
-        wrapperBottom.appendChild(reflectionBottom);
-        
-        // Insert reflection wrappers
-        photoItem.insertBefore(wrapperTop, photoItem.firstChild);
-        photoItem.appendChild(wrapperBottom);
+    // Get number of columns based on screen width
+    function getColumnCount() {
+        const width = window.innerWidth;
+        if (width <= 768) {
+            return 1; // Mobile: 1 column
+        } else if (width <= 1024) {
+            return 2; // Tablet: 2 columns
+        } else {
+            return 3; // Desktop: 3 columns
+        }
     }
 
     // Photo Lightbox functionality

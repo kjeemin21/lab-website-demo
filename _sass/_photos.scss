@@ -1,72 +1,38 @@
-/* Photos Section */
+/* Photos Section - Masonry Layout */
 .photos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     gap: 20px;
     margin-top: 20px;
+    align-items: flex-start;
+}
+
+.photo-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .photo-item {
     position: relative;
     width: 100%;
-    height: 250px;
     background-color: #ffffff;
     overflow: hidden;
     cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .photo-item img.photo-main {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    z-index: 2;
-    /* Shadow 제거 */
-    box-shadow: none;
-    filter: none;
-}
-
-/* Reflection wrapper containers */
-.photo-item .reflection-wrapper-top,
-.photo-item .reflection-wrapper-bottom {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.photo-item .reflection-wrapper-top {
-    top: 0;
-}
-
-.photo-item .reflection-wrapper-bottom {
-    bottom: 0;
-}
-
-/* Reflection images */
-.photo-item .reflection-top,
-.photo-item .reflection-bottom {
-    display: block;
-    width: 100%;
+    height: auto;
     object-fit: cover;
-    /* 블러 효과만 적용 (shadow 없음) */
-    filter: blur(8px);
-    /* 블러가 가장자리에서 잘리지 않도록 약간 확대 */
-    transform: scaleY(-1) scale(1.1);
-    box-shadow: none;
-}
-
-/* 위쪽 reflection: 이미지를 반전시키고 아래쪽 edge가 wrapper 아래에 위치하도록 */
-.photo-item .reflection-top {
-    object-position: center top;
-}
-
-/* 아래쪽 reflection: 이미지를 반전시키고 위쪽 edge가 wrapper 위에 위치하도록 */
-.photo-item .reflection-bottom {
-    object-position: center bottom;
+    display: block;
 }
 
 /* Photo Lightbox */
@@ -140,23 +106,21 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .photos-grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
     
-    .photo-item {
-        height: 220px;
+    .photo-column {
+        gap: 15px;
     }
 }
 
 @media (max-width: 768px) {
     .photos-grid {
-        grid-template-columns: 1fr;
         gap: 15px;
     }
     
-    .photo-item {
-        height: 200px;
+    .photo-column {
+        gap: 15px;
     }
     
     .photo-lightbox-close {
