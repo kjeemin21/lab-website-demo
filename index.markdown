@@ -699,6 +699,12 @@ title: Home
         <h2>Photos</h2>
         <div class="content">
             {% if site.data.photos %}
+            <!-- Loading Spinner -->
+            <div class="photos-loading-spinner" id="photosLoadingSpinner">
+                <div class="spinner"></div>
+                <p>Loading photos...</p>
+            </div>
+            
             <div class="photos-grid" id="photosGrid">
                 <!-- Photos will be dynamically loaded here -->
             </div>
