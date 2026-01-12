@@ -7,6 +7,11 @@
     // Force scroll to top immediately on script execution
     window.scrollTo(0, 0);
     
+    // Auto-slide variables for research areas (must be declared early)
+    let autoSlideTimer = null;
+    let autoSlideEnabled = true;
+    let currentResearchIndex = 0;
+    
     // Menu toggle functionality
     const menuToggle = document.querySelector('.menu-toggle');
     const menuClose = document.querySelector('.menu-close');
@@ -39,6 +44,12 @@
 
     // Tab switching functionality
     function switchTab(tabId) {
+        // Stop auto-slide if leaving About tab
+        const currentActiveTab = document.querySelector('.tab-panel.active');
+        if (currentActiveTab && currentActiveTab.id === 'about' && tabId !== 'about') {
+            stopAutoSlide();
+        }
+        
         // Remove active class from all tab buttons
         document.querySelectorAll('.tab-button').forEach(btn => {
             btn.classList.remove('active');
@@ -582,8 +593,75 @@
         initAboutResearchTags();
     }
     
+    // Auto-slide management functions
+    function stopAutoSlide() {
+        if (autoSlideTimer !== null) {
+            clearTimeout(autoSlideTimer);
+            autoSlideTimer = null;
+        }
+        autoSlideEnabled = false;
+    }
+    
+    function switchToNextResearch() {
+        const tags = document.querySelectorAll('.research-tag');
+        const detailPanel = document.querySelector('.research-detail-panel');
+        
+        if (!tags.length || !detailPanel) return;
+        
+        const detailTitle = detailPanel.querySelector('.detail-title');
+        const detailContent = detailPanel.querySelector('.detail-content');
+        
+        // Move to next index (cycle back to 0 after last)
+        currentResearchIndex = (currentResearchIndex + 1) % tags.length;
+        
+        const targetTag = tags[currentResearchIndex];
+        const tagName = targetTag.textContent;
+        const description = targetTag.getAttribute('data-description');
+        
+        // Update UI
+        tags.forEach(t => t.classList.remove('selected'));
+        targetTag.classList.add('selected');
+        
+        if (detailTitle && detailContent) {
+            detailTitle.textContent = tagName;
+            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+        }
+        
+        // If panel is already active, fade out and fade in for smooth transition
+        if (detailPanel.classList.contains('active')) {
+            detailPanel.classList.remove('active');
+            setTimeout(() => {
+                detailPanel.classList.add('active');
+            }, 300);
+        } else {
+            detailPanel.classList.add('active');
+        }
+    }
+    
+    function startAutoSlide() {
+        // Clear any existing timer
+        if (autoSlideTimer !== null) {
+            clearTimeout(autoSlideTimer);
+        }
+        
+        // Only start if auto-slide is enabled
+        if (!autoSlideEnabled) return;
+        
+        // Set timer for 10 seconds
+        autoSlideTimer = setTimeout(() => {
+            switchToNextResearch();
+            // Continue auto-slide by starting next timer
+            if (autoSlideEnabled) {
+                startAutoSlide();
+            }
+        }, 10000); // 10 seconds
+    }
+    
     // Research tag click handler
     function initAboutResearchTags() {
+        // Stop any existing auto-slide
+        stopAutoSlide();
+        
         const tags = document.querySelectorAll('.research-tag');
         const detailPanel = document.querySelector('.research-detail-panel');
         
@@ -601,37 +679,57 @@
         // Re-select tags after cloning
         const freshTags = document.querySelectorAll('.research-tag');
         
+        // Reset auto-slide state
+        autoSlideEnabled = true;
+        currentResearchIndex = 0;
+        
+        // Auto-select first tag on page load
+        if (freshTags.length > 0) {
+            const firstTag = freshTags[0];
+            const firstTagName = firstTag.textContent;
+            const firstDescription = firstTag.getAttribute('data-description');
+            
+            freshTags.forEach(t => t.classList.remove('selected'));
+            firstTag.classList.add('selected');
+            
+            if (detailTitle && detailContent) {
+                detailTitle.textContent = firstTagName;
+                detailContent.textContent = firstDescription || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+            }
+            
+            detailPanel.classList.add('active');
+        }
+        
+        // Start auto-slide timer
+        startAutoSlide();
+        
         freshTags.forEach(tag => {
             tag.addEventListener('click', function() {
                 const isSelected = this.classList.contains('selected');
+                
+                // If already selected, do nothing
+                if (isSelected) {
+                    return;
+                }
+                
+                // Stop auto-slide when user clicks
+                stopAutoSlide();
+                
                 const isActive = detailPanel.classList.contains('active');
                 
-                if (isSelected) {
-                    // Same tag clicked again - fade out and close panel
-                    freshTags.forEach(t => t.classList.remove('selected'));
+                // Find clicked tag index
+                const clickedIndex = Array.from(freshTags).indexOf(this);
+                currentResearchIndex = clickedIndex;
+                
+                // Different tag selected
+                const tagName = this.textContent;
+                const description = this.getAttribute('data-description');
+                
+                if (isActive) {
+                    // Panel is already open - fade out, change content, fade in
                     detailPanel.classList.remove('active');
-                } else {
-                    // Different tag selected
-                    const tagName = this.textContent;
-                    const description = this.getAttribute('data-description');
                     
-                    if (isActive) {
-                        // Panel is already open - fade out, change content, fade in
-                        detailPanel.classList.remove('active');
-                        
-                        setTimeout(() => {
-                            freshTags.forEach(t => t.classList.remove('selected'));
-                            this.classList.add('selected');
-                            
-                            if (detailTitle && detailContent) {
-                                detailTitle.textContent = tagName;
-                                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-                            }
-                            
-                            detailPanel.classList.add('active');
-                        }, 300); // Match CSS transition duration
-                    } else {
-                        // Panel is closed - just fade in
+                    setTimeout(() => {
                         freshTags.forEach(t => t.classList.remove('selected'));
                         this.classList.add('selected');
                         
@@ -641,7 +739,18 @@
                         }
                         
                         detailPanel.classList.add('active');
+                    }, 300); // Match CSS transition duration
+                } else {
+                    // Panel is closed - just fade in
+                    freshTags.forEach(t => t.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    if (detailTitle && detailContent) {
+                        detailTitle.textContent = tagName;
+                        detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
                     }
+                    
+                    detailPanel.classList.add('active');
                 }
             });
         });

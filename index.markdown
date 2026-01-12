@@ -6,6 +6,15 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
 ---
 
 <section id="about" class="section tab-panel active">
+    <!-- Side Menu for Social Links -->
+    <div class="about-side-menu">
+        <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="about-side-menu-link" title="Github">
+            <img src="{{ '/assets/images/icons/github_icon.svg' | relative_url }}" alt="Github" class="about-side-menu-icon">
+        </a>
+        <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="about-side-menu-link about-side-menu-link-youtube" title="YouTube">
+            <img src="{{ '/assets/images/icons/youtube_icon.svg' | relative_url }}" alt="YouTube" class="about-side-menu-icon">
+        </a>
+    </div>
     <div class="container about-container">
         {% if site.data.about %}
         <div class="about-content">
@@ -750,8 +759,6 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                     <a href="https://www.youtube.com/watch?v=dGNjNBvxrDA&t=1s&ab_channel=BDILab" target="_blank" rel="noopener" class="recruitment-link-btn">연구실 동영상</a>
                     <a href="assets/pdf/BDI_Lab_KAIST.pdf" target="_blank" rel="noopener" class="recruitment-link-btn">소개자료</a>
                     <a href="assets/down/BDI_Lab_video.html" target="_blank" rel="noopener" class="recruitment-link-btn">설명자료</a>
-                    <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="recruitment-link-btn">Github</a>
-                    <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="recruitment-link-btn">YouTube</a>
                 </div>
                 <div class="recruitment-applications">
                     <p class="recruitment-title">[학생 모집 중]</p>
