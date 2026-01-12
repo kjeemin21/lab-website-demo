@@ -747,7 +747,27 @@
         autoSlideEnabled = false;
     }
     
+    // Preload all research area images
+    function preloadResearchImages() {
+        const tags = document.querySelectorAll('.research-tag');
+        const imageUrls = new Set();
+        
+        tags.forEach(tag => {
+            const imageUrl = tag.getAttribute('data-image');
+            if (imageUrl && imageUrl.trim() !== '') {
+                imageUrls.add(imageUrl);
+            }
+        });
+        
+        // Preload each image
+        imageUrls.forEach(imageUrl => {
+            const img = new Image();
+            img.src = imageUrl;
+        });
+    }
+    
     // Helper function to update research detail panel content
+    // Returns a Promise that resolves when image is loaded (if image exists)
     function updateResearchDetailPanel(detailPanel, tagName, description, imageUrl) {
         const detailTitle = detailPanel.querySelector('.detail-title');
         const detailContent = detailPanel.querySelector('.detail-content');
@@ -763,13 +783,28 @@
         
         if (detailImage) {
             if (imageUrl && imageUrl.trim() !== '') {
-                detailImage.src = imageUrl;
-                detailImage.alt = tagName;
-                detailImage.style.display = 'block';
+                return new Promise((resolve) => {
+                    // Check if image is already loaded in cache
+                    const img = new Image();
+                    img.onload = function() {
+                        detailImage.src = imageUrl;
+                        detailImage.alt = tagName;
+                        detailImage.style.display = 'block';
+                        resolve();
+                    };
+                    img.onerror = function() {
+                        detailImage.style.display = 'none';
+                        resolve(); // Resolve even on error to continue fade-in
+                    };
+                    // If already cached, onload fires immediately
+                    img.src = imageUrl;
+                });
             } else {
                 detailImage.style.display = 'none';
+                return Promise.resolve();
             }
         }
+        return Promise.resolve();
     }
     
     function switchToNextResearch() {
@@ -795,14 +830,16 @@
             detailPanel.classList.remove('active');
             setTimeout(() => {
                 // Change content after fade-out is complete
-                updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
-                // Fade in with new content
-                detailPanel.classList.add('active');
+                updateResearchDetailPanel(detailPanel, tagName, description, imageUrl).then(() => {
+                    // Wait for image to load before fading in
+                    detailPanel.classList.add('active');
+                });
             }, 300); // Match CSS transition duration
         } else {
             // Panel is closed - update content and fade in
-            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
-            detailPanel.classList.add('active');
+            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl).then(() => {
+                detailPanel.classList.add('active');
+            });
         }
     }
     
@@ -835,6 +872,9 @@
         
         if (!tags.length || !detailPanel) return;
         
+        // Preload all images before setting up event listeners
+        preloadResearchImages();
+        
         tags.forEach(tag => {
             // Remove any existing listeners by cloning
             const newTag = tag.cloneNode(true);
@@ -862,9 +902,9 @@
             freshTags.forEach(t => t.classList.remove('selected'));
             targetTag.classList.add('selected');
             
-            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
-            
-            detailPanel.classList.add('active');
+            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl).then(() => {
+                detailPanel.classList.add('active');
+            });
         }
         
         // Start auto-slide timer
@@ -901,18 +941,19 @@
                         freshTags.forEach(t => t.classList.remove('selected'));
                         this.classList.add('selected');
                         
-                        updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
-                        
-                        detailPanel.classList.add('active');
+                        updateResearchDetailPanel(detailPanel, tagName, description, imageUrl).then(() => {
+                            // Wait for image to load before fading in
+                            detailPanel.classList.add('active');
+                        });
                     }, 300); // Match CSS transition duration
                 } else {
                     // Panel is closed - just fade in
                     freshTags.forEach(t => t.classList.remove('selected'));
                     this.classList.add('selected');
                     
-                    updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
-                    
-                    detailPanel.classList.add('active');
+                    updateResearchDetailPanel(detailPanel, tagName, description, imageUrl).then(() => {
+                        detailPanel.classList.add('active');
+                    });
                 }
             });
         });
