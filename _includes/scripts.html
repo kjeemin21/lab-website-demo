@@ -705,16 +705,24 @@
         
         if (!gridContainer) return;
         
-        // Show loading spinner and hide grid
-        if (loadingSpinner) {
-            loadingSpinner.classList.remove('hidden');
-        }
-        gridContainer.classList.remove('loaded');
+        // Show grid immediately (it's already visible with 'loaded' class)
+        gridContainer.classList.add('loaded');
         
         // Clear existing content
         gridContainer.innerHTML = '';
         
+        // Remove any existing spinner from grid
+        const existingSpinner = gridContainer.querySelector('.photos-loading-spinner-inline');
+        if (existingSpinner) {
+            existingSpinner.remove();
+        }
+        
         try {
+            // Create wrapper for columns to ensure spinner appears below all columns
+            const columnsWrapper = document.createElement('div');
+            columnsWrapper.className = 'photos-columns-wrapper';
+            gridContainer.appendChild(columnsWrapper);
+            
             // Determine number of columns based on screen width
             const columnCount = getColumnCount();
             
@@ -725,84 +733,132 @@
             for (let i = 0; i < columnCount; i++) {
                 const column = document.createElement('div');
                 column.className = 'photo-column';
-                gridContainer.appendChild(column);
+                columnsWrapper.appendChild(column);
                 columns.push(column);
                 columnHeights.push(0);
             }
             
-            // Pre-load all images to get their dimensions
-            const imagePromises = photosData.map(photo => {
-                return new Promise((resolve, reject) => {
-                    const img = new Image();
-                    img.onload = function() {
-                        resolve({
-                            photo: photo,
-                            width: this.naturalWidth,
-                            height: this.naturalHeight,
-                            aspectRatio: this.naturalWidth / this.naturalHeight
-                        });
-                    };
-                    img.onerror = function() {
-                        console.error('Failed to load image:', photo.image);
-                        reject(photo);
-                    };
-                    img.src = photo.image;
-                });
-            });
-            
-            // Wait for all images to load
-            const loadedImages = await Promise.all(imagePromises);
-            
-            // Now place images in order (sorted by date, newest first)
-            loadedImages.forEach(imageData => {
-                // Find the shortest column
-                const minHeight = Math.min(...columnHeights);
-                const minIndex = columnHeights.indexOf(minHeight);
-                
-                // Get column width to calculate proper height
-                const columnWidth = columns[minIndex].offsetWidth;
-                const calculatedHeight = columnWidth / imageData.aspectRatio;
-                
-                // Create photo item
-                const photoItem = document.createElement('div');
-                photoItem.className = 'photo-item';
-                photoItem.setAttribute('data-image', imageData.photo.image);
-                
-                const img = document.createElement('img');
-                img.src = imageData.photo.image;
-                img.alt = imageData.photo.caption || 'Lab photo';
-                img.className = 'photo-main';
-                
-                photoItem.appendChild(img);
-                
-                // Add photo to the shortest column
-                columns[minIndex].appendChild(photoItem);
-                
-                // Update column height (add image height + gap)
-                columnHeights[minIndex] += calculatedHeight + 20; // 20px is the gap
-            });
-            
-            // Hide loading spinner and show grid with fade-in effect
-            if (loadingSpinner) {
-                loadingSpinner.classList.add('hidden');
+            // Split photos into chunks of 9
+            const chunkSize = 9;
+            const chunks = [];
+            for (let i = 0; i < photosData.length; i += chunkSize) {
+                chunks.push(photosData.slice(i, i + chunkSize));
             }
             
-            // Small delay to ensure the DOM is ready for the fade-in transition
-            setTimeout(() => {
-                gridContainer.classList.add('loaded');
-            }, 50);
+            // Helper function to create and show inline spinner
+            function createInlineSpinner() {
+                const spinnerContainer = document.createElement('div');
+                spinnerContainer.className = 'photos-loading-spinner-inline';
+                spinnerContainer.innerHTML = `
+                    <div class="spinner"></div>
+                    <p>Loading photos...</p>
+                `;
+                gridContainer.appendChild(spinnerContainer);
+                return spinnerContainer;
+            }
             
-            // Re-initialize photo items for lightbox
-            initPhotoItems();
+            // Helper function to remove inline spinner
+            function removeInlineSpinner() {
+                const spinner = gridContainer.querySelector('.photos-loading-spinner-inline');
+                if (spinner) {
+                    spinner.remove();
+                }
+            }
+            
+            // Helper function to add images to grid
+            function addImagesToGrid(imageDataArray) {
+                imageDataArray.forEach(imageData => {
+                    // Find the shortest column
+                    const minHeight = Math.min(...columnHeights);
+                    const minIndex = columnHeights.indexOf(minHeight);
+                    
+                    // Get column width to calculate proper height
+                    const columnWidth = columns[minIndex].offsetWidth;
+                    const calculatedHeight = columnWidth / imageData.aspectRatio;
+                    
+                    // Create photo item
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.setAttribute('data-image', imageData.photo.image);
+                    
+                    const img = document.createElement('img');
+                    img.src = imageData.photo.image;
+                    img.alt = imageData.photo.caption || 'Lab photo';
+                    img.className = 'photo-main';
+                    
+                    photoItem.appendChild(img);
+                    
+                    // Add photo to the shortest column
+                    columns[minIndex].appendChild(photoItem);
+                    
+                    // Update column height (add image height + gap)
+                    columnHeights[minIndex] += calculatedHeight + 20; // 20px is the gap
+                });
+            }
+            
+            // Process chunks sequentially
+            for (let chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {
+                const chunk = chunks[chunkIndex];
+                
+                // Show spinner if there are more chunks to load
+                let inlineSpinner = null;
+                if (chunkIndex < chunks.length - 1) {
+                    inlineSpinner = createInlineSpinner();
+                }
+                
+                // Pre-load images in this chunk
+                const imagePromises = chunk.map(photo => {
+                    return new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.onload = function() {
+                            resolve({
+                                photo: photo,
+                                width: this.naturalWidth,
+                                height: this.naturalHeight,
+                                aspectRatio: this.naturalWidth / this.naturalHeight
+                            });
+                        };
+                        img.onerror = function() {
+                            console.error('Failed to load image:', photo.image);
+                            reject(photo);
+                        };
+                        img.src = photo.image;
+                    });
+                });
+                
+                // Wait for this chunk to load
+                try {
+                    const loadedImages = await Promise.all(imagePromises);
+                    
+                    // Remove spinner before adding images
+                    if (inlineSpinner) {
+                        removeInlineSpinner();
+                    }
+                    
+                    // Add images to grid
+                    addImagesToGrid(loadedImages);
+                    
+                    // Re-initialize photo items for lightbox after each chunk
+                    initPhotoItems();
+                    
+                } catch (error) {
+                    console.error('Error loading chunk:', error);
+                    if (inlineSpinner) {
+                        removeInlineSpinner();
+                    }
+                }
+            }
+            
+            // All chunks loaded, ensure spinner is removed
+            removeInlineSpinner();
             
         } catch (error) {
             console.error('Error loading images:', error);
             
-            // Hide loading spinner even on error
+            // Show error spinner if something goes wrong
             if (loadingSpinner) {
-                loadingSpinner.classList.add('hidden');
+                loadingSpinner.classList.remove('hidden');
             }
-            gridContainer.classList.add('loaded');
         }
     }
     
