@@ -21,11 +21,16 @@
 title: bdi-lab Demo
 email: kjeemin21@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  It's a demo site for bdi-lab.
+  The Big Data Intelligence lab at KAIST is led by Prof. Joyce Jiyoung Whang at the School of Computing. The group is engaged in fundamental research on diverse aspects of big data, with an emphasis on developing novel computational algorithms for massive and complex datasets.
 baseurl: "/lab-website-demo" # the subpath of your site, e.g. /blog
 url: "https://kjeemin21.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: None
 github_username:  kjeemin21
+
+# SEO Settings
+author: "Joyce Jiyoung Whang"
+keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, Data Mining, Big Data Analytics, Data Science, Research Lab"
+language: "ko"
 
 # Build settings
 theme: minima

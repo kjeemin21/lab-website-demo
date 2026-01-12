@@ -2,6 +2,8 @@
 layout: page
 title: About
 permalink: /about/
+description: "Learn about the Big Data Intelligence lab at KAIST. We conduct research on graph machine learning, deep learning, data mining, and big data analytics."
+keywords: "About BDI Lab, KAIST Research Lab, Big Data Research, Graph Machine Learning"
 ---
 
 This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
