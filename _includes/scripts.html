@@ -148,22 +148,41 @@
 
     // Handle initial hash on page load
     function handleInitialHash() {
+        // Wait a bit to ensure DOM is fully ready
         const hash = window.location.hash.substring(1);
         if (hash) {
+            // Try to find the target panel
             const targetPanel = document.querySelector(`#${hash}.tab-panel`);
             if (targetPanel) {
                 switchTab(hash);
                 return;
             }
+            // If panel not found, wait a bit more and try again
+            setTimeout(function() {
+                const retryPanel = document.querySelector(`#${hash}.tab-panel`);
+                if (retryPanel) {
+                    switchTab(hash);
+                    return;
+                }
+                // Still not found, default to about
+                switchTab('about');
+                window.scrollTo(0, 0);
+            }, 50);
+        } else {
+            // Default to first tab if no valid hash
+            switchTab('about');
+            // Ensure scroll is at top for About tab
+            window.scrollTo(0, 0);
         }
-        // Default to first tab if no valid hash
-        switchTab('about');
-        // Ensure scroll is at top for About tab
-        window.scrollTo(0, 0);
     }
 
-    // Initialize on page load
-    handleInitialHash();
+    // Initialize on DOM ready to ensure all elements are loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', handleInitialHash);
+    } else {
+        // DOM is already loaded
+        handleInitialHash();
+    }
     
     // Also ensure scroll is at top after page fully loads
     window.addEventListener('load', function() {
@@ -881,33 +900,68 @@
     }
 
     // Also initialize on page load if publications or members tab is active
-    document.addEventListener('DOMContentLoaded', function() {
+    // This will run after handleInitialHash() has set the correct tab
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            // handleInitialHash() will be called first, then this runs
+            const hash = window.location.hash.substring(1);
+            const activeTab = document.querySelector('.tab-panel.active');
+            
+            // Force scroll to top for About tab or no hash
+            if (!hash || hash === 'about') {
+                window.scrollTo(0, 0);
+            }
+            
+            // Additional initialization is already handled by switchTab() in handleInitialHash()
+            // But we keep this for edge cases where DOMContentLoaded fires after handleInitialHash
+            if (activeTab) {
+                const tabId = activeTab.id;
+                if (tabId === 'publications') {
+                    setTimeout(function() {
+                        initPublicationsMenuWithClose();
+                        initPublicationsShowMore();
+                    }, 100);
+                }
+                if (tabId === 'members') {
+                    setTimeout(initMembersMenuWithClose, 100);
+                }
+                if (tabId === 'about') {
+                    setTimeout(function() {
+                        initAboutAnimations();
+                        setTimeout(function() {
+                            window.scrollTo(0, 0);
+                        }, 50);
+                    }, 100);
+                }
+            }
+        });
+    } else {
+        // DOM already loaded, handleInitialHash() already ran
+        // Just ensure additional initialization if needed
         const hash = window.location.hash.substring(1);
+        const activeTab = document.querySelector('.tab-panel.active');
         
-        // Force scroll to top for About tab or no hash
-        if (!hash || hash === 'about') {
-            window.scrollTo(0, 0);
-        }
-        
-        if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
-            setTimeout(function() {
-                initPublicationsMenuWithClose();
-                initPublicationsShowMore();
-            }, 100);
-        }
-        if (hash === 'members' || (!hash && document.querySelector('#members.tab-panel.active'))) {
-            setTimeout(initMembersMenuWithClose, 100);
-        }
-        if (hash === 'about' || (!hash && document.querySelector('#about.tab-panel.active'))) {
-            setTimeout(function() {
-                initAboutAnimations();
-                // Double-check scroll position after animations init
+        if (activeTab) {
+            const tabId = activeTab.id;
+            if (tabId === 'publications') {
                 setTimeout(function() {
-                    window.scrollTo(0, 0);
-                }, 50);
-            }, 100);
+                    initPublicationsMenuWithClose();
+                    initPublicationsShowMore();
+                }, 100);
+            }
+            if (tabId === 'members') {
+                setTimeout(initMembersMenuWithClose, 100);
+            }
+            if (tabId === 'about') {
+                setTimeout(function() {
+                    initAboutAnimations();
+                    setTimeout(function() {
+                        window.scrollTo(0, 0);
+                    }, 50);
+                }, 100);
+            }
         }
-    });
+    }
 
     // Photo Grid functionality with fixed frames
     function initBalancedPhotoGrid() {
