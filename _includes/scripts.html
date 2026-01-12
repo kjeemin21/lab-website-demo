@@ -148,22 +148,41 @@
 
     // Handle initial hash on page load
     function handleInitialHash() {
+        // Wait a bit to ensure DOM is fully ready
         const hash = window.location.hash.substring(1);
         if (hash) {
+            // Try to find the target panel
             const targetPanel = document.querySelector(`#${hash}.tab-panel`);
             if (targetPanel) {
                 switchTab(hash);
                 return;
             }
+            // If panel not found, wait a bit more and try again
+            setTimeout(function() {
+                const retryPanel = document.querySelector(`#${hash}.tab-panel`);
+                if (retryPanel) {
+                    switchTab(hash);
+                    return;
+                }
+                // Still not found, default to about
+                switchTab('about');
+                window.scrollTo(0, 0);
+            }, 50);
+        } else {
+            // Default to first tab if no valid hash
+            switchTab('about');
+            // Ensure scroll is at top for About tab
+            window.scrollTo(0, 0);
         }
-        // Default to first tab if no valid hash
-        switchTab('about');
-        // Ensure scroll is at top for About tab
-        window.scrollTo(0, 0);
     }
 
-    // Initialize on page load
-    handleInitialHash();
+    // Initialize on DOM ready to ensure all elements are loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', handleInitialHash);
+    } else {
+        // DOM is already loaded
+        handleInitialHash();
+    }
     
     // Also ensure scroll is at top after page fully loads
     window.addEventListener('load', function() {
@@ -245,8 +264,14 @@
         if (targetSection) {
             enableScrollBlock();
             
+            // Find the subsection title within the section
+            const titleElement = targetSection.querySelector('.subsection-title');
+            const targetElement = titleElement || targetSection;
+            
             const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
-            const offsetTop = targetSection.offsetTop - headerHeight - 20;
+            // Calculate position relative to viewport, accounting for header
+            const elementTop = targetElement.getBoundingClientRect().top + window.scrollY;
+            const offsetTop = elementTop - headerHeight - 20;
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
@@ -450,8 +475,14 @@
         if (targetSection) {
             enableScrollBlock();
             
+            // Find the subsection title within the section
+            const titleElement = targetSection.querySelector('.subsection-title');
+            const targetElement = titleElement || targetSection;
+            
             const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
-            const offsetTop = targetSection.offsetTop - headerHeight - 20;
+            // Calculate position relative to viewport, accounting for header
+            const elementTop = targetElement.getBoundingClientRect().top + window.scrollY;
+            const offsetTop = elementTop - headerHeight - 20;
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
@@ -716,14 +747,36 @@
         autoSlideEnabled = false;
     }
     
+    // Helper function to update research detail panel content
+    function updateResearchDetailPanel(detailPanel, tagName, description, imageUrl) {
+        const detailTitle = detailPanel.querySelector('.detail-title');
+        const detailContent = detailPanel.querySelector('.detail-content');
+        const detailImage = detailPanel.querySelector('.detail-image');
+        
+        if (detailTitle) {
+            detailTitle.textContent = tagName;
+        }
+        
+        if (detailContent) {
+            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+        }
+        
+        if (detailImage) {
+            if (imageUrl && imageUrl.trim() !== '') {
+                detailImage.src = imageUrl;
+                detailImage.alt = tagName;
+                detailImage.style.display = 'block';
+            } else {
+                detailImage.style.display = 'none';
+            }
+        }
+    }
+    
     function switchToNextResearch() {
         const tags = document.querySelectorAll('.research-tag');
         const detailPanel = document.querySelector('.research-detail-panel');
         
         if (!tags.length || !detailPanel) return;
-        
-        const detailTitle = detailPanel.querySelector('.detail-title');
-        const detailContent = detailPanel.querySelector('.detail-content');
         
         // Move to next index (cycle back to 0 after last)
         currentResearchIndex = (currentResearchIndex + 1) % tags.length;
@@ -731,6 +784,7 @@
         const targetTag = tags[currentResearchIndex];
         const tagName = targetTag.textContent;
         const description = targetTag.getAttribute('data-description');
+        const imageUrl = targetTag.getAttribute('data-image');
         
         // Update tag selection immediately
         tags.forEach(t => t.classList.remove('selected'));
@@ -741,19 +795,13 @@
             detailPanel.classList.remove('active');
             setTimeout(() => {
                 // Change content after fade-out is complete
-                if (detailTitle && detailContent) {
-                    detailTitle.textContent = tagName;
-                    detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-                }
+                updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
                 // Fade in with new content
                 detailPanel.classList.add('active');
             }, 300); // Match CSS transition duration
         } else {
             // Panel is closed - update content and fade in
-            if (detailTitle && detailContent) {
-                detailTitle.textContent = tagName;
-                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-            }
+            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
             detailPanel.classList.add('active');
         }
     }
@@ -787,9 +835,6 @@
         
         if (!tags.length || !detailPanel) return;
         
-        const detailTitle = detailPanel.querySelector('.detail-title');
-        const detailContent = detailPanel.querySelector('.detail-content');
-        
         tags.forEach(tag => {
             // Remove any existing listeners by cloning
             const newTag = tag.cloneNode(true);
@@ -812,14 +857,12 @@
             const targetTag = freshTags[currentResearchIndex];
             const tagName = targetTag.textContent;
             const description = targetTag.getAttribute('data-description');
+            const imageUrl = targetTag.getAttribute('data-image');
             
             freshTags.forEach(t => t.classList.remove('selected'));
             targetTag.classList.add('selected');
             
-            if (detailTitle && detailContent) {
-                detailTitle.textContent = tagName;
-                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-            }
+            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
             
             detailPanel.classList.add('active');
         }
@@ -848,6 +891,7 @@
                 // Different tag selected
                 const tagName = this.textContent;
                 const description = this.getAttribute('data-description');
+                const imageUrl = this.getAttribute('data-image');
                 
                 if (isActive) {
                     // Panel is already open - fade out, change content, fade in
@@ -857,10 +901,7 @@
                         freshTags.forEach(t => t.classList.remove('selected'));
                         this.classList.add('selected');
                         
-                        if (detailTitle && detailContent) {
-                            detailTitle.textContent = tagName;
-                            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-                        }
+                        updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
                         
                         detailPanel.classList.add('active');
                     }, 300); // Match CSS transition duration
@@ -869,10 +910,7 @@
                     freshTags.forEach(t => t.classList.remove('selected'));
                     this.classList.add('selected');
                     
-                    if (detailTitle && detailContent) {
-                        detailTitle.textContent = tagName;
-                        detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-                    }
+                    updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
                     
                     detailPanel.classList.add('active');
                 }
@@ -881,33 +919,68 @@
     }
 
     // Also initialize on page load if publications or members tab is active
-    document.addEventListener('DOMContentLoaded', function() {
+    // This will run after handleInitialHash() has set the correct tab
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            // handleInitialHash() will be called first, then this runs
+            const hash = window.location.hash.substring(1);
+            const activeTab = document.querySelector('.tab-panel.active');
+            
+            // Force scroll to top for About tab or no hash
+            if (!hash || hash === 'about') {
+                window.scrollTo(0, 0);
+            }
+            
+            // Additional initialization is already handled by switchTab() in handleInitialHash()
+            // But we keep this for edge cases where DOMContentLoaded fires after handleInitialHash
+            if (activeTab) {
+                const tabId = activeTab.id;
+                if (tabId === 'publications') {
+                    setTimeout(function() {
+                        initPublicationsMenuWithClose();
+                        initPublicationsShowMore();
+                    }, 100);
+                }
+                if (tabId === 'members') {
+                    setTimeout(initMembersMenuWithClose, 100);
+                }
+                if (tabId === 'about') {
+                    setTimeout(function() {
+                        initAboutAnimations();
+                        setTimeout(function() {
+                            window.scrollTo(0, 0);
+                        }, 50);
+                    }, 100);
+                }
+            }
+        });
+    } else {
+        // DOM already loaded, handleInitialHash() already ran
+        // Just ensure additional initialization if needed
         const hash = window.location.hash.substring(1);
+        const activeTab = document.querySelector('.tab-panel.active');
         
-        // Force scroll to top for About tab or no hash
-        if (!hash || hash === 'about') {
-            window.scrollTo(0, 0);
-        }
-        
-        if (hash === 'publications' || (!hash && document.querySelector('#publications.tab-panel.active'))) {
-            setTimeout(function() {
-                initPublicationsMenuWithClose();
-                initPublicationsShowMore();
-            }, 100);
-        }
-        if (hash === 'members' || (!hash && document.querySelector('#members.tab-panel.active'))) {
-            setTimeout(initMembersMenuWithClose, 100);
-        }
-        if (hash === 'about' || (!hash && document.querySelector('#about.tab-panel.active'))) {
-            setTimeout(function() {
-                initAboutAnimations();
-                // Double-check scroll position after animations init
+        if (activeTab) {
+            const tabId = activeTab.id;
+            if (tabId === 'publications') {
                 setTimeout(function() {
-                    window.scrollTo(0, 0);
-                }, 50);
-            }, 100);
+                    initPublicationsMenuWithClose();
+                    initPublicationsShowMore();
+                }, 100);
+            }
+            if (tabId === 'members') {
+                setTimeout(initMembersMenuWithClose, 100);
+            }
+            if (tabId === 'about') {
+                setTimeout(function() {
+                    initAboutAnimations();
+                    setTimeout(function() {
+                        window.scrollTo(0, 0);
+                    }, 50);
+                }, 100);
+            }
         }
-    });
+    }
 
     // Photo Grid functionality with fixed frames
     function initBalancedPhotoGrid() {

@@ -5,7 +5,7 @@ description: "The Big Data Intelligence lab at KAIST conducts fundamental resear
 keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, Data Mining, Research Lab"
 ---
 
-<section id="about" class="section tab-panel active">
+<section id="about" class="section tab-panel">
     <!-- Side Menu for Social Links -->
     <div class="about-side-menu">
         <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="about-side-menu-link" title="Github">
@@ -51,14 +51,23 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                 <h3 class="research-section-title">Research Areas</h3>
                 <div class="research-tags-list">
                     {% for area in site.data.about.research_areas %}
-                    <span class="research-tag" data-description="{{ area.description }}">{{ area.name }}</span>
+                    <span class="research-tag" data-description="{{ area.description }}" data-image="{% if area.image %}{{ area.image | relative_url }}{% endif %}">{{ area.name }}</span>
                     {% endfor %}
                 </div>
                 
                 <!-- Research Detail Panel -->
                 <div class="research-detail-panel">
-                    <h3 class="detail-title">연구 영역 상세</h3>
-                    <p class="detail-content">연구 영역을 선택하면 자세한 내용이 표시됩니다.</p>
+                    <div class="detail-body">
+                        <div class="detail-text-wrapper">
+                            <h3 class="detail-title">연구 영역 상세</h3>
+                            <p class="detail-content">연구 영역을 선택하면 자세한 내용이 표시됩니다.</p>
+                        </div>
+                        <div class="detail-image-wrapper">
+                            <div class="detail-image-container">
+                                <img class="detail-image" src="" alt="" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endif %}

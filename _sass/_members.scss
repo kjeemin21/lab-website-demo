@@ -95,7 +95,7 @@
     transition: all 0.3s;
     padding: 4px;
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: color-mix(in srgb, var(--card-bg) 80%, white);
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
@@ -404,7 +404,7 @@
 .member-menu-btn {
     width: 100%;
     padding: 14px 20px;
-    background-color: var(--bg-color);
+    background-color: color-mix(in srgb, var(--bg-color) 95%, black);
     border: none;
     border-bottom: 1px solid #d0d0d0;
     color: var(--primary-color);
@@ -417,18 +417,18 @@
 }
 
 .member-menu-btn:hover {
-    background-color: #f2f2f2;
+    background-color: var(--bg-color);
     color: var(--primary-color);
 }
 
 .member-menu-btn.active {
-    background-color: #e8e8e8;
+    background-color: color-mix(in srgb, var(--bg-color) 50%, white);
     color: var(--primary-color);
     font-weight: 700;
 }
 
 .member-menu-btn.active:hover {
-    background-color: #f2f2f2;
+    background-color: color-mix(in srgb, var(--bg-color) 40%, white);
     color: var(--primary-color);
 }
 
