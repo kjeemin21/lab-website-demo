@@ -747,14 +747,36 @@
         autoSlideEnabled = false;
     }
     
+    // Helper function to update research detail panel content
+    function updateResearchDetailPanel(detailPanel, tagName, description, imageUrl) {
+        const detailTitle = detailPanel.querySelector('.detail-title');
+        const detailContent = detailPanel.querySelector('.detail-content');
+        const detailImage = detailPanel.querySelector('.detail-image');
+        
+        if (detailTitle) {
+            detailTitle.textContent = tagName;
+        }
+        
+        if (detailContent) {
+            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+        }
+        
+        if (detailImage) {
+            if (imageUrl && imageUrl.trim() !== '') {
+                detailImage.src = imageUrl;
+                detailImage.alt = tagName;
+                detailImage.style.display = 'block';
+            } else {
+                detailImage.style.display = 'none';
+            }
+        }
+    }
+    
     function switchToNextResearch() {
         const tags = document.querySelectorAll('.research-tag');
         const detailPanel = document.querySelector('.research-detail-panel');
         
         if (!tags.length || !detailPanel) return;
-        
-        const detailTitle = detailPanel.querySelector('.detail-title');
-        const detailContent = detailPanel.querySelector('.detail-content');
         
         // Move to next index (cycle back to 0 after last)
         currentResearchIndex = (currentResearchIndex + 1) % tags.length;
@@ -762,6 +784,7 @@
         const targetTag = tags[currentResearchIndex];
         const tagName = targetTag.textContent;
         const description = targetTag.getAttribute('data-description');
+        const imageUrl = targetTag.getAttribute('data-image');
         
         // Update tag selection immediately
         tags.forEach(t => t.classList.remove('selected'));
@@ -772,19 +795,13 @@
             detailPanel.classList.remove('active');
             setTimeout(() => {
                 // Change content after fade-out is complete
-                if (detailTitle && detailContent) {
-                    detailTitle.textContent = tagName;
-                    detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-                }
+                updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
                 // Fade in with new content
                 detailPanel.classList.add('active');
             }, 300); // Match CSS transition duration
         } else {
             // Panel is closed - update content and fade in
-            if (detailTitle && detailContent) {
-                detailTitle.textContent = tagName;
-                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-            }
+            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
             detailPanel.classList.add('active');
         }
     }
@@ -818,9 +835,6 @@
         
         if (!tags.length || !detailPanel) return;
         
-        const detailTitle = detailPanel.querySelector('.detail-title');
-        const detailContent = detailPanel.querySelector('.detail-content');
-        
         tags.forEach(tag => {
             // Remove any existing listeners by cloning
             const newTag = tag.cloneNode(true);
@@ -843,14 +857,12 @@
             const targetTag = freshTags[currentResearchIndex];
             const tagName = targetTag.textContent;
             const description = targetTag.getAttribute('data-description');
+            const imageUrl = targetTag.getAttribute('data-image');
             
             freshTags.forEach(t => t.classList.remove('selected'));
             targetTag.classList.add('selected');
             
-            if (detailTitle && detailContent) {
-                detailTitle.textContent = tagName;
-                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-            }
+            updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
             
             detailPanel.classList.add('active');
         }
@@ -879,6 +891,7 @@
                 // Different tag selected
                 const tagName = this.textContent;
                 const description = this.getAttribute('data-description');
+                const imageUrl = this.getAttribute('data-image');
                 
                 if (isActive) {
                     // Panel is already open - fade out, change content, fade in
@@ -888,10 +901,7 @@
                         freshTags.forEach(t => t.classList.remove('selected'));
                         this.classList.add('selected');
                         
-                        if (detailTitle && detailContent) {
-                            detailTitle.textContent = tagName;
-                            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-                        }
+                        updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
                         
                         detailPanel.classList.add('active');
                     }, 300); // Match CSS transition duration
@@ -900,10 +910,7 @@
                     freshTags.forEach(t => t.classList.remove('selected'));
                     this.classList.add('selected');
                     
-                    if (detailTitle && detailContent) {
-                        detailTitle.textContent = tagName;
-                        detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-                    }
+                    updateResearchDetailPanel(detailPanel, tagName, description, imageUrl);
                     
                     detailPanel.classList.add('active');
                 }
