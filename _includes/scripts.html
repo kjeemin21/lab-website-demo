@@ -48,6 +48,7 @@
         const currentActiveTab = document.querySelector('.tab-panel.active');
         if (currentActiveTab && currentActiveTab.id === 'about' && tabId !== 'about') {
             stopAutoSlide();
+            stopAboutSlideshow();
         }
         
         // Remove active class from all tab buttons
@@ -591,6 +592,119 @@
         
         // Initialize research tag interactions
         initAboutResearchTags();
+        
+        // Initialize image slideshow
+        initAboutImageSlideshow();
+    }
+    
+    // About image slideshow functionality
+    let aboutSlideshowTimer = null;
+    let aboutSlideshowEnabled = false;
+    
+    function initAboutImageSlideshow() {
+        const slideshow = document.getElementById('aboutImageSlideshow');
+        if (!slideshow) return;
+        
+        const slides = slideshow.querySelectorAll('.slideshow-item');
+        
+        // Adjust container height to fit images
+        function adjustSlideshowHeight() {
+            const activeSlide = slideshow.querySelector('.slideshow-item.active');
+            if (activeSlide) {
+                const img = activeSlide.querySelector('img');
+                if (img && img.complete) {
+                    slideshow.style.height = img.offsetHeight + 'px';
+                }
+            }
+        }
+        
+        // Wait for all images to load, then adjust height
+        const images = slideshow.querySelectorAll('img');
+        let loadedCount = 0;
+        const totalImages = images.length;
+        
+        if (totalImages === 0) return;
+        
+        images.forEach(img => {
+            if (img.complete) {
+                loadedCount++;
+            } else {
+                img.addEventListener('load', function() {
+                    loadedCount++;
+                    if (loadedCount === totalImages) {
+                        adjustSlideshowHeight();
+                    }
+                });
+            }
+        });
+        
+        if (loadedCount === totalImages) {
+            adjustSlideshowHeight();
+        }
+        
+        // Adjust height when window resizes
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(adjustSlideshowHeight, 100);
+        });
+        
+        if (slides.length <= 1) {
+            // Only one image or no images, no slideshow needed
+            return;
+        }
+        
+        // Stop any existing slideshow
+        stopAboutSlideshow();
+        
+        // Start slideshow
+        aboutSlideshowEnabled = true;
+        startAboutSlideshow(slides, adjustSlideshowHeight);
+    }
+    
+    function startAboutSlideshow(slides, adjustHeightCallback) {
+        if (!aboutSlideshowEnabled || !slides || slides.length <= 1) return;
+        
+        let currentIndex = 0;
+        
+        // Find current active slide
+        slides.forEach((slide, index) => {
+            if (slide.classList.contains('active')) {
+                currentIndex = index;
+            }
+        });
+        
+        function nextSlide() {
+            if (!aboutSlideshowEnabled) return;
+            
+            // Remove active class from current slide
+            slides[currentIndex].classList.remove('active');
+            
+            // Move to next slide (cycle back to 0 after last)
+            currentIndex = (currentIndex + 1) % slides.length;
+            
+            // Add active class to next slide
+            slides[currentIndex].classList.add('active');
+            
+            // Adjust height for new active image
+            if (adjustHeightCallback) {
+                setTimeout(adjustHeightCallback, 50);
+            }
+            
+            // Schedule next transition
+            aboutSlideshowTimer = setTimeout(nextSlide, 3000); // 3 seconds
+        }
+        
+        // Start the slideshow
+        aboutSlideshowTimer = setTimeout(nextSlide, 3000); // 3 seconds
+    }
+    
+    function stopAboutSlideshow() {
+        if (aboutSlideshowTimer !== null) {
+            clearTimeout(aboutSlideshowTimer);
+            aboutSlideshowTimer = null;
+        }
+        aboutSlideshowEnabled = false;
     }
     
     // Auto-slide management functions

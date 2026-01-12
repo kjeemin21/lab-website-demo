@@ -20,11 +20,21 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
         <div class="about-content">
             <!-- Main Content: Image (Left) + Text (Right) -->
             <div class="about-main-section">
-                <!-- Left: Hero Image -->
+                <!-- Left: Hero Image / Slideshow -->
                 <div class="about-main-image">
-                    {% if site.data.about.hero_image %}
-                    <img src="{{ site.data.about.hero_image | relative_url }}" alt="{{ site.data.about.title }}">
-                    {% endif %}
+                    <div class="about-image-slideshow" id="aboutImageSlideshow">
+                        {% if site.data.about.hero_images and site.data.about.hero_images.size > 1 %}
+                            {% for image in site.data.about.hero_images %}
+                            <div class="slideshow-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image | relative_url }}" alt="{{ site.data.about.title }}" loading="lazy">
+                            </div>
+                            {% endfor %}
+                        {% elsif site.data.about.hero_image %}
+                            <div class="slideshow-item active">
+                                <img src="{{ site.data.about.hero_image | relative_url }}" alt="{{ site.data.about.title }}">
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
                 
                 <!-- Right: Description -->
