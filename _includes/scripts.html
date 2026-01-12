@@ -264,8 +264,14 @@
         if (targetSection) {
             enableScrollBlock();
             
+            // Find the subsection title within the section
+            const titleElement = targetSection.querySelector('.subsection-title');
+            const targetElement = titleElement || targetSection;
+            
             const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
-            const offsetTop = targetSection.offsetTop - headerHeight - 20;
+            // Calculate position relative to viewport, accounting for header
+            const elementTop = targetElement.getBoundingClientRect().top + window.scrollY;
+            const offsetTop = elementTop - headerHeight - 20;
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
@@ -469,8 +475,14 @@
         if (targetSection) {
             enableScrollBlock();
             
+            // Find the subsection title within the section
+            const titleElement = targetSection.querySelector('.subsection-title');
+            const targetElement = titleElement || targetSection;
+            
             const headerHeight = document.querySelector('.site-header')?.offsetHeight || 100;
-            const offsetTop = targetSection.offsetTop - headerHeight - 20;
+            // Calculate position relative to viewport, accounting for header
+            const elementTop = targetElement.getBoundingClientRect().top + window.scrollY;
+            const offsetTop = elementTop - headerHeight - 20;
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
