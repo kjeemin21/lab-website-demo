@@ -93,4 +93,56 @@
       "description": "{% if site.data.about.description %}{{ site.data.about.description | strip_html | strip_newlines | truncate: 200 }}{% else %}{{ site.description }}{% endif %}"
     }
     </script>
+    
+    <!-- Prevent tab flickering on page load -->
+    <script>
+        (function() {
+            // Get hash from URL immediately
+            var hash = window.location.hash.substring(1);
+            var targetTab = hash || 'about';
+            
+            // Function to set initial tab state
+            function setInitialTab() {
+                // Remove active class from all tab panels and buttons
+                var allPanels = document.querySelectorAll('.tab-panel');
+                var allButtons = document.querySelectorAll('.tab-button');
+                var allSideMenuTabs = document.querySelectorAll('.side-menu-tab');
+                
+                allPanels.forEach(function(panel) {
+                    panel.classList.remove('active');
+                });
+                allButtons.forEach(function(btn) {
+                    btn.classList.remove('active');
+                });
+                allSideMenuTabs.forEach(function(btn) {
+                    btn.classList.remove('active');
+                });
+                
+                // Activate the correct tab based on hash
+                var targetPanel = document.querySelector('#' + targetTab + '.tab-panel');
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                }
+                
+                var targetButton = document.querySelector('.tab-button[data-tab="' + targetTab + '"]');
+                if (targetButton) {
+                    targetButton.classList.add('active');
+                }
+                
+                var targetSideMenuTab = document.querySelector('.side-menu-tab[data-tab="' + targetTab + '"]');
+                if (targetSideMenuTab) {
+                    targetSideMenuTab.classList.add('active');
+                }
+            }
+            
+            // Try to set tab immediately if DOM is ready
+            if (document.readyState === 'loading') {
+                // DOM is still loading, wait for DOMContentLoaded
+                document.addEventListener('DOMContentLoaded', setInitialTab);
+            } else {
+                // DOM is already loaded, set tab immediately
+                setInitialTab();
+            }
+        })();
+    </script>
 </head>
