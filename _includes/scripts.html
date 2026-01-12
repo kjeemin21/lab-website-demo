@@ -618,22 +618,28 @@
         const tagName = targetTag.textContent;
         const description = targetTag.getAttribute('data-description');
         
-        // Update UI
+        // Update tag selection immediately
         tags.forEach(t => t.classList.remove('selected'));
         targetTag.classList.add('selected');
         
-        if (detailTitle && detailContent) {
-            detailTitle.textContent = tagName;
-            detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
-        }
-        
-        // If panel is already active, fade out and fade in for smooth transition
+        // If panel is already active, fade out first, then change content and fade in
         if (detailPanel.classList.contains('active')) {
             detailPanel.classList.remove('active');
             setTimeout(() => {
+                // Change content after fade-out is complete
+                if (detailTitle && detailContent) {
+                    detailTitle.textContent = tagName;
+                    detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                }
+                // Fade in with new content
                 detailPanel.classList.add('active');
-            }, 300);
+            }, 300); // Match CSS transition duration
         } else {
+            // Panel is closed - update content and fade in
+            if (detailTitle && detailContent) {
+                detailTitle.textContent = tagName;
+                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+            }
             detailPanel.classList.add('active');
         }
     }
@@ -679,22 +685,26 @@
         // Re-select tags after cloning
         const freshTags = document.querySelectorAll('.research-tag');
         
-        // Reset auto-slide state
-        autoSlideEnabled = true;
-        currentResearchIndex = 0;
+        // Ensure currentResearchIndex is within valid range
+        if (currentResearchIndex >= freshTags.length) {
+            currentResearchIndex = 0;
+        }
         
-        // Auto-select first tag on page load
+        // Reset auto-slide state (but keep currentResearchIndex)
+        autoSlideEnabled = true;
+        
+        // Display the research area at current index (maintains state across tab switches)
         if (freshTags.length > 0) {
-            const firstTag = freshTags[0];
-            const firstTagName = firstTag.textContent;
-            const firstDescription = firstTag.getAttribute('data-description');
+            const targetTag = freshTags[currentResearchIndex];
+            const tagName = targetTag.textContent;
+            const description = targetTag.getAttribute('data-description');
             
             freshTags.forEach(t => t.classList.remove('selected'));
-            firstTag.classList.add('selected');
+            targetTag.classList.add('selected');
             
             if (detailTitle && detailContent) {
-                detailTitle.textContent = firstTagName;
-                detailContent.textContent = firstDescription || '연구 영역에 대한 상세 설명이 준비 중입니다.';
+                detailTitle.textContent = tagName;
+                detailContent.textContent = description || '연구 영역에 대한 상세 설명이 준비 중입니다.';
             }
             
             detailPanel.classList.add('active');
