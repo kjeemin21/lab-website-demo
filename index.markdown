@@ -5,7 +5,7 @@ description: "The Big Data Intelligence lab at KAIST conducts fundamental resear
 keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, Data Mining, Research Lab"
 ---
 
-<section id="about" class="section tab-panel active">
+<section id="about" class="section tab-panel">
     <!-- Side Menu for Social Links -->
     <div class="about-side-menu">
         <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="about-side-menu-link" title="Github">
