@@ -23,18 +23,42 @@
     box-shadow: 0 5px 20px rgba(0,0,0,0.15);
 }
 
-.organization-logo {
+.organization-logos {
     flex-shrink: 0;
     width: 280px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    gap: 20px;
+}
+
+.organization-logo {
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    width: 100%;
 }
 
 .organization-logo img {
     max-width: 100%;
     max-height: 200px;
+    object-fit: contain;
+    display: block;
+}
+
+.subinstitution-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.subinstitution-logo img {
+    max-width: 100%;
+    max-height: 80px;
     object-fit: contain;
     display: block;
 }
