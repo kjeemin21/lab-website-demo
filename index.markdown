@@ -688,11 +688,22 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
             <div class="projects-list">
                 {% for org in site.data.projects %}
                 <div class="organization-card">
-                    {% if org.logo %}
-                    <div class="organization-logo">
-                        <img src="{{ org.logo | relative_url }}" alt="{{ org.organization }}">
+                    <div class="organization-logos">
+                        {% if org.logo %}
+                        <div class="organization-logo">
+                            <img src="{{ org.logo | relative_url }}" alt="{{ org.organization }}">
+                        </div>
+                        {% endif %}
+                        {% if org.projects %}
+                            {% for project in org.projects %}
+                                {% if project.subinstitution_logo %}
+                                <div class="subinstitution-logo">
+                                    <img src="{{ project.subinstitution_logo | relative_url }}" alt="Subinstitution Logo">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
-                    {% endif %}
                     <div class="organization-content">
                         <h3 class="organization-name">{{ org.organization }}</h3>
                         {% if org.projects %}

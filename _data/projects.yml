@@ -35,3 +35,41 @@
     - title: "Knowledge Graph Modeling for Semiconductor Data (반도체 공정 데이터의 다각적 분석을 위한 지식 그래프 모델링)"
       period: "Sep. 2020 ~ Sep. 2023"
       role: "Principal Investigator"
+
+- organization: "Institute of Information & communications Technology Planning & Evaluation (IITP)"
+  logo: "/assets/images/projects/iitp_logo.png"
+  projects:
+    - title: "LG AI STAR Talent Development Program for Leading Large-Scale Generative AI Models in the Physical AI Domain (Physical AI 분야의 거대 생성모델 기술 선도를 위한 LG AI STAR 인재양성 사업)"
+      period: "Jul. 2025 ~ Dec. 2028"
+      subinstitution_logo: "/assets/images/projects/lg_ai_research_logo.png"
+    - title: "Development of AI Technology to support Expert Decision-making that can Explain the Reasons/Grounds for Judgment Results based on Expert Knowledge (전문지식 대상 판단결과의 이유/근거를 설명가능한 전문가 의사결정 지원 인공지능 기술개발)"
+      period: "Apr. 2022 ~ Dec. 2026"
+      subinstitution_logo: "/assets/images/projects/etri_logo.png"
+
+- organization: "Kyobo & DPLANEX"
+  logo: "/assets/images/projects/kyobo_dplanex_logo.png"
+  projects:
+    - title: "Multimodal Cross-Domain Recommendation Systems for Personalized Services (개인 맞춤형 서비스를 위한 멀티모달 크로스 도메인 추천 시스템)"
+      period: "Dec. 2024 ~ Nov. 2025"
+    - title: "GNN-based Insurance Fraud Detection (그래프 신경망(GNN) 기반 보험사기 예측 연구)"
+      period: "Aug. 2022 ~ Nov. 2025"
+
+- organization: "Telecommunications Technology Association (TTA)"
+  logo: "/assets/images/projects/tta_logo.png"
+  projects:
+    - title: "생성형 AI의 기술 혁신에 대응 가능한 안정성 평가체계 수립 연구"
+      period: "Oct. 2024 ~ Dec. 2024"
+      role: "Principal Investigator"
+    - title: "AI 위험 분야별 안전성 평가를 위한 데이터셋 로드맵 구축"
+      period: "Oct. 2024 ~ Dec. 2024"
+      role: "Principal Investigator"
+
+- organization: "DevStack"
+  logo: "/assets/images/projects/devstack_logo.svg"
+  projects:
+    - title: "Development of a Technology for Analyzing Root Causes and Proposing Countermeasures for Containerized OpenStack Service’s Failures Using LLM and Knowledge Graphs (거대언어모델 및 지식그래프를 활용하여 컨테이너화된 오픈스택 장애원인 분석 및 대응방안 제시 기술개발)"
+      period: "Mar. 2025 ~ Nov. 2025"
+      role: "Principal Investigator"
+    - title: "Development of Intelligent Kubernetes Fault Cause Analysis and Response Proposal Method Using LLM and Knowledge Graphs (LLM 및 지식그래프를 활용한 지능형 K8s 장애 원인 분석 및 대응 방안 제시 기술 개발)"
+      period: "May 2024 ~ Nov. 2024"
+      role: "Principal Investigator"
