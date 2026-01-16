@@ -386,7 +386,7 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
 <section id="publications" class="section tab-panel">
     <div class="container">
         <div class="publications-header">
-            <h2>Publications</h2>
+            <h2>Selected Publications</h2>
             <button class="publications-menu-toggle" aria-label="Toggle publications menu">
                 <img src="{{ '/assets/images/icons/menu_icon.svg' | relative_url }}" alt="Menu" class="menu-icon">
             </button>
@@ -409,7 +409,7 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                     {% if has_international %}
                     <div class="publications-section" id="publications-international">
                         <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid var(--border-color);">
-                            <h3 class="subsection-title" style="margin: 0; border: none; padding: 0;">International</h3>
+                            <h3 class="subsection-title" style="margin: 0; border: none; padding: 0;">International Publications</h3>
                             <p style="font-size: 0.85rem; color: #666; margin: 0; font-style: italic;">‡: Equal Contribution, *: Corresponding Author</p>
                         </div>
                         {% assign int_count = 0 %}
@@ -509,7 +509,7 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                     <!-- Domestic Publications Section -->
                     {% if domestic_pubs.size > 0 %}
                     <div class="publications-section" id="publications-domestic">
-                        <h3 class="subsection-title">Domestic</h3>
+                        <h3 class="subsection-title">Domestic Papers</h3>
                         {% assign dom_count = 0 %}
                         {% for pub in site.data.publications %}
                         {% assign pub_type = pub.type | default: "international" %}
