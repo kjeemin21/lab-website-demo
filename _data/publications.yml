@@ -451,7 +451,7 @@
 # ==================================================================================
 # Domestic Publications ------------------------------------------------------------
 # ==================================================================================
-- title: "Root Cause Analysis for Microservice Systems Using Anomaly Propagation by Resource Sharing자원 공유에 따른 이상치 전파를 활용한 마이크로서비스 시스템 결함의 근본 원인 분석[paper]"
+- title: "Root Cause Analysis for Microservice Systems Using Anomaly Propagation by Resource Sharing (자원 공유에 따른 이상치 전파를 활용한 마이크로서비스 시스템 결함의 근본 원인 분석)"
   authors: "박준호, 황지영"
   venue: "정보과학회논문지 (Journal of KIISE), 2025년 4월"
   year: "2025"
@@ -459,7 +459,7 @@
   links:
     paper: "assets/pdf/domestic_kiise2025.pdf"
 
-- title: "Knowledge Graph Embedding with Entity Type Constraints개체 유형 정보를 활용한 지식 그래프 임베딩[paper][code]"
+- title: "Knowledge Graph Embedding with Entity Type Constraints (개체 유형 정보를 활용한 지식 그래프 임베딩)"
   authors: "공승환, 정찬영, 주수헌, 황지영"
   venue: "정보과학회논문지 (Journal of KIISE), 2022년 9월"
   year: "2022"
@@ -468,7 +468,7 @@
     paper: "assets/pdf/domestic_kiise2022.pdf"
     code: "https://github.com/bdi-lab/TransE_type"
 
-- title: "Knowledge Graph Embedding with Dynamic Attention동적 어텐션을 이용한 지식그래프 임베딩[paper][poster]"
+- title: "Knowledge Graph Embedding with Dynamic Attention (동적 어텐션을 이용한 지식그래프 임베딩)"
   authors: "황민성, 황지영"
   venue: "한국컴퓨터종합학술대회 논문집, 2022년 6월"
   year: "2022"
