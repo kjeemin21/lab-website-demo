@@ -1,14 +1,15 @@
 ﻿/* Responsive Design */
 @media (max-width: 768px) {
     :root {
-        --header-height: 120px;
+        --header-height: 80px;
     }
     
     .header-container {
-        flex-direction: column;
-        height: auto;
-        padding: 15px 20px;
-        min-height: var(--header-height);
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: var(--header-height);
+        padding: 10px 20px;
     }
 
     .main-nav ul {

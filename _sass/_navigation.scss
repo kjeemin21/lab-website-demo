@@ -9,6 +9,12 @@
     transition: opacity 0.3s;
 }
 
+@media (max-width: 768px) {
+    .menu-toggle {
+        margin-left: 0;
+    }
+}
+
 .menu-toggle:hover {
     opacity: 0.7;
 }
