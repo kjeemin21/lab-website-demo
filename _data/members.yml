@@ -5,7 +5,6 @@
 #   status: "Student"
 #   role: "Ph.D. Student / Master's Student / Research Assistant"
 #   email: "member@university.edu"
-#   research: "Research area or interests"
 #   homepage_url: "https://example.com" (optional)
 #   scholar_url: "https://scholar.google.com/..." (optional)
 #   education_history: (optional)
@@ -35,7 +34,6 @@
   status: "Student"
   role: "Ph.D. Student"
   email: "chanyoung.chung@kaist.ac.kr"
-  research: "Machine Learning, Deep Learning"
   homepage_url: "https://chanyoungchung.github.io/"
   scholar_url: "https://scholar.google.co.kr/citations?user=Qg9oTYoAAAAJ"
   education_history:
@@ -51,7 +49,6 @@
   status: "Student"
   role: "Ph.D. Student"
   email: "jjlee98@kaist.ac.kr"
-  research: "Machine Learning, Deep Learning, Mathematical Sciences"
   homepage_url: "https://jaejunlee714.github.io/"
   scholar_url: "https://scholar.google.co.kr/citations?user=G5UMYkUAAAAJ"
   education_history:
@@ -67,7 +64,6 @@
   status: "Student"
   role: "Ph.D. Student"
   email: "heehyeon@kaist.ac.kr"
-  research: "Artificial Intelligence, Machine Learning"
   scholar_url: "hhttps://scholar.google.co.kr/citations?user=-CBfXxYAAAAJ"
   education_history:
     - period: "Sep. 2024 ~"
@@ -82,7 +78,6 @@
   status: "Student"
   role: "Ph.D. Student"
   email: "hminsung@kaist.ac.kr"
-  research: "Artificial Intelligence, Machine Learning"
   homepage_url: "https://www.minsung.space/"
   scholar_url: "https://scholar.google.co.kr/citations?user=Iw2xxKwAAAAJ"
   education_history:
@@ -98,7 +93,6 @@
   status: "Student"
   role: "Ph.D. Student"
   email: "cjh0507@kaist.ac.kr"
-  research: "Artificial Intelligence, Machine Learning"
   scholar_url: "https://scholar.google.co.kr/citations?user=BlqGvb4AAAAJ"
   education_history:
     - period: "Mar. 2025 ~"
@@ -113,7 +107,6 @@
   status: "Student"
   role: "Ph.D. Student"
   email: "klee0257@kaist.ac.kr"
-  research: "Artificial Intelligence, Machine Learning"
   scholar_url: "https://scholar.google.com/citations?user=lvhedBQAAAAJ"
   education_history:
     - period: "Mar. 2026 ~"
@@ -131,7 +124,6 @@
   status: "Student"
   role: "Master's Student"
   email: "justinyoonwk@kaist.ac.kr"
-  research: "Electrical Engineering, Machine Learning"
   education_history:
     - period: "Mar. 2025 ~"
       description: "Program in School of Computing"
@@ -143,7 +135,6 @@
   status: "Student"
   role: "Master's Student"
   email: "rlehd201@kaist.ac.kr"
-  research: "Knowledge Graph Representation Learning, Machine Learning"
   education_history:
     - period: "Mar. 2025 ~"
       description: "KT-AI M.S. Program in School of Computing"
@@ -155,7 +146,6 @@
   status: "Student"
   role: "Master's Student"
   email: "eidophor@kaist.ac.kr"
-  research: "Knowledge Graph Representation Learning, Machine Learning"
   homepage_url: "https://eidophor.github.io/"
   education_history:
     - period: "Sep. 2025 ~"
@@ -168,7 +158,6 @@
   status: "Student"
   role: "Master's Student"
   email: "kjm10122@kaist.ac.kr"
-  research: "Knowledge Graph Representation Learning, Machine Learning"
   education_history:
     - period: "Mar. 2026 ~"
       description: "M.S. Program in School of Computing"
@@ -180,7 +169,6 @@
   status: "Student"
   role: "Master's Student"
   email: "jacobpower@kaist.ac.kr"
-  research: "Knowledge Graph Representation Learning, Machine Learning"
   education_history:
     - period: "Mar. 2026 ~"
       description: "M.S. Program in School of Computing"

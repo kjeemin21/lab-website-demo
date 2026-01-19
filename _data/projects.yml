@@ -51,8 +51,10 @@
   projects:
     - title: "Multimodal Cross-Domain Recommendation Systems for Personalized Services (개인 맞춤형 서비스를 위한 멀티모달 크로스 도메인 추천 시스템)"
       period: "Dec. 2024 ~ Nov. 2025"
+      role: "Principal Investigator"
     - title: "GNN-based Insurance Fraud Detection (그래프 신경망(GNN) 기반 보험사기 예측 연구)"
       period: "Aug. 2022 ~ Nov. 2025"
+      role: "Principal Investigator"
 
 - organization: "Telecommunications Technology Association (TTA)"
   logo: "/assets/images/projects/tta_logo.png"

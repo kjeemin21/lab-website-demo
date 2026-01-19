@@ -60,7 +60,15 @@
 .about-main-text {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.about-text-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .about-text {
@@ -68,6 +76,15 @@
     line-height: 1.6;
     color: var(--text-color);
     text-align: justify;
+    margin: 0;
+}
+
+.about-links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 12px;
 }
 
 /* Research Areas Section (Below main content) */
@@ -143,9 +160,9 @@
 
 .research-detail-panel .detail-body {
     display: grid;
-    grid-template-columns: 5fr 3fr;
+    grid-template-columns: 5fr 2.5fr;
     gap: 30px;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .research-detail-panel .detail-text-wrapper {
@@ -159,6 +176,7 @@
     line-height: 1.7;
     color: var(--text-color);
     margin: 0;
+    text-align: justify;
 }
 
 .research-detail-panel .detail-image-wrapper {
@@ -169,8 +187,7 @@
 
 .research-detail-panel .detail-image-container {
     width: 100%;
-    height: 100%;
-    min-height: 260px;
+    max-height: 200px;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -179,39 +196,26 @@
 
 .research-detail-panel .detail-image {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 200px;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
 }
 
-/* Side Menu for Social Links */
-.about-side-menu {
-    position: fixed;
-    top: calc(var(--header-height) + 20px);
-    right: 20px;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 8px 6px;
-    background-color: var(--bg-color);
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-}
-
-.about-side-menu-link {
+/* Social Links */
+.about-link {
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.about-side-menu-link:hover {
+.about-link:hover {
     transform: scale(1.1);
     opacity: 0.8;
 }
 
-.about-side-menu-icon {
+.about-link-icon {
     width: 32px;
     height: 32px;
     display: block;
@@ -220,13 +224,8 @@
     transition: opacity 0.3s ease;
 }
 
-.about-side-menu-link:hover .about-side-menu-icon {
+.about-link:hover .about-link-icon {
     opacity: 1;
-}
-
-.about-side-menu-link-youtube .about-side-menu-icon {
-    width: 24.64px;
-    height: 24.64px;
 }
 
 /* About Section Responsive */
@@ -248,21 +247,13 @@
         padding: 25px 20px;
     }
 
-    .about-side-menu {
-        top: calc(var(--header-height) + 25px);
-        right: 15px;
-        padding: 6px 5px;
-        gap: 6px;
+    .about-links-container {
+        gap: 10px;
     }
 
-    .about-side-menu-icon {
+    .about-link-icon {
         width: 28px;
         height: 28px;
-    }
-
-    .about-side-menu-link-youtube .about-side-menu-icon {
-        width: 21.56px;
-        height: 21.56px;
     }
 }
 
@@ -314,26 +305,26 @@
         order: 2;
         align-items: center;
     }
+
+    .research-detail-panel .detail-image-container {
+        max-height: 180px;
+    }
+
+    .research-detail-panel .detail-image {
+        max-height: 180px;
+    }
     
     .research-detail-panel .detail-content {
         font-size: 1rem;
     }
 
-    .about-side-menu {
-        top: calc(var(--header-height) + 20px);
-        right: 10px;
-        padding: 6px 4px;
-        gap: 6px;
+    .about-links-container {
+        gap: 8px;
     }
 
-    .about-side-menu-icon {
+    .about-link-icon {
         width: 24px;
         height: 24px;
-    }
-
-    .about-side-menu-link-youtube .about-side-menu-icon {
-        width: 18.48px;
-        height: 18.48px;
     }
 }
 
@@ -372,22 +363,13 @@
         font-size: 0.95rem;
     }
 
-    .about-side-menu {
-        top: calc(var(--header-height) + 15px);
-        right: 8px;
-        padding: 5px 3px;
-        gap: 5px;
-        border-radius: 10px;
+    .about-links-container {
+        gap: 6px;
     }
 
-    .about-side-menu-icon {
+    .about-link-icon {
         width: 20px;
         height: 20px;
-    }
-
-    .about-side-menu-link-youtube .about-side-menu-icon {
-        width: 15.4px;
-        height: 15.4px;
     }
 }
 
