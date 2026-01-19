@@ -415,7 +415,7 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                         {% assign pub_type = pub.type | default: "international" %}
                         {% if pub_type != "domestic" and pub_type != "patent" %}
                         {% assign int_count = int_count | plus: 1 %}
-                        <div class="publication-item {% if int_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                        <div class="publication-item {% if int_count > 16 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
@@ -491,12 +491,12 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                         </div>
                         {% endif %}
                         {% endfor %}
-                        {% if int_count > 10 %}
+                        {% if int_count > 16 %}
                         <div class="publications-show-more-container">
-                            <button class="publications-show-more-btn" data-section="publications-international" data-limit="10">
+                            <button class="publications-show-more-btn" data-section="publications-international" data-limit="16">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
                             </button>
-                            <button class="publications-show-less-btn" data-section="publications-international" data-limit="10" style="display: none;">
+                            <button class="publications-show-less-btn" data-section="publications-international" data-limit="16" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
                             </button>
                         </div>
@@ -513,7 +513,7 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                         {% assign pub_type = pub.type | default: "international" %}
                         {% if pub_type == "domestic" %}
                         {% assign dom_count = dom_count | plus: 1 %}
-                        <div class="publication-item {% if dom_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                        <div class="publication-item {% if dom_count > 16 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
@@ -589,12 +589,12 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                         </div>
                         {% endif %}
                         {% endfor %}
-                        {% if dom_count > 10 %}
+                        {% if dom_count > 16 %}
                         <div class="publications-show-more-container">
-                            <button class="publications-show-more-btn" data-section="publications-domestic" data-limit="10">
+                            <button class="publications-show-more-btn" data-section="publications-domestic" data-limit="16">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
                             </button>
-                            <button class="publications-show-less-btn" data-section="publications-domestic" data-limit="10" style="display: none;">
+                            <button class="publications-show-less-btn" data-section="publications-domestic" data-limit="16" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
                             </button>
                         </div>
@@ -612,7 +612,7 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                         {% assign pub_type = pub.type | default: "international" %}
                         {% if pub_type == "patent" %}
                         {% assign patent_count = patent_count | plus: 1 %}
-                        <div class="publication-item {% if patent_count > 10 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
+                        <div class="publication-item {% if patent_count > 16 %}publication-item-hidden{% endif %}" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-type="{{ pub_type }}">
                             {% if pub.year %}
                             <span class="year-badge">{{ pub.year }}</span>
                             {% endif %}
@@ -640,12 +640,12 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                         </div>
                         {% endif %}
                         {% endfor %}
-                        {% if patent_count > 10 %}
+                        {% if patent_count > 16 %}
                         <div class="publications-show-more-container">
-                            <button class="publications-show-more-btn" data-section="publications-patents" data-limit="10">
+                            <button class="publications-show-more-btn" data-section="publications-patents" data-limit="16">
                                 <img src="{{ '/assets/images/icons/arrow_down_icon.svg' | relative_url }}" alt="Show More" class="show-more-icon">
                             </button>
-                            <button class="publications-show-less-btn" data-section="publications-patents" data-limit="10" style="display: none;">
+                            <button class="publications-show-less-btn" data-section="publications-patents" data-limit="16" style="display: none;">
                                 <img src="{{ '/assets/images/icons/arrow_up_icon.svg' | relative_url }}" alt="Show Less" class="show-less-icon">
                             </button>
                         </div>
