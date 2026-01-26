@@ -1,4 +1,4 @@
-﻿/* Responsive Design */
+/* Responsive Design */
 @media (max-width: 768px) {
     :root {
         --header-height: 80px;
@@ -225,31 +225,6 @@
         padding-right: 0;
     }
 
-    .publications-side-menu {
-        position: fixed;
-        top: calc(var(--header-height) + 20px);
-        right: 20px;
-        width: 180px;
-        z-index: 1999;
-    }
-
-    .publications-menu-title {
-        font-size: 1rem;
-        padding: 10px 40px 10px 15px;
-    }
-
-    .publications-menu-list {
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .publication-menu-btn {
-        width: 100%;
-        text-align: center;
-        font-size: 0.9rem;
-        padding: 12px 15px;
-    }
-
     .members-side-menu {
         position: fixed;
         top: calc(var(--header-height) + 20px);
@@ -276,7 +251,7 @@
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 1479px) {
     .publications-menu-toggle {
         display: block;
     }

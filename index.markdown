@@ -408,9 +408,9 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                     <!-- International Publications Section -->
                     {% if has_international %}
                     <div class="publications-section" id="publications-international">
-                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid var(--border-color);">
-                            <h3 class="subsection-title" style="margin: 0; border: none; padding: 0;">International Publications</h3>
-                            <p style="font-size: 0.85rem; color: #666; margin: 0; font-style: italic;">‡: Equal Contribution, *: Corresponding Author</p>
+                        <div class="publications-section-header">
+                            <h3 class="subsection-title">International Publications</h3>
+                            <p class="publications-section-note">‡: Equal Contribution, *: Corresponding Author</p>
                         </div>
                         {% assign int_count = 0 %}
                         {% for pub in site.data.publications %}

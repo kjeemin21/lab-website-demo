@@ -1489,4 +1489,32 @@
         }
     });
 
+    // Scroll to Top Button
+    const scrollToTopButton = document.getElementById('scrollToTop');
+    
+    if (scrollToTopButton) {
+        // Show/hide button based on scroll position
+        function toggleScrollToTopButton() {
+            if (window.scrollY > 300) {
+                scrollToTopButton.classList.add('visible');
+            } else {
+                scrollToTopButton.classList.remove('visible');
+            }
+        }
+        
+        // Check scroll position on load
+        toggleScrollToTopButton();
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', toggleScrollToTopButton);
+        
+        // Smooth scroll to top on click
+        scrollToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
 </script>
