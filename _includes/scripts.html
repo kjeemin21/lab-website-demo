@@ -275,10 +275,11 @@
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
-            let startTime = null;
+            
+            // Set startTime immediately to avoid initial delay
+            const startTime = performance.now();
             
             function animation(currentTime) {
-                if (startTime === null) startTime = currentTime;
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 
@@ -298,6 +299,7 @@
                 }
             }
             
+            // Start animation immediately on next frame
             requestAnimationFrame(animation);
         }
     }
@@ -486,10 +488,11 @@
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
-            let startTime = null;
+            
+            // Set startTime immediately to avoid initial delay
+            const startTime = performance.now();
             
             function animation(currentTime) {
-                if (startTime === null) startTime = currentTime;
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 
@@ -509,6 +512,7 @@
                 }
             }
             
+            // Start animation immediately on next frame
             requestAnimationFrame(animation);
         }
     }
