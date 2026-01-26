@@ -41,9 +41,11 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                     <div class="about-links-container">
                         <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="about-link" title="Github">
                             <img src="{{ '/assets/images/icons/github_icon.svg' | relative_url }}" alt="Github" class="about-link-icon">
+                            <span class="about-link-text">GitHub</span>
                         </a>
                         <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="about-link about-link-youtube" title="YouTube">
                             <img src="{{ '/assets/images/icons/youtube_icon.svg' | relative_url }}" alt="YouTube" class="about-link-icon">
+                            <span class="about-link-text">YouTube</span>
                         </a>
                     </div>
                 </div>

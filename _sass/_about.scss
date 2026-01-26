@@ -1,4 +1,4 @@
-﻿/* About Section */
+/* About Section */
 .about-container {
     max-width: 1200px;
     padding: 0 20px;
@@ -19,6 +19,7 @@
     gap: 40px;
     align-items: center;
     min-height: auto;
+    padding: 0 30px;
 }
 
 .about-main-image {
@@ -82,9 +83,10 @@
 .about-links-container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 12px;
+    margin-top: 15px;
 }
 
 /* Research Areas Section (Below main content) */
@@ -162,7 +164,7 @@
     display: grid;
     grid-template-columns: 5fr 2.5fr;
     gap: 30px;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .research-detail-panel .detail-text-wrapper {
@@ -206,12 +208,15 @@
 .about-link {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 8px;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    text-decoration: none;
+    color: var(--text-color);
 }
 
 .about-link:hover {
-    transform: scale(1.1);
+    transform: translateY(-2px);
     opacity: 0.8;
 }
 
@@ -222,10 +227,23 @@
     filter: grayscale(100%);
     opacity: 0.7;
     transition: opacity 0.3s ease;
+    flex-shrink: 0;
 }
 
 .about-link:hover .about-link-icon {
     opacity: 1;
+    filter: grayscale(0%);
+}
+
+.about-link-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.about-link:hover .about-link-text {
+    color: var(--secondary-color);
 }
 
 /* About Section Responsive */
@@ -241,6 +259,9 @@
         margin: 0 auto;
     }
     
+    .about-main-section {
+        padding: 0 20px;
+    }
     
     .about-research-section {
         margin-top: 0;
@@ -268,6 +289,10 @@
     
     .about-text {
         font-size: 1.05rem;
+    }
+    
+    .about-main-section {
+        padding: 0 15px;
     }
     
     .about-research-section {
@@ -331,6 +356,10 @@
 @media (max-width: 480px) {
     .about-text {
         font-size: 1rem;
+    }
+    
+    .about-main-section {
+        padding: 0 10px;
     }
     
     .about-research-section {

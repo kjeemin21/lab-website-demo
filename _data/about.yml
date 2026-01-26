@@ -4,7 +4,7 @@
 title: ""
 subtitle: ""
 description: >
-  <b>The Big Data Intelligence lab</b> at KAIST is led by Prof. Joyce Jiyoung Whang at the School of Computing. The group engages in fundamental research on diverse aspects of big data, with an emphasis on developing novel computational algorithms for massive and complex datasets in scientific and industrial applications. In particular, the group focuses on graph machine learning and mining, where data is represented and interpreted in terms of the interactions between entities. The group explores various AI, graph machine learning, and data mining tasks to solve open challenges and develop scalable algorithms for real-world data.
+  <b>The Big Data Intelligence lab</b> at KAIST is led by Prof. Joyce Jiyoung Whang at the School of Computing. The group engages in fundamental research on big data, emphasizing novel computational algorithms for massive scientific and industrial datasets. In particular, the group focuses on graph machine learning and mining to interpret entity interactions and solve real-world challenges with scalable algorithms.
 
 # Main hero image for the About section (fallback for single image)
 hero_image: "/assets/images/about/대표_이미지2.png"
@@ -17,22 +17,22 @@ hero_images:
 # Research areas/keywords
 research_areas:
   - name: "Graph Machine Learning"
-    description: "We investigate machine learning techniques for graph-structured data. Our research focuses on developing algorithms to effectively learn from and analyze complex relational data, such as social networks, knowledge graphs, and biological networks."
+    description: "We investigate machine learning techniques for graph-structured data. Our research focuses on developing algorithms to effectively learn from and analyze complex relational data, such as social networks, knowledge graphs, and biological networks. We also address challenges in learning from dynamic, hyper-relational, and heterogeneous graphs to ensure robustness and generalizability in real-world scenarios."
     image: "/assets/images/about/GML.png"
   - name: "Deep Learning"
-    description: "We work on the development and optimization of deep neural network models. We design efficient and scalable deep learning architectures across diverse domains and apply them to solve real-world problems."
+    description: "We work on the development and optimization of deep neural network models. We design efficient and scalable deep learning architectures across diverse domains and apply them to solve real-world problems. Recently, our scope has expanded to Large Language Models (LLMs) and multimodal learning, specifically focusing on safety, interpretability, and cross-domain adaptation."
     image: "/assets/images/about/DL.png"
   - name: "Knowledge Graphs"
-    description: "We research techniques for knowledge graph construction, embedding, and reasoning. We develop methodologies to extract and utilize meaningful semantic information from large-scale knowledge bases."
+    description: "We research techniques for knowledge graph construction, embedding, and reasoning. We develop methodologies to extract and utilize meaningful semantic information from large-scale knowledge bases. Our work extends to complex reasoning tasks, such as inductive link prediction and question answering, by integrating symbolic knowledge with neural representations."
     image: "/assets/images/about/KG.png"
   - name: "Data Mining"
-    description: "We study techniques to discover useful patterns and knowledge from large-scale datasets. Our work involves developing diverse data mining algorithms for clustering, classification, and anomaly detection."
+    description: "We study techniques to discover useful patterns and knowledge from large-scale datasets. Our work involves developing diverse data mining algorithms for clustering, classification, and anomaly detection. We specifically target high-impact applications like financial fraud detection and web spam detection by leveraging structural patterns and anomaly propagation mechanisms."
     image: "/assets/images/about/DM.png"
   - name: "Big Data Analytics"
-    description: "We research scalable algorithms to efficiently process and analyze massive datasets. We develop high-performance data analytics systems designed to operate in distributed computing environments."
+    description: "We research scalable algorithms to efficiently process and analyze massive datasets. We develop high-performance data analytics systems designed to operate in distributed computing environments. Furthermore, we develop analytical frameworks for complex systems, such as root cause analysis in microservices, ensuring reliability and efficiency in large-scale infrastructures."
     image: "/assets/images/about/BDA.png"
   - name: "Data Science"
-    description: "We explore various facets of data science to address industrial and scientific challenges. Our research encompasses the entire data pipeline, including data collection, preprocessing, visualization, and modeling."
+    description: "We explore various facets of data science to address industrial and scientific challenges. Our research encompasses the entire data pipeline, including data collection, preprocessing, visualization, and modeling. We bridge the gap between theory and practice by collaborating on interdisciplinary projects, providing actionable insights for domains ranging from robotics to public sector policy."
     image: "/assets/images/about/DS.png"
 
 # ==================================================================================
