@@ -17,54 +17,79 @@ main {
     position: relative;
 }
 
-/* About Section Background Image - PC only */
+/* About Section Background Images - PC only */
 @media (min-width: 1025px) {
+    /* 왼쪽 배경 이미지 */
     #about.section::before {
+        /* ... (기존 속성 동일) ... */
         content: '';
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
+        width: 50%;
         bottom: 0;
-        background-image: url('../images/about/background.png');
-        background-size: cover;
-        background-position: center;
+        background-image: url('../images/about/background_left.png');
+        background-size: contain;
+        background-position: left center;
         background-repeat: no-repeat;
         background-attachment: fixed;
         z-index: 0;
-        /* 중앙 1500px까지 투명, 좌우로 갈수록 부드럽게 불투명도 증가 (양쪽 끝 20% 불투명도 = 80% 투명도) */
+        
+        /* opacity는 0.8 그대로 두거나, 더 은은한 걸 원하시면 제거해도 됩니다 */
+        opacity: 0.8; 
+        
+        /* [수정 포인트] */
+        /* 1. 시작점(0%)을 rgba(0,0,0, 0.3) 정도로 낮춰서 은은하게 시작 */
+        /* 2. 끝점(100%가 아닌 80%)에서 미리 0으로 만들어 중앙 선이 생기지 않게 차단 */
         mask-image: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.15) calc(50% - 900px),
-            rgba(0, 0, 0, 0.1) calc(50% - 800px),
-            rgba(0, 0, 0, 0) calc(50% - 750px),
-            rgba(0, 0, 0, 0) calc(50% + 750px),
-            rgba(0, 0, 0, 0) calc(50% + 750px),
-            rgba(0, 0, 0, 0.1) calc(50% + 800px),
-            rgba(0, 0, 0, 0.15) calc(50% + 900px),
-            rgba(0, 0, 0, 0.2) 100%
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0) 30%
         );
         -webkit-mask-image: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.15) calc(50% - 900px),
-            rgba(0, 0, 0, 0.1) calc(50% - 800px),
-            rgba(0, 0, 0, 0) calc(50% - 750px),
-            rgba(0, 0, 0, 0) calc(50% + 750px),
-            rgba(0, 0, 0, 0) calc(50% + 750px),
-            rgba(0, 0, 0, 0.1) calc(50% + 800px),
-            rgba(0, 0, 0, 0.15) calc(50% + 900px),
-            rgba(0, 0, 0, 0.2) 100%
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0) 30%
         );
         pointer-events: none;
     }
     
-    /* About 섹션의 콘텐츠가 배경 위에 표시되도록 z-index 설정 */
-    #about.section > * {
-        position: relative;
-        z-index: 1;
+    /* 오른쪽 배경 이미지 */
+    #about.section::after {
+        /* ... (기존 속성 동일) ... */
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        bottom: 0;
+        background-image: url('../images/about/background_right.png');
+        background-size: contain;
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        z-index: 0;
+        opacity: 0.8;
+        
+        /* [수정 포인트] */
+        mask-image: linear-gradient(
+            to left,
+            rgba(0, 0, 0, 0.3) 0%,   /* 30%만 보이게 시작 */
+            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0) 30%     /* 중앙에 닿기 전(80%)에 미리 투명화 완료 */
+        );
+        -webkit-mask-image: linear-gradient(
+            to left,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0) 30%
+        );
+        pointer-events: none;
     }
+
+    /* ... */
 }
 
 /* Photos Section - align to top */
