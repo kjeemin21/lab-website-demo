@@ -1,4 +1,4 @@
-﻿/* Professor Section */
+/* Professor Section */
 #professor.section {
     align-items: flex-start;
 }
@@ -31,10 +31,10 @@
     height: calc(100% - 40px);
     border-radius: 12px;
     overflow: hidden;
-    border: 2px solid transparent;
+    border: none;
     flex-shrink: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: transparent;
 }
 
 .professor-image img {
