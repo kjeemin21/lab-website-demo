@@ -275,11 +275,21 @@
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
-            
-            // Set startTime immediately to avoid initial delay
-            const startTime = performance.now();
+            let startTime = null;
             
             function animation(currentTime) {
+                // Use currentTime as startTime on first frame to avoid timing issues on mobile
+                if (startTime === null) {
+                    startTime = currentTime;
+                    // On mobile, first frame may be delayed, so ensure immediate scroll start
+                    // by using a small initial progress to avoid slow start
+                    const initialProgress = 0.01; // 1% initial progress for immediate start
+                    const initialEase = initialProgress < 0.5 
+                        ? 2 * initialProgress * initialProgress 
+                        : 1 - Math.pow(-2 * initialProgress + 2, 2) / 2;
+                    window.scrollTo(0, startPosition + distance * initialEase);
+                }
+                
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 
@@ -488,11 +498,21 @@
             const startPosition = window.scrollY;
             const distance = offsetTop - startPosition;
             const duration = 400; // 400ms for smooth and fast animation
-            
-            // Set startTime immediately to avoid initial delay
-            const startTime = performance.now();
+            let startTime = null;
             
             function animation(currentTime) {
+                // Use currentTime as startTime on first frame to avoid timing issues on mobile
+                if (startTime === null) {
+                    startTime = currentTime;
+                    // On mobile, first frame may be delayed, so ensure immediate scroll start
+                    // by using a small initial progress to avoid slow start
+                    const initialProgress = 0.01; // 1% initial progress for immediate start
+                    const initialEase = initialProgress < 0.5 
+                        ? 2 * initialProgress * initialProgress 
+                        : 1 - Math.pow(-2 * initialProgress + 2, 2) / 2;
+                    window.scrollTo(0, startPosition + distance * initialEase);
+                }
+                
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 
