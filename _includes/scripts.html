@@ -293,10 +293,8 @@
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 
-                // Easing function (ease-in-out)
-                const ease = progress < 0.5 
-                    ? 2 * progress * progress 
-                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                // Easing function (Ease-Out Cubic: Starts fast, slows down)
+                const ease = 1 - Math.pow(1 - progress, 3);
                 
                 window.scrollTo(0, startPosition + distance * ease);
                 
@@ -516,10 +514,8 @@
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 
-                // Easing function (ease-in-out)
-                const ease = progress < 0.5 
-                    ? 2 * progress * progress 
-                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                // Easing function (Ease-Out Cubic: Starts fast, slows down)
+                const ease = 1 - Math.pow(1 - progress, 3);
                 
                 window.scrollTo(0, startPosition + distance * ease);
                 
