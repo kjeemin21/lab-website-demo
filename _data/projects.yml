@@ -7,6 +7,7 @@
 #     - title: "Project Title"
 #       period: "Mar. 2025 ~ Feb. 2028"
 #       role: "Principal Investigator" (optional)
+#       subinstitution_logo: "/assets/images/projects/subinstitution-logo.png" (optional)
 # ==================================================================================
 - organization: "National Research Foundation of Korea"
   logo: "/assets/images/projects/nrf_logo.png"

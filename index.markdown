@@ -687,45 +687,93 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
             {% if site.data.projects %}
             <div class="projects-list">
                 {% for org in site.data.projects %}
-                <div class="organization-card">
-                    <div class="organization-logos">
-                        {% if org.logo %}
-                        <div class="organization-logo">
-                            <img src="{{ org.logo | relative_url }}" alt="{{ org.organization }}">
+                    {% assign has_subinstitution = false %}
+                    {% if org.projects %}
+                        {% for project in org.projects %}
+                            {% if project.subinstitution_logo %}
+                                {% assign has_subinstitution = true %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% if has_subinstitution %}
+                        <!-- Organization card with logo, name, and subinstitution containers -->
+                        <div class="organization-card organization-card-with-subinstitution">
+                            <div class="organization-header">
+                                <div class="organization-logos">
+                                    {% if org.logo %}
+                                    <div class="organization-logo">
+                                        <img src="{{ org.logo | relative_url }}" alt="{{ org.organization }}">
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="organization-content">
+                                    <h3 class="organization-name">{{ org.organization }}</h3>
+                                </div>
+                            </div>
+                            
+                            <!-- Subinstitution containers -->
+                            {% if org.projects %}
+                                {% for project in org.projects %}
+                                    {% if project.subinstitution_logo %}
+                                    <div class="subinstitution-container">
+                                        <div class="subinstitution-logo-section">
+                                            <div class="subinstitution-logo">
+                                                <img src="{{ project.subinstitution_logo | relative_url }}" alt="Subinstitution Logo">
+                                            </div>
+                                        </div>
+                                        <div class="subinstitution-content">
+                                            <div class="project-item">
+                                                <span class="project-bullet">▶</span>
+                                                <div class="project-content">
+                                                    <div class="project-title">{{ project.title }}</div>
+                                                    <div class="project-meta">
+                                                        <span class="project-period">{{ project.period }}</span>
+                                                        {% if project.role %}
+                                                        <span class="project-role">{{ project.role }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </div>
-                        {% endif %}
-                        {% if org.projects %}
-                            {% for project in org.projects %}
-                                {% if project.subinstitution_logo %}
-                                <div class="subinstitution-logo">
-                                    <img src="{{ project.subinstitution_logo | relative_url }}" alt="Subinstitution Logo">
+                    {% else %}
+                        <!-- Original layout for organizations without subinstitution -->
+                        <div class="organization-card">
+                            <div class="organization-logos">
+                                {% if org.logo %}
+                                <div class="organization-logo">
+                                    <img src="{{ org.logo | relative_url }}" alt="{{ org.organization }}">
                                 </div>
                                 {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="organization-content">
-                        <h3 class="organization-name">{{ org.organization }}</h3>
-                        {% if org.projects %}
-                        <ul class="projects-list-items">
-                            {% for project in org.projects %}
-                            <li class="project-item">
-                                <span class="project-bullet">▶</span>
-                                <div class="project-content">
-                                    <div class="project-title">{{ project.title }}</div>
-                                    <div class="project-meta">
-                                        <span class="project-period">{{ project.period }}</span>
-                                        {% if project.role %}
-                                        <span class="project-role">{{ project.role }}</span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                </div>
+                            </div>
+                            <div class="organization-content">
+                                <h3 class="organization-name">{{ org.organization }}</h3>
+                                {% if org.projects %}
+                                <ul class="projects-list-items">
+                                    {% for project in org.projects %}
+                                    <li class="project-item">
+                                        <span class="project-bullet">▶</span>
+                                        <div class="project-content">
+                                            <div class="project-title">{{ project.title }}</div>
+                                            <div class="project-meta">
+                                                <span class="project-period">{{ project.period }}</span>
+                                                {% if project.role %}
+                                                <span class="project-role">{{ project.role }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             {% else %}
