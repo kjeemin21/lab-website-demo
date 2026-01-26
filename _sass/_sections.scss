@@ -1,4 +1,4 @@
-﻿/* Main Content */
+/* Main Content */
 main {
     margin-top: var(--header-height);
 }
@@ -14,6 +14,57 @@ main {
 /* About Section - align to top */
 #about.section {
     align-items: flex-start;
+    position: relative;
+}
+
+/* About Section Background Image - PC only */
+@media (min-width: 1025px) {
+    #about.section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('../images/about/background.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        z-index: 0;
+        /* 중앙 1500px까지 투명, 좌우로 갈수록 부드럽게 불투명도 증가 (양쪽 끝 20% 불투명도 = 80% 투명도) */
+        mask-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.15) calc(50% - 900px),
+            rgba(0, 0, 0, 0.1) calc(50% - 800px),
+            rgba(0, 0, 0, 0) calc(50% - 750px),
+            rgba(0, 0, 0, 0) calc(50% + 750px),
+            rgba(0, 0, 0, 0) calc(50% + 750px),
+            rgba(0, 0, 0, 0.1) calc(50% + 800px),
+            rgba(0, 0, 0, 0.15) calc(50% + 900px),
+            rgba(0, 0, 0, 0.2) 100%
+        );
+        -webkit-mask-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.15) calc(50% - 900px),
+            rgba(0, 0, 0, 0.1) calc(50% - 800px),
+            rgba(0, 0, 0, 0) calc(50% - 750px),
+            rgba(0, 0, 0, 0) calc(50% + 750px),
+            rgba(0, 0, 0, 0) calc(50% + 750px),
+            rgba(0, 0, 0, 0.1) calc(50% + 800px),
+            rgba(0, 0, 0, 0.15) calc(50% + 900px),
+            rgba(0, 0, 0, 0.2) 100%
+        );
+        pointer-events: none;
+    }
+    
+    /* About 섹션의 콘텐츠가 배경 위에 표시되도록 z-index 설정 */
+    #about.section > * {
+        position: relative;
+        z-index: 1;
+    }
 }
 
 /* Photos Section - align to top */
