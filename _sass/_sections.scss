@@ -10,6 +10,7 @@ main {
     display: flex;
     align-items: center;
     position: relative;
+    z-index: 0; /* 배경(::before, ::after)보다 위에 올 컨텐츠용 스택 컨텍스트 */
 }
 
 /* About Section - align to top */
@@ -33,7 +34,7 @@ main {
         background-position: left center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        z-index: 0;
+        z-index: -1; /* 섹션 내부 모든 컨텐츠보다 항상 뒤로 */
         
         /* opacity는 0.8 그대로 두거나, 더 은은한 걸 원하시면 제거해도 됩니다 */
         opacity: 0.8; 
@@ -70,7 +71,7 @@ main {
         background-position: right center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        z-index: 0;
+        z-index: -1; /* 섹션 내부 모든 컨텐츠보다 항상 뒤로 */
         opacity: 0.8;
         
         /* [수정 포인트] */
@@ -146,5 +147,17 @@ main {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
+}
+
+/* 섹션 내 주요 카드/패널 요소들이 항상 배경보다 위에 오도록 보장 */
+.research-detail-panel,
+.professor-info,
+.member-card,
+.publication-item,
+.organization-card,
+.photo-main,
+.recruit-card {
+    position: relative;
+    z-index: 1;
 }
 
