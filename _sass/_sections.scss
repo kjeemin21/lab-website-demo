@@ -97,6 +97,11 @@ main {
     align-items: flex-start;
 }
 
+/* Photos Section - 배경색 제거 (다른 탭과 통일) */
+#photos.tab-panel {
+    background-color: transparent;
+}
+
 /* Tab Panel Styles */
 .tab-panel {
     display: none;
