@@ -4,7 +4,7 @@
 title: ""
 subtitle: ""
 description: >
-  <b>The Big Data Intelligence lab</b> at KAIST is led by Prof. Joyce Jiyoung Whang at the School of Computing. The group engages in fundamental research on big data, emphasizing novel computational algorithms for massive scientific and industrial datasets. In particular, the group focuses on graph machine learning and mining to interpret entity interactions and solve real-world challenges with scalable algorithms.
+  <b>The Big Data Intelligence lab</b> at KAIST is led by Prof. Joyce Jiyoung Whang at the School of Computing. The group engages in fundamental research on big data, emphasizing algorithms for massive scientific and industrial datasets. In particular, the group focuses on graph machine learning and mining to interpret entity interactions and solve real-world challenges with scalable algorithms.
 
 # Main hero image for the About section (fallback for single image)
 hero_image: "/assets/images/about/대표_이미지2.png"

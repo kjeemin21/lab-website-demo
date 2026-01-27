@@ -39,13 +39,14 @@ keywords: "Big Data Intelligence, KAIST, Graph Machine Learning, Deep Learning, 
                     
                     <!-- Links Container -->
                     <div class="about-links-container">
-                        <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="about-link" title="Github">
-                            <img src="{{ '/assets/images/icons/github_icon.svg' | relative_url }}" alt="Github" class="about-link-icon">
-                            <span class="about-link-text">GitHub</span>
+                        <a href="https://github.com/bdi-lab" target="_blank" rel="noopener" class="about-link" title="BDI Lab GitHub Link">
+                            <img src="{{ '/assets/images/icons/github_icon.svg' | relative_url }}" alt="BDI Lab GitHub Link" class="about-link-icon">
+                            <span class="about-link-text">BDI Lab GitHub Link</span>
                         </a>
-                        <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="about-link about-link-youtube" title="YouTube">
-                            <img src="{{ '/assets/images/icons/youtube_icon.svg' | relative_url }}" alt="YouTube" class="about-link-icon">
-                            <span class="about-link-text">YouTube</span>
+                        <div class="about-link-divider"></div>
+                        <a href="https://www.youtube.com/@bdi-lab" target="_blank" rel="noopener" class="about-link about-link-youtube" title="BDI Lab YouTube Channel">
+                            <img src="{{ '/assets/images/icons/youtube_icon.svg' | relative_url }}" alt="BDI Lab YouTube Channel" class="about-link-icon">
+                            <span class="about-link-text">BDI Lab YouTube Channel</span>
                         </a>
                     </div>
                 </div>

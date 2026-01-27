@@ -9,18 +9,18 @@ main {
     min-height: calc(100vh - var(--header-height));
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 /* About Section - align to top */
 #about.section {
     align-items: flex-start;
-    position: relative;
 }
 
-/* About Section Background Images - PC only */
+/* Section Background Images - PC only (applied to all sections) */
 @media (min-width: 1025px) {
     /* 왼쪽 배경 이미지 */
-    #about.section::before {
+    .section::before {
         /* ... (기존 속성 동일) ... */
         content: '';
         position: absolute;
@@ -43,21 +43,21 @@ main {
         /* 2. 끝점(100%가 아닌 80%)에서 미리 0으로 만들어 중앙 선이 생기지 않게 차단 */
         mask-image: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0.10) 0%,
+            rgba(0, 0, 0, 0.05) 20%,
             rgba(0, 0, 0, 0) 30%
         );
         -webkit-mask-image: linear-gradient(
             to right,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0.10) 0%,
+            rgba(0, 0, 0, 0.05) 20%,
             rgba(0, 0, 0, 0) 30%
         );
         pointer-events: none;
     }
     
     /* 오른쪽 배경 이미지 */
-    #about.section::after {
+    .section::after {
         /* ... (기존 속성 동일) ... */
         content: '';
         position: absolute;
@@ -76,14 +76,14 @@ main {
         /* [수정 포인트] */
         mask-image: linear-gradient(
             to left,
-            rgba(0, 0, 0, 0.3) 0%,   /* 30%만 보이게 시작 */
-            rgba(0, 0, 0, 0.15) 20%,
-            rgba(0, 0, 0, 0) 30%     /* 중앙에 닿기 전(80%)에 미리 투명화 완료 */
+            rgba(0, 0, 0, 0.10) 0%,
+            rgba(0, 0, 0, 0.05) 20%,
+            rgba(0, 0, 0, 0) 30%
         );
         -webkit-mask-image: linear-gradient(
             to left,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0.10) 0%,
+            rgba(0, 0, 0, 0.05) 20%,
             rgba(0, 0, 0, 0) 30%
         );
         pointer-events: none;
