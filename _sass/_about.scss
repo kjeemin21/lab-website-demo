@@ -1,4 +1,4 @@
-/* About Section */
+﻿/* About Section */
 .about-container {
     max-width: 1200px;
     padding: 0 20px;
@@ -8,7 +8,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     padding-top: 5px;
 }
 
@@ -118,7 +118,7 @@
 .research-section-title {
     font-size: 1.5rem;
     color: var(--primary-color);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 600;
     text-align: center;
 }
@@ -248,7 +248,7 @@
 
 .about-link-text {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-color);
     transition: color 0.3s ease;
 }
