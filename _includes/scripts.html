@@ -710,13 +710,13 @@
         // Stop any existing slideshow
         stopAboutSlideshow();
         
-        // Start slideshow
+        // Setup click-based slideshow
         aboutSlideshowEnabled = true;
-        startAboutSlideshow(slides, adjustSlideshowHeight);
+        setupClickSlideshow(slideshow, slides, adjustSlideshowHeight);
     }
     
-    function startAboutSlideshow(slides, adjustHeightCallback) {
-        if (!aboutSlideshowEnabled || !slides || slides.length <= 1) return;
+    function setupClickSlideshow(slideshow, slides, adjustHeightCallback) {
+        if (!slides || slides.length <= 1) return;
         
         let currentIndex = 0;
         
@@ -728,8 +728,6 @@
         });
         
         function nextSlide() {
-            if (!aboutSlideshowEnabled) return;
-            
             // Remove active class from current slide
             slides[currentIndex].classList.remove('active');
             
@@ -743,13 +741,11 @@
             if (adjustHeightCallback) {
                 setTimeout(adjustHeightCallback, 50);
             }
-            
-            // Schedule next transition
-            aboutSlideshowTimer = setTimeout(nextSlide, 3000); // 3 seconds
         }
         
-        // Start the slideshow
-        aboutSlideshowTimer = setTimeout(nextSlide, 3000); // 3 seconds
+        // Add click event listener to slideshow container
+        slideshow.style.cursor = 'pointer';
+        slideshow.addEventListener('click', nextSlide);
     }
     
     function stopAboutSlideshow() {

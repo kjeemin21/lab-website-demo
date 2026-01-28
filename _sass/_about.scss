@@ -1,4 +1,4 @@
-﻿/* About Section */
+/* About Section */
 .about-container {
     max-width: 1200px;
     padding: 0 20px;
@@ -34,6 +34,12 @@
     position: relative;
     width: 100%;
     height: auto;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+        opacity: 0.95;
+    }
 }
 
 .slideshow-item {

@@ -13,6 +13,10 @@ hero_image: "/assets/images/about/대표_이미지2.png"
 # If only one image exists, hero_image will be used instead
 hero_images:
   - "/assets/images/about/대표_이미지2.png"
+  - "/assets/images/about/대표_이미지.png"
+  - "/assets/images/about/test_image1.png"
+  - "/assets/images/about/test_image2.png"
+  - "/assets/images/about/photo6.webp"
 
 # Research areas/keywords
 research_areas:
