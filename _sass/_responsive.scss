@@ -256,9 +256,52 @@
         max-height: 150px;
     }
 
+    /* 모바일: organization name도 로고 아래(세로 레이아웃)로 */
+    .organization-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .organization-content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .organization-name {
+        margin-top: 4px;
+        margin-bottom: 16px;
+    }
+
+    /* 모바일: subinstitution이 있는 카드도 이미지 위, 설명 아래로 세로 배치 */
+    .subinstitution-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .subinstitution-logo-section {
+        width: 100%;
+        max-width: 250px;
+        padding: 10px 15px;
+    }
+
+    .subinstitution-content {
+        width: 100%;
+        min-width: 0;
+    }
+
     .organization-name {
         font-size: 1.3rem;
         text-align: center;
+    }
+
+    /* 모바일: project 제목은 항상 왼쪽 정렬 */
+    .project-title {
+        text-align: left;
+        width: 100%;
     }
 
     .project-content {

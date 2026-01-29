@@ -1231,11 +1231,11 @@
     function getColumnCount() {
         const width = window.innerWidth;
         if (width <= 768) {
-            return 1; // Mobile: 1 column
+            return 2; // Mobile: 최소 2열
         } else if (width <= 1024) {
-            return 2; // Tablet: 2 columns
+            return 2; // Tablet: 2열
         } else {
-            return 3; // Desktop: 3 columns
+            return 3; // Desktop: 3열
         }
     }
 
