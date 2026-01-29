@@ -1,4 +1,4 @@
-﻿/* About Section */
+/* About Section */
 .about-container {
     max-width: 1200px;
     padding: 0 20px;
@@ -91,13 +91,16 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0;
     margin-top: 15px;
     width: 100%;
+    min-width: 0;
 }
 
 .about-link {
-    flex: 0 0 auto;
+    flex: 0 1 auto;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -257,6 +260,22 @@
     font-weight: 600;
     color: var(--text-color);
     transition: color 0.3s ease;
+    min-width: 0;
+}
+
+/* Desktop: show long text, hide short text */
+.about-link-text-mobile {
+    display: none;
+}
+
+/* Mobile: show short text, hide long text */
+@media (max-width: 768px) {
+    .about-link-text-desktop {
+        display: none;
+    }
+    .about-link-text-mobile {
+        display: inline;
+    }
 }
 
 .about-link:hover .about-link-text {
@@ -347,14 +366,20 @@
     .research-detail-panel .detail-image-wrapper {
         order: 2;
         align-items: center;
+        justify-content: center;
     }
 
     .research-detail-panel .detail-image-container {
+        width: fit-content;
+        max-width: 100%;
         max-height: 180px;
     }
 
     .research-detail-panel .detail-image {
+        width: auto;
+        max-width: 100%;
         max-height: 180px;
+        display: block;
     }
     
     .research-detail-panel .detail-content {
