@@ -37,19 +37,71 @@
         font-size: 2rem;
     }
 
+    /* Members: 동일한 카드 너비·오른쪽 여백 보장 (Ph.D / M.S. / Alumni) */
+    #members .container,
+    #members .content {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    #members .members-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #members .members-subsection {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #members .members-grid {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    #members .member-card {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
     .members-grid {
         grid-template-columns: 1fr;
         gap: 15px;
     }
 
+    /* 모바일: 카드 세로 배치 — 위 사진(중앙), 아래 이름·텍스트 */
     .member-card {
+        flex-direction: column;
+        align-items: center;
         padding: 15px;
-        gap: 15px;
+        gap: 18px;
+    }
+
+    .member-card .member-image {
+        width: 120px;
+        height: 165px;
+        margin: 0 auto;
+        flex-shrink: 0;
+    }
+
+    .member-card .member-info {
+        width: 100%;
+        text-align: left;
+    }
+
+    .member-card .member-header {
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-right: 0; /* 모바일에서는 이름 오른쪽 여백 제거 */
     }
 
     .member-image {
-        width: 98px;
-        height: 133px;
+        width: 120px;
+        height: 165px;
     }
 
     .member-links-top {
